@@ -3,7 +3,7 @@
         <div class="container responsive" style="padding-left: 0; padding-right: 0;">
             
         <div class="row gallery-firstrow">
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-4">
             <div class="gridview-pic">
                 <img src="{{ asset('assets/images/first1.png') }}" alt="" style="width: 100%;">
             </div>
@@ -12,7 +12,7 @@
                <a href="{{ url('shop/online-shop') }}" class="btn btn-lg btn-block"><span>Wall Clock</span></a>
                </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-4">
             <div class="gridview-pic">
                 <img src="{{ asset('assets/images/2nd-1.jpg') }}" alt="" style="width: 100%;">
             </div>
@@ -20,7 +20,7 @@
                <a href="{{ url('shop/farm-shop') }}" class="btn btn-lg btn-block"><span>Wood Art</span></a>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-4">
             <div class="gridview-pic">
                 <img src="{{ asset('assets/images/first3.jpg') }}" alt="" style="width: 100%;">
             </div>
@@ -30,7 +30,7 @@
         </div>
     </div>
         <div class="row gallery-firstrow2">
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-3">
             <div class="gridview-pic2">
                 <img src="{{ asset('assets/images/2nd-1.jpg') }}" alt="" style="width: 100%;">
             </div>
@@ -38,7 +38,7 @@
                 <a href="{{ url('shop/online-shop') }}" class="btn btn-lg btn-block"><span>Wall Clock</span></a>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-3">
             <div class="gridview-pic2">
                 <img src="{{ asset('assets/images/2nd-2.jpg') }}" alt="" style="width: 100%;">
             </div>
@@ -46,7 +46,7 @@
                 <button class="btn btn-lg btn-block"><span>Wood Art</span></button>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-3">
             <div class="gridview-pic2">
                 <img src="{{ asset('assets/images/2nd-3.jpg') }}" alt="" style="width: 100%;">
             </div>
@@ -54,7 +54,7 @@
                 <button class="btn btn-lg btn-block"><span>kids room art</span></button>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-3">
             <div class="gridview-pic2">
                 <img src="{{ asset('assets/images/2nd-4.jpg') }}" alt="" style="width: 100%;">
             </div>

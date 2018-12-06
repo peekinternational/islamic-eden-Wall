@@ -2,12 +2,12 @@
     <div class="page_header header-01" style="height: 70px; background-color: white">
         <div class="container">
             <div class="row respnsve" style="background-color: white; height: 20px;">
-                <div class=" col-md-2 col-sm-12 text-md-center col-xs-4">
+                <div class=" col-md-2 col-sm-12 text-md-center hidden-xs hidden-sm">
                     <a href="{{ url('/') }}" class="logo">
                         <img src="{{ asset('assets/images/logo.png') }}" alt="">
                     </a>
                 </div>
-                <div class=" col-md-8 col-sm-4 text-lg-center">
+                <div class=" col-md-8 col-sm-2 text-lg-center">
          <span class="toggle_menu">
           <span></span>
          </span>
@@ -161,8 +161,12 @@
                     </nav>
                     <!-- eof main nav -->
                 </div>
-
-                <div class="col-md-2 col-sm-4 text-sm-center text-right" style="padding-top: 4px; position: relative;">
+                <div class=" col-md-2 col-sm-3 col-xs-4 hidden-md hidden-lg">
+                    <a href="{{ url('/') }}" class="logo">
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="">
+                    </a>
+                </div>
+                <div class="col-md-2 col-sm-7 text-right" style="padding-top: 4px; position: relative;">
                         <!-- {!! Form::open(['route' => 'search','class'=>'searchform search-form','method'=>'get']) !!}
                         <input type="text" value="{{ ((isset($_GET['q']) && !empty($_GET['q'])?$_GET['q']:'')) }}" name="q" class="search-form__search form-control"
                                placeholder="Search keyword" id="modal-search-input">

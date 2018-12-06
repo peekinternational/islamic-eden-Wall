@@ -45,9 +45,13 @@
             <li class="latest-products__item">
                 <a class="media-left" href="{{ url('product/'.$product->slug) }}">
                     @if($product->images->count()>0)
-                        <img class="media-object" src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
+                        <div class="lates-prdct-sidebar">
+                            <img class="media-object" src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
+                        </div>
                     @else
-                        <img class="media-object" src="{{ asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
+                        <div class="lates-prdct-sidebar">
+                            <img class="media-object" src="{{ asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
+                        </div>
                     @endif
                 </a>
                 <div class="media-body">
