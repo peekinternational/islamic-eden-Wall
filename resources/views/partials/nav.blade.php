@@ -1,8 +1,8 @@
 <header class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }}">
     <div class="page_header header-01" style="height: 70px; background-color: white">
         <div class="container">
-            <div class="row" style="background-color: white; height: 20px;">
-                <div class=" col-md-2 col-sm-12 text-md-center">
+            <div class="row respnsve" style="background-color: white; height: 20px;">
+                <div class=" col-md-2 col-sm-12 text-md-center col-xs-4">
                     <a href="{{ url('/') }}" class="logo">
                         <img src="{{ asset('assets/images/logo.png') }}" alt="">
                     </a>

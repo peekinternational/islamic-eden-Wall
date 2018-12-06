@@ -210,7 +210,7 @@
             </div>
     </div>
     <div style="background-color: black;">
-        <div class="container">
+        <div class="container hidden-xs">
             <div class="row footer" style="padding: 12px 0px;">
                 <div class="col-md-6">
                     <div class="foter-icons">

@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row">
                 <form target="paypal" class="form-horizontal checkout shop-checkout" action="{{ isset($PaymentSettings['payment_mood']['value']) && $PaymentSettings['payment_mood']['value']=='live'?'https://www.paypal.com/cgi-bin/webscr':'https://www.sandbox.paypal.com/cgi-bin/webscr' }}" method="post">
-                <div class="col-sm-7 col-md-8 col-lg-8">
+                <div class="col-sm-7 col-md-8 col-lg-8" style="width: 60%;">
 
                     {{--<input type="hidden" name="country" value="Us" />--}}
                     {{--<input type="hidden" name="first_name" value="shah" />
@@ -209,7 +209,7 @@
                           </div>
                 </div>
 
-                <aside class="col-sm-5 col-md-4 col-lg-4">
+                <aside class="col-sm-5 col-md-4 col-lg-4" style="margin-left: 30px;">
                     <h3 class="widget-title" id="order_review_heading">Your order</h3>
                     <div id="order_review" class="shop-checkout-review-order">
                         <table class="table shop_table shop-checkout-review-order-table">
