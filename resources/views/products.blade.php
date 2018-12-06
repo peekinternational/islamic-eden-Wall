@@ -51,29 +51,30 @@
                                         <img src="{{  asset('assets/images/'.$image) }}" alt="{{ $product->name }}">
                                     </a>
                                 </figure>
-                                <div class="shop-item__content">
-                                    <div class="shop-item__meta-list">
-                                        @if($product->tags->count()>0)
-                                        <a class="shop-item__meta-tag" href="#">{{ $product->category->name }}</a>
-                                        @endif
-                                       {{-- <div class="star-rating" title="Rated 4.00 out of 5">
-                                                    <span style="width:80%">
-                                                        <strong class="rating">4.00</strong> out of 5
-                                                    </span>
-                                        </div>--}}
-                                    </div>
-                                    <div class="items-name">
+                                <div class="shop-item__content" style="padding: 0">
                                     <h3 class="shop-item__title">
                                         <a href="{{ url('/product/'.$product->slug) }}">{{ $product->name }}</a>
                                     </h3>
-                                     <span class="shop-item__price">
+                                    <!-- <div class="shop-item__meta-list">
+                                        
+                                    </div> -->
+                                    <div class="items-name" style="float: none;">
+                                         @if($product->tags->count()>0)
+                                         <a class="shop-item__meta-tag" href="#">{{ $product->category->name }}</a>
+                                         @endif
+                                        {{-- <div class="star-rating" title="Rated 4.00 out of 5">
+                                                     <span style="width:80%">
+                                                         <strong class="rating">4.00</strong> out of 5
+                                                     </span>
+                                         </div>--}}
+                                     <p class="shop-item__price">
                                             <span>
                                                 <span class="amount">&euro; {{ $product->price  }}</span>
                                             </span>
-                                        </span>
-                                    <p class="shop-item__desc">
+                                        </p>
+                                    <!-- <p class="shop-item__desc">
                                        {{ $product->details }}
-                                    </p>
+                                    </p> -->
                                 </div>
                                 <!-- <div>
                                     <span class="shop-item__price">
@@ -82,7 +83,7 @@
                                             </span>
                                         </span>
                                 </div> -->
-                                    <div class="shop-item__block">
+                                    <div class="shop-item__block" style="text-align: center;">
                                         
                                         {!! Form::open(array('url' => 'cart','method' => 'post')) !!}
                                              {!! Form::button('Add to cart',['class'=>'button-t1','type'=>'submit']) !!}

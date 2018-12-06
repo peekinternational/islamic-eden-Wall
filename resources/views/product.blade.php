@@ -15,7 +15,7 @@
                                         <div id="carousel-generic" class="carousel slide">
                                             <div class="carousel-inner">
                                                 @foreach($product->images as $key => $image)
-                                                <div class="item {{ $key==0?'active':'' }}" style="height: 350px;">
+                                                <div class="item {{ $key==0?'active':'' }}  product-detail-img">
                                                     <img
                                                     src="{{ asset('assets/images/products/'.$image->image) }}" alt="{{ $product->name }}">
                                                 </div>

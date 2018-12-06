@@ -8,7 +8,7 @@
     @include('partials.breadcrumb')
 @stop
 @section('content')
-    <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_75 section_padding_bottom_75 columns_padding_25">
+    <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_75 section_padding_bottom_75 columns_padding_25 cart-section">
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-md-8 col-lg-8">
