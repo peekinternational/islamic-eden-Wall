@@ -97,6 +97,13 @@
     
 
 }	
+.notifyjs-corner{
+	top: 7% !important;
+}
+#toTop{
+	background-color: black;
+	color: white;
+}
 
 /*Preloader starts here*/
 #loading{
