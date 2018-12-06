@@ -1,5 +1,5 @@
 @if(!$slides->isEmpty())
-<div class="container">
+<div class="container responsive">
   <div class="row">
     <div class="col-md-12" style="padding: 0px 0px ;">
         <div class="intro_section page_mainslider">
@@ -8,7 +8,7 @@
                  @foreach($slides as $key=>$slide)
                 <li>
                     <figure class="flexslider__img"><a href="{{ $slide->link }}"><img src="{{ asset('assets/images/slider/'.$slide->background)  }}" alt="{{ $slide->title }}"></a></figure>
-                <div class="flexslider__content">
+                <div class="flexslider__content hidden-xs">
                     <div class="container">
                         <div class="row">
                             <!-- <div class="col-lg-6 text-{{ $slide->text_align }}">

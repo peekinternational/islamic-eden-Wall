@@ -5,11 +5,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Edenmill</title>
+        <title>Islamic Wall</title>
 
 
     </head>
     <body>
-        <h1>Edenmill</h1>
+        <h1>Islamic Wall</h1>
     </body>
 </html>

@@ -4,7 +4,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">{{ env('APP_NAME_SHORT','EDM') }}</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg">{{ env('APP_NAME','Edenmill') }}</span>
+        <span class="logo-lg">{{ env('APP_NAME','Islamic Wall') }}</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">

@@ -5,12 +5,12 @@
 @stop
 @section('content')
     <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_120 section_padding_bottom_85">
-        <div class="container">
+        <div class="container responsive">
             <div class="row">
                  @include('partials/sidebar')
-                <div class="col-sm-8 col-md-9 col-lg-9">
+                <div class="col-sm-8 col-md-9 col-lg-9" style="margin-left: 10px;">
                     @if($products->count()>0)
-                    <div class="shop-sorting">
+                    <div class="shop-sorting hidden-xs">
                         <form class="form-inline">
                             <div class="form-group">
                                 <select class="form-control orderby" name="limit" id="limit">
@@ -66,20 +66,29 @@
                                     <h3 class="shop-item__title">
                                         <a href="{{ url('/product/'.$product->slug) }}">{{ $product->name }}</a>
                                     </h3>
+                                     <span class="shop-item__price">
+                                            <span>
+                                                <span class="amount">&euro; {{ $product->price  }}</span>
+                                            </span>
+                                        </span>
                                     <p class="shop-item__desc">
                                        {{ $product->details }}
                                     </p>
                                 </div>
+                                <!-- <div>
+                                    <span class="shop-item__price">
+                                            <span>
+                                                <span class="amount">&euro; {{ $product->price  }}</span>
+                                            </span>
+                                        </span>
+                                </div> -->
                                     <div class="shop-item__block">
+                                        
                                         {!! Form::open(array('url' => 'cart','method' => 'post')) !!}
                                              {!! Form::button('Add to cart',['class'=>'button-t1','type'=>'submit']) !!}
                                              {!!  Form::hidden('id',$product->id)  !!}
 
-                                                <span class="shop-item__price">
-                                                    <span>
-                                                        <span class="amount">&euro; {{ $product->price  }}</span>
-                                                    </span>
-                                                </span>
+                                               
                                          {!! Form::close() !!}
 
                                     </div>
