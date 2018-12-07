@@ -211,7 +211,7 @@
     </div>
     <div style="background-color: black;">
         <div class="container hidden-xs">
-            <div class="row footer" style="padding: 12px 0px;">
+            <div class="row footer" style="padding: 0px 0px;">
                 <div class="col-md-6">
                     <div class="foter-icons">
                         <i class="fa fa-cc-visa"></i>
@@ -221,8 +221,14 @@
                         <i class="fa fa-cc-amex"></i>
                     </div>
                 </div>
+               
                 <div class="col-md-6 hidden-xs">
-                    <p class="text-right" style="padding: 10px 105px;"> Powered by:<a href="" class="text-primary"> Peek International</a></p>
+                   
+                    <p class="text-right" style="padding: 10px 105px;">&copy; <?php
+                    $copyYear = 2018; // Set your website start date
+                    $curYear = date('Y'); // Keeps the second year updated
+                    echo $copyYear . (($copyYear != $curYear) ? '-' . $curYear : '');
+                    ?> Copyright &nbsp; Powered by:<a href="" class="text-primary"> Peek International</a></p>
                     
                 </div>
                 

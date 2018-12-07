@@ -117,6 +117,7 @@
 	.cart-section .row{
 		margin: 0;
 	}
+	.cart-section .cart-buttons 
 }	
 @media screen and (max-width: 767px) and (min-width: 467px){
 	.slides  li{
