@@ -10,8 +10,8 @@
                     <figure class="flexslider__img"><a href="{{ $slide->link }}"><img src="{{ asset('assets/images/slider/'.$slide->background)  }}" alt="{{ $slide->title }}"></a></figure>
                 <div class="flexslider__content hidden-xs">
                     <div class="container">
-                        <div class="row">
-                            <!-- <div class="col-lg-6 text-{{ $slide->text_align }}">
+                        <div class="row text-slider">
+                            <div class=" col-lg-offset-3 col-lg-6 text-{{ $slide->text_align }}">
                                 <h3 class="flexslider__title ">
                                     <span>{{ $slide->title }}</span>
                                     {{ $slide->description }}
@@ -19,7 +19,7 @@
                                 @if(!empty($slide->link))
                                     <a href="{{ $slide->link }}" class="button-t1__parallax2">{{ $slide->link_text }}</a>
                                 @endif
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
