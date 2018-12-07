@@ -68,19 +68,24 @@
                                     @endforeach
                                 </p>
                             @endif
-                            {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
-                                    <span class="quantity form-group">
-                                            <input type="button" value="-" class="minus">
-                                            <input type="number" step="1" min="0" name="quantity" value="{{ $quantity }}" title="Qty" id="product_quantity" class="form-control ">
-                                            <input type="button" value="+" class="plus">
-                                    </span>
-                                    <button class="button-t1" type="submit">Add to cart</button>
-                                    <span class="price">
-                                        <span>
-                                            <span class="amount" style="color: gray !important;">&euro;{{ $product->price }}</span>
+                            <span class="price">
+                                <span>
+                                    <span class="amount" style="color: gray !important; font-size: 26px;">&euro;{{ $product->price }}</span>
+                                </span>
+                            </span>
+                            <div class="quantity-btn">
+                                {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
+
+                                        <span class="quantity form-group">
+                                                <input type="button" value="-" class="minus">
+                                                <input type="number" step="1" min="0" name="quantity" value="{{ $quantity }}" title="Qty" id="product_quantity" class="form-control ">
+                                                <input type="button" value="+" class="plus">
                                         </span>
-                                    </span>
-                            {!! Form::close() !!}
+                                        <button class="button-t1" type="submit">Add to cart</button>
+                                       
+                                {!! Form::close() !!}
+                            </div>
+                            
                          {{--   <a class="btn__wish" href="#">Add to Wishlist</a>--}}
                         </div>
                     </div>

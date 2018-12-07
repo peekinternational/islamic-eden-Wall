@@ -156,16 +156,16 @@
                         <div class="row">
                             <div class="col-md-6" style="">
                                 <ul class="">
-                                  <li><a href="#">ABOUT</a></li>
-                                  <li><a href="#">TRACK ORDER</a></li>
+                                  <li><a href="{{ url('shop/online-shop') }}">ART</a></li>
+                                  <li><a href="#">DECORE</a></li>
                                   <li><a href="#">FAQS</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-6">
                                 <ul class="">
-                                  <li><a href="#">SERVICES</a></li>
+                                  <li><a href="#">HOME GOODS</a></li>
                                   <li><a href="#">CONTACT</a></li>
-                                  <li><a href="#">PORTFOLOIO</a></li>
+                                  <li><a href="#">BLOGS</a></li>
                                 </ul>
                             </div>
                         </div>  
@@ -195,13 +195,13 @@
                                 <input name="email" type="email" class="form-control" placeholder="Email" required>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-success">Subscribe</button>
+                                <button class="btn btn-success btn-block">Subscribe</button>
                             </div>
                             {{--<div class="form-group">
                                 <input name="email" type="email" class="mailchimp_email form-control" placeholder="Full Name">
                             </div>
 
-                            <button type="submit" class="widget_mailchimp__button">Subscribe</button>
+                            <!-- <button type="submit" class="widget_mailchimp__button " s>Subscribe</button> -->
                             <div class="response"></div>--}}
                        {!! Form::close() !!}
                 </div>
@@ -211,8 +211,8 @@
     </div>
     <div style="background-color: black;">
         <div class="container hidden-xs">
-            <div class="row footer" style="padding: 12px 0px;">
-                <div class="col-md-6">
+            <div class="row footer" style="padding: 0px 0px;">
+                <div class="col-md-4">
                     <div class="foter-icons">
                         <i class="fa fa-cc-visa"></i>
                         <i class="fa fa-cc-paypal"></i>
@@ -221,8 +221,20 @@
                         <i class="fa fa-cc-amex"></i>
                     </div>
                 </div>
-                <div class="col-md-6 hidden-xs">
-                    <p class="text-right" style="padding: 10px 105px;"> Powered by:<a href="" class="text-primary"> Peek International</a></p>
+                <div class="col-md-4" style="margin-top: 12px ;
+">
+                    <p  class ="text-center"   style="font-size: 14px; margin-bottom:0px">&copy; 
+                        <?php
+                                           $copyYear = 2018; // Set your website start date
+                                           $curYear = date('Y'); // Keeps the second year updated
+                                           echo $copyYear . (($copyYear != $curYear) ? '-' . $curYear : '');
+                                           ?> Copyright.Islamic Wall Design &nbsp;
+                    </p>
+                </div>
+               
+                <div class="col-md-4 hidden-xs">
+                   
+                    <p class="text-center" style="    padding: 10px 0px; font-size: 14px; margin-right: 12px; margin-bottom: 0px;"> Powered by:<a href="" class="text-primary"> Peek International</a></p>
                     
                 </div>
                 

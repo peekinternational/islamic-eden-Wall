@@ -1,5 +1,5 @@
 <header class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }}">
-    <div class="page_header header-01" style="height: 70px; background-color: white">
+    <div class="page_header header-01 mbl-view-header" style="height: 70px; background-color: white">
         <div class="container">
             <div class="row respnsve" style="background-color: white; height: 20px;">
                 <div class=" col-md-2 col-sm-12 text-md-center hidden-xs hidden-sm">
@@ -161,12 +161,97 @@
                     </nav>
                     <!-- eof main nav -->
                 </div>
-                <div class=" col-md-2 col-sm-3 col-xs-4 hidden-md hidden-lg">
+                <div class="  col-xs-4 hidden-md hidden-lg hidden-sm">
                     <a href="{{ url('/') }}" class="logo">
                         <img src="{{ asset('assets/images/logo.png') }}" alt="">
                     </a>
                 </div>
-                <div class="col-md-2 col-sm-7 text-right" style="padding-top: 4px; position: relative;">
+                <div class=" col-lg-offset-6 col col-lg-3 mbl-cart-sec text-right hidden-lg hidden-md hidden-sm ">
+                <div class="shopping-cart">
+
+                    <a class="shopping-cart__content header-button" id="cart" data-target="#"
+                       href="{{ route('cart.index') }}" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
+                        <span class="shopping-cart__info" style="font-size: 13px !important;">
+                           
+                            @if($cart_items>0)
+                                {{ $cart_items }} Items  &euro;{{ $cart->subTotal($format = false, $withDiscount = true) }}
+                            @else
+                                My Cart (0):$0
+                            @endif
+                           </span>
+                           <button class="btn checkout-btn">Checkout</button>
+
+                    </a>
+                    @if($cart_items > 0)
+                    <div class="shopping-cart__list dropdown-menu" aria-labelledby="cart">
+                       {{-- <span class="grey">Recently added item(s)</span>--}}
+                        <div class="shopping-cart">
+                           {{-- <a class="shopping-cart__content header-button" id="cart" data-target="#"
+                               href="http://webdesign-finder.com/" data-toggle="dropdown" aria-haspopup="true"
+                               aria-expanded="false">
+                                <span class="shopping-cart__info">3 Items</span>
+                                $ 25.99
+                            </a>
+                            <div class="shopping-cart__list dropdown-menu" aria-labelledby="cart">
+                --}}
+
+                                <span class="grey">Recently added item(s)</span>
+                                <div class="widget widget_shopping_cart">
+                                    <div class="widget_shopping_cart_content">
+                                        <ul class="cart_list product_list_widget media-list darklinks">
+                                             <?php 
+                                                   print_r($cart->subTotal($format = false, $withDiscount = true));
+                                                ?>
+                                            @foreach($cart->getItems() as $item)
+                                             <li class="media">
+                                                <div class="media-left media-middle">
+                                                    <a href="{{ route('product.show',['slug'=>$item->slug]) }}">
+                                                        <img src="{{  asset($item->options['image']) }}" alt="{{ $item->name }}">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body media-middle">
+                                                    <h4>
+                                                        <a href="blog-right.html">{{ $item->options['name'] }}</a>
+                                                    </h4>
+                                                      <span class="quantity">{{ $item->options['qty'] }} ×
+                                                       <span class="amount">&euro; {{ $item->options['price'] }}</span>
+                                                      </span>
+                                                </div>
+                                                <div class="media-body media-middle">
+                                                    {!! Form::open(array('route' => array('cart.destroy', $item->options['id']),'method' => 'delete')) !!}
+                                                        <button type="submit" class="remove" style="background: transparent; border: none;" title="Remove this item">
+                                                            <i class="rt-icon2-trash highlight"></i>
+                                                        </button>
+                                                    {!! Form::close() !!}
+                                                    {{--<a href="#" class="remove" title="Remove this item">
+                                                        <i class="rt-icon2-trash highlight"></i>
+                                                    </a>--}}
+                                                </div>
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                        <!-- end product list -->
+                                        <p class="total">
+                                            <span class="grey">Cart Subtotal:
+
+                                            <span class="amount">${{ $cart->subTotal($format = false, $withDiscount = true) }}</span>
+                                            </span>
+                                        </p>
+                                        <p class="buttons">
+                                            <a href="{{ route('cart.index') }}" class="button-t1">View All</a>
+                                            <a href="{{ route('cart.checkout') }}" class="button-t1">Checkout</a>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                     {{--   </div>--}}
+                    </div>
+                    @endif
+                </div>
+            </div>
+                <div class="col-md-2 col-sm-7 text-righ hidden-xs hidden-sm" style="padding-top: 4px; position: relative;">
                         <!-- {!! Form::open(['route' => 'search','class'=>'searchform search-form','method'=>'get']) !!}
                         <input type="text" value="{{ ((isset($_GET['q']) && !empty($_GET['q'])?$_GET['q']:'')) }}" name="q" class="search-form__search form-control"
                                placeholder="Search keyword" id="modal-search-input">
@@ -175,6 +260,7 @@
 
                         <div class="modal" tabindex="-1" role="dialog" aria-labelledby="search_modal"
                              id="search_modal"></div> -->
+
                             
                         <div class="inner-addon right-addon header-search-bar">
                         
@@ -188,6 +274,16 @@
                     </div>
               
             </div>
+        </div>
+        <!-- on mobile view search -->
+        <div class="col-xs-12 hidden-lg hidden-md " style="padding-top: 0px; position: relative;">
+          <div class="inner-addon right-addon header-search-bar">
+          
+              {!! Form::open(['route' => 'search','class'=>'searchform search-form','method'=>'get']) !!}
+              <button type="submit" class="search-form__button"><i class="fa fa-search"></i></button>
+              <input type="text" class="form-control" name="q" value="{{ ((isset($_GET['q']) && !empty($_GET['q'])?$_GET['q']:'')) }}" placeholder="Search keyword"  id="modal-search-input">
+              {!! Form::close() !!}
+          </div>
         </div>
     </div>
 </header>
