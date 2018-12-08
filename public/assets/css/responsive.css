@@ -9,7 +9,7 @@
 	.checkout-btn{
     background-color: #150404;
     color: white;
-    padding: 2px 7px;
+    padding: 2px 1px;
     margin-top: 6px;
     border-radius: 0px;
     text-transform: uppercase;
@@ -54,7 +54,7 @@
 		padding: 0px 0px !important ;
 	}
 	.home .logo img{
-		width: 82%;
+		width: 100%;
 	}
 	.home .logo{
 		padding: 10px 15px 0 !important;
@@ -92,7 +92,7 @@
     	text-align: center;
     }
     .respnsve .col-xs-4{
-    	    margin-left: 8%;
+    	    margin-left: 10%;
     }
     .toggle_menu{
     	width: 52px !important;

@@ -172,7 +172,7 @@
                     <a class="shopping-cart__content header-button" id="cart" data-target="#"
                        href="{{ route('cart.index') }}" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
-                        <span class="shopping-cart__info" style="font-size: 13px !important;">
+                        <span class="shopping-cart__info" style="font-size: 12px !important;">
                            
                             @if($cart_items>0)
                                 {{ $cart_items }} Items  &euro;{{ $cart->subTotal($format = false, $withDiscount = true) }}
