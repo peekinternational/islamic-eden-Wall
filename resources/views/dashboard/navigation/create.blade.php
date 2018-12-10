@@ -135,7 +135,7 @@
                 var value = $('select option[value='+this.value+']').attr('data-slug').trim();
                 switch (value){
                     case 'shop':
-					case 'eat':
+					case 'decore':
                     case 'about-us':
                     case 'home':
                     case 'blog':

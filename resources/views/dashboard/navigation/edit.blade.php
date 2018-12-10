@@ -19,7 +19,7 @@
                     <div class="col-sm-6 col-sm-offset-2">
                         @include('dashboard.partials.formErrorMessage')
                         @include('dashboard.navigation._formCreateEdit')
-                        @if(!isset($nav_info->slug) || (isset($nav_info->slug) && !empty($nav_info->slug) && !in_array($nav_info->slug,['shop','eat','about-us','home','blog'])))
+                        @if(!isset($nav_info->slug) || (isset($nav_info->slug) && !empty($nav_info->slug) && !in_array($nav_info->slug,['shop','decore','about-us','home','blog'])))
                         <div class="form-group">
                             <label class="col-sm-3 control-label"> Url</label>
                             <div class="col-sm-9" style="padding-top: 5px;">
