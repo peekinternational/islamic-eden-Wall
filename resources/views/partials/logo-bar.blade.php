@@ -116,11 +116,7 @@
                                                         <a href="blog-right.html">{{ $item->options['name'] }}</a>
                                                     </h4>
                                                       <span class="quantity">{{ $item->options['qty'] }} ×
-                                                      @if($item->options['offer'])
-                                                      <span class="amount">&euro; {{ $item->options['saleprice'] }}</span>
-                                                      @else
                                                        <span class="amount">&euro; {{ $item->options['price'] }}</span>
-                                                     @endif
                                                       </span>
                                                 </div>
                                                 <div class="media-body media-middle">
