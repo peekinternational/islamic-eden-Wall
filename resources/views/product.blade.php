@@ -70,11 +70,12 @@
                             @endif
                             <span class="price">
                                 <span>
-                                @if($product->offer)
+                                    @if($product->offer)
                                 <span class="amount" style="color: gray !important; font-size: 26px;">&euro;<strike>{{ $product->price }}</strike></span>
                                <span class="amount" style="color: gray !important; font-size: 26px;">&euro;{{ $product->price }}</span>
                                 @else
                                     <span class="amount" style="color: gray !important; font-size: 26px;">&euro;{{ $product->price }}</span>
+                               @endif
                                 </span>
                             </span>
                             <div class="quantity-btn">
