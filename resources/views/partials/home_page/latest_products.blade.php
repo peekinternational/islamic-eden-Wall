@@ -82,7 +82,11 @@
                                 <a class="banner-01__img-wrapp" href="{{ url('product/'.$product->slug) }}">
                                     @if($product->images->count()>0)
                                         <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
+                                       @if($product->offer)
+                                     <label class="tag">Sale</label>
+                                       @else
                                         <label class="tag">New</label>
+                                        @endif
                                     @else
                                         <img  src="{{ asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
                                     @endif
@@ -94,8 +98,13 @@
                                         {{ $product->name }} <br>
                                     <span>{{ $product->category['name'] }}</span></a>
                                 </h5>
-                                        
-                                        <p class="text-center">${{ $product->price }}</p>
+                                @if($product->offer)
+                                <p class="text-center">{{ $product->offer }} % off</p>
+                                      <p class="text-center"> <strike>${{ $product->price }} </strike></p>
+                                       <p class="text-center">${{ $product->saleprice }}</p>
+                                        @else
+                                        <p class="text-center">${{ $product->price }} </p>
+                                      @endif
                                     
                             </div>
                         </div>

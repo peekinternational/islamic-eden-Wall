@@ -45,10 +45,44 @@
                         <div class="form-group {{ $errors->has('price') ? ' has-error' : '' }}">
                             <label for="price" class="col-sm-3 control-label">Price <span>*</span></label>
                             <div class="col-sm-9">
-                                {!! Form::number('price',$value= null, $attributes = ['class'=>'form-control','placeholder'=>'Price','required'=>true])  !!}
+                            <input type="number" name="price" id="orgprice" class="form-control" placeholder="Price" required>
+                               
                                 @if ($errors->has('price'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('price') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group {{ $errors->has('price') ? ' has-error' : '' }}">
+                            <label for="price" class="col-sm-3 control-label">Discount Offer <span></span></label>
+                            <div class="col-sm-9">
+                           
+                           <select name="offer" id="offers" class="form-control" >
+                               <option value="">Select Offer</option>
+                                <?php 
+                                        for($i=1; $i<=100; $i++){
+                                            $i=$i+4;
+                                            echo "<option value='$i'>$i % offer</option>";
+                                        }
+                                ?>
+                           </select>
+                           
+                               
+                                @if ($errors->has('offer'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('offer') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div id="salepricemain" class="form-group {{ $errors->has('description') ? ' has-error' : '' }}" style="display:none">
+                            <label for="description" class="col-sm-3 control-label">Sale Price</label>
+                            <div class="col-sm-9">
+                                <input type="number" name="saleprice" id="saleprice" class="form-control" placeholder="Price">
+                                @if ($errors->has('saleprice'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('saleprice') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -215,6 +249,24 @@
             }catch (e){
                 console.error(e);
             }
+
+        });
+
+        $('#offers').change(function(){
+           var val= $(this).val();
+           if(val != ''){
+                var original_price = $('#orgprice').val();
+                var discountprice=original_price/100*val;
+                var saledec =original_price-discountprice;
+                var sale =Math.round(saledec)
+               // alert(sale);
+                $('#salepricemain').show();
+                $('#saleprice').val(sale);
+           }
+           else{
+               $('#salepricemain').hide();
+           }
+           
 
         });
     </script>
