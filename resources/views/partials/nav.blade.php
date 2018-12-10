@@ -28,8 +28,8 @@
                                             }elseif($nav->slug =='shop'){
                                                 $url = url('/').'#shop';
                                             }
-											elseif($nav->slug =='eat'){
-                                                $url = url('/').'#eat';
+											elseif($nav->slug =='decore'){
+                                                $url = url('/').'#decore';
                                             }elseif($nav->page_id>0 && isset($nav->page->slug) && !empty($nav->page->slug)){
                                                 $url = url($nav->page->slug.'/page');
                                             }
