@@ -14,6 +14,17 @@
     border-radius: 0px;
     text-transform: uppercase;
 	}
+
+	.gallery-firstrow .col-md-4 img{
+	position: relative;
+	margin-top: 10px;
+	}
+	.flexslider{
+		margin-top: 10px;
+	}
+	.search-form{
+		margin-top: 13px;
+	}
 	.shopping-cart__content span{
 		color: black;
 		font-size: 13px !important;
@@ -70,6 +81,7 @@
     border: none !important;
     padding-right: 0 !important;
     right: 20px;
+    margin-top: 8px;
 	}
 
   .search-form {
@@ -157,7 +169,7 @@
 	}
 	.flexslider__img{
 		height: 250px !important;
-	}
+	}	
 	.gallery-firstrow{
 		margin-top: 50%;
 	}
@@ -198,7 +210,6 @@
 	background-color: black;
 	color: white;
 }
-
 /*Preloader starts here*/
 #loading{
 	background:#333;
