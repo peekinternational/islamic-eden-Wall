@@ -45,7 +45,7 @@
                                                     <li>
                                                         @if($nav->slug == 'shop')
                                                             <a href="{{ url('shop/'.$sub_nav->slug) }}">{{ $sub_nav->title }}</a>
-														@elseif($nav->slug == 'eat')
+														@elseif($nav->slug == 'decore')
                                                             <a href="{{ url('shop/'.$sub_nav->slug) }}">{{ $sub_nav->title }}</a>
                                                         @elseif($nav->slug =='useful')
                                                             @if($sub_nav->slug=='download-menu')
