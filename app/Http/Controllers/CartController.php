@@ -151,7 +151,7 @@ class CartController extends Controller
                                 $product_id = (int)$product['id'];
                                 $find = $cart->find(['id' => $product_id]);
                                 $db_product = Products::findOrFail($product_id);
-                                if($product->offer){
+                                if($db_product->offer){
                                 $final_price= $db_product->saleprice; 
                                 }
                                 else
