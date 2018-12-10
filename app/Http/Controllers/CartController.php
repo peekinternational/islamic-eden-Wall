@@ -65,7 +65,7 @@ class CartController extends Controller
                               $quantity  = (int)$item->qty;
                               $quantity++;
                                 $cart->updateItem($itemHashId,'qty', $quantity);
-                                $cart->updateItem($itemHashId,'price', (float)$product->price);
+                                $cart->updateItem($itemHashId,'price', (float)$product->saleprice);
 
                         }
                         $request->session()->flash('__response', ['notify'=>'Product "'.$product->name.'" successfully added to cart.','type'=>'success']);
@@ -117,7 +117,7 @@ class CartController extends Controller
                                 $product_id,
                                 $name = $product->name,
                                 $qty = $quantity,
-                                $price = (float)$product->price,
+                                $price = (float)$product->saleprice,
                                 $options = [
                                         'image'=>'assets/images/'.($product->images()->count()?'products/'.$product->images->first()->image:'no-image.png'),
                                         'slug'=> $product->slug
@@ -129,7 +129,7 @@ class CartController extends Controller
                         $item = $find[0];
                         $itemHashId =  $item->getHash();
                         $cart->updateItem($itemHashId,'qty', $quantity);
-                        $cart->updateItem($itemHashId,'price', (float)$product->price);
+                        $cart->updateItem($itemHashId,'price', (float)$product->saleprice);
                 }
                 $request->session()->flash('__response', ['notify'=>'Product "'.$product->name.'" successfully added to cart.','type'=>'success']);
                 return Redirect::back();
@@ -152,7 +152,7 @@ class CartController extends Controller
                                                 $product_id,
                                                 $name = $db_product->name,
                                                 $qty = $quantity,
-                                                $price = (float)$db_product->price,
+                                                $price = (float)$db_product->saleprice,
                                                 $options = [
                                                         'image'=>'assets/images/'.($db_product->images()->count()?'products/'.$db_product->images->first()->image:'no-image.png'),
                                                         'slug'=> $db_product->slug
@@ -164,7 +164,7 @@ class CartController extends Controller
                                         $item = $find[0];
                                         $itemHashId =  $item->getHash();
                                         $cart->updateItem($itemHashId,'qty', $quantity);
-                                        $cart->updateItem($itemHashId,'price', (float)$db_product->price);
+                                        $cart->updateItem($itemHashId,'price', (float)$db_product->saleprice);
 
                                 }
                         }
