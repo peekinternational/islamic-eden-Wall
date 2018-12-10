@@ -22,6 +22,7 @@
                     switch(trim($nav_info->slug)){
                         case 'shop':
 						case 'decore':
+						case 'home-goods':
                         case 'gift-vouchers':
                         case 'home':
                         case 'blog':

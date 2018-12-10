@@ -128,6 +128,7 @@
                 switch (value){
                     case 'shop':
 					case 'decore':
+					case 'home-goods':
                     case 'about-us':
                     case 'home':
                     case 'blog':
