@@ -30,6 +30,9 @@
                                             }
 											elseif($nav->slug =='decore'){
                                                 $url = url('/').'#decore';
+                                            }
+											elseif($nav->slug =='home-goods'){
+                                                $url = url('/').'#home-goods';
                                             }elseif($nav->page_id>0 && isset($nav->page->slug) && !empty($nav->page->slug)){
                                                 $url = url($nav->page->slug.'/page');
                                             }
@@ -46,6 +49,8 @@
                                                         @if($nav->slug == 'shop')
                                                             <a href="{{ url('shop/'.$sub_nav->slug) }}">{{ $sub_nav->title }}</a>
 														@elseif($nav->slug == 'decore')
+                                                            <a href="{{ url('shop/'.$sub_nav->slug) }}">{{ $sub_nav->title }}</a>
+															@elseif($nav->slug == 'home-goods')
                                                             <a href="{{ url('shop/'.$sub_nav->slug) }}">{{ $sub_nav->title }}</a>
                                                         @elseif($nav->slug =='useful')
                                                             @if($sub_nav->slug=='download-menu')
