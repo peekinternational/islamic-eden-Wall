@@ -43,8 +43,13 @@
                                                 </div>
                                             </td>
                                             <td class="product-price">
+                                            @if($item->offer)
+                                                <span class="currencies">$</span>
+                                                <span class="amount">{{ $item->saleprice }}</span>
+                                            @else
                                                 <span class="currencies">$</span>
                                                 <span class="amount">{{ $item->price }}</span>
+                                                @endif
                                             </td>
                                             <td class="product-quantity">
                                                 <div class="quantity">

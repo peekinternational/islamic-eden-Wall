@@ -74,6 +74,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     { 
+      //  dd($request->all());
         if(!$request->has('slug')){
             $request->merge(['slug'=>str_slug($request->input('name'))]);
         }
