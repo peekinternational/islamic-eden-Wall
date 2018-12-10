@@ -27,6 +27,9 @@
                                                 $url = url('/blog');
                                             }elseif($nav->slug =='shop'){
                                                 $url = url('/').'#shop';
+                                            }
+											elseif($nav->slug =='eat'){
+                                                $url = url('/').'#eat';
                                             }elseif($nav->page_id>0 && isset($nav->page->slug) && !empty($nav->page->slug)){
                                                 $url = url($nav->page->slug.'/page');
                                             }
@@ -41,6 +44,8 @@
                                                 @if(!$sub_nav->hidden)
                                                     <li>
                                                         @if($nav->slug == 'shop')
+                                                            <a href="{{ url('shop/'.$sub_nav->slug) }}">{{ $sub_nav->title }}</a>
+														@elseif($nav->slug == 'eat')
                                                             <a href="{{ url('shop/'.$sub_nav->slug) }}">{{ $sub_nav->title }}</a>
                                                         @elseif($nav->slug =='useful')
                                                             @if($sub_nav->slug=='download-menu')
