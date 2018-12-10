@@ -36,12 +36,14 @@ class CartController extends Controller
                         $product_id = (int)$request->input('id');
                         $find = $cart->find(['id' => $product_id]);
                         $product = Products::findOrFail($product_id);
+                       // dd($product);
                         if($product->offer){
                         $final_price= $product->saleprice; 
                         }
                         else
                         {
-                        $final_price= $product->price;    
+                        
+                        $final_price= $product->saleprice;   
                         }
                         if(is_array($find) && !count($find)>0){
                                 $cart->add(
