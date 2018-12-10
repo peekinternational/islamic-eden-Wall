@@ -177,7 +177,6 @@ class ProductController extends Controller
         ],[],[
                 'name' => 'title'
         ]);
-
         $product->fill($request->all());
         $product->save();
         session()->flash('__response', ['notify'=>'Product "'.$product->name.'" updated successfully.','type'=>'success']);
