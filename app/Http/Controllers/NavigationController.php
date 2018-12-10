@@ -42,6 +42,7 @@ class NavigationController extends Controller
      */
     public function store(Request $request)
     {
+		
         if($request->has('title') && !$request->has('slug')){
             $request->merge(['slug'=>str_slug($request->input('title'))]);
         }
@@ -70,6 +71,7 @@ class NavigationController extends Controller
                         $sub_nav->nav_id = $request->input('nav_id');
                         $sub_nav->order_by = $request->has('order_by')?$request->input('order_by'):SubNavs::count();
                         $sub_nav->hidden = $request->input('hidden');
+						//dd($sub_nav);
                         $sub_nav->save();
                         if(isset($sub_nav->id)){
                             session()->flash('__response', ['notify'=>'Sub Navigation "'.$request->input('title').'" added successfully.','type'=>'success']);

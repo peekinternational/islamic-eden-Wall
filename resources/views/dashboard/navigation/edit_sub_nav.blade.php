@@ -117,7 +117,7 @@
 @stop
 @section('footer')
     <script>
-        @if(!empty($nav_info->nav_slug) && in_array($nav_info->nav_slug,['shop','home','blog','about-us']))
+        @if(!empty($nav_info->nav_slug) && in_array($nav_info->nav_slug,['shop','eat','home','blog','about-us']))
             $(document).ready(function(){
                     $('.hide-url-inputs').hide();
             });
@@ -127,6 +127,8 @@
                var value = $('select option[value='+($(this).val())+']').attr('data-slug').trim();
                 switch (value){
                     case 'shop':
+					case 'decore':
+					case 'home-goods':
                     case 'about-us':
                     case 'home':
                     case 'blog':
