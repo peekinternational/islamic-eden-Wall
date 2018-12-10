@@ -36,12 +36,19 @@ class CartController extends Controller
                         $product_id = (int)$request->input('id');
                         $find = $cart->find(['id' => $product_id]);
                         $product = Products::findOrFail($product_id);
+                        if($product->offer){
+                        $final_price= $product->saleprice; 
+                        }
+                        else
+                        {
+                        $final_price= $product->price;    
+                        }
                         if(is_array($find) && !count($find)>0){
                                 $cart->add(
                                         $product_id,
                                         $name = $product->name,
                                         $qty = 1,
-                                        $price = (float)$product->price,
+                                        $price = (float)$final_price,
                                         $options = [
                                                 'image'=>'assets/images/'.($product->images()->count()?'products/'.$product->images->first()->image:'no-image.png'),
                                                 'slug'=> $product->slug
