@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                      <div style="height: 350px; overflow: hidden;">
-                         <img style="position: relative;"  src="{{ asset('assets/images/blog/'.$post->images_data) }}" alt="{{ $product->meta_title }}">
+                         <img style="position: relative;"  src="{{ asset('assets/images/blog/'.$post->images_data) }}" alt="{{ $post->meta_title }}">
                      </div>
                     {!!  $post->meta_title  !!}
                     {!!  $post->post  !!}
