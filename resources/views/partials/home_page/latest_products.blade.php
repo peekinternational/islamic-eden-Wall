@@ -113,7 +113,7 @@
             @endforeach
             <!-- End featured Products -->
             <!-- starting best Sellers -->
-           <h3  class="title-featured text-center" style="    margin-bottom: 38px;     margin-top: 38px;"> <i class="fa fa-chevron-left"></i> <span>Featured Product</span> <i class="fa fa-chevron-right"></i></h3>
+           <h3  class="title-featured text-center" style="    margin-bottom: 38px;     margin-top: 38px;"> <i class="fa fa-chevron-left"></i> <span>Our Best seller's</span> <i class="fa fa-chevron-right"></i></h3>
                       
                       @foreach($latest_products->chunk(5) as $products)
                           <div class="row product-row">
@@ -142,7 +142,7 @@
                                           @if($product->offer)
                                           <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
                                                 <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
-                                                <span> €{{ $product->price }}</span></p>
+                                                <span> €{{ $product->saleprice }}</span></p>
                                                   @else
                                                 <p class="text-center"> €{{ $product->price }} </p>
                                                 @endif
