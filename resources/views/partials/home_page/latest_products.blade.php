@@ -100,10 +100,10 @@
                                 </h5>
                                 @if($product->offer)
                                 <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
-                                      <p class="text-center"> <strike style="padding: 0px 8px;"><small>${{ $product->price }}</small> </strike>
-                                      <span> ${{ $product->price }}</span></p>
+                                      <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
+                                      <span> €{{ $product->saleprice }}</span></p>
                                         @else
-                                      <p class="text-center"> ${{ $product->price }} </p>
+                                      <p class="text-center"> €{{ $product->price }} </p>
                                       @endif
                                     
                             </div>
@@ -141,10 +141,10 @@
                                           </h5>
                                           @if($product->offer)
                                           <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
-                                                <p class="text-center"> <strike style="padding: 0px 8px;"><small>${{ $product->price }}</small> </strike>
-                                                <span> ${{ $product->price }}</span></p>
+                                                <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
+                                                <span> €{{ $product->price }}</span></p>
                                                   @else
-                                                <p class="text-center"> ${{ $product->price }} </p>
+                                                <p class="text-center"> €{{ $product->price }} </p>
                                                 @endif
                                               
                                       </div>

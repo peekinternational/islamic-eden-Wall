@@ -71,10 +71,10 @@
                             <span class="price">
                                 <span>
                                     @if($product->offer)
-                                <span class="amount" style="color: gray !important; font-size: 26px;">&euro;<strike>{{ $product->price }}</strike></span>
+                                <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->price }}</small></strike></span>
                                <span class="amount" style="color: gray !important; font-size: 26px;">&euro;{{ $product->saleprice }}</span>
                                 @else
-                                    <span class="amount" style="color: gray !important; font-size: 26px;">&euro;{{ $product->price }}</span>
+                                    <span class="amount" style="color: black !important; font-size: 26px;">&euro;{{ $product->price }}</span>
                                @endif
                                 </span>
                             </span>
