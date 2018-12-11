@@ -83,7 +83,7 @@
                                     @if($product->images->count()>0)
                                         <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
                                        @if($product->offer)
-                                     <label class="tag">Sale</label>
+                                     <label class="tag" style="background-color:red;">Sale</label>
                                        @else
                                         <label class="tag">New</label>
                                         @endif
@@ -99,11 +99,11 @@
                                     <span>{{ $product->category['name'] }}</span></a>
                                 </h5>
                                 @if($product->offer)
-                                <p class="text-center">{{ $product->offer }} % off</p>
-                                      <p class="text-center"> <strike>${{ $product->price }} </strike></p>
-                                       <p class="text-center">${{ $product->saleprice }}</p>
+                                <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
+                                      <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
+                                      <span> €{{ $product->saleprice }}</span></p>
                                         @else
-                                        <p class="text-center">${{ $product->price }} </p>
+                                      <p class="text-center"> €{{ $product->price }} </p>
                                       @endif
                                     
                             </div>
@@ -113,35 +113,45 @@
             @endforeach
             <!-- End featured Products -->
             <!-- starting best Sellers -->
-            <h3  class="title-featured text-center" style="    margin-bottom: 38px;     margin-top: 38px;"> <i class="fa fa-chevron-left"></i>  <span> Browe Our Best Sellers</span> <i class="fa fa-chevron-right"></i></h3>
-                        @foreach($latest_products->chunk(5) as $products)
-                            <div class="row product-row">
-                                @foreach($products as $product)
-                                    <div class="col-md-2-5" style="width: 20%;">
-                                        <figure class="banner-01__img">
-                                            <a class="banner-01__img-wrapp" href="{{ url('product/'.$product->slug) }}">
-                                                @if($product->images->count()>0)
-                                                    <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
-                                                    <label class="tag">New</label>
-                                                @else
-                                                    <img  src="{{ asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
+           <h3  class="title-featured text-center" style="    margin-bottom: 38px;     margin-top: 38px;"> <i class="fa fa-chevron-left"></i> <span>Featured Product</span> <i class="fa fa-chevron-right"></i></h3>
+                      
+                      @foreach($latest_products->chunk(5) as $products)
+                          <div class="row product-row">
+                              @foreach($products as $product)
+                                  <div class="col-md-2-5" style="width: 20%;">
+                                      <figure class="banner-01__img">
+                                          <a class="banner-01__img-wrapp" href="{{ url('product/'.$product->slug) }}">
+                                              @if($product->images->count()>0)
+                                                  <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
+                                                 @if($product->offer)
+                                               <label class="tag" style="background-color:red;">Sale</label>
+                                                 @else
+                                                  <label class="tag">New</label>
+                                                  @endif
+                                              @else
+                                                  <img  src="{{ asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
+                                              @endif
+                                          </a>
+                                      </figure>
+                                      <div class="banner-01__content">
+                                          <h5 class="card-dscrpt">
+                                              <a href="{{ url('product/'.$product->slug) }}">
+                                                  {{ $product->name }} <br>
+                                              <span>{{ $product->category['name'] }}</span></a>
+                                          </h5>
+                                          @if($product->offer)
+                                          <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
+                                                <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
+                                                <span> €{{ $product->price }}</span></p>
+                                                  @else
+                                                <p class="text-center"> €{{ $product->price }} </p>
                                                 @endif
-                                            </a>
-                                        </figure>
-                                        <div class="banner-01__content">
-                                            <h5 class="card-dscrpt">
-                                                <a href="{{ url('product/'.$product->slug) }}">
-                                                    {{ $product->name }} <br>
-                                                <span>{{ $product->category['name'] }}</span></a>
-                                            </h5>
-                                                    
-                                                    <p class="text-center">${{ $product->price }}</p>
-                                                
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endforeach
+                                              
+                                      </div>
+                                  </div>
+                              @endforeach
+                          </div>
+                      @endforeach
                         <!-- ending best Sellers -->
                         <!-- our Logs -->
                         <h3  class="title-featured text-center" style="    margin-bottom: 38px;     margin-top: 38px;"> <i class="fa fa-chevron-left"></i> <span>OUR bLog's</span> <i class="fa fa-chevron-right"></i></h3>
