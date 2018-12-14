@@ -4,6 +4,21 @@
 .quantity-btn{
 	margin-top: 10px;
 }
+.category-img:first-Child{
+	padding-left: 0;
+}
+.category-img{
+	padding-left: 15px;
+	position: relative;
+}
+.category-img:last-Child{
+	padding-right: 15px;
+}
+.product-carousel .owl-stage {
+	width: 100% !important;
+	overflow: hidden;
+	display: -webkit-box; 
+}
 @media  only screen and (max-width: 767px){
 	
 	.checkout-btn{

@@ -256,7 +256,7 @@ class ProductController extends Controller
 
     public function page_products($slug){
         $nav =  SubNavs::whereSlug($slug)->firstOrFail();
-        $products = $nav->products()->orderBy('id','desc')->paginate(15);
+        $products = $nav->products()->orderBy('id','desc')->paginate(6);
         return view('products',compact('products'));
     }
 }
