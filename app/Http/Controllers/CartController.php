@@ -29,7 +29,7 @@ class CartController extends Controller
          */
         public function store(Request $request,LaraCart $cart)
         {
-            
+            dd($request->all());
                 if(!$request->has('id') && !((int)$request->input('id'))>0){
                         $request->session()->flash('__response', ['message'=>'Oops! Something went wrong.','type'=>'danger']);
                 }else{
@@ -102,6 +102,7 @@ class CartController extends Controller
          */
         public function update(Request $request, $id,LaraCart $cart)
         {
+                 dd($request->all());
                 $product_id = (int)$id;
                 if(!$request->has('quantity') || !$request->quantity >0 ||  !$product_id>0){
                         $request->session()->flash('__response', ['notify'=>'Oops something went wrong.','type'=>'error']);
