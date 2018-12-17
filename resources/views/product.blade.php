@@ -145,75 +145,46 @@
                                 <div role="tabpanel" class="tab-pane" id="Additional-info">Additional</div>
                             </div>
                         </div>
-                        <ul id="products" class="products list-unstyled grid-view">
-                        @foreach($products as $product)
-                        <li class="shop-item product type-product item-list" style="width: 30%;">
-
-                                <div class="side-item">
-                                    <figure class="item-media shop-item__img">
-                                        <a href="{{ url('product/'.$product->slug) }}">
-                                            <?php
-                                                $first_image = $product->images->first();
-                                                $image = 'no-image.png';
-                                                    if(isset($first_image->image) && !empty($first_image)){
-                                                        $image = 'products/'.$first_image->image;
-                                                    }
-                                            ?>
-                                            <img src="{{  asset('assets/images/'.$image) }}" alt="{{ $product->name }}">
-                                        </a>
-                                    </figure>
-                                    <div class="shop-item__content" style="padding: 0">
-                                        <h3 class="shop-item__title">
-                                            <a href="{{ url('/product/'.$product->slug) }}">{{ $product->name }}</a>
-                                        </h3>
-                                        <!-- <div class="shop-item__meta-list">
-                                            
-                                        </div> -->
-                                        <div class="items-name" style="float: none;">
-                                             @if($product->tags->count()>0)
-                                             <a class="shop-item__meta-tag" href="#">{{ $product->category->name }}</a>
-                                             @endif
-                                            {{-- <div class="star-rating" title="Rated 4.00 out of 5">
-                                                         <span style="width:80%">
-                                                             <strong class="rating">4.00</strong> out of 5
-                                                         </span>
-                                             </div>--}}
-                                         <p class="shop-item__price">
-                                                <span>
-                                                    <span class="amount">&euro; {{ $product->price  }}</span>
-                                                </span>
-                                            </p>
-                                        <!-- <p class="shop-item__desc">
-                                           {{ $product->details }}
-                                        </p> -->
-                                    </div>
-                                    <!-- <div>
-                                        <span class="shop-item__price">
-                                                <span>
-                                                    <span class="amount">&euro; {{ $product->price  }}</span>
-                                                </span>
-                                            </span>
-                                    </div> -->
-                                        <div class="shop-item__block" style="text-align: center;">
-                                            
-                                            {!! Form::open(array('url' => 'cart','method' => 'post')) !!}
-                                                 {!! Form::button('Add to cart',['class'=>'button-t1','type'=>'submit']) !!}
-                                                 {!!  Form::hidden('id',$product->id)  !!}
-                                              
-
-                                                   
-                                             {!! Form::close() !!}
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            @endforeach
-                         </ul>
+                       
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <hr />
+                    <div id="itemSlider">
+                        <div class="col-md-12" style="display: block !important;">
+                            <h2 class="text-center"> Latest Product</h2>
+                            <div class="">
+                                @foreach($latestProducts as $product)
+                                <div class="col-md-2 category-img" style="width: 20%;">
+                                    <a href="{{ url('product/'.$product->slug) }}" class="">
+                                        @if($product->images->count()>0)
+                                            <img src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}" style="width: 100%; height: 283px; ">
+                                             
+                                         @else
+                                            <img class="media-object" src="{{ asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
+                                        @endif
+                                       
+                                    </a>
+                                    <div class="banner-01__content">
+                                        <h5 class="card-dscrpt">
+                                            <a href="{{ url('product/'.$product->slug) }}">
+                                                {{ $product->name }} <br>
+                                            <span>{{ $product->category['name'] }}</span></a>
+                                        </h5>
+                                        @if($product->offer)
+                                        <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
+                                              <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
+                                              <span> €{{ $product->saleprice }}</span></p>
+                                                @else
+                                              <p class="text-center"> €{{ $product->price }} </p>
+                                              @endif
+                                            
+                                    </div>
+                                </div>
+                                
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                     
                 </div>
             </div>

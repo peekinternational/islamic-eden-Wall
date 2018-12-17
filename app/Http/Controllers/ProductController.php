@@ -152,7 +152,7 @@ class ProductController extends Controller
         if(is_array($find) && count($find)>0){
             $quantity = $find[0]->qty;
         }
-        $products = Products::orderBy('id','desc')->limit(3)->get();
+        $products = Products::orderBy('id','desc')->limit(5)->get();
         $product_color = DB::table('product_color')->where('product_id','=',$product->id)->get();
         $product_size = DB::table('product_size')->where('product_id','=',$product->id)->get();
         //dd($product_size);
