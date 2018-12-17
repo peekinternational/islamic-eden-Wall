@@ -70,6 +70,35 @@
                                     @endforeach
                                 </p>
                             @endif
+                         @if($product_color->count()>0)
+                                <p class="shop-tags">
+                                    <div style="display: -webkit-box;">
+                                    <span>Color:</span>
+                                    @foreach($product_color as $key=>$color)
+                                    <input id="checkboxid{{$color->id}}" onclick="colorselect({{$color->id}})" name="color" type="checkbox" value="{{$color->color}}" class="css-checkbox onlyone">
+                                     <label for="checkboxid{{$color->id}}" class="css-label">{{ucfirst($color->color)}}</label>
+                                        @if(($key+1)< $product_color->count())
+                                                	&nbsp;&nbsp;
+                                       @endif
+                                    @endforeach
+                                    </div>
+                                </p>
+                            @endif
+                            @if($product_size->count()>0)
+                                 <p class="shop-tags">
+                                     <div style="display: -webkit-box;">
+                                    <span>Size:</span>
+                                    @foreach($product_size as $key=>$size)
+                                    <input id="checkboxidd{{$size->id}}" type="radio" name="p_size" class="css-checkbox onlyone">
+                                       <label for="checkboxidd{{$size->id}}" class="css-label">{{strtoupper( $size->p_size)}}</label>
+                                       
+                                        @if(($key+1)< $product_size->count())
+                                                   	&nbsp;&nbsp;
+                                        @endif
+                                    @endforeach
+                                    </div>
+                                </p>
+                            @endif
                             <span class="price">
                                 <span>
                                     @if($product->offer)
@@ -168,6 +197,7 @@
                                             {!! Form::open(array('url' => 'cart','method' => 'post')) !!}
                                                  {!! Form::button('Add to cart',['class'=>'button-t1','type'=>'submit']) !!}
                                                  {!!  Form::hidden('id',$product->id)  !!}
+                                                 <input type="text" name="color" id="sel_color">
 
                                                    
                                              {!! Form::close() !!}
@@ -182,7 +212,7 @@
                 </div>
                 <div class="col-lg-12">
                     <hr />
-                    <div id="disqus_thread"></div>
+                    
                 </div>
             </div>
         </div>
@@ -192,7 +222,44 @@
 @section('scripts')
 
     <script>
+        function colorselect(id)
+        {
+            
+           var data= $('#checkboxid'+id).val();
+           $('#sel_color').val(data);
+        //   / alert(data);
+        }
+$("input:checkbox").on('click', function() {
+  // in the handler, 'this' refers to the box clicked on
+  var $box = $(this);
+  if ($box.is(":checked")) {
+    // the name of the box is retrieved using the .attr() method
+    // as it is assumed and expected to be immutable
+    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+    // the checked state of the group/box on the other hand will change
+    // and the current value is retrieved using .prop() method
+    $(group).prop("checked", false);
+    $box.prop("checked", true);
+  } else {
+    $box.prop("checked", false);
+  }
+});
 
+$("input:radio").on('click', function() {
+  // in the handler, 'this' refers to the box clicked on
+  var $box = $(this);
+  if ($box.is(":checked")) {
+    // the name of the box is retrieved using the .attr() method
+    // as it is assumed and expected to be immutable
+    var group = "input:radio[name='" + $box.attr("name") + "']";
+    // the checked state of the group/box on the other hand will change
+    // and the current value is retrieved using .prop() method
+    $(group).prop("checked", false);
+    $box.prop("checked", true);
+  } else {
+    $box.prop("checked", false);
+  }
+});
 /**
 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/

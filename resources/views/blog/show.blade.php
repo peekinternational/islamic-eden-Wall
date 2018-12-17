@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-lg-12">
                     <hr />
-                    <div id="disqus_thread"></div>
+                    
                 </div>
             </div>
         </div>

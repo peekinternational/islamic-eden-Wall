@@ -169,8 +169,9 @@
                                 </ul>
                             </div>
                         </div>  
-                    </div>
+                    </div>   
                     <div class="col-md-2 tags-section hidden-xs">
+                     
                         <h4 style="color: white;"> Tags</h4>
                         <span class="label label-shirt">Shirt</span>
                             <span class="label label-wordpress">Wordpress</span>

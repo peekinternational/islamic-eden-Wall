@@ -6,6 +6,7 @@
 <script src="{{ asset('assets/plugins/select2/select2.full.min.js') }}"></script>
 <!-- SlimScroll -->
 <script src="{{ asset('assets/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
+<script src="http://wenzhixin.net.cn/p/multiple-select/multiple-select.js"></script>
 <!-- FastClick -->
 <script src="{{ asset('assets/plugins/fastclick/fastclick.js') }}"></script>
 <!-- iCheck 1.0.1 -->

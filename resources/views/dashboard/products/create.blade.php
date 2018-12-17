@@ -98,6 +98,50 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group {{ $errors->has('color') ? ' has-error' : '' }}">
+                            <label for="price" class="col-sm-3 control-label">Product Color <span>*</span></label>
+                            <div class="col-sm-9">
+                              <select multiple="multiple" name="color[]" class="form-control select2" id="color_select">
+                              <option disabled>Select Color</option>
+                                <option value="white">White</option>
+                                <option value="black">black</option>
+                                <option value="green">Green</option>
+                                <option value="grey">gray</option>
+                                <option value="pink">pink</option>
+                                <option value="violet">Violet</option>
+                                <option value="brown">Brown</option>
+                                <option value="blue">Blue</option>
+                                <option value="maroon">Maroon</option>
+                                <option value="olive">olive</option>
+                            </select>
+                               
+                                @if ($errors->has('color'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('color') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                         <div class="form-group {{ $errors->has('p_size') ? ' has-error' : '' }}">
+                            <label for="price" class="col-sm-3 control-label">Product Size <span>*</span></label>
+                            <div class="col-sm-9">
+                              <select multiple="multiple" name="p_size[]" class="form-control select2" id="size_select">
+                              <option disabled>Select size</option>
+                                <option value="s">S</option>
+                                <option value="m">M</option>
+                                <option value="l">L</option>
+                                <option value="xl">XL</option>
+                                <option value="xxl">XXL</option>
+                                <option value="xxxl">XXXL</option>
+                            </select>
+                               
+                                @if ($errors->has('p_size'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('p_size') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-group {{ $errors->has('categories') ? ' has-error' : '' }}">
                             <label for="category_id" class="col-sm-3 control-label">Product Category</label>
                             <div class="col-sm-9">
@@ -209,6 +253,12 @@
     </section>
 @stop
 @section('footer')
+<script>
+        $('#color_select select').multipleSelect();
+    </script>
+    <script>
+        $('#size_select select').multipleSelect();
+    </script>
     <script>
         function readURL(input) {
             if (input.files && input.files.length>0) {
@@ -231,6 +281,58 @@
             try {
                 $(".select2").select2({
                     placeholder:"Select Tags"
+                });
+            }catch (e){
+                console.error(e);
+            }
+            try {
+                //iCheck for checkbox and radio inputs
+                $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+                    checkboxClass: 'icheckbox_minimal-blue',
+                    radioClass: 'iradio_minimal-blue'
+                });
+                //Red color scheme for iCheck
+                $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+                    checkboxClass: 'icheckbox_minimal-red',
+                    radioClass: 'iradio_minimal-red'
+                });
+            }catch (e){
+                console.error(e);
+            }
+
+        });
+
+           $(function () {
+            //Initialize Select2 Elements
+            try {
+                $("#color_select").select2({
+                    placeholder:"Select Colors"
+                });
+            }catch (e){
+                console.error(e);
+            }
+            try {
+                //iCheck for checkbox and radio inputs
+                $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+                    checkboxClass: 'icheckbox_minimal-blue',
+                    radioClass: 'iradio_minimal-blue'
+                });
+                //Red color scheme for iCheck
+                $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+                    checkboxClass: 'icheckbox_minimal-red',
+                    radioClass: 'iradio_minimal-red'
+                });
+            }catch (e){
+                console.error(e);
+            }
+
+        });
+
+           $(function () {
+            //Initialize Select2 Elements
+            try {
+                $("#size_select").select2({
+                    placeholder:"Select Size"
                 });
             }catch (e){
                 console.error(e);

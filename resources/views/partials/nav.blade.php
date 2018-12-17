@@ -53,32 +53,10 @@
 															@elseif($nav->slug == 'home-goods')
                                                             <a href="{{ url('shop/'.$sub_nav->slug) }}">{{ $sub_nav->title }}</a>
                                                         @elseif($nav->slug =='useful')
-                                                            @if($sub_nav->slug=='download-menu')
-                                                                @if(!empty($Menu->value && file_exists(public_path('assets/'.$Menu->value))))
-                                                                       <a download href="{{ asset('assets/'.$Menu->value) }}">{{ $sub_nav->title }}</a>
-                                                                  @else
-                                                                       <a href="#">{{ $sub_nav->title }}</a>
-                                                                 @endif
-                                                                
-                                                            @endif
-                                                             @if($sub_nav->slug=='download-recipes')
-                                                                @if(!empty($Recipes->value && file_exists(public_path('assets/'.$Recipes->value))))
-                                                                       <a download href="{{ asset('assets/'.$Recipes->value) }}">{{ $sub_nav->title }}</a>
-                                                                  @else
-                                                                       <a href="#">{{ $sub_nav->title }}</a>
-                                                                 @endif
-                                                            @endif
+                                                             <?php $url = url($sub_nav->page->slug.'/page'); ?>
+                                                              <a href="{{ $url }}">{{ $sub_nav->title }}</a>
                                                         @else
-                                                            <?php
-                                                                $url = '#';
-                                                                if(isset($sub_nav->page->slug)){
-                                                                    $url = url($sub_nav->page->slug.'/page');
-                                                                }
-                                                                if(!empty($sub_nav->url) && filter_var($sub_nav->url,FILTER_VALIDATE_URL) == true){
-                                                                     $url = $sub_nav->url;
-                                                               }
-                                                            ?>
-                                                            <a href="{{ $url }}">{{ $sub_nav->title }}</a>
+                                                           
                                                         @endif
                                                     </li>
                                                 @endif
