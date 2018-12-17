@@ -8,9 +8,10 @@
     @include('partials.breadcrumb')
 @stop
 @section('content')
-    <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_75 section_padding_bottom_75 columns_padding_25 cart-section">
+    <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_75 section_padding_bottom_75 columns_padding_25 ">
         <div class="container">
             <div class="row">
+                 @include('partials.sidebar')
                 <div class="col-sm-8 col-md-8 col-lg-8">
 
                     <div class="table-responsive">
@@ -64,7 +65,7 @@
                                                 <span class="currencies">€</span>
                                                 <span class="amount">{{ $item->saleprice }}</span>
                                             @else
-                                                <span class="currencies">$</span>
+                                                <span class="currencies">€</span>
                                                 <span class="amount">{{ $item->price }}</span>
                                                 @endif
                                             </td>
@@ -168,7 +169,7 @@
                     </div>--}}
                 </div>
                 <!-- sidebar -->
-                @include('partials.sidebar')
+               
                 <!-- eof aside sidebar -->
             </div>
         </div>
