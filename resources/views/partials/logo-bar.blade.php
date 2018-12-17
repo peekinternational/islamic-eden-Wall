@@ -118,6 +118,9 @@
                                                       <span class="quantity">{{ $item->options['qty'] }} ×
                                                        <span class="amount">&euro; {{ $item->options['price'] }}</span>
                                                       </span>
+                                                      <span class="">{{ $item->options['color'] }}  
+                                                        <span class="" style="color: black;">({{ strtoupper($item->options['p_size'] )}})</span>
+                                                      </span>
                                                 </div>
                                                 <div class="media-body media-middle">
                                                     {!! Form::open(array('route' => array('cart.destroy', $item->options['id']),'method' => 'delete')) !!}

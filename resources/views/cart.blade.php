@@ -18,8 +18,10 @@
                             <thead>
                             <tr>
                                 <td class="product-info">Product</td>
-                                <td class="product-price-td">Price</td>
+                                <td class="product-price-td">Color</td>
+                                <td class="product-price-td">Size</td>
                                 <td class="product-quantity">Quantity</td>
+                                <td class="product-price-td">Price</td>
                                 <td class="product-subtotal">Subtotal</td>
                                 <td class="product-remove">&nbsp;</td>
                             </tr>
@@ -41,6 +43,14 @@
                                                         </h4>
                                                     </div>
                                                 </div>
+                                            </td>
+                                            <td class="product-subtotal">
+                                                
+                                               <span class="amount">{{ $item->color  }}</span>
+                                            </td>
+                                            <td class="product-subtotal">
+                                                
+                                               <span class="amount">{{ $item->p_size  }}</span>
                                             </td>
                                             <td class="product-price">
                                             @if($item->offer)
