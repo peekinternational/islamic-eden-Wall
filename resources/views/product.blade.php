@@ -3,10 +3,12 @@
     @include('partials.breadcrumb')
 @stop
 @section('content')
+
     <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_100 section_padding_bottom_100">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                @include('partials/sidebar')
+                <div class="col-sm-8">
                     <div class="shop-single">
                         <figure class="shop-single__img">
                             @if($product->images->count()>0)
@@ -94,6 +96,89 @@
                          {{--   <a class="btn__wish" href="#">Add to Wishlist</a>--}}
                         </div>
                     </div>
+                    <div class="row" style="margin: 0px;">
+                        <div role="tabpanel "  class="product_tabs">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#descript" aria-controls="home" role="tab" data-toggle="tab">DEScription</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#Additional-info" aria-controls="tab" role="tab" data-toggle="tab">Additional Information</a>
+                                </li>
+                            </ul>
+                        
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="descript">{{ $product->description }}</div>
+                                <div role="tabpanel" class="tab-pane" id="Additional-info">Additional</div>
+                            </div>
+                        </div>
+                        <ul id="products" class="products list-unstyled grid-view">
+                        @foreach($products as $product)
+                        <li class="shop-item product type-product item-list">
+
+                                <div class="side-item">
+                                    <figure class="item-media shop-item__img">
+                                        <a href="{{ url('product/'.$product->slug) }}">
+                                            <?php
+                                                $first_image = $product->images->first();
+                                                $image = 'no-image.png';
+                                                    if(isset($first_image->image) && !empty($first_image)){
+                                                        $image = 'products/'.$first_image->image;
+                                                    }
+                                            ?>
+                                            <img src="{{  asset('assets/images/'.$image) }}" alt="{{ $product->name }}">
+                                        </a>
+                                    </figure>
+                                    <div class="shop-item__content" style="padding: 0">
+                                        <h3 class="shop-item__title">
+                                            <a href="{{ url('/product/'.$product->slug) }}">{{ $product->name }}</a>
+                                        </h3>
+                                        <!-- <div class="shop-item__meta-list">
+                                            
+                                        </div> -->
+                                        <div class="items-name" style="float: none;">
+                                             @if($product->tags->count()>0)
+                                             <a class="shop-item__meta-tag" href="#">{{ $product->category->name }}</a>
+                                             @endif
+                                            {{-- <div class="star-rating" title="Rated 4.00 out of 5">
+                                                         <span style="width:80%">
+                                                             <strong class="rating">4.00</strong> out of 5
+                                                         </span>
+                                             </div>--}}
+                                         <p class="shop-item__price">
+                                                <span>
+                                                    <span class="amount">&euro; {{ $product->price  }}</span>
+                                                </span>
+                                            </p>
+                                        <!-- <p class="shop-item__desc">
+                                           {{ $product->details }}
+                                        </p> -->
+                                    </div>
+                                    <!-- <div>
+                                        <span class="shop-item__price">
+                                                <span>
+                                                    <span class="amount">&euro; {{ $product->price  }}</span>
+                                                </span>
+                                            </span>
+                                    </div> -->
+                                        <div class="shop-item__block" style="text-align: center;">
+                                            
+                                            {!! Form::open(array('url' => 'cart','method' => 'post')) !!}
+                                                 {!! Form::button('Add to cart',['class'=>'button-t1','type'=>'submit']) !!}
+                                                 {!!  Form::hidden('id',$product->id)  !!}
+
+                                                   
+                                             {!! Form::close() !!}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            @endforeach
+                         </ul>
+                    </div>
                 </div>
                 <div class="col-lg-12">
                     <hr />
@@ -102,6 +187,7 @@
             </div>
         </div>
     </div>
+   
 @stop
 @section('scripts')
 

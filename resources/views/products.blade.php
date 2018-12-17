@@ -112,13 +112,48 @@
                             Products Not Found
                         </div>
                     @endif
+
+                    <div id="itemSlider">
+                        <div class="col-md-12" style="display: block !important;">
+                            <h2 class="text-center"> Latest Product</h2>
+                            <div class="">
+                                @foreach($latestProducts as $product)
+                                <div class="col-md-3 category-img">
+                                    <a href="{{ url('product/'.$product->slug) }}" class="">
+                                        @if($product->images->count()>0)
+                                            <img src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}" style="width: 100%; height: 283px; ">
+                                             
+                                         @else
+                                            <img class="media-object" src="{{ asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
+                                        @endif
+                                       
+                                    </a>
+                                    <div class="banner-01__content">
+                                        <h5 class="card-dscrpt">
+                                            <a href="{{ url('product/'.$product->slug) }}">
+                                                {{ $product->name }} <br>
+                                            <span>{{ $product->category['name'] }}</span></a>
+                                        </h5>
+                                        @if($product->offer)
+                                        <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
+                                              <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
+                                              <span> €{{ $product->saleprice }}</span></p>
+                                                @else
+                                              <p class="text-center"> €{{ $product->price }} </p>
+                                              @endif
+                                            
+                                    </div>
+                                </div>
+                                
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-            </div>
-
-        </div>
-
+         </div>
+            <!-- enfd -->
     </div>
+</div>
 
 @stop
 
@@ -155,5 +190,23 @@
                 });
             });
         })
+    </script>
+    <script>
+         var owl = $('.product-carousel ');
+        owl.owlCarousel({
+            items:10,
+            loop:true,
+            margin:10,
+            autoplay:true,
+            autoplayTimeout:1000,
+            autoplayHoverPause:true
+        });
+        $('.play').on('click',function(){
+            owl.trigger('play.owl.autoplay',[1000])
+        })
+        $('.stop').on('click',function(){
+            owl.trigger('stop.owl.autoplay')
+        })
+
     </script>
 @stop

@@ -36,7 +36,8 @@ class ProductController extends Controller
         $cat = $produt->category;
         return $category;*/
         $products = Products::orderBy('id','desc')->paginate(10);
-        return view('products',compact('products'));
+         return view('products',compact('products'));
+
     }
 
     /**
@@ -256,7 +257,7 @@ class ProductController extends Controller
 
     public function page_products($slug){
         $nav =  SubNavs::whereSlug($slug)->firstOrFail();
-        $products = $nav->products()->orderBy('id','desc')->paginate(15);
+        $products = $nav->products()->orderBy('id','desc')->paginate(6);
         return view('products',compact('products'));
     }
 }
