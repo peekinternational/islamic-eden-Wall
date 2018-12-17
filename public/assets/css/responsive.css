@@ -365,3 +365,49 @@ top: 26%;
 .pro-prce{
 	padding-right: 14px;
 }
+.block {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: black;
+  padding: 7px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+.add_cart{
+	position: absolute;    
+	z-index: 999;
+	top: 85%; opacity: 0 ;
+	width: 100%;
+	
+}
+.banner-01__img-wrapp:hover .add_cart {
+  opacity: 1;
+  color: white;
+}
+.product_tabs ul li {
+	background-color:black !important;
+	color: white ;
+
+}
+.product_tabs ul li a{
+	padding: 17px 30px;
+
+}
+.product_tabs .nav-tabs li.active a:hover,.product_tabs .nav-tabs li.active a:active,.product_tabs .nav-tabs li.active a:focus {
+    background: black !important;
+    color: white;
+}
+.product_tabs .nav-tabs li.active{
+	border:0px;
+}
+.product_tabs .nav-tabs li.active a{
+	 background: black !important;
+	 border:0px;
+    color: white;
+}
+.product_tabs .nav-tabs li a:hover{
+	 background: black !important;
+    color: white;
+}

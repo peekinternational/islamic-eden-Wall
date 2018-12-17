@@ -36,7 +36,8 @@ class ProductController extends Controller
         $cat = $produt->category;
         return $category;*/
         $products = Products::orderBy('id','desc')->paginate(10);
-        return view('products',compact('products'));
+         return view('products',compact('products'));
+
     }
 
     /**
