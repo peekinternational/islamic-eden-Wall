@@ -44,7 +44,7 @@
                                             </td>
                                             <td class="product-price">
                                             @if($item->offer)
-                                                <span class="currencies">$</span>
+                                                <span class="currencies">€</span>
                                                 <span class="amount">{{ $item->saleprice }}</span>
                                             @else
                                                 <span class="currencies">$</span>
@@ -59,7 +59,7 @@
                                                 </div>
                                             </td>
                                             <td class="product-subtotal">
-                                                <span class="currencies">$</span>
+                                                <span class="currencies">€</span>
                                                <span class="amount">{{ $item->price *  $item->qty  }}</span>
                                             </td>
                                             <td class="product-remove">
@@ -96,7 +96,7 @@
                                 <tr class="cart-subtotal">
                                     <td>Shopping Basket Subtotal</td>
                                     <td>
-                                        <span class="currencies">$</span>
+                                        <span class="currencies">€</span>
                                         <span class="amount">{{ $cart->subTotal($format = false, $withDiscount = true) }}</span>
                                     </td>
                                 </tr>
@@ -110,7 +110,7 @@
                                     <td class="grey">Order Total</td>
                                     <td>
                                         <strong class="grey">
-                                            <span class="currencies">$</span>
+                                            <span class="currencies">€</span>
                                             <span class="amount">{{ $cart->total($format = false,$withDiscount = true) }}</span>
                                         </strong>
                                     </td>

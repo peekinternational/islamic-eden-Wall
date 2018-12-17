@@ -80,8 +80,14 @@
                         <div class="col-md-2-5" style="width: 20%;">
                             <figure class="banner-01__img">
                                 <a class="banner-01__img-wrapp" href="{{ url('product/'.$product->slug) }}">
+                                  {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
+                                  <div class="add_cart" >
+                                    <button class="btn block" type="submit"> ADD TO CART</button>
+                                    </div>
+                                   {!! Form::close() !!} 
                                     @if($product->images->count()>0)
                                         <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
+                                        
                                        @if($product->offer)
                                      <label class="tag" style="background-color:red;">Sale</label>
                                        @else
@@ -113,7 +119,7 @@
             @endforeach
             <!-- End featured Products -->
             <!-- starting best Sellers -->
-           <h3  class="title-featured text-center" style="    margin-bottom: 38px;     margin-top: 38px;"> <i class="fa fa-chevron-left"></i> <span>Featured Product</span> <i class="fa fa-chevron-right"></i></h3>
+           <h3  class="title-featured text-center" style="    margin-bottom: 38px;     margin-top: 38px;"> <i class="fa fa-chevron-left"></i> <span>Our Best seller's</span> <i class="fa fa-chevron-right"></i></h3>
                       
                       @foreach($latest_products->chunk(5) as $products)
                           <div class="row product-row">
@@ -121,6 +127,12 @@
                                   <div class="col-md-2-5" style="width: 20%;">
                                       <figure class="banner-01__img">
                                           <a class="banner-01__img-wrapp" href="{{ url('product/'.$product->slug) }}">
+                                            {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
+                                            <div class="add_cart" >
+                                              <button class="btn block" type="submit"> ADD TO CART</button>
+                                              </div>
+                                             {!! Form::close() !!}
+                                            
                                               @if($product->images->count()>0)
                                                   <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
                                                  @if($product->offer)
@@ -142,7 +154,7 @@
                                           @if($product->offer)
                                           <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
                                                 <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
-                                                <span> €{{ $product->price }}</span></p>
+                                                <span> €{{ $product->saleprice }}</span></p>
                                                   @else
                                                 <p class="text-center"> €{{ $product->price }} </p>
                                                 @endif
@@ -161,7 +173,12 @@
                                                 <div class="col-md-2-5" style="width: 20%;">
                                                     <figure class="banner-01__img">
                                                         <a class="banner-01__img-wrapp" href="{{ action('BlogController@showPost',$product->id) }}">
-                                                                   @if($product->images_data)
+                                                          {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
+                                                          <div class="add_cart" >
+                                                            <button class="btn block" type="submit"> ADD TO CART</button>
+                                                            </div>
+                                                           {!! Form::close() !!}
+                                                          @if($product->images_data)
                                                         <img style="position: relative;"  src="{{ asset('assets/images/blog/'.$product->images_data) }}" alt="{{ $product->meta_title }}">
                                                         <label class="tag">New</label>
                                                     @else

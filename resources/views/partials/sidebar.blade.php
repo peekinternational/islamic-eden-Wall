@@ -38,7 +38,7 @@
         {!! Form::close() !!}
     </div>
 
-    <div class="widget widget_latest_products">
+   <!--  <div class="widget widget_latest_products">
         <h3 class="widget-title">Latest Products </h3>
         <ul class="latest-products__list">
             @foreach($latestProducts as $product)
@@ -72,5 +72,5 @@
             </li>
             @endforeach
         </ul>
-    </div>
+    </div> -->
 </aside>
