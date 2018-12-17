@@ -113,12 +113,14 @@
                         </div>
                     @endif
 
-                    <div id="itemSlider">
+                    
+                </div>
+                <div id="itemSlider">
                         <div class="col-md-12" style="display: block !important;">
                             <h2 class="text-center"> Latest Product</h2>
                             <div class="">
                                 @foreach($latestProducts as $product)
-                                <div class="col-md-3 category-img">
+                                <div class="col-md-2 category-img" style="width: 20%;">
                                     <a href="{{ url('product/'.$product->slug) }}" class="">
                                         @if($product->images->count()>0)
                                             <img src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}" style="width: 100%; height: 283px; ">
@@ -149,7 +151,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
          </div>
             <!-- enfd -->
     </div>
