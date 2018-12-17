@@ -75,7 +75,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     { 
-      //  dd($request->all());
+       //dd($request->input('color'));
         if(!$request->has('slug')){
             $request->merge(['slug'=>str_slug($request->input('name'))]);
         }
@@ -89,9 +89,12 @@ class ProductController extends Controller
             'name' => 'title',
             'category_id'=>'Category'
         ]);
+     $size=$request->input('p_size');
+     $p_color=$request->input('color');
 
         $product = Products::create($request->all());
         if($product->id){
+
             $product->navs()->attach($request->input('navs'));
             if($request->has('tags')){
                 $product->tags()->attach($request->input('tags'));
@@ -112,6 +115,19 @@ class ProductController extends Controller
                     
                 
             }
+              foreach($p_color as $colors )
+              {
+                  $input['color']=$colors;
+                  $input['product_id']=$product->id;
+                  DB::table('product_color')->insert($input);
+              }
+              foreach($size as $pro_size )
+              {
+                  $inputs['p_size']=$pro_size;
+                  $inputs['product_id']=$product->id;
+                  DB::table('product_size')->insert($inputs);
+              }
+
             session()->flash('__response', ['notify'=>'Product "'.$request->input('name').'" created successfully.','type'=>'success']);
         }else{
             session()->flash('__response', ['notify'=>'Oops something went wrong..','type'=>'error']);
@@ -136,8 +152,12 @@ class ProductController extends Controller
         if(is_array($find) && count($find)>0){
             $quantity = $find[0]->qty;
         }
+        $products = Products::orderBy('id','desc')->limit(5)->get();
+        $product_color = DB::table('product_color')->where('product_id','=',$product->id)->get();
+        $product_size = DB::table('product_size')->where('product_id','=',$product->id)->get();
+        //dd($product_size);
         
-        return view('product',compact('product','quantity'));
+        return view('product',compact('product','quantity','product_size','product_color','products'));
     }
 
     /**

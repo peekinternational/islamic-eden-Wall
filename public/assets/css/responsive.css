@@ -411,3 +411,27 @@ top: 26%;
 	 background: black !important;
     color: white;
 }
+input[type=checkbox].css-checkbox{ display: none; }
+
+.css-label{
+        padding-left: 11px;
+    line-height: 23px;
+    display: flex;
+    width: 19%;
+    height: 26px; 
+}
+
+
+input[type=checkbox].css-checkbox:checked + label.css-label {
+ background-position: 0 0;
+ border: 3px solid #2FBCDF;
+}
+
+input[type=radio].css-checkbox{ display: none; }
+
+
+input[type=radio].css-checkbox:checked + label.css-label {
+ background-position: 0 0;
+ border: 3px solid #2FBCDF;
+}
+

@@ -8,9 +8,10 @@
     @include('partials.breadcrumb')
 @stop
 @section('content')
-    <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_75 section_padding_bottom_75 columns_padding_25 cart-section">
+    <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_75 section_padding_bottom_75 columns_padding_25 ">
         <div class="container">
             <div class="row">
+                 @include('partials.sidebar')
                 <div class="col-sm-8 col-md-8 col-lg-8">
 
                     <div class="table-responsive">
@@ -18,8 +19,10 @@
                             <thead>
                             <tr>
                                 <td class="product-info">Product</td>
-                                <td class="product-price-td">Price</td>
+                                <td class="product-price-td">Color</td>
+                                <td class="product-price-td">Size</td>
                                 <td class="product-quantity">Quantity</td>
+                                <td class="product-price-td">Price</td>
                                 <td class="product-subtotal">Subtotal</td>
                                 <td class="product-remove">&nbsp;</td>
                             </tr>
@@ -42,14 +45,13 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="product-price">
-                                            @if($item->offer)
-                                                <span class="currencies">€</span>
-                                                <span class="amount">{{ $item->saleprice }}</span>
-                                            @else
-                                                <span class="currencies">$</span>
-                                                <span class="amount">{{ $item->price }}</span>
-                                                @endif
+                                            <td class="product-subtotal">
+                                                
+                                               <span class="amount">{{ $item->color  }}</span>
+                                            </td>
+                                            <td class="product-subtotal">
+                                                
+                                               <span class="amount">{{ $item->p_size  }}</span>
                                             </td>
                                             <td class="product-quantity">
                                                 <div class="quantity">
@@ -58,6 +60,16 @@
                                                     <input type="button" value="+" class="plus">
                                                 </div>
                                             </td>
+                                            <td class="product-price">
+                                            @if($item->offer)
+                                                <span class="currencies">€</span>
+                                                <span class="amount">{{ $item->saleprice }}</span>
+                                            @else
+                                                <span class="currencies">€</span>
+                                                <span class="amount">{{ $item->price }}</span>
+                                                @endif
+                                            </td>
+                                            
                                             <td class="product-subtotal">
                                                 <span class="currencies">€</span>
                                                <span class="amount">{{ $item->price *  $item->qty  }}</span>
@@ -157,7 +169,7 @@
                     </div>--}}
                 </div>
                 <!-- sidebar -->
-                @include('partials.sidebar')
+               
                 <!-- eof aside sidebar -->
             </div>
         </div>
