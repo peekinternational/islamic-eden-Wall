@@ -52,6 +52,13 @@
                                                 
                                                <span class="amount">{{ $item->p_size  }}</span>
                                             </td>
+                                            <td class="product-quantity">
+                                                <div class="quantity">
+                                                    <input type="button" value="-" class="minus">
+                                                    <input type="number" step="1" min="0" data-id="{{ $item->id }}" name="product_quantity" value="{{ $item->qty }}" title="Qty" class="form-control input-product-quantity">
+                                                    <input type="button" value="+" class="plus">
+                                                </div>
+                                            </td>
                                             <td class="product-price">
                                             @if($item->offer)
                                                 <span class="currencies">€</span>
@@ -61,13 +68,7 @@
                                                 <span class="amount">{{ $item->price }}</span>
                                                 @endif
                                             </td>
-                                            <td class="product-quantity">
-                                                <div class="quantity">
-                                                    <input type="button" value="-" class="minus">
-                                                    <input type="number" step="1" min="0" data-id="{{ $item->id }}" name="product_quantity" value="{{ $item->qty }}" title="Qty" class="form-control input-product-quantity">
-                                                    <input type="button" value="+" class="plus">
-                                                </div>
-                                            </td>
+                                            
                                             <td class="product-subtotal">
                                                 <span class="currencies">€</span>
                                                <span class="amount">{{ $item->price *  $item->qty  }}</span>
