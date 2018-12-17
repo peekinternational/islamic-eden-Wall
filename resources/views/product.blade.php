@@ -89,7 +89,7 @@
                                      <div style="display: -webkit-box;">
                                     <span>Size:</span>
                                     @foreach($product_size as $key=>$size)
-                                    <input id="checkboxidd{{$size->id}}" type="radio" name="p_size" class="css-checkbox onlyone">
+                                    <input id="checkboxidd{{$size->id}}" onclick="sizeselect({{$size->id}})" type="radio" name="p_size" value="{{$size->p_size}}" class="css-checkbox onlyone">
                                        <label for="checkboxidd{{$size->id}}" class="css-label">{{strtoupper( $size->p_size)}}</label>
                                        
                                         @if(($key+1)< $product_size->count())
@@ -116,6 +116,8 @@
                                                 <input type="button" value="-" class="minus">
                                                 <input type="number" step="1" min="0" name="quantity" value="{{ $quantity }}" title="Qty" id="product_quantity" class="form-control ">
                                                 <input type="button" value="+" class="plus">
+                                                <input type="hidden" name="color" id="sel_color">
+                                                <input type="hidden" name="p_size" id="sel_size">
                                         </span>
                                         <button class="button-t1" type="submit">Add to cart</button>
                                        
@@ -145,7 +147,7 @@
                         </div>
                         <ul id="products" class="products list-unstyled grid-view">
                         @foreach($products as $product)
-                        <li class="shop-item product type-product item-list">
+                        <li class="shop-item product type-product item-list" style="width: 30%;">
 
                                 <div class="side-item">
                                     <figure class="item-media shop-item__img">
@@ -197,7 +199,7 @@
                                             {!! Form::open(array('url' => 'cart','method' => 'post')) !!}
                                                  {!! Form::button('Add to cart',['class'=>'button-t1','type'=>'submit']) !!}
                                                  {!!  Form::hidden('id',$product->id)  !!}
-                                                 <input type="text" name="color" id="sel_color">
+                                              
 
                                                    
                                              {!! Form::close() !!}
@@ -224,9 +226,14 @@
     <script>
         function colorselect(id)
         {
-            
            var data= $('#checkboxid'+id).val();
            $('#sel_color').val(data);
+        //   / alert(data);
+        }
+        function sizeselect(id)
+        {
+           var datas= $('#checkboxidd'+id).val();
+           $('#sel_size').val(datas);
         //   / alert(data);
         }
 $("input:checkbox").on('click', function() {

@@ -102,7 +102,8 @@ class CartController extends Controller
          */
         public function update(Request $request, $id,LaraCart $cart)
         {
-                 dd($request->all());
+                 $color=$request->input('color');
+                 $size=$request->input('p_size');
                 $product_id = (int)$id;
                 if(!$request->has('quantity') || !$request->quantity >0 ||  !$product_id>0){
                         $request->session()->flash('__response', ['notify'=>'Oops something went wrong.','type'=>'error']);
@@ -126,7 +127,9 @@ class CartController extends Controller
                                 $price = (float)$final_price,
                                 $options = [
                                         'image'=>'assets/images/'.($product->images()->count()?'products/'.$product->images->first()->image:'no-image.png'),
-                                        'slug'=> $product->slug
+                                        'slug'=> $product->slug,
+                                        'color'=>$color,
+                                        'p_size'=>$size
                                 ],
                                 $taxable = false,
                                 $lineItem = false
