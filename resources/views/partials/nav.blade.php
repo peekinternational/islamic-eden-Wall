@@ -40,11 +40,11 @@
                                                 $url = $nav->url;
                                             }
                                         ?>
-                                        <a href="{{ $url }}" class="sf-with-ul" style="color: {{ $nav->color }};padding: 25px 10px;font-size: 18px;"  onmouseout="this.style.color='{{ $nav->color }}'" onmouseover="this.style.color = 'inherit'">{{ $nav->title }}</a>
+                                        <a href="{{ $url }}" class="" style="color: {{ $nav->color }};padding: 25px 10px;font-size: 18px;"  onmouseout="this.style.color='{{ $nav->color }}'" onmouseover="this.style.color = 'inherit'">{{ $nav->title }}</a>
                                         @if($nav->sub_navs->count()>0)
-                                        <ul style="display: none;">
+                                        <ul style="display: none !important;" id="sub_ul">
                                             @foreach($nav->sub_navs as $sub_nav)
-                                                @if(!$sub_nav->hidden)
+                                               
                                                     <li>
                                                         @if($nav->slug == 'shop')
                                                             <a href="{{ url('shop/'.$sub_nav->slug) }}">{{ $sub_nav->title }}</a>
@@ -58,8 +58,22 @@
                                                         @else
                                                            
                                                         @endif
+
+                                                         @if($sub_nav->more_subnav->count()>0)
+                                                            <ul class="more_sub">
+                                                                @foreach($sub_nav->more_subnav as $sub_nav)
+                                                                    @if(!$sub_nav->hidden)
+                                                                        <li>
+                                                                           
+                                                                                <a href="{{ url('shop/'.$sub_nav->slug) }}">{{ $sub_nav->title }}</a>
+                                                                           
+                                                                        </li>
+                                                                    @endif
+                                                                @endforeach
+                                                            </ul>
+                                                        @endif
                                                     </li>
-                                                @endif
+                                                
                                             @endforeach
                                         </ul>
                                         @endif

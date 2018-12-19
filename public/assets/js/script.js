@@ -1304,7 +1304,7 @@ jQuery(document).ready(function() {
 
 						jQuery(this).find('ul').first().css({
 
-								left: -newSubMenuPosition,
+								//left: -newSubMenuPosition,
 
 								//top: '10px',
 
@@ -1316,7 +1316,7 @@ jQuery(document).ready(function() {
 
 						left: '100%',
 
-						//top: '10px',
+						display: 'block',
 
 					});
 

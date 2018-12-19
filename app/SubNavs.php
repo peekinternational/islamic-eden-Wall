@@ -14,6 +14,9 @@ class SubNavs extends Model
         public function nav(){
                 return $this->hasOne(Navs::class,'id','nav_id');
         }
+        public function more_subnav(){
+                return $this->hasMany(MoreSubNav::class,'sub_id','id');
+        }
         public function page(){
              return $this->belongsTo(Pages::class,'page_id','id');
         }

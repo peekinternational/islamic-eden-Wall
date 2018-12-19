@@ -1952,7 +1952,7 @@ body {
 
 .sf-menu > li > ul > li > ul > li::before {
 
-  display: none; }
+  }
 
 .sf-menu > li > ul > li > ul > li > a {
 
