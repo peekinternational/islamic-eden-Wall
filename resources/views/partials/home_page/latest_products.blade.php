@@ -80,11 +80,11 @@
                         <div class="col-md-2-5" style="width: 20%;">
                             <figure class="banner-01__img">
                                 <a class="banner-01__img-wrapp" href="{{ url('product/'.$product->slug) }}">
-                                  {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
+                                  <!-- {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
                                   <div class="add_cart" >
                                     <button class="btn block" type="submit"> ADD TO CART</button>
                                     </div>
-                                   {!! Form::close() !!} 
+                                   {!! Form::close() !!}  -->
                                     @if($product->images->count()>0)
                                         <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
                                         
@@ -127,11 +127,11 @@
                                   <div class="col-md-2-5" style="width: 20%;">
                                       <figure class="banner-01__img">
                                           <a class="banner-01__img-wrapp" href="{{ url('product/'.$product->slug) }}">
-                                            {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
+                                           <!--  {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
                                             <div class="add_cart" >
                                               <button class="btn block" type="submit"> ADD TO CART</button>
                                               </div>
-                                             {!! Form::close() !!}
+                                             {!! Form::close() !!} -->
                                             
                                               @if($product->images->count()>0)
                                                   <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
@@ -173,11 +173,11 @@
                                                 <div class="col-md-2-5" style="width: 20%;">
                                                     <figure class="banner-01__img">
                                                         <a class="banner-01__img-wrapp" href="{{ action('BlogController@showPost',$product->id) }}">
-                                                          {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
+                                                          <!-- {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
                                                           <div class="add_cart" >
                                                             <button class="btn block" type="submit"> ADD TO CART</button>
                                                             </div>
-                                                           {!! Form::close() !!}
+                                                           {!! Form::close() !!} -->
                                                           @if($product->images_data)
                                                         <img style="position: relative;"  src="{{ asset('assets/images/blog/'.$product->images_data) }}" alt="{{ $product->meta_title }}">
                                                         <label class="tag">New</label>
