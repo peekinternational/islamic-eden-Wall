@@ -31,7 +31,7 @@
                             <td>{{ strip_tags($product->description) }}</td>
 
                             <td>
-                                <a href="{{ action('ProductController@show',$product->id) }}" class="btn btn-xs btn-info" data-toggle="tooltip"  data-original-title="View Product"><i class="fa fa-search"></i> </a>
+                                <a href="{{ action('ProductController@show',$product->name) }}" class="btn btn-xs btn-info" data-toggle="tooltip"  data-original-title="View Product"><i class="fa fa-search"></i> </a>
                             <span class="pull-right">
                                     <a href="{{ action('ProductController@edit',$product->id) }}" class="btn btn-xs btn-warning" data-toggle="tooltip"  data-original-title="Edit"><i class="fa fa-edit"></i> </a>
                                     {!! Form::open(['action'=>['ProductController@destroy',$product->id],'method'=>'delete','style'=>'display:inline;']) !!}
