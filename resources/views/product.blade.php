@@ -148,6 +148,7 @@
                        
                     </div>
                 </div>
+                
                 <div class="col-lg-12">
                     <div id="itemSlider">
                         <div class="col-md-12" style="display: block !important;">
