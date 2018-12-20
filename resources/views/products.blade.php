@@ -83,16 +83,7 @@
                                             </span>
                                         </span>
                                 </div> -->
-                                    <div class="shop-item__block" style="text-align: center;">
-                                        
-                                        {!! Form::open(array('url' => 'cart','method' => 'post')) !!}
-                                             {!! Form::button('Add to cart',['class'=>'button-t1','type'=>'submit']) !!}
-                                             {!!  Form::hidden('id',$product->id)  !!}
-
-                                               
-                                         {!! Form::close() !!}
-
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </li>
