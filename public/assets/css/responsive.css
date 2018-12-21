@@ -434,4 +434,10 @@ input[type=radio].css-checkbox:checked + label.css-label {
  background-position: 0 0;
  border: 3px solid #2FBCDF;
 }
+.title-product{
+	text-align: left !important;
+	border-bottom: 1px solid lightgray;
+	font-size: 25px;
+	color: black;
+}
 

@@ -71,8 +71,8 @@
                                 </p>
                             @endif
                          @if($product_color->count()>0)
-                                <p class="shop-tags">
-                                    <div style="display: -webkit-box;">
+                                
+                                    <div class="shop-tags" style="display: -webkit-box;">
                                     <span>Color:</span>
                                     @foreach($product_color as $key=>$color)
                                     <input id="checkboxid{{$color->id}}" onclick="colorselect({{$color->id}})" name="color" type="checkbox" value="{{$color->color}}" class="css-checkbox onlyone">
@@ -82,10 +82,10 @@
                                        @endif
                                     @endforeach
                                     </div>
-                                </p>
+                               
                             @endif
                             @if($product_size->count()>0)
-                                 <p class="shop-tags">
+                                 
                                      <div style="display: -webkit-box;">
                                     <span>Size:</span>
                                     @foreach($product_size as $key=>$size)
@@ -97,7 +97,7 @@
                                         @endif
                                     @endforeach
                                     </div>
-                                </p>
+                                
                             @endif
                             <span class="price">
                                 <span>
@@ -152,7 +152,7 @@
                 <div class="col-lg-12">
                     <div id="itemSlider">
                         <div class="col-md-12" style="display: block !important;">
-                            <h2 class="text-center"> Latest Product</h2>
+                            <h2 class="text-center title-product"> realated Product</h2>
                             <div class="">
                                 @foreach($latestProducts as $product)
                                 <div class="col-md-2 category-img" style="width: 20%;">
