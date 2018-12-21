@@ -102,8 +102,11 @@ class CartController extends Controller
          */
         public function update(Request $request, $id,LaraCart $cart)
         {
+        //        /dd($request->input('p_size'));
                  $color=$request->input('color');
                  $size=$request->input('p_size');
+                 $p_dimension=$request->input('p_dimension');
+                 $p_price=$request->input('p_price');
                 $product_id = (int)$id;
                 if(!$request->has('quantity') || !$request->quantity >0 ||  !$product_id>0){
                         $request->session()->flash('__response', ['notify'=>'Oops something went wrong.','type'=>'error']);
@@ -111,13 +114,17 @@ class CartController extends Controller
                 }
                 $find = $cart->find(['id' => $product_id]);
                 $product = Products::findOrFail($product_id);
-                if($product->offer){
-                        $final_price= $product->saleprice; 
-                        }
-                        else
-                        {
-                        $final_price= $product->price;    
-                        }
+                if($p_price){
+                  $final_price=$p_price;
+                }else{
+                      if($product->offer){
+                              $final_price= $product->saleprice; 
+                           }
+                         else
+                            {
+                               $final_price= $product->price;    
+                             }
+                      }
                 $quantity = (int)$request->quantity;
                 if(is_array($find) && !count($find)>0){
                         $cart->add(
@@ -129,7 +136,8 @@ class CartController extends Controller
                                         'image'=>'assets/images/'.($product->images()->count()?'products/'.$product->images->first()->image:'no-image.png'),
                                         'slug'=> $product->slug,
                                         'color'=>$color,
-                                        'p_size'=>$size
+                                        'p_size'=>$size,
+                                        'p_dimension'=>$p_dimension
                                 ],
                                 $taxable = false,
                                 $lineItem = false

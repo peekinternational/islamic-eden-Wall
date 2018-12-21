@@ -414,11 +414,11 @@ top: 26%;
 input[type=checkbox].css-checkbox{ display: none; }
 
 .css-label{
-        padding-left: 11px;
-    line-height: 23px;
+    margin-left: 14px;
     display: flex;
-    width: 19%;
-    height: 26px; 
+    width: auto;
+    height: 26px;
+    padding: 2px;
 }
 
 

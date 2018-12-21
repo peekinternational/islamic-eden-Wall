@@ -119,7 +119,11 @@
                                                        <span class="amount">&euro; {{ $item->options['price'] }}</span>
                                                       </span>
                                                       <span class="">{{ $item->options['color'] }}  
-                                                        <span class="" style="color: black;">({{ strtoupper($item->options['p_size'] )}})</span>
+                                                          @if($item->options['p_size'])
+                                                           <span class="" style="color: black;">({{ strtoupper($item->options['p_size'] )}})</span>
+                                                        @else
+                                                           <span class="" style="color: black;">({{ strtoupper($item->options['p_dimension'] )}})</span>
+                                                       @endif
                                                       </span>
                                                 </div>
                                                 <div class="media-body media-middle">

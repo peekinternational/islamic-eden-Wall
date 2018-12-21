@@ -38,16 +38,19 @@
                         </figure>
                         <div class="shop-single__content">
                             <ul class="shop-item__meta-list">
+                            <li>
+                                    <h3 class="shop-item__title">
+                                        {{ $product->name }}
+                                    </h3>
+                                </li>
+                                <li>
+                                </li>
                                 @if($product->tags->count()>0)
                                     <li>
                                         <a class="shop-item__meta-tag" href="{{ action('CategoryController@show',str_slug($product->category->name)) }}">{{ $product->category->name }}</a>
                                     </li>
                                 @endif
-                                <li>
-                                    <h3 class="shop-item__title">
-                                        {{ $product->name }}
-                                    </h3>
-                                </li>
+                                
                                {{-- <li>
                                     <div class="star-rating" title="Rated 4.00 out of 5">
 												<span style="width:80%">
@@ -56,6 +59,16 @@
                                     </div>
                                 </li>--}}
                             </ul>
+                             <span class="price">
+                                <span>
+                                    @if($product->offer)
+                                <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->price }}</small></strike></span>
+                               <span class="amount" style="color: gray !important; font-size: 26px;">&euro;{{ $product->saleprice }}</span>
+                                @else
+                                    <span class="amount" id="show_price" style="color: black !important; font-size: 26px;">&euro;{{ $product->price }}</span>
+                               @endif
+                                </span>
+                            </span>
                             <p class="shop-item__desc">
                                 {{ $product->description }}
                             </p>
@@ -99,16 +112,23 @@
                                     </div>
                                 
                             @endif
-                            <span class="price">
-                                <span>
-                                    @if($product->offer)
-                                <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->price }}</small></strike></span>
-                               <span class="amount" style="color: gray !important; font-size: 26px;">&euro;{{ $product->saleprice }}</span>
-                                @else
-                                    <span class="amount" style="color: black !important; font-size: 26px;">&euro;{{ $product->price }}</span>
-                               @endif
-                                </span>
-                            </span>
+
+                             @if($product_dimension->count()>0)
+                                 
+                                     <div style="display: -webkit-box;">
+                                    <span>Dimension:</span>
+                                    @foreach($product_dimension as $key=>$dimension)
+                                    <input id="checkdem{{$dimension->id}}" onclick="dimensionselect({{$dimension->id}},{{$dimension->p_price}})" type="radio" name="p_dimension" value="{{$dimension->p_dimension}}" class="css-checkbox onlyone">
+                                       <label for="checkdem{{$dimension->id}}" class="css-label">{{strtoupper( $dimension->p_dimension)}}</label>
+                                       
+                                        @if(($key+1)< $product_size->count())
+                                                   	&nbsp;&nbsp;
+                                        @endif
+                                    @endforeach
+                                    </div>
+                                
+                            @endif
+                           
                             <div class="quantity-btn">
                                 {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
 
@@ -118,6 +138,8 @@
                                                 <input type="button" value="+" class="plus">
                                                 <input type="hidden" name="color" id="sel_color">
                                                 <input type="hidden" name="p_size" id="sel_size">
+                                                <input type="hidden" name="p_dimension" id="sel_dim">
+                                                <input type="hidden" name="p_price" id="sel_price">
                                         </span>
                                         <button class="button-t1" type="submit">Add to cart</button>
                                        
@@ -154,7 +176,7 @@
                         <div class="col-md-12" style="display: block !important;">
                             <h2 class="text-center title-product"> realated Product</h2>
                             <div class="">
-                                @foreach($latestProducts as $product)
+                                @foreach($products as $product)
                                 <div class="col-md-2 category-img" style="width: 20%;">
                                     <a href="{{ url('product/'.$product->slug) }}" class="">
                                         @if($product->images->count()>0)
@@ -196,6 +218,14 @@
 @section('scripts')
 
     <script>
+   function dimensionselect(id, price){
+       //alert(price);
+       $('#show_price').html('€'+price);
+       var data= $('#checkdem'+id).val();
+           $('#sel_dim').val(data);
+           $('#sel_price').val(price);
+
+   }
         function colorselect(id)
         {
            var data= $('#checkboxid'+id).val();

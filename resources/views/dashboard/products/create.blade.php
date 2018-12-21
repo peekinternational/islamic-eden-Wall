@@ -98,6 +98,7 @@
                                 @endif
                             </div>
                         </div>
+                      
                         <div class="form-group {{ $errors->has('color') ? ' has-error' : '' }}">
                             <label for="price" class="col-sm-3 control-label">Product Color <span>*</span></label>
                             <div class="col-sm-9">
@@ -122,10 +123,53 @@
                                 @endif
                             </div>
                         </div>
-                         <div class="form-group {{ $errors->has('p_size') ? ' has-error' : '' }}">
-                            <label for="price" class="col-sm-3 control-label">Product Size <span>*</span></label>
+
+
+                        <div class="form-group {{ $errors->has('color') ? ' has-error' : '' }}">
+                        <label for="price" class="col-sm-3 control-label">Size/Dimension <span>*</span></label>
+                        <div class="col-sm-9">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="checkbox">
+                                <label>
+                                <input type="radio" name="size" value="size" class="checkboxsize">
+                                  Product Size </label>
+                                </div>
+                                </div>
+                               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="checkbox">
+                                <label>
+                                    <input type="radio" name="size"  value="dim" class="checkboxsize">
+                                    Product Dimension
+                                </label>
+                             </div>
+                           </div>
+                         </div>
+                        </div>
+
+                         <div class="form-group {{ $errors->has('p_size') ? ' has-error' : '' }}" style="display:none" id="showdim">
+                            <label for="price" class="col-sm-3 control-label">Product Dimension  <span>*</span></label>
+                            <div class="col-sm-9 optionBox">
+
+                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;">
+                               
+                               <input type="text" id="i" class="form-control" name="p_dimension[]" placeholder="Enter Dimension">
+                                
+                            </div>
+                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;">
+                               
+                               <input type="text"  id="inpu" class="form-control" name="p_price[]" placeholder="Enter Price">
+                                
+                            </div>
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 block" style="padding-top: 5px;">
+                            <span class="add" style=""><i class="fa fa-plus"></i></span>
+                        </div>
+
+                        </div>
+                        </div>
+                         <div class="form-group {{ $errors->has('p_size') ? ' has-error' : '' }}" style="display:none" id="showsize">
+                            <label for="" class="col-sm-3 control-label">Product Size <span>*</span></label>
                             <div class="col-sm-9">
-                              <select multiple="multiple" name="p_size[]" class="form-control select2" id="size_select">
+                              <select multiple="multiple" name="p_size[]" class="form-control select2" id="size_select" style="width:100%">
                               <option disabled>Select size</option>
                                 <option value="s">S</option>
                                 <option value="m">M</option>
@@ -254,6 +298,27 @@
 @stop
 @section('footer')
 <script>
+var maxAppend = 0;
+$('.checkboxsize').change(function(){
+	if($(this).is(":checked")){
+        if($(this).val() == 'size'){
+            $('#showsize').show();
+            $('#showdim').hide();
+            }else{
+            
+           $('#showdim').show();
+           $('#showsize').hide();
+        }
+    }
+});
+        $('.add').click(function() {
+            if (maxAppend >= 5) return;
+            $('.block:last').before('<div class="block"> <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;"><input type="text"  class="form-control" name="p_dimension[]" placeholder="Enter Dimension"/></div><div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;"><input type="text" class="form-control" name="p_price[]" placeholder="Enter Price" /></div><span class="col-xs-2 col-sm-2 col-md-2 col-lg-2 remove" style="padding-top: 5px;"><i class="fa fa-minus"></i></span></div>');
+            maxAppend++;
+        });
+        $('.optionBox').on('click','.remove',function() {
+            $(this).parent().remove();
+        });
         $('#color_select select').multipleSelect();
     </script>
     <script>

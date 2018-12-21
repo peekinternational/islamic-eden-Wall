@@ -34,7 +34,7 @@ class CategoryController extends Controller
                         }
                 }
 
-               $products = Products::where('category_id','=',$id)->paginate(2);
+               $products = Products::where('category_id','=',$id)->paginate(9);
                return view('products',compact('category','products'));
        }
 
