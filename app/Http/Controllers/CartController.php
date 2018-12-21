@@ -165,7 +165,7 @@ class CartController extends Controller
                                 $p_price = $product['p_price'];
                                 $find = $cart->find(['id' => $product_id]);
                                 $db_product = Products::findOrFail($product_id);
-                                dd($p_price);
+                               // dd($p_price);
                                   if($p_price){
                                    $final_price=$p_price;
                                  }else{
@@ -195,7 +195,7 @@ class CartController extends Controller
                                         $item = $find[0];
                                         $itemHashId =  $item->getHash();
                                         $cart->updateItem($itemHashId,'qty', $quantity);
-                                        $cart->updateItem($itemHashId,'price', (float)$db_product->price);
+                                        $cart->updateItem($itemHashId,'price', (float)$final_price);
 
                                 }
                         }
