@@ -75,7 +75,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     { 
-       //dd($request->input('color'));
+       // dd($request->all());
         if(!$request->has('slug')){
             $request->merge(['slug'=>str_slug($request->input('name'))]);
         }
@@ -89,8 +89,12 @@ class ProductController extends Controller
             'name' => 'title',
             'category_id'=>'Category'
         ]);
-     $size=$request->input('p_size');
-     $p_color=$request->input('color');
+
+        
+       $size=$request->input('p_size');
+       $p_color=$request->input('color');
+       $p_dimension=$request->input('p_dimension');
+       $p_price=$request->input('p_price');
 
         $product = Products::create($request->all());
         if($product->id){
@@ -121,12 +125,30 @@ class ProductController extends Controller
                   $input['product_id']=$product->id;
                   DB::table('product_color')->insert($input);
               }
+
+              if($size){
               foreach($size as $pro_size )
               {
                   $inputs['p_size']=$pro_size;
                   $inputs['product_id']=$product->id;
                   DB::table('product_size')->insert($inputs);
               }
+             }
+             if($p_price){
+              foreach($p_price as $key=>$price){
+                  $inputss['p_price']=$price;
+                  $inputss['p_dimension']=$p_dimension[$key];
+                  $inputss['product_id']=$product->id;
+                  DB::table('product_dimension')->insert($inputss);
+            }
+        }
+
+        
+
+
+
+
+
 
             session()->flash('__response', ['notify'=>'Product "'.$request->input('name').'" created successfully.','type'=>'success']);
         }else{
@@ -144,6 +166,7 @@ class ProductController extends Controller
     public function show($slug,LaraCart $cart)
     {
         $product = Products::whereSlug($slug)->firstorFail();
+        //dd($product);
 
         // return $product->images->first()->image;
         $product_id = (int)$product->id;
@@ -152,12 +175,13 @@ class ProductController extends Controller
         if(is_array($find) && count($find)>0){
             $quantity = $find[0]->qty;
         }
-        $products = Products::orderBy('id','desc')->limit(5)->get();
+        $products = Products::orderBy('id','desc')->where('category_id','=',$product->category_id)->limit(5)->get();
         $product_color = DB::table('product_color')->where('product_id','=',$product->id)->get();
         $product_size = DB::table('product_size')->where('product_id','=',$product->id)->get();
+         $product_dimension  = DB::table('product_dimension')->where('product_id','=',$product->id)->get();
         //dd($product_size);
         
-        return view('product',compact('product','quantity','product_size','product_color','products'));
+        return view('product',compact('product','quantity','product_size','product_color','products','product_dimension'));
     }
 
     /**
@@ -277,7 +301,7 @@ class ProductController extends Controller
 
     public function page_products($slug){
         $nav =  SubNavs::whereSlug($slug)->firstOrFail();
-        $products = $nav->products()->orderBy('id','desc')->paginate(6);
+        $products = $nav->products()->orderBy('id','desc')->paginate(9);
         return view('products',compact('products'));
     }
 }

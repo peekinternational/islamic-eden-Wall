@@ -20,17 +20,23 @@
                             <label class="col-sm-3 control-label"> Navigation Type</label>
                             <div class="col-sm-9" style="padding-top: 5px;">
                                 <label>
-                                    <input type="radio" {{ old('type') != 'sub-menu'?'checked':'' }} name="type"  value="main-menu" class="minimal" >
+                                    <input type="radio"  name="type"  value="main-menu" class="minimal" >
                                     Main Menu
                                 </label>
                                 &nbsp;
                                 <label>
-                                    <input type="radio"  name="type" {{ old('type') == 'sub-menu'?'checked':'' }} value="sub-menu" class="minimal" >
+                                    <input type="radio"  name="type"  value="sub-menu" class="minimal" >
                                     Sub Menu
                                 </label>
+                                &nbsp;
+                                <label>
+                                    <input type="radio"  name="type"  value="more-sub-menu" class="minimal" >
+                                   More Sub Menu
+                                </label>
+                                
                             </div>
                         </div>
-                        <div {!!  old('type') != 'sub-menu'?'style="display: none;"':'' !!}   class="form-group hidden-main-menu {{ $errors->has('nav_id') ? ' has-error' : '' }}">
+                        <div style="display: none;" id="sub_nav" class="form-group hidden-main-menu {{ $errors->has('nav_id') ? ' has-error' : '' }}">
                             <label for="nav_id" class="col-sm-3 control-label">Parent Navigation</label>
                             <div class="col-sm-9">
                                 <select name="nav_id" style="width: 100%" id="nav_id" class="select2">
@@ -44,6 +50,26 @@
                                 @if ($errors->has('nav_id'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('nav_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                           <div style="display: none;" id="more_sub"  class="form-group hidden-sub-menu {{ $errors->has('sub_id') ? ' has-error' : '' }}">
+                            <label for="sub_id" class="col-sm-3 control-label">Parent Navigation</label>
+                            <div class="col-sm-9">
+                                <select name="sub_id" style="width: 100%" id="sub_id" class="select2">
+                                    <option value="0">--- Select More Parent Navigation ---</option>
+                                    @foreach($navs as $key=>$nav)
+                                    @foreach($nav->sub_navs as $sub_nav)
+                                        
+                                            <option {!!  old('sub_id')==$sub_nav->id?'selected="selected"':'' !!} data-slug="{{ $sub_nav->slug }}"  value="{{ $sub_nav->id }}">{{ $sub_nav->title }}</option>
+                                       
+                                        @endforeach
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('sub_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('sub_id') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -156,10 +182,17 @@
             $('input[name=type]:radio').on('ifChecked', function(event) {
                 var value = $(this).val();
                 if(value.trim() == 'sub-menu'){
+                    
                     $('.hidden-sub-menu').hide();
                     $('.hidden-main-menu').show();
-                }else{
+                    
+                }
+                else if(value.trim() == 'more-sub-menu'){
                     $('.hidden-sub-menu').show();
+                    $('.hidden-main-menu').hide();
+                }
+                else{
+                    $('.hidden-sub-menu').hide();
                     $('.hidden-main-menu').hide();
                 }
             });

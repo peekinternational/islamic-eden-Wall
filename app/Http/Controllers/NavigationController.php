@@ -5,6 +5,7 @@ namespace Edenmill\Http\Controllers;
 use Edenmill\Navs;
 use Edenmill\Pages;
 use Edenmill\SubNavs;
+use Edenmill\MoreSubNav;
 use Illuminate\Http\Request;
 
 use Edenmill\Http\Requests;
@@ -42,6 +43,7 @@ class NavigationController extends Controller
      */
     public function store(Request $request)
     {
+ 
 		
         if($request->has('title') && !$request->has('slug')){
             $request->merge(['slug'=>str_slug($request->input('title'))]);
@@ -70,6 +72,35 @@ class NavigationController extends Controller
                         $sub_nav->slug = $request->input('slug');
                         $sub_nav->nav_id = $request->input('nav_id');
                         $sub_nav->order_by = $request->has('order_by')?$request->input('order_by'):SubNavs::count();
+                        $sub_nav->hidden = $request->input('hidden');
+						//dd($sub_nav);
+                        $sub_nav->save();
+                        if(isset($sub_nav->id)){
+                            session()->flash('__response', ['notify'=>'Sub Navigation "'.$request->input('title').'" added successfully.','type'=>'success']);
+                            return redirect()->action('NavigationController@index');
+                        }
+                }
+                 else if($request->input('type') == 'more-sub-menu'){
+                    // dd($request->all());
+                        $this->validate($request, [
+                                'sub_id' => 'required|exists:sub_navs,id',
+                                'slug' => 'max:255|unique:sub_navs,slug',
+                                'url' => 'url',
+                        ]);
+                        $sub_nav = new MoreSubNav();
+                        if($request->has('url')  && $request->input('url_type')=='custom') {
+                            $sub_nav->url = $request->input('url');
+                        }
+                        if($request->has('page_id') && $request->input('url_type')=='page' && $request->input('page_id')!='0'){
+                            $this->validate($request, [
+                                    'page_id' => 'exists:pages,id'
+                            ]);
+                            $request->page_id = $request->input('page_id');
+                        }
+                        $sub_nav->title = $request->input('title');
+                        $sub_nav->slug = $request->input('slug');
+                        $sub_nav->sub_id = $request->input('sub_id');
+                        $sub_nav->order_by = $request->has('order_by')?$request->input('order_by'):MoreSubNav::count();
                         $sub_nav->hidden = $request->input('hidden');
 						//dd($sub_nav);
                         $sub_nav->save();

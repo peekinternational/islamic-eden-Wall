@@ -20,7 +20,7 @@
                             <tr>
                                 <td class="product-info">Product</td>
                                 <td class="product-price-td">Color</td>
-                                <td class="product-price-td">Size</td>
+                                <td class="product-price-td">Size/Dimension</td>
                                 <td class="product-quantity">Quantity</td>
                                 <td class="product-price-td">Price</td>
                                 <td class="product-subtotal">Subtotal</td>
@@ -50,8 +50,11 @@
                                                <span class="amount">{{ $item->color  }}</span>
                                             </td>
                                             <td class="product-subtotal">
-                                                
+                                                @if($item->p_size)
                                                <span class="amount">{{ $item->p_size  }}</span>
+                                               @else
+                                               <span class="amount">{{ $item->p_dimension  }}</span>
+                                               @endif
                                             </td>
                                             <td class="product-quantity">
                                                 <div class="quantity">
