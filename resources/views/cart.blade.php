@@ -59,18 +59,15 @@
                                             <td class="product-quantity">
                                                 <div class="quantity">
                                                     <input type="button" value="-" class="minus">
-                                                    <input type="number" step="1" min="0" data-id="{{ $item->id }}" name="product_quantity" value="{{ $item->qty }}" title="Qty" class="form-control input-product-quantity">
+                                                    <input type="number" step="1" min="0" data-id="{{ $item->id }}" data-price="{{ $item->price }}"  name="product_quantity" value="{{ $item->qty }}" title="Qty" class="form-control input-product-quantity">
                                                     <input type="button" value="+" class="plus">
                                                 </div>
                                             </td>
                                             <td class="product-price">
-                                            @if($item->offer)
-                                                <span class="currencies">€</span>
-                                                <span class="amount">{{ $item->saleprice }}</span>
-                                            @else
+                                           
                                                 <span class="currencies">€</span>
                                                 <span class="amount">{{ $item->price }}</span>
-                                                @endif
+                                                
                                             </td>
                                             
                                             <td class="product-subtotal">
@@ -192,6 +189,7 @@
                     $('.input-product-quantity').each(function () {
                         products[index] = {
                             id: $(this).attr('data-id'),
+                            p_price: $(this).attr('data-price'),
                             quantity:$(this).val()
                         };
                         index++;
