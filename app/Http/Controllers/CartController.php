@@ -146,7 +146,7 @@ class CartController extends Controller
                         $item = $find[0];
                         $itemHashId =  $item->getHash();
                         $cart->updateItem($itemHashId,'qty', $quantity);
-                        $cart->updateItem($itemHashId,'price', (float)$product->price);
+                        $cart->updateItem($itemHashId,'price', (float)$final_price);
                 }
                 $request->session()->flash('__response', ['notify'=>'Product "'.$product->name.'" successfully added to cart.','type'=>'success']);
                 return Redirect::back();
