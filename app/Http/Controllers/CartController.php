@@ -155,20 +155,26 @@ class CartController extends Controller
 
 
         public function update_all(Request $request,LaraCart $cart){
+                dd($request->all());
                 if(!$request->has('products') && is_array($request->input('products')) && count($request->input('products'))>0){
                         return json_encode(['notify'=>'Oops something went wrong.','type'=>'error']);
                 }
                 foreach($request->input('products') as $product){
                         if(isset($product['id']) && isset($product['quantity'])){
                                 $product_id = (int)$product['id'];
+                                $p_price = $product['p_price'];
                                 $find = $cart->find(['id' => $product_id]);
                                 $db_product = Products::findOrFail($product_id);
-                                if($db_product->offer){
-                                $final_price= $db_product->saleprice; 
-                                }
+                                  if($p_price){
+                                $final_price=$p_price;
+                                 }else{
+                                  if($db_product->offer){
+                                   $final_price= $db_product->saleprice; 
+                                   }
                                 else
-                                {
-                                $final_price= $db_product->price;    
+                                  {
+                                      $final_price= $db_product->price;    
+                                  }
                                 }
                                 $quantity = $product['quantity'];
                                 if(is_array($find) && !count($find)>0){

@@ -135,6 +135,7 @@ class ProductController extends Controller
               }
              }
              if($p_price){
+                 
               foreach($p_price as $key=>$price){
                   $inputss['p_price']=$price;
                   $inputss['p_dimension']=$p_dimension[$key];
