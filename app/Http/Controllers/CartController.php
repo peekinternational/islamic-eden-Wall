@@ -155,7 +155,7 @@ class CartController extends Controller
 
 
         public function update_all(Request $request,LaraCart $cart){
-                dd($request->all());
+                //dd($request->all());
                 if(!$request->has('products') && is_array($request->input('products')) && count($request->input('products'))>0){
                         return json_encode(['notify'=>'Oops something went wrong.','type'=>'error']);
                 }
