@@ -61,11 +61,36 @@
                             </ul>
                              <span class="price">
                                 <span>
+                                 @if($product_dimension->count()>0)
+                                
+                                 @if($product_dimension[0]->dim_offer)
+                                  <?php 
+                                  $min = $product_dimension->min('p_price');
+                                  $max = $product_dimension->max('p_price');
+                               
+                                  $offer_min = $product_dimension->min('dimoffer_price');
+                                  $offer_max = $product_dimension->max('dimoffer_price');
+                                
+                                 ?>
+                                 <span class="amount" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $min }} - {{$max}}</small></strike></span><br>
+                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $offer_min }} - {{$offer_max}}</span>
+                                 <span>&nbsp;  {{$product_dimension[0]->dim_offer}} %</span>
+                                @else
+                                <?php 
+                                  $min = $product_dimension->min('p_price');
+                                  $max = $product_dimension->max('p_price');
+                               
+                                 ?>
+                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $min }} - {{$max}}</span><br>
+                                 @endif
+                                 @else
+                                 
                                     @if($product->offer)
                                 <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->price }}</small></strike></span>
                                <span class="amount" style="color: gray !important; font-size: 26px;">&euro;{{ $product->saleprice }}</span>
-                                @else
-                                    <span class="amount" id="show_price" style="color: black !important; font-size: 26px;">&euro;{{ $product->price }}</span>
+                               @else
+                                <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;{{ $product->price }}</span>
+                               @endif
                                @endif
                                 </span>
                             </span>
@@ -118,7 +143,11 @@
                                      <div style="display: -webkit-box;">
                                     <span>Dimension:</span>
                                     @foreach($product_dimension as $key=>$dimension)
-                                    <input id="checkdem{{$dimension->id}}" onclick="dimensionselect({{$dimension->id}},{{$dimension->p_price}})" type="radio" name="p_dimension" value="{{$dimension->p_dimension}}" class="css-checkbox onlyone">
+                                    @if($dimension->dim_offer)
+                                    <input id="checkdem{{$dimension->id}}" onclick="dimensionselect({{$dimension->id}},{{$dimension->dimoffer_price}})" type="radio" name="p_dimension" value="{{$dimension->p_dimension}}" class="css-checkbox onlyone">
+                                      @else
+                                       <input id="checkdem{{$dimension->id}}" onclick="dimensionselect({{$dimension->id}},{{$dimension->p_price}})" type="radio" name="p_dimension" value="{{$dimension->p_dimension}}" class="css-checkbox onlyone">
+                                       @endif
                                        <label for="checkdem{{$dimension->id}}" class="css-label">{{strtoupper( $dimension->p_dimension)}}</label>
                                        
                                         @if(($key+1)< $product_size->count())
