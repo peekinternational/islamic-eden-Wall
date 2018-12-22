@@ -76,7 +76,7 @@
             
             @foreach($latest_products->chunk(5) as $products)
                 <div class="row product-row">
-                    @foreach($products as $product)
+                    @foreach($products as $key=>$product)
                         <div class="col-md-2-5" style="width: 20%;">
                             <figure class="banner-01__img">
                                 <a class="banner-01__img-wrapp" href="{{ url('product/'.$product->slug) }}">
@@ -88,11 +88,7 @@
                                     @if($product->images->count()>0)
                                         <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
                                         
-                                       @if($product->offer)
-                                     <label class="tag" style="background-color:red;">Sale</label>
-                                       @else
-                                        <label class="tag">New</label>
-                                        @endif
+                                       
                                     @else
                                         <img  src="{{ asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
                                     @endif
@@ -104,6 +100,21 @@
                                         {{ $product->name }} <br>
                                     <span>{{ $product->category['name'] }}</span></a>
                                 </h5>
+                                @if($product->dimension)
+                                
+                                @if($product->dimension[0]->dim_offer)
+                                
+                                 <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->dimension[0]->dim_offer }} % off</p>
+                                      <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->dimension[0]->p_price }}</small> </strike>
+                                      <span> €{{ $product->dimension[0]->dimoffer_price }}</span></p>
+                                      
+                                 @else
+                                 
+                                <p class="text-center"> €{{ $product->dimension[0]->p_price }} </p>
+                                 @endif
+                                
+
+                               @else
                                 @if($product->offer)
                                 <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
                                       <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
@@ -111,7 +122,7 @@
                                         @else
                                       <p class="text-center"> €{{ $product->price }} </p>
                                       @endif
-                                    
+                                    @endif
                             </div>
                         </div>
                     @endforeach
@@ -135,11 +146,7 @@
                                             
                                               @if($product->images->count()>0)
                                                   <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
-                                                 @if($product->offer)
-                                               <label class="tag" style="background-color:red;">Sale</label>
-                                                 @else
-                                                  <label class="tag">New</label>
-                                                  @endif
+                                                
                                               @else
                                                   <img  src="{{ asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
                                               @endif
@@ -151,12 +158,28 @@
                                                   {{ $product->name }} <br>
                                               <span>{{ $product->category['name'] }}</span></a>
                                           </h5>
+                                           @if($product->dimension)
+                                
+                                @if($product->dimension[0]->dim_offer)
+                                
+                                 <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->dimension[0]->dim_offer }} % off</p>
+                                      <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->dimension[0]->p_price }}</small> </strike>
+                                      <span> €{{ $product->dimension[0]->dimoffer_price }}</span></p>
+                                      
+                                 @else
+                                 
+                                <p class="text-center"> €{{ $product->dimension[0]->p_price }} </p>
+                                 @endif
+                                
+
+                               @else
                                           @if($product->offer)
                                           <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
                                                 <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
                                                 <span> €{{ $product->saleprice }}</span></p>
                                                   @else
                                                 <p class="text-center"> €{{ $product->price }} </p>
+                                                @endif
                                                 @endif
                                               
                                       </div>

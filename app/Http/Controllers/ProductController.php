@@ -75,13 +75,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     { 
-       // dd($request->all());
+     //dd($request->all());
+        
+        
         if(!$request->has('slug')){
             $request->merge(['slug'=>str_slug($request->input('name'))]);
         }
         $this->validate($request,[
             'name' => 'required',
-            'price' => 'required',
             'category_id'=>'required',
             'navs' => 'required',
             'slug' => 'unique:products'
@@ -95,6 +96,9 @@ class ProductController extends Controller
        $p_color=$request->input('color');
        $p_dimension=$request->input('p_dimension');
        $p_price=$request->input('p_price');
+       //dd($p_price[0]);
+       $dim_offer=$request->input('dim_offer');
+       
 
         $product = Products::create($request->all());
         if($product->id){
@@ -134,24 +138,30 @@ class ProductController extends Controller
                   DB::table('product_size')->insert($inputs);
               }
              }
-             if($p_price){
-                 
-              foreach($p_price as $key=>$price){
-                  $inputss['p_price']=$price;
-                  $inputss['p_dimension']=$p_dimension[$key];
-                  $inputss['product_id']=$product->id;
-                  DB::table('product_dimension')->insert($inputss);
-            }
-        }
+              if($dim_offer){
+                      
+                   foreach($p_price as $key=>$price){
+                                $original_price = $price;
+                                $discountprice=$original_price/100*$dim_offer;
+                                $saledec =$original_price-$discountprice;
+                                $sale =round($saledec);
+                                $inputsss['p_price']=$price;
+                                $inputsss['dimoffer_price']=$sale;
+                                $inputsss['dim_offer']=$dim_offer;
+                                $inputsss['p_dimension']=$p_dimension[$key];
+                                $inputsss['product_id']=$product->id;
+                                DB::table('product_dimension')->insert($inputsss);
+                            }
+                        }elseif($p_price[0] !=''){   
+                                foreach($p_price as $key=>$price){
+                                $inputss['p_price']=$price;
+                                $inputss['p_dimension']=$p_dimension[$key];
+                                $inputss['product_id']=$product->id;
+                                DB::table('product_dimension')->insert($inputss);
+                        }
+                  }
 
-        
-
-
-
-
-
-
-            session()->flash('__response', ['notify'=>'Product "'.$request->input('name').'" created successfully.','type'=>'success']);
+         session()->flash('__response', ['notify'=>'Product "'.$request->input('name').'" created successfully.','type'=>'success']);
         }else{
             session()->flash('__response', ['notify'=>'Oops something went wrong..','type'=>'error']);
         }
