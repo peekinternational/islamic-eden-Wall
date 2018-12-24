@@ -10,9 +10,104 @@
 @section('content')
     <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_100 section_padding_bottom_75 columns_padding_25">
         <div class="container">
+
             <div class="row">
+               <aside class="col-sm-5 col-md-4 hidden-sm hidden-md hidden-lg col-lg-4" style="margin-left: 30px;">
+                    <h3 class="widget-title" id="order_review_heading">Your order</h3>
+                    <div id="order_review" class="shop-checkout-review-order">
+                        <table class="table shop_table shop-checkout-review-order-table">
+                            <thead>
+                            <tr>
+                                <td class="product-name">Product</td>
+                                <td class="product-total">Total</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($cart->getItems() as $item)
+                            <tr class="cart_item">
+                                <td class="product-name">
+                                    {{ $item->name }}
+                                    <span class="product-quantity">× {{ $item->qty }}</span>
+                                </td>
+                                <td class="product-total">
+                                    <span class="amount grey">&euro; {{ $item->price * $item->qty }}</span>
+                                </td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                            <tfoot>
+                            <tr class="cart-subtotal">
+                                <td>Subtotal:</td>
+                                <td>
+                                    <span class="amount grey">&euro; {{ $cart->subTotal($format = false, $withDiscount = true) }}</span>
+                                </td>
+                            </tr>
+                            <tr class="shipping">
+                                <td>Shipping:</td>
+                                <td>
+                                    <span class="grey">Free Shipping</span>
+                                </td>
+                            </tr>
+                            <tr class="order-total">
+                                <td>Total:</td>
+                                <td>
+                        <span class="amount grey">
+                          <strong>&euro; {{ $cart->total($format = false,$withDiscount = true) }}</strong>
+                        </span>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                        <div id="payment" class="shop-checkout-payment">
+                            <h3 class="widget-title">Payment</h3>
+                            <ul class="list1 no-bullets payment_methods methods">
+                                {{--<li class="payment_method_bacs">
+                                    <div class="radio">
+                                        <label for="payment_method_bacs">
+                                            <input id="payment_method_bacs" type="radio" name="payment_method" value="bacs" checked="checked">
+                                            <span class="grey">Direct Bank Transfer</span>
+                                        </label>
+                                    </div>
+                                    <div class="payment_box payment_method_bacs">
+                                        <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                                    </div>
+                                </li>
+                                <li class="payment_method_cheque">
+                                    <div class="radio">
+                                        <label for="payment_method_cheque">
+                                            <input id="payment_method_cheque" type="radio" name="payment_method" value="cheque">
+                                            <span class="grey">Cheque Payment</span>
+                                        </label>
+                                    </div>
+                                </li>--}}
+                                <li class="payment_method_paypal">
+                                    <div class="radio">
+                                        <div class="payment_box payment_method_bacs">
+                                            <p>Your order won’t be shipped until the funds have cleared in our account.</p>
+                                        </div>
+                                        <label for="payment_method_paypal">
+                                            <input id="payment_method_paypal" checked name="landing_page" value="Login" type="radio">
+                                            <span class="grey">PayPal</span>
+                                        </label>
+                                    </div>
+                                </li>
+                                <li class="payment_method_paypal">
+                                    <div class="radio">
+                                        <label for="payment_method_card">
+                                            <input id="payment_method_card" type="radio" value="Billing" name="landing_page">
+                                            <span class="grey">Credit/Debit Card</span>
+                                        </label>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="place-order">
+                                <input type="submit" class="button-t1" name="checkout_place_order" id="place_order" value="Place order">
+                            </div>
+                        </div>
+                    </div>
+                </aside>
                 <form target="paypal" class="form-horizontal checkout shop-checkout" action="{{ isset($PaymentSettings['payment_mood']['value']) && $PaymentSettings['payment_mood']['value']=='live'?'https://www.paypal.com/cgi-bin/webscr':'https://www.sandbox.paypal.com/cgi-bin/webscr' }}" method="post">
-                <div class="col-sm-7 col-md-8 col-lg-8" style="width: 60%;">
+                <div class="col-sm-7 col-md-8 col-lg-8 shipping-process" style="width: 60%;">
 
                     {{--<input type="hidden" name="country" value="Us" />--}}
                     {{--<input type="hidden" name="first_name" value="shah" />
@@ -207,9 +302,10 @@
                                   <textarea name="noteToSeller" class="form-control" id="order_comments" placeholder="Notes about your order, e.g. special notes for delivery." rows="5"></textarea>
                               </div>
                           </div>
-                </div>
+                        </div>
+           
 
-                <aside class="col-sm-5 col-md-4 col-lg-4" style="margin-left: 30px;">
+                <aside class="col-sm-5 col-md-4 col-lg-4 hidden-xs" style="margin-left: 30px;" >
                     <h3 class="widget-title" id="order_review_heading">Your order</h3>
                     <div id="order_review" class="shop-checkout-review-order">
                         <table class="table shop_table shop-checkout-review-order-table">

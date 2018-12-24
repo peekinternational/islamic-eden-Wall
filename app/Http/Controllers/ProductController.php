@@ -36,6 +36,11 @@ class ProductController extends Controller
         $cat = $produt->category;
         return $category;*/
         $products = Products::orderBy('id','desc')->paginate(10);
+
+         foreach($products as &$rec){
+                  $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
+                }
+
          return view('products',compact('products'));
 
     }
@@ -192,6 +197,9 @@ class ProductController extends Controller
             $quantity = $find[0]->qty;
         }
         $products = Products::orderBy('id','desc')->where('category_id','=',$product->category_id)->limit(5)->get();
+         foreach($products as &$rec){
+                  $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
+                }
         $product_color = DB::table('product_color')->where('product_id','=',$product->id)->get();
         $product_size = DB::table('product_size')->where('product_id','=',$product->id)->get();
          $product_dimension  = DB::table('product_dimension')->where('product_id','=',$product->id)->get();

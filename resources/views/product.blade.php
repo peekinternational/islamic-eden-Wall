@@ -6,7 +6,7 @@
 
     <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_100 section_padding_bottom_100">
         <div class="container">
-            <div class="row">
+            <div class="row product-page-responsive">
                 @include('partials/sidebar')
                 <div class="col-sm-8">
                     <div class="shop-single">
@@ -61,40 +61,15 @@
                             </ul>
                              <span class="price">
                                 <span>
-                                 @if($product_dimension->count()>0)
-                                
-                                 @if($product_dimension[0]->dim_offer)
-                                  <?php 
-                                  $min = $product_dimension->min('p_price');
-                                  $max = $product_dimension->max('p_price');
-                               
-                                  $offer_min = $product_dimension->min('dimoffer_price');
-                                  $offer_max = $product_dimension->max('dimoffer_price');
-                                
-                                 ?>
-                                 <span class="amount" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $min }} - {{$max}}</small></strike></span><br>
-                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $offer_min }} - {{$offer_max}}</span>
-                                 <span>&nbsp;  {{$product_dimension[0]->dim_offer}} %</span>
-                                @else
-                                <?php 
-                                  $min = $product_dimension->min('p_price');
-                                  $max = $product_dimension->max('p_price');
-                               
-                                 ?>
-                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $min }} - {{$max}}</span><br>
-                                 @endif
-                                 @else
-                                 
                                     @if($product->offer)
                                 <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->price }}</small></strike></span>
                                <span class="amount" style="color: gray !important; font-size: 26px;">&euro;{{ $product->saleprice }}</span>
-                               @else
-                                <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;{{ $product->price }}</span>
-                               @endif
+                                @else
+                                    <span class="amount" id="show_price" style="color: black !important; font-size: 26px;">&euro;{{ $product->price }}</span>
                                @endif
                                 </span>
                             </span>
-                            <p class="shop-item__desc">
+                                <p class="shop-item__desc">
                                 {{ $product->description }}
                             </p>
                             @if($product->tags->count()>0)
@@ -143,11 +118,7 @@
                                      <div style="display: -webkit-box;">
                                     <span>Dimension:</span>
                                     @foreach($product_dimension as $key=>$dimension)
-                                    @if($dimension->dim_offer)
-                                    <input id="checkdem{{$dimension->id}}" onclick="dimensionselect({{$dimension->id}},{{$dimension->dimoffer_price}})" type="radio" name="p_dimension" value="{{$dimension->p_dimension}}" class="css-checkbox onlyone">
-                                      @else
-                                       <input id="checkdem{{$dimension->id}}" onclick="dimensionselect({{$dimension->id}},{{$dimension->p_price}})" type="radio" name="p_dimension" value="{{$dimension->p_dimension}}" class="css-checkbox onlyone">
-                                       @endif
+                                    <input id="checkdem{{$dimension->id}}" onclick="dimensionselect({{$dimension->id}},{{$dimension->p_price}})" type="radio" name="p_dimension" value="{{$dimension->p_dimension}}" class="css-checkbox onlyone">
                                        <label for="checkdem{{$dimension->id}}" class="css-label">{{strtoupper( $dimension->p_dimension)}}</label>
                                        
                                         @if(($key+1)< $product_size->count())
@@ -202,14 +173,14 @@
                 
                 <div class="col-lg-12">
                     <div id="itemSlider">
-                        <div class="col-md-12" style="display: block !important;">
+                        <div class="col-md-12 " style="display: block !important;" >
                             <h2 class="text-center title-product"> realated Product</h2>
                             <div class="">
                                 @foreach($products as $product)
-                                <div class="col-md-2 category-img" style="width: 20%;">
-                                    <a href="{{ url('product/'.$product->slug) }}" class="">
+                                <div class="col-md-2 col-sm-12 category-img  respnsve-img-pro" >
+                                    <a class="img-height" href="{{ url('product/'.$product->slug) }}" class="">
                                         @if($product->images->count()>0)
-                                            <img src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}" style="width: 100%; height: 283px; ">
+                                            <img src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}" style="width: 100%; height: 100%">
                                              
                                          @else
                                             <img class="media-object" src="{{ asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
@@ -222,13 +193,31 @@
                                                 {{ $product->name }} <br>
                                             <span>{{ $product->category['name'] }}</span></a>
                                         </h5>
-                                        @if($product->offer)
-                                        <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
-                                              <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
-                                              <span> €{{ $product->saleprice }}</span></p>
-                                                @else
-                                              <p class="text-center"> €{{ $product->price }} </p>
-                                              @endif
+
+                                        @if($product->dimension)
+                                
+                                            @if($product->dimension[0]->dim_offer)
+                                        
+                                            <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->dimension[0]->dim_offer }} % off</p>
+                                            <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->dimension[0]->p_price }}</small> </strike>
+                                            <span> €{{ $product->dimension[0]->dimoffer_price }}</span></p>
+                                            
+                                         @else
+                                        
+                                            <p class="text-center"> €{{ $product->dimension[0]->p_price }} </p>
+                                        @endif
+                                
+
+                                  @else
+                                          @if($product->offer)
+                                          <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
+                                                <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
+                                                <span> €{{ $product->saleprice }}</span></p>
+                                                  @else
+                                                <p class="text-center"> €{{ $product->price }} </p>
+                                                @endif
+                                                @endif
+
                                             
                                     </div>
                                 </div>
