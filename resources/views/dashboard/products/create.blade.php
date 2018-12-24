@@ -1,4 +1,9 @@
 @extends('dashboard.layouts.default')
+@section('css')
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{{ asset('assets/backend/dist/css/styles.imageuploader.css') }}">
+@endsection
+
 @section('content')
     <section class="content">
         <div class="box">
@@ -11,6 +16,7 @@
                         <i class="fa fa-minus"></i></button>
                 </div>
             </div>
+            
             {!! Form::open(['action'=>['ProductController@store'],'method'=>'post','class'=>'form-horizontal','files'=>true,'enctype'=>'multipart/form-data']) !!}
             <div class="box-body">
                 <div class="row">
@@ -288,10 +294,11 @@
                                 @endif
                             </div>
                         </div>
+                            
                         <div class="form-group {{ $errors->has('photos') ? ' has-error' : '' }}">
                             <label class="col-sm-3 control-label"> Photos</label>
                             <div class="col-sm-9">
-                                <input type="file" name="photos" multiple class="input-photo" accept="image/*">
+                                <input type="file" name="photos[]" multiple class="input-photo" accept="image/*">
                             </div>
                         </div>
                         <div class="form-group {{ $errors->has('photos') ? ' has-error' : '' }}">
@@ -313,12 +320,20 @@
                 </div>
             </div>
             {!! Form::close() !!}
+            
                     <!-- /.box-footer-->
         </div>
         <!-- /.box -->
     </section>
 @stop
 @section('footer')
+<script src="{{ asset('assets/backend/dist/js/jquery.imageuploader.js') }}"></script>
+<script>
+(function(){
+            var options = {};
+            $('.js-uploader__box').uploader(options);
+        }());
+</script>
 <script>
 var maxAppend = 0;
 $('.checkboxsize').change(function(){
