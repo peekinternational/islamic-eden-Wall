@@ -75,7 +75,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     { 
-     //dd($request->all());
+    // dd($request->file('photos'));
         
         
         if(!$request->has('slug')){
@@ -109,17 +109,20 @@ class ProductController extends Controller
             }
             if($request->hasFile('photos')) {
                 $photos = $request->file('photos');
-                
-                   /* $extension = $photo->extension();
+                 foreach ($photos as $photo) {
+                    /* $extension = $photo->extension();
                     $filename = md5(str_shuffle(time())) . md5(time()) . '.' . $extension;
                     $path = public_path('assets/images/products/' . $filename);
                     Image::make($photo->getRealPath())->resize(220, 220)->save($path);*/
-                    $extension = $photos->getClientOriginalExtension();
+                    $extension = $photo->getClientOriginalExtension();
                     $filename = md5(str_shuffle(time())).md5(time()).'.'.$extension;
                     $path = public_path('assets/images/products/');
-                    $photos->move($path , $filename );
+                    $photo->move($path , $filename );
 
                     $image = ProductImages::create(['product_id' => $product->id, 'image' => $filename]);
+                }
+                
+                 
                     
                 
             }
@@ -167,6 +170,8 @@ class ProductController extends Controller
         }
         return redirect()->action('ProductController@getIndex');
     }
+
+   
 
     /**
      * Display the specified resource.
