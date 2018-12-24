@@ -206,7 +206,7 @@
                             <h2 class="text-center title-product"> realated Product</h2>
                             <div class="">
                                 @foreach($products as $product)
-                                <div class="col-md-2 category-img" style="width: 20%;">
+                                <div class="col-md-2 col-sm-12 category-img" style="width: 20%;">
                                     <a href="{{ url('product/'.$product->slug) }}" class="">
                                         @if($product->images->count()>0)
                                             <img src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}" style="width: 100%; height: 283px; ">
@@ -222,13 +222,29 @@
                                                 {{ $product->name }} <br>
                                             <span>{{ $product->category['name'] }}</span></a>
                                         </h5>
-                                        @if($product->offer)
-                                        <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
-                                              <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
-                                              <span> €{{ $product->saleprice }}</span></p>
-                                                @else
-                                              <p class="text-center"> €{{ $product->price }} </p>
-                                              @endif
+                                        @if($product->dimension)
+                                
+                                            @if($product->dimension[0]->dim_offer)
+                                        
+                                            <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->dimension[0]->dim_offer }} % off</p>
+                                            <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->dimension[0]->p_price }}</small> </strike>
+                                            <span> €{{ $product->dimension[0]->dimoffer_price }}</span></p>
+                                            
+                                         @else
+                                        
+                                            <p class="text-center"> €{{ $product->dimension[0]->p_price }} </p>
+                                        @endif
+                                
+
+                                  @else
+                                          @if($product->offer)
+                                          <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
+                                                <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
+                                                <span> €{{ $product->saleprice }}</span></p>
+                                                  @else
+                                                <p class="text-center"> €{{ $product->price }} </p>
+                                                @endif
+                                                @endif
                                             
                                     </div>
                                 </div>
