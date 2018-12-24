@@ -6,7 +6,7 @@
 
     <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_100 section_padding_bottom_100">
         <div class="container">
-            <div class="row">
+            <div class="row product-page-responsive">
                 @include('partials/sidebar')
                 <div class="col-sm-8">
                     <div class="shop-single">
@@ -173,14 +173,14 @@
                 
                 <div class="col-lg-12">
                     <div id="itemSlider">
-                        <div class="col-md-12" style="display: block !important;">
+                        <div class="col-md-12 " style="display: block !important;" >
                             <h2 class="text-center title-product"> realated Product</h2>
                             <div class="">
                                 @foreach($products as $product)
-                                <div class="col-md-2 col-sm-12 category-img" style="width: 20%;">
-                                    <a href="{{ url('product/'.$product->slug) }}" class="">
+                                <div class="col-md-2 col-sm-12 category-img  respnsve-img-pro" >
+                                    <a class="img-height" href="{{ url('product/'.$product->slug) }}" class="">
                                         @if($product->images->count()>0)
-                                            <img src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}" style="width: 100%; height: 283px; ">
+                                            <img src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}" style="width: 100%; height: 100%">
                                              
                                          @else
                                             <img class="media-object" src="{{ asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
