@@ -7,6 +7,98 @@
         <div class="container">
             <div class="row">
                 <form target="paypal" class="form-horizontal checkout shop-checkout" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                                  <aside class="col-sm-5 col-md-4 col-lg-4 hidden-lg hidden-md hidden-xs">
+                                      <h3 class="widget-title" id="order_review_heading">Your order</h3>
+                                      <div id="order_review" class="shop-checkout-review-order">
+                                          <table class="table shop_table shop-checkout-review-order-table">
+                                              <thead>
+                                              <tr>
+                                                  <td class="product-name">Product</td>
+                                                  <td class="product-total">Total</td>
+                                              </tr>
+                                              </thead>
+                                              <tbody>
+                                              <tr class="cart_item">
+                                                  <td class="product-name">
+                                                     Gift Voucher
+                                                      <span class="product-quantity">× {{ $_GET['quantity'] }}</span>
+                                                  </td>
+                                                  <td class="product-total">
+                                                     {{-- <span class="amount grey">&euro; 10</span>--}}
+                                                  </td>
+                                              </tr>
+                                              </tbody>
+                                              <tfoot>
+                                              <tr class="cart-subtotal">
+                                                  <td>Subtotal:</td>
+                                                  <td>
+                                                      <span class="amount grey">&euro; {{ $_GET['quantity'] * $_GET['price'] }}</span>
+                                                  </td>
+                                              </tr>
+                                              <tr class="shipping">
+                                                  <td>Shipping:</td>
+                                                  <td>
+                                                      <span class="grey">Free Shipping</span>
+                                                  </td>
+                                              </tr>
+                                              <tr class="order-total">
+                                                  <td>Total:</td>
+                                                  <td>
+                                          <span class="amount grey">
+                                            <strong>&euro; {{ $_GET['quantity'] * $_GET['price'] }}</strong>
+                                          </span>
+                                                  </td>
+                                              </tr>
+                                              </tfoot>
+                                          </table>
+                                          <div id="payment" class="shop-checkout-payment">
+                                              <h3 class="widget-title">Payment</h3>
+                                              <ul class="list1 no-bullets payment_methods methods">
+                                                  {{--<li class="payment_method_bacs">
+                                                      <div class="radio">
+                                                          <label for="payment_method_bacs">
+                                                              <input id="payment_method_bacs" type="radio" name="payment_method" value="bacs" checked="checked">
+                                                              <span class="grey">Direct Bank Transfer</span>
+                                                          </label>
+                                                      </div>
+                                                      <div class="payment_box payment_method_bacs">
+                                                          <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                                                      </div>
+                                                  </li>
+                                                  <li class="payment_method_cheque">
+                                                      <div class="radio">
+                                                          <label for="payment_method_cheque">
+                                                              <input id="payment_method_cheque" type="radio" name="payment_method" value="cheque">
+                                                              <span class="grey">Cheque Payment</span>
+                                                          </label>
+                                                      </div>
+                                                  </li>--}}
+                                                  <li class="payment_method_paypal">
+                                                      <div class="radio">
+                                                          <div class="payment_box payment_method_bacs">
+                                                              <p>Your order won’t be shipped until the funds have cleared in our account.</p>
+                                                          </div>
+                                                          <label for="payment_method_paypal">
+                                                              <input id="payment_method_paypal" checked name="landing_page" value="Login" type="radio">
+                                                              <span class="grey">PayPal</span>
+                                                          </label>
+                                                      </div>
+                                                  </li>
+                                                  <li class="payment_method_paypal">
+                                                      <div class="radio">
+                                                          <label for="payment_method_card">
+                                                              <input id="payment_method_card" type="radio" value="Billing" name="landing_page">
+                                                              <span class="grey">Credit/Debit Card</span>
+                                                          </label>
+                                                      </div>
+                                                  </li>
+                                              </ul>
+                                              <div class="place-order">
+                                                  <input type="submit" class="button-t1" name="checkout_place_order" id="place_order" value="Place order">
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </aside>
                 <div class="col-sm-7 col-md-8 col-lg-8">
                     <input type="hidden" name="cmd" value="_cart">
                         <input type="hidden" name="upload" value="1">
@@ -167,7 +259,7 @@
                           </div>
                 </div>
 
-                <aside class="col-sm-5 col-md-4 col-lg-4">
+                <aside class="col-sm-5 col-md-4 col-lg-4 hidden-sm ">
                     <h3 class="widget-title" id="order_review_heading">Your order</h3>
                     <div id="order_review" class="shop-checkout-review-order">
                         <table class="table shop_table shop-checkout-review-order-table">

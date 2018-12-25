@@ -16,9 +16,9 @@
 @section('content')
     <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_40 section_padding_bottom_100">
         <div class="container">
-            <div class="row">
+            <div class="row blog-page-responsive">
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                    <h3  class="title-featured text-center" style="    margin-bottom: 38px;     margin-top: 38px;"> <i class="fa fa-chevron-left"></i> <span ></span> <span>Latest Blog Posts</span> <i class="fa fa-chevron-right"></i></h3>
+                    <h3  class="title-featured text-left" style="    margin-bottom: 9px;     margin-top: 38px;"> <span>Latest Blog Posts</span></h3>
                     <hr>
                 </div>
                 <div class="row gallery-firstrow2">
@@ -26,20 +26,25 @@
                     @foreach($posts as $post)
                          <div class="col-md-3">
                              
-                                        <div class="gridview-pic2">
-                                            <img   src="{{ asset('assets/images/blog/'.$post->images_data) }}" alt="{{ $post->meta_title }}" style="width: 100%;">
-                                        </div>
-                                        
-                                   
-                                <div class="blog-post card-dscrpt">
-                                   
+                              <a href="{{ action('BlogController@showPost',$post->id) }}">
+                                          <div class="gridview-pic2">
+                                              <img src="{{ asset('assets/images/blog/'.$post->images_data) }}" alt="{{ $post->meta_title }}" style="width: 100%;">
+                                          </div>
+                                          
                                      
-                                    {{$post->meta_title}}
-                                     {!!  $post->post  !!}
-                                    <div class="pager">
-                                        <a href="{{ action('BlogController@showPost',$post->id) }}" class="next btn-more" style="color: white !important;">Read More</a>
-                                    </div>
-                                </div>
+                                  <div class="blog-post card-dscrpt" style="text-align: left">
+                                     <span  class="wrap-title" style="color: black; font-size: 22px; font-weight: 600px;"> {{$post->meta_title}}</span> <br>
+                                     &nbsp;<span class="text-left" style=" font-size: 13px; display: inline-block; overflow: hidden; ;">  {!!  $post->publish_at !!} /Admin</span>
+
+                                       <div class="blog-des">
+                                          {!!  $post->post  !!}
+                                      </div>
+                                       
+                                      <div class="pager">
+                                          <a href="{{ action('BlogController@showPost',$post->id) }}" class="next btn-more" style="color: white !important;">Read More</a>
+                                      </div>
+                                  </div>
+                              </a>
                          </div>
                     @endforeach
                         {{--<div class="post format-standart">

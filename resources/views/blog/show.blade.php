@@ -5,13 +5,20 @@
 @section('content')
     <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_40 section_padding_bottom_100">
         <div class="container">
-            <div class="row">
+            <div class="row respnsve-blog">
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                     <div style="height: 350px; overflow: hidden;">
-                         <img style="position: relative;"  src="{{ asset('assets/images/blog/'.$post->images_data) }}" alt="{{ $post->meta_title }}">
+                     <div style="height: 400px; overflow: hidden;">
+                         <img  style="position: relative; width: 100%; height: 100%;"  src="{{ asset('assets/images/blog/'.$post->images_data) }}" alt="{{ $post->meta_title }}">
                      </div>
-                    {!!  $post->meta_title  !!}
-                    {!!  $post->post  !!}
+                   <div class="blog_title"> {!!  $post->meta_title  !!}
+                    <p style=" font-size: 14px;"> {!!  $post->publish_at !!}  /Admin</p>
+                   </div> 
+                  
+
+                    <div>
+                        {!!  $post->post  !!}
+                    </div>
+                    
                 </div>
                 <div class="col-lg-12">
                     <hr />

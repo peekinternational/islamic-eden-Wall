@@ -176,6 +176,46 @@
 	.search-form__button{
 		top: 6px;
 	}
+
+	.respnsve-blog{
+		margin-left: 5px !important;
+		margin-right: 5px !important;
+	}
+	.respnsve-img-pro{
+		width: 100% !important;
+
+	}
+	.product-page-responsive{
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+
+	.blog-page-responsive{
+		margin-left: 5px;
+		margin-right: 12px;
+	}
+	.shipping-process{
+    width: 100% !important;
+	}
+	.gallery-firstrow2 .col-md-3{
+		padding-right: 0px !important;
+	}
+	.checkout-row{
+		margin: 0;
+	}
+	.checkout-row aside{
+		margin-left: 0 !important;
+	}
+	.checkout-row form .form-group{
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+	.shop-checkout__title{
+		font-size: 25px;
+	}
+	.cart-sectn{
+		margin: 0;
+	}
 }	
 @media screen and (max-width: 767px) and (min-width: 467px){
 	.slides  li{
@@ -440,4 +480,42 @@ input[type=radio].css-checkbox:checked + label.css-label {
 	font-size: 25px;
 	color: black;
 }
+.blog_title{
+	margin: 40px 0px;
+    color: black;
+    font-size: 28px;
+    border-bottom: 1px solid lightgray;
+}
+.blog-des p{
+  width: 98%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.blog-des p:nth-Child(2){
+	display: none;
+}
+.blog-des{
+	height: 30px;
+	overflow: hidden;
+}
 
+.respnsve-img-pro{
+	width: 20%;
+}
+.img-height{
+	height: 204px;
+    
+    overflow: hidden;
+    display: block;
+}
+.wrap-title{
+	width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+}
+.product-info, .product-price-td, .product-quantity, .product-subtotal, .product-remove{
+	text-transform: capitalize;
+}

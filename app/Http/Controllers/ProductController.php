@@ -36,9 +36,11 @@ class ProductController extends Controller
         $cat = $produt->category;
         return $category;*/
         $products = Products::orderBy('id','desc')->paginate(10);
+
          foreach($products as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
                 }
+
          return view('products',compact('products'));
 
     }
