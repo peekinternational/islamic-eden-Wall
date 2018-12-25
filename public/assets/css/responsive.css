@@ -495,6 +495,10 @@ input[type=radio].css-checkbox:checked + label.css-label {
 .blog-des p:nth-Child(2){
 	display: none;
 }
+.blog-des{
+	height: 30px;
+	overflow: hidden;
+}
 
 .respnsve-img-pro{
 	width: 20%;
