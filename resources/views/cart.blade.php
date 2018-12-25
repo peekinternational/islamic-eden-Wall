@@ -15,20 +15,20 @@
                 <div class="col-sm-8 col-md-8 col-lg-8">
                     @if(count($cart->getItems())>0)
                     @foreach($cart->getItems() as $item)
-                    <div class="row cart-sectn">
+                    <div class="row cart-sectn" style="margin: 0 0 10px;">
                         <div class="col-md-3 col-xs-6">
                             <h5 class="product-info">Product</h5>
 
                             <div class="media">
-                                <div class="media-left">
+                                <div class="media-left" style="width: 75%;">
                                     <a href="{{ route('product.show',['slug'=>$item->id]) }}">
-                                        <img class="media-object cart-product-image" src="{{  $item->image }}" alt="{{ $item->name }}">
+                                        <img class="media-object cart-product-image" src="{{  $item->image }}" alt="{{ $item->name }}" style="width: 80%;">
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    <h4 class="media-heading">
+                                    <h5 class="media-heading">
                                         <a href="{{ route('product.show',['slug'=>$item->id]) }}">{{ $item->name }}</a>
-                                    </h4>
+                                    </h5>
                                 </div>
                             </div>
                         </div>

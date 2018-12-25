@@ -11,7 +11,7 @@
                          <img  style="position: relative; width: 100%; height: 100%;"  src="{{ asset('assets/images/blog/'.$post->images_data) }}" alt="{{ $post->meta_title }}">
                      </div>
                    <div class="blog_title"> {!!  $post->meta_title  !!}
-                    <p style=" font-size: 14px;"> {!!  $post->publish_at !!}  /Admin</p>
+                    <p style=" font-size: 14px;"> {!!  $post->publish_at !!}  |Admin</p>
                    </div> 
                   
 
