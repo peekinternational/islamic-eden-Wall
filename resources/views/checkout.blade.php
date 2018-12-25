@@ -11,7 +11,8 @@
     <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_100 section_padding_bottom_75 columns_padding_25">
         <div class="container">
 
-            <div class="row">
+            <div class="row checkout-row">
+              <form target="paypal" class="form-horizontal checkout shop-checkout" action="{{ isset($PaymentSettings['payment_mood']['value']) && $PaymentSettings['payment_mood']['value']=='live'?'https://www.paypal.com/cgi-bin/webscr':'https://www.sandbox.paypal.com/cgi-bin/webscr' }}" method="post">
                <aside class="col-sm-5 col-md-4 hidden-sm hidden-md hidden-lg col-lg-4" style="margin-left: 30px;">
                     <h3 class="widget-title" id="order_review_heading">Your order</h3>
                     <div id="order_review" class="shop-checkout-review-order">
@@ -106,9 +107,9 @@
                         </div>
                     </div>
                 </aside>
-                <form target="paypal" class="form-horizontal checkout shop-checkout" action="{{ isset($PaymentSettings['payment_mood']['value']) && $PaymentSettings['payment_mood']['value']=='live'?'https://www.paypal.com/cgi-bin/webscr':'https://www.sandbox.paypal.com/cgi-bin/webscr' }}" method="post">
-                <div class="col-sm-7 col-md-8 col-lg-8 shipping-process" style="width: 60%;">
-
+                
+                <div class="col-sm-7 col-md-8 col-lg-8 shipping-process" style="width: 64%;">
+                  
                     {{--<input type="hidden" name="country" value="Us" />--}}
                     {{--<input type="hidden" name="first_name" value="shah" />
                     <input type="hidden" name="last_name"value="Khalid" />--}}
@@ -156,7 +157,7 @@
                         <input type="hidden" name="night_phone_c" value="1234">
                         <input type="hidden" name="email" value="shahkhalid.me@gmail.com">
                         <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_cart_SM.gif" border="0" name="upload" alt="Make payments with PayPal - it's fast, free and secure!" width="87" height="23">--}}
-                 {{--   </form>--}}
+                 <!-- {{--   </form>--}} -->
                     <h2 class="shop-checkout__title">Shipping Address</h2>
                        <div class="form-group">
                             <label for="country" class="col-sm-3 control-label">
@@ -302,10 +303,10 @@
                                   <textarea name="noteToSeller" class="form-control" id="order_comments" placeholder="Notes about your order, e.g. special notes for delivery." rows="5"></textarea>
                               </div>
                           </div>
-                        </div>
            
-
-                <aside class="col-sm-5 col-md-4 col-lg-4 hidden-xs" style="margin-left: 30px;" >
+                
+              </div>
+                <aside class="col-sm-5 col-md-4 col-lg-4 hidden-xs" style="margin-left: 24px;" >
                     <h3 class="widget-title" id="order_review_heading">Your order</h3>
                     <div id="order_review" class="shop-checkout-review-order">
                         <table class="table shop_table shop-checkout-review-order-table">
@@ -400,6 +401,7 @@
                     </div>
                 </aside>
                 </form>
+                        </div>
             </div>
         </div>
     </div>
