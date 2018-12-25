@@ -37,6 +37,76 @@
     <script src="{{ asset('assets/js/respond.min.js') }}"></script>
     <![endif]-->
     <style>
+    .navbar {
+  overflow: hidden;
+  margin-top: 9px;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.subnav {
+  float: left;
+  overflow: hidden;
+}
+
+.subnav .subnavbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: black;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.navbar a:hover, .subnav:hover .subnavbtn {
+ 
+}
+
+.subnav-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color: white;
+  width: 100%;
+  z-index: 9999;
+}
+
+.subnav-content a {
+  float: left;
+  color: black;
+  text-decoration: none;
+}
+
+.subnav-content a:hover {
+  background-color: #eee;
+  color: black;
+}
+
+.subnav:hover .subnav-content {
+  display: block;
+  position:fixed;
+  top: 17%;
+  
+}
+.subnav-  a{
+padding:5px 16px;
+}
+.subnav:hover .subnav- {
+    top: 98%;
+    position: absolute;
+    background: white;
+    width: 100%;
+}
         header.ls .page_header.header-01,header.ls .page_header.header-01 input#modal-search-input{
             background: #f6f6f6;
         }
