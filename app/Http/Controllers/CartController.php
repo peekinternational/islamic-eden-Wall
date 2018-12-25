@@ -139,7 +139,7 @@ class CartController extends Controller
                                         'p_size'=>$size,
                                         'p_dimension'=>$p_dimension
                                 ],
-                                $taxable = false,
+                                $taxable = true,
                                 $lineItem = false
                         );
                 }else if(is_array($find) && count($find)>0){
