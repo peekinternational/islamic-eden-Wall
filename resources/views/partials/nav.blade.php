@@ -7,12 +7,101 @@
                         <img src="{{ asset('assets/images/logo.png') }}" alt="">
                     </a>
                 </div>
-                <div class=" col-md-8 col-sm-2 text-lg-center">
-         <span class="toggle_menu">
-          <span></span>
-         </span>
+             <div class=" col-md-8 col-sm-2 text-lg-center">
+                <span class="toggle_menu">
+                <span></span>
+                </span>
+                    <div class="navbar hidden-xs hidden-sm">
+                        @foreach($navs as $key=>$nav)
+                        @if(!$nav->hidden)
+                            
+                            <?php
+                            $url = '#';
+                            if(trim($nav->slug) == 'about'){
+                                $url = url('/').'#about-us';
+                            }elseif($nav->slug == 'home'){
+                                $url = url('/');
+                            }elseif($nav->slug == 'blog'){
+                                $url = url('/blog');
+                            }elseif($nav->slug =='shop'){
+                                $url = url('/').'#shop';
+                            }
+                            elseif($nav->slug =='decore'){
+                                $url = url('/').'#decore';
+                            }
+                            elseif($nav->slug =='home-goods'){
+                                $url = url('/').'#home-goods';
+                            }elseif($nav->page_id>0 && isset($nav->page->slug) && !empty($nav->page->slug)){
+                                $url = url($nav->page->slug.'/page');
+                            }
+                            if(!empty($nav->url) && filter_var($nav->url,FILTER_VALIDATE_URL) == true){
+                                $url = $nav->url;
+                            }
+                        ?>
+            
+                    <div class="subnav">
+                        <a href="{{ $url }}" class="subnavbtn">{{ $nav->title }} </a>
+                        
+                            <div class="row">
+                                <div class="subnav-content">
+                                @foreach($nav->sub_navs as $sub_nav)
+                                
+                                <div class="col-md-2 col-lg-2">
+                            @if($nav->slug == 'shop')
+                            <a href="{{ url('shop/'.$sub_nav->slug) }}" ><b>{{ $sub_nav->title }}</b></a>
+                            
+                            <div class="">
+                                @foreach($sub_nav->more_subnav as $msub_nav)
+                                
+                                <div class="col-md-12 col-lg-12">
+                                    
+                                    <a href="{{ url('shop/'.$sub_nav->slug) }}" style="color: #989898;">{{ $msub_nav->title }}</a>
+                                                        
+                                </div>
+                                @endforeach
+                            </div>
+                        @elseif($nav->slug == 'decore')
+                            <a href="{{ url('shop/'.$sub_nav->slug) }}">{{ $sub_nav->title }}</a>
+                                      <div class="">
+                                @foreach($sub_nav->more_subnav as $msub_nav)
+                                
+                                <div class="col-md-12 col-lg-12">
+                                    
+                                    <a href="{{ url('shop/'.$sub_nav->slug) }}" style="color: #989898;">{{ $msub_nav->title }}</a>
+                                                        
+                                </div>
+                                @endforeach
+                            </div>
+                            @elseif($nav->slug == 'home-goods')
+                            <a href="{{ url('shop/'.$sub_nav->slug) }}">{{ $sub_nav->title }}</a>
+                                      <div class="">
+                                @foreach($sub_nav->more_subnav as $msub_nav)
+                                
+                                <div class="col-md-12 col-lg-12">
+                                    
+                                    <a href="{{ url('shop/'.$sub_nav->slug) }}" style="color: #989898;">{{ $msub_nav->title }}</a>
+                                                        
+                                </div>
+                                @endforeach
+                            </div>
+                        @elseif($nav->slug =='useful')
+                                <?php $url = url($sub_nav->page->slug.'/page'); ?>
+                                <a href="{{ $url }}">{{ $sub_nav->title }}</a>
+                        @else
+                            
+                        @endif
+                    </div>
+                        @endforeach
+                            </div>
+                            </div>
+                        </div>
+                        @endif
+                        @endforeach
+                        </div>
+                    
+
                     <!-- main nav start -->
-                    <nav class="mainmenu_wrapper">
+                    <nav class="mainmenu_wrapper hidden-md hidden-lg" >
                         <ul class="mainmenu nav sf-menu ">
                             @foreach($navs as $key=>$nav)
                                 @if(!$nav->hidden)
