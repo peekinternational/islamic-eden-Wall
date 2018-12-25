@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row">
                 <form target="paypal" class="form-horizontal checkout shop-checkout" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-                                  <aside class="col-sm-5 col-md-4 col-lg-4 hidden-lg hidden-md hidden-sm">
+                                  <aside class="col-sm-5 col-md-4 col-lg-4 hidden-lg hidden-md hidden-xs">
                                       <h3 class="widget-title" id="order_review_heading">Your order</h3>
                                       <div id="order_review" class="shop-checkout-review-order">
                                           <table class="table shop_table shop-checkout-review-order-table">
@@ -259,7 +259,7 @@
                           </div>
                 </div>
 
-                <aside class="col-sm-5 col-md-4 col-lg-4 hidden-xs ">
+                <aside class="col-sm-5 col-md-4 col-lg-4 hidden-sm ">
                     <h3 class="widget-title" id="order_review_heading">Your order</h3>
                     <div id="order_review" class="shop-checkout-review-order">
                         <table class="table shop_table shop-checkout-review-order-table">

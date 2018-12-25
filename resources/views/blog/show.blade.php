@@ -10,7 +10,10 @@
                      <div style="height: 400px; overflow: hidden;">
                          <img  style="position: relative; width: 100%"  src="{{ asset('assets/images/blog/'.$post->images_data) }}" alt="{{ $post->meta_title }}">
                      </div>
-                   <div class="blog_title"> {!!  $post->meta_title  !!} &nbsp;<span style="border-left: 1px solid gray ; font-size: 14px;">  {!!  $post->publish_at !!}</span></div>
+                   <div class="blog_title"> {!!  $post->meta_title  !!}
+                    <p style=" font-size: 14px;"> {!!  $post->publish_at !!}  /Admin</p>
+                   </div> 
+                  
 
                     <div>
                         {!!  $post->post  !!}
