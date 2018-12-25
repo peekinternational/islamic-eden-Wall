@@ -34,7 +34,7 @@
                                      
                                   <div class="blog-post card-dscrpt" style="text-align: left">
                                      <span  class="wrap-title" style="color: black; font-size: 22px; font-weight: 600px;"> {{$post->meta_title}}</span> <br>
-                                     &nbsp;<span class="text-left" style=" font-size: 13px; display: inline-block; overflow: hidden; ;">  {!!  $post->publish_at !!} /Admin</span>
+                                     &nbsp;<span class="text-left" style=" font-size: 13px; display: inline-block; overflow: hidden; ;">  {!!  $post->publish_at !!} |Admin</span>
 
                                        <div class="blog-des">
                                           {!!  $post->post  !!}
