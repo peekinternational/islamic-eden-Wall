@@ -21,7 +21,7 @@ class MainController extends Controller
 
                 }
                 $without_offer = Products::where('offer','=','')->latest(5)->get();
-                 foreach($product_offer as &$rec){
+                 foreach($without_offer as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('dim_offer','=','')->where('product_id','=',$rec->id)->get()->toArray(); 
                 }
                  $product_offer = Products::where('offer','!=','')->latest(5)->get();
