@@ -159,21 +159,21 @@
                                     <div class="col-xs-12" style="padding-top: 7px;">
                                          <span class="amount">{{ $item->color  }}</span>
                                     </div>
-                                    <div class="col-xs-12"  style="padding-top: 7px;>
+                                    <div class="col-xs-12"  style="padding-top: 7px;">
                                          @if($item->p_size)
                                             <span class="amount">{{ $item->p_size  }}</span>
                                         @else
                                             <span class="amount">{{ $item->p_dimension  }}</span>
                                         @endif
                                     </div>
-                                    <div class="col-xs-12"  style="padding-top: 10px;>
+                                    <div class="col-xs-12"  style="padding-top: 10px;">
                                          <div class="quantity">
                                              <input type="button" value="-" class="minus">
                                              <input type="number" step="1" min="0" data-id="{{ $item->id }}" data-price="{{ $item->price }}"  name="product_quantity" value="{{ $item->qty }}" title="Qty" class="form-control input-product-quantity">
                                              <input type="button" value="+" class="plus">
                                          </div>
                                     </div>
-                                    <div class="col-xs-12" style="padding-top: 7px;>
+                                    <div class="col-xs-12" style="padding-top: 7px;">
                                          <span class="currencies">€</span>
                                          <span class="amount">{{ $item->price }}</span>
                                     </div>
