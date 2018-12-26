@@ -219,7 +219,7 @@
 	.product-info, .product-price-td, .product-quantity, .product-subtotal, .product-remove{
 		font-size: 14px;
 		font-weight: 500;
-		margin: 7px 0pc;
+		margin: 10px 0pc;
 	}
 }	
 @media screen and (max-width: 767px) and (min-width: 467px){
