@@ -522,10 +522,10 @@ input[type=radio].css-checkbox:checked + label.css-label {
 .title-row{
 	margin: 0;
 }
-.title-row .col-xs-6{
+.title-row .col-xs-8{
 	padding-left: 7px;
 }
-.title-row .col-xs-6 .text-heading{
+.title-row .col-xs-8 .text-heading{
 	line-height: 18px;
 	font-size: 13px;
 	width: 200px;
