@@ -17,27 +17,21 @@
                                         <div id="carousel-generic" class="carousel slide">
                                             <div class="carousel-inner">
                                                 @foreach($product->images as $key => $image)
-                                                <div class="item {{ $key==0?'active':'' }}  product-detail-img">
+                                                <div class="item {{ $key==0?'active':'' }}  product-detail-img tile" data-scale="2.4"  data-image="{{ asset('assets/images/products/'.$image->image)}}">
                                                     <img
                                                     src="{{ asset('assets/images/products/'.$image->image) }}" alt="{{ $product->name }}">
                                                 </div>
                                                 @endforeach
                                             </div>
-                                            <a class="left carousel-control" href="#carousel-generic" data-slide="prev">
-                                                <span class="format-gallery__prew"></span>
-                                            </a>
-                                            <a class="right carousel-control" href="#carousel-generic" data-slide="next">
-                                                <span class="format-gallery__next"></span>
-                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             @else
                                 <img src="{{  asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
                             @endif
-                            <div style="margin-top:11px;">
+                            <div style="margin-top:11px;" >
                             @foreach($product->images as $key => $image)
-                            <img src="{{ asset('assets/images/products/'.$image->image) }}" alt="{{ $product->name }}" style="width:19%;margin-right: 8px;">
+                           <img src="{{ asset('assets/images/products/'.$image->image) }}" alt="{{ $product->name }}" style="width:19%;margin-right: 8px;">
                             @endforeach
                             </div>
                         </figure>
@@ -268,6 +262,29 @@
 @section('scripts')
 
     <script>
+
+        $('.tile')
+          // tile mouse actions
+          .on('mouseover', function(){
+            $(this).children('.photo').css({'transform': 'scale('+ $(this).attr('data-scale') +')'});
+          })
+          .on('mouseout', function(){
+            $(this).children('.photo').css({'transform': 'scale(1)'});
+          })
+          .on('mousemove', function(e){
+            $(this).children('.photo').css({'transform-origin': ((e.pageX - $(this).offset().left) / $(this).width()) * 100 + '% ' + ((e.pageY - $(this).offset().top) / $(this).height()) * 100 +'%'});
+          })
+          // tiles set up
+          .each(function(){
+            $(this)
+              // add a photo container
+              .append('<div class="photo"></div>')
+              // some text just to show zoom level on current item in this example
+              
+              // set up a background image for each tile based on data-image attribute
+              .children('.photo').css({'background-image': 'url('+ $(this).attr('data-image') +')'});
+          })
+
    function dimensionselect(id, price){
        //alert(price);
        $('#show_price').html('€'+price);
