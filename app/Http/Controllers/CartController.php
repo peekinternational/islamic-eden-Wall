@@ -155,7 +155,7 @@ class CartController extends Controller
 
 
         public function update_all(Request $request,LaraCart $cart){
-                //dd($request->all());
+                dd($request->all());
                 if(!$request->has('products') && is_array($request->input('products')) && count($request->input('products'))>0){
                         return json_encode(['notify'=>'Oops something went wrong.','type'=>'error']);
                 }
@@ -195,6 +195,7 @@ class CartController extends Controller
                                         $item = $find[0];
                                         $itemHashId =  $item->getHash();
                                         $cart->updateItem($itemHashId,'qty', $quantity);
+
                                         $cart->updateItem($itemHashId,'price', (float)$final_price);
 
                                 }
