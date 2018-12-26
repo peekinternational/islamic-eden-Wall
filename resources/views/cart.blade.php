@@ -146,7 +146,7 @@
                                         <div class="row title-row">
                                             <div class="col-xs-4">
                                                 <a href="{{ route('product.show',['slug'=>$item->id]) }}">
-                                                    <img class="media-object cart-product-image" src="{{  $item->image }}" alt="{{ $item->name }}" style="width: 74%;">
+                                                    <img class="media-object cart-product-image" src="{{  $item->image }}" alt="{{ $item->name }}" style="width: 45%;">
                                                 </a>
                                             </div>
                                             <div class="col-xs-8">
