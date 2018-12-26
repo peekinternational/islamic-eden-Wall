@@ -519,3 +519,18 @@ input[type=radio].css-checkbox:checked + label.css-label {
 .product-info, .product-price-td, .product-quantity, .product-subtotal, .product-remove{
 	text-transform: capitalize;
 }
+.title-row{
+	margin: 0;
+}
+.title-row .col-xs-6{
+	padding-left: 7px;
+}
+.title-row .col-xs-6 .text-heading{
+	line-height: 18px;
+	font-size: 13px;
+	width: 200px;
+	text-overflow: ellipsis;
+  	white-space: nowrap;
+  	display: inline-block;
+  	overflow: hidden;
+}
