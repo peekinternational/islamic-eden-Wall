@@ -35,6 +35,11 @@
                             @else
                                 <img src="{{  asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
                             @endif
+                            <div style="margin-top:11px;">
+                            @foreach($product->images as $key => $image)
+                            <img src="{{ asset('assets/images/products/'.$image->image) }}" alt="{{ $product->name }}" style="width:19%;margin-right: 8px;">
+                            @endforeach
+                            </div>
                         </figure>
                         <div class="shop-single__content">
                             <ul class="shop-item__meta-list">
@@ -59,13 +64,40 @@
                                     </div>
                                 </li>--}}
                             </ul>
-                             <span class="price">
+                           <span class="price">
                                 <span>
-                                    @if($product->offer)
+                                 @if($product_dimension->count()>0)
+
+                                 @if($product_dimension[0]->dim_offer)
+                                  <?php 
+                                  $min = $product_dimension->min('p_price');
+                                  $max = $product_dimension->max('p_price');
+                               
+                                  $offer_min = $product_dimension->min('dimoffer_price');
+                                  $offer_max = $product_dimension->max('dimoffer_price');
+                                
+                                 ?>
+                                 <span class="amount" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $min }} - {{$max}}</small></strike></span><br>
+                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $offer_min }} - {{$offer_max}}</span>
+                                 <span>&nbsp;  {{$product_dimension[0]->dim_offer}} %</span>
+                                 @else
+                                <?php 
+                                  $min = $product_dimension->min('p_price');
+                                  $max = $product_dimension->max('p_price');
+                               
+                                 ?>
+                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $min }} - {{$max}}</span><br>
+                                 @endif
+
+                                 @else
+
+                                 @if($product->offer)
                                 <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->price }}</small></strike></span>
                                <span class="amount" style="color: gray !important; font-size: 26px;">&euro;{{ $product->saleprice }}</span>
-                                @else
+                                 @else
                                     <span class="amount" id="show_price" style="color: black !important; font-size: 26px;">&euro;{{ $product->price }}</span>
+                               
+                               @endif
                                @endif
                                 </span>
                             </span>
@@ -208,7 +240,7 @@
                                         @endif
                                 
 
-                                  @else
+                                      @else
                                           @if($product->offer)
                                           <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
                                                 <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>

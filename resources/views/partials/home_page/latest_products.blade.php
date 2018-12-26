@@ -160,19 +160,19 @@
                                           </h5>
                                            @if($product->dimension)
                                 
-                                @if($product->dimension[0]->dim_offer)
-                                
-                                 <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->dimension[0]->dim_offer }} % off</p>
-                                      <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->dimension[0]->p_price }}</small> </strike>
-                                      <span> €{{ $product->dimension[0]->dimoffer_price }}</span></p>
-                                      
-                                 @else
-                                 
-                                <p class="text-center"> €{{ $product->dimension[0]->p_price }} </p>
-                                 @endif
+                                            @if($product->dimension[0]->dim_offer)
+                                        
+                                            <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->dimension[0]->dim_offer }} % off</p>
+                                            <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->dimension[0]->p_price }}</small> </strike>
+                                            <span> €{{ $product->dimension[0]->dimoffer_price }}</span></p>
+                                            
+                                         @else
+                                        
+                                            <p class="text-center"> €{{ $product->dimension[0]->p_price }} </p>
+                                        @endif
                                 
 
-                               @else
+                                  @else
                                           @if($product->offer)
                                           <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
                                                 <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
