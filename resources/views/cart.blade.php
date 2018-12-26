@@ -158,7 +158,7 @@
                                     <div class="col-xs-12">
                                          <span class="amount">{{ $item->color  }}</span>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12" style="    padding: 28px 15px;">
                                          @if($item->p_size)
                                             <span class="amount">{{ $item->p_size  }}</span>
                                         @else
@@ -172,15 +172,15 @@
                                              <input type="button" value="+" class="plus">
                                          </div>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12" style="    padding: 28px 15px;">
                                          <span class="currencies">€</span>
                                          <span class="amount">{{ $item->price }}</span>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12" style="padding: 15px;">
                                           <span class="currencies">€</span>
                                          <span class="amount">{{ $item->price *  $item->qty  }}</span>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12" style="    padding: 28px 15px;">
                                          {!! Form::open(array('route' => array('cart.destroy', $item->id),'method' => 'delete')) !!}
                                          <button type="submit" class="remove fontsize_24" style="background: transparent; border: none;" title="Remove this item">
                                              <i class="rt-icon2-trash highlight"></i>
