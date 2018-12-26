@@ -21,11 +21,11 @@ class MainController extends Controller
 
                 }
                 $without_offer = Products::where('offer','=','')->latest(5)->get();
-                 foreach($produc_offer as &$rec){
+                 foreach($product_offer as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('dim_offer','=','')->where('product_id','=',$rec->id)->get()->toArray(); 
                 }
-                 $produc_offer = Products::where('offer','!=','')->latest(5)->get();
-                 foreach($produc_offer as &$rec){
+                 $product_offer = Products::where('offer','!=','')->latest(5)->get();
+                 foreach($product_offer as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('dim_offer','=','')->where('product_id','=',$rec->id)->get()->toArray(); 
                 }
                 // $product_dimension  = DB::table('product_dimension')->where('product_id','=',$latest_products->id)->get();
@@ -33,7 +33,7 @@ class MainController extends Controller
                 $gallery = Gallery::all();
                 $posts =  Blog::orderBy('publish_at','desc')->limit(5)->get();
                // dd($posts);
-                return view('index',compact('slides','latest_products','gallery','posts','produc_offer','without_offer'));
+                return view('index',compact('slides','latest_products','gallery','posts','product_offer','without_offer'));
         }
 
 }
