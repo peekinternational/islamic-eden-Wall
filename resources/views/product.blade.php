@@ -15,11 +15,12 @@
                                 <div class="format-gallery">
                                     <div class="entry-thumbnail">
                                         <div id="carousel-generic" class="carousel slide">
-                                            <div class="carousel-inner">
+                                            <div class="carousel-inner"  id="description">
                                                 @foreach($product->images as $key => $image)
-                                                <div class="item {{ $key==0?'active':'' }}  product-detail-img tile" data-scale="2.4"  data-image="{{ asset('assets/images/products/'.$image->image)}}">
+
+                                                <div class="item {{ $key==0?'active':'' }}  product-detail-img tile"  data-scale="2.4"  data-image="{{ asset('assets/images/products/'.$image->image)}}">
                                                     <img
-                                                    src="{{ asset('assets/images/products/'.$image->image) }}" alt="{{ $product->name }}">
+                                                    src="{{ asset('assets/images/products/'.$image->image) }}" alt="{{ $product->name }}" id="largeImage ">
                                                 </div>
                                                 @endforeach
                                             </div>
@@ -29,7 +30,7 @@
                             @else
                                 <img src="{{  asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
                             @endif
-                            <div style="margin-top:11px;" >
+                            <div style="margin-top:11px;" id="thumbs">
                             @foreach($product->images as $key => $image)
                            <img src="{{ asset('assets/images/products/'.$image->image) }}" alt="{{ $product->name }}" style="width:19%;margin-right: 8px;">
                             @endforeach
@@ -262,6 +263,15 @@
 @section('scripts')
 
     <script>
+        $('#thumbs img').click(function(){
+          var imgsrc=$(this).attr('src');
+           var html= ' <div class="item active  product-detail-img tile"   data-scale="2.4" '+
+            'data-image="'+imgsrc+'">'+
+             '<img src="'+imgsrc+'" alt="{{ $product->name }}" id="largeImage">'+
+                   '</div>';
+    
+    $('#description').html(html);
+    });
 
         $('.tile')
           // tile mouse actions
