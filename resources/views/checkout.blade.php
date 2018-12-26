@@ -320,7 +320,7 @@
                             @foreach($cart->getItems() as $item)
                             <tr class="cart_item">
                                 <td class="product-name">
-                                    {{ $item->name }}
+                                    {{ $item->name }}({{$item->color}})
                                     <span class="product-quantity">× {{ $item->qty }}</span>
                                 </td>
                                 <td class="product-total">
