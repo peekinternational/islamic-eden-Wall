@@ -134,7 +134,7 @@
             <!-- starting best Sellers -->
            <h3  class="title-featured text-center" style="    margin-bottom: 38px;     margin-top: 38px;"> <i class="fa fa-chevron-left"></i> <span>Sales Items</span> <i class="fa fa-chevron-right"></i></h3>
                       
-                      @foreach($produc_offer->chunk(5) as $products)
+                      @foreach($product_offer->chunk(5) as $products)
                           <div class="row product-row">
                               @foreach($products as $product)
                                   <div class="col-md-2-5" style="width: 20%;">
