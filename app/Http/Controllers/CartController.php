@@ -195,6 +195,7 @@ class CartController extends Controller
                                         $item = $find[0];
                                         $itemHashId =  $item->getHash();
                                         $cart->updateItem($itemHashId,'qty', $quantity);
+                                        
                                         $cart->updateItem($itemHashId,'price', (float)$final_price);
 
                                 }
@@ -213,9 +214,10 @@ class CartController extends Controller
                 if(!count($cart->getItems())>0){
                         return redirect('/');
                 }
+                // dd($order_products);
                 $countries = Countries::getListForDropdown('cca2', false, 'eng');
                 return view('checkout',compact('countries','order_products'));
-               // dd($this->cart);
+               
         }
 
         public function giftVoucherCheckout(Request $request){
