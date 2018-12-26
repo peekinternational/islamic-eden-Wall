@@ -108,6 +108,9 @@
 
 
                     <div class="hidden-md hidden-lg hidden-sm">
+
+                                @if(count($cart->getItems())>0)
+                                @foreach($cart->getItems() as $item)
                         <div class="row" style="margin: 0;">
                             <div class="col-xs-4">
                                 <div class="row cart-sectn" style="margin: 0 0 10px;">
@@ -137,15 +140,13 @@
                                 
                             </div>
                             <div class="col-xs-8">
-                                @if(count($cart->getItems())>0)
-                                @foreach($cart->getItems() as $item)
                                 <div class="row cart-sectn" style="margin: 0 0 10px;">
                                     <div class="col-xs-12">
 
                                         <div class="row title-row">
                                             <div class="col-xs-4">
                                                 <a href="{{ route('product.show',['slug'=>$item->id]) }}">
-                                                    <img class="media-object cart-product-image" src="{{  $item->image }}" alt="{{ $item->name }}" style="width: 100%;">
+                                                    <img class="media-object cart-product-image" src="{{  $item->image }}" alt="{{ $item->name }}" style="width: 74%;">
                                                 </a>
                                             </div>
                                             <div class="col-xs-8">
@@ -188,7 +189,10 @@
                                          {!! Form::close() !!}
                                     </div>
                                 </div>
-                                    @endforeach
+                                    
+                            </div>
+                        </div>
+                        @endforeach
                                 @else
                                     <div class="cart_item row">
                                         <div class="col-md-12" colspan="5">
@@ -198,8 +202,6 @@
                                         </div>
                                     </div>
                                 @endif
-                            </div>
-                        </div>
                         
                     </div>
 
