@@ -108,6 +108,9 @@
 
 
                     <div class="hidden-md hidden-lg hidden-sm">
+
+                                @if(count($cart->getItems())>0)
+                                @foreach($cart->getItems() as $item)
                         <div class="row" style="margin: 0;">
                             <div class="col-xs-4">
                                 <div class="row cart-sectn" style="margin: 0 0 10px;">
@@ -137,15 +140,13 @@
                                 
                             </div>
                             <div class="col-xs-8">
-                                @if(count($cart->getItems())>0)
-                                @foreach($cart->getItems() as $item)
                                 <div class="row cart-sectn" style="margin: 0 0 10px;">
                                     <div class="col-xs-12">
 
                                         <div class="row title-row">
                                             <div class="col-xs-4">
                                                 <a href="{{ route('product.show',['slug'=>$item->id]) }}">
-                                                    <img class="media-object cart-product-image" src="{{  $item->image }}" alt="{{ $item->name }}" style="width: 100%;">
+                                                    <img class="media-object cart-product-image" src="{{  $item->image }}" alt="{{ $item->name }}" style="width: 45%;">
                                                 </a>
                                             </div>
                                             <div class="col-xs-8">
@@ -155,32 +156,32 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12" style="padding-top: 7px;">
                                          <span class="amount">{{ $item->color  }}</span>
                                     </div>
-                                    <div class="col-xs-12" style="    padding: 28px 15px;">
+                                    <div class="col-xs-12"  style="padding-top: 7px;">
                                          @if($item->p_size)
                                             <span class="amount">{{ $item->p_size  }}</span>
                                         @else
                                             <span class="amount">{{ $item->p_dimension  }}</span>
                                         @endif
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12"  style="padding-top: 10px;">
                                          <div class="quantity">
                                              <input type="button" value="-" class="minus">
                                              <input type="number" step="1" min="0" data-id="{{ $item->id }}" data-price="{{ $item->price }}"  name="product_quantity" value="{{ $item->qty }}" title="Qty" class="form-control input-product-quantity">
                                              <input type="button" value="+" class="plus">
                                          </div>
                                     </div>
-                                    <div class="col-xs-12" style="    padding: 28px 15px;">
+                                    <div class="col-xs-12" style="padding-top: 7px;">
                                          <span class="currencies">€</span>
                                          <span class="amount">{{ $item->price }}</span>
                                     </div>
-                                    <div class="col-xs-12" style="padding: 15px;">
+                                    <div class="col-xs-12" style="padding-top: 15px;">
                                           <span class="currencies">€</span>
                                          <span class="amount">{{ $item->price *  $item->qty  }}</span>
                                     </div>
-                                    <div class="col-xs-12" style="    padding: 28px 15px;">
+                                    <div class="col-xs-12" style="padding-top: 15px;">
                                          {!! Form::open(array('route' => array('cart.destroy', $item->id),'method' => 'delete')) !!}
                                          <button type="submit" class="remove fontsize_24" style="background: transparent; border: none;" title="Remove this item">
                                              <i class="rt-icon2-trash highlight"></i>
@@ -188,7 +189,10 @@
                                          {!! Form::close() !!}
                                     </div>
                                 </div>
-                                    @endforeach
+                                    
+                            </div>
+                        </div>
+                        @endforeach
                                 @else
                                     <div class="cart_item row">
                                         <div class="col-md-12" colspan="5">
@@ -198,8 +202,6 @@
                                         </div>
                                     </div>
                                 @endif
-                            </div>
-                        </div>
                         
                     </div>
 

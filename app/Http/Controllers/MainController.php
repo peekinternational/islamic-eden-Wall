@@ -18,13 +18,22 @@ class MainController extends Controller
                 $latest_products = Products::latest(5)->get();
                  foreach($latest_products as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
+
+                }
+                $without_offer = Products::where('offer','=','')->latest(5)->get();
+                 foreach($without_offer as &$rec){
+                  $rec->dimension=DB::table('product_dimension')->where('dim_offer','=','')->where('product_id','=',$rec->id)->get()->toArray(); 
+                }
+                 $product_offer = Products::where('offer','!=','')->latest(5)->get();
+                 foreach($product_offer as &$rec){
+                  $rec->dimension=DB::table('product_dimension')->where('dim_offer','=','')->where('product_id','=',$rec->id)->get()->toArray(); 
                 }
                 // $product_dimension  = DB::table('product_dimension')->where('product_id','=',$latest_products->id)->get();
-              //dd($latest_products);
+              //dd($produc_offer);
                 $gallery = Gallery::all();
                 $posts =  Blog::orderBy('publish_at','desc')->limit(5)->get();
                // dd($posts);
-                return view('index',compact('slides','latest_products','gallery','posts'));
+                return view('index',compact('slides','latest_products','gallery','posts','product_offer','without_offer'));
         }
 
 }

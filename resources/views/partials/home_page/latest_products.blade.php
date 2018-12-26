@@ -74,7 +74,7 @@
             <!-- featured Products sections -->
           <h3  class="title-featured text-center" style="    margin-bottom: 38px;     margin-top: 38px;"> <i class="fa fa-chevron-left"></i> <span>Featured Product</span> <i class="fa fa-chevron-right"></i></h3>
             
-            @foreach($latest_products->chunk(5) as $products)
+            @foreach($without_offer->chunk(5) as $products)
                 <div class="row product-row">
                     @foreach($products as $key=>$product)
                         <div class="col-md-2-5" style="width: 20%;">
@@ -85,6 +85,7 @@
                                     <button class="btn block" type="submit"> ADD TO CART</button>
                                     </div>
                                    {!! Form::close() !!}  -->
+                                  
                                     @if($product->images->count()>0)
                                         <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
                                         
@@ -123,6 +124,7 @@
                                       <p class="text-center"> €{{ $product->price }} </p>
                                       @endif
                                     @endif
+
                             </div>
                         </div>
                     @endforeach
@@ -130,9 +132,9 @@
             @endforeach
             <!-- End featured Products -->
             <!-- starting best Sellers -->
-           <h3  class="title-featured text-center" style="    margin-bottom: 38px;     margin-top: 38px;"> <i class="fa fa-chevron-left"></i> <span>Our Best seller's</span> <i class="fa fa-chevron-right"></i></h3>
+           <h3  class="title-featured text-center" style="    margin-bottom: 38px;     margin-top: 38px;"> <i class="fa fa-chevron-left"></i> <span>Sales Items</span> <i class="fa fa-chevron-right"></i></h3>
                       
-                      @foreach($latest_products->chunk(5) as $products)
+                      @foreach($product_offer->chunk(5) as $products)
                           <div class="row product-row">
                               @foreach($products as $product)
                                   <div class="col-md-2-5" style="width: 20%;">
@@ -143,7 +145,7 @@
                                               <button class="btn block" type="submit"> ADD TO CART</button>
                                               </div>
                                              {!! Form::close() !!} -->
-                                            
+                            @if($product->offer)
                                               @if($product->images->count()>0)
                                                   <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
                                                 
@@ -172,7 +174,7 @@
                                         @endif
                                 
 
-                                  @else
+                                        @else
                                           @if($product->offer)
                                           <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
                                                 <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
@@ -181,6 +183,7 @@
                                                 <p class="text-center"> €{{ $product->price }} </p>
                                                 @endif
                                                 @endif
+                         @endif
                                               
                                       </div>
                                   </div>
