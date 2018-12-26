@@ -145,7 +145,7 @@
                                               <button class="btn block" type="submit"> ADD TO CART</button>
                                               </div>
                                              {!! Form::close() !!} -->
-                            @if($product->offer)
+                           
                                               @if($product->images->count()>0)
                                                   <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
                                                 
@@ -183,7 +183,7 @@
                                                 <p class="text-center"> €{{ $product->price }} </p>
                                                 @endif
                                                 @endif
-                         @endif
+                     
                                               
                                       </div>
                                   </div>

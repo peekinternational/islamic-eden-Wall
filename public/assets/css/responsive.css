@@ -464,6 +464,8 @@ input[type=checkbox].css-checkbox{ display: none; }
     width: auto;
     height: 26px;
     padding: 2px;
+    cursor: pointer;
+
 }
 
 
