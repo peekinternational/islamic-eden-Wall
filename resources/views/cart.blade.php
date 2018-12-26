@@ -10,94 +10,200 @@
 @section('content')
     <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_75 section_padding_bottom_75 columns_padding_25 ">
         <div class="container">
-            <div class="row cart-sectn">
+            <div class="row cart-sectn ">
                  @include('partials.sidebar')
                 <div class="col-sm-8 col-md-8 col-lg-8">
-                    <div class="row cart-sectn" style="margin: 0 0 10px;">
-                        <div class="col-md-3 col-xs-6">
-                            <h5 class="product-info">Product</h5>
-                        </div>
-                        <div class="col-md-1 col-xs-6">
-                             <h5 class="product-info">Color</h5>
-                         </div>
-                         <div class="col-md-2 col-xs-6 text-center">
-                             <h5 class="product-info">Size</h5>
-                         </div>
-                         <div class="col-md-2 col-xs-6 text-center">
-                             <h5 class="product-info">Quantity</h5>
-                         </div>
-                         <div class="col-md-1 col-xs-6 text-center">
-                             <h5 class="product-info">Price</h5>
-                         </div>
-                         <div class="col-md-2 col-xs-6 text-center">
-                             <h5 class="product-info">Sub-total</h5>
-                         </div>
-                         <div class="col-md-1 text-center">
-                            <h5 class="product-info">Action</h5>
-                        </div>
-
-                    </div>
-                    @if(count($cart->getItems())>0)
-                    @foreach($cart->getItems() as $item)
-                    <div class="row cart-sectn" style="margin: 0 0 10px;">
-                        <div class="col-md-3 col-xs-6">
-
-                            <div class="row title-row">
-                                <div class="col-xs-4">
-                                    <a href="{{ route('product.show',['slug'=>$item->id]) }}">
-                                        <img class="media-object cart-product-image" src="{{  $item->image }}" alt="{{ $item->name }}" style="width: 100%;">
-                                    </a>
-                                </div>
-                                <div class="col-xs-8">
-                                    <h5 class="text-heading">
-                                        <a href="{{ route('product.show',['slug'=>$item->id]) }}">{{ $item->name }}</a>
-                                    </h5>
-                                </div>
+                    <div class="hidden-xs">
+                        <div class="row cart-sectn" style="margin: 0 0 10px;">
+                            <div class="col-md-3 col-xs-6">
+                                <h5 class="product-info">Product</h5>
                             </div>
-                        </div>
-                        <div class="col-md-1 col-xs-6">
-                             <span class="amount">{{ $item->color  }}</span>
-                        </div>
-                        <div class="col-md-2 col-xs-6 text-center">
-                             @if($item->p_size)
-                                <span class="amount">{{ $item->p_size  }}</span>
-                            @else
-                                <span class="amount">{{ $item->p_dimension  }}</span>
-                            @endif
-                        </div>
-                        <div class="col-md-2 col-xs-6 text-center">
-                             <div class="quantity">
-                                 <input type="button" value="-" class="minus">
-                                 <input type="number" step="1" min="0" data-id="{{ $item->id }}" data-price="{{ $item->price }}"  name="product_quantity" value="{{ $item->qty }}" title="Qty" class="form-control input-product-quantity">
-                                 <input type="button" value="+" class="plus">
+                            <div class="col-md-1 col-xs-6">
+                                 <h5 class="product-info">Color</h5>
                              </div>
+                             <div class="col-md-2 col-xs-6 text-center">
+                                 <h5 class="product-info">Size</h5>
+                             </div>
+                             <div class="col-md-2 col-xs-6 text-center">
+                                 <h5 class="product-info">Quantity</h5>
+                             </div>
+                             <div class="col-md-1 col-xs-6 text-center">
+                                 <h5 class="product-info">Price</h5>
+                             </div>
+                             <div class="col-md-2 col-xs-6 text-center">
+                                 <h5 class="product-info">Sub-total</h5>
+                             </div>
+                             <div class="col-md-1 text-center">
+                                <h5 class="product-info">Action</h5>
+                            </div>
+
                         </div>
-                        <div class="col-md-1 col-xs-6 text-center">
-                             <span class="currencies">€</span>
-                             <span class="amount">{{ $item->price }}</span>
-                        </div>
-                        <div class="col-md-2 col-xs-6 text-center">
-                              <span class="currencies">€</span>
-                             <span class="amount">{{ $item->price *  $item->qty  }}</span>
-                        </div>
-                        <div class="col-md-1 text-center">
-                             {!! Form::open(array('route' => array('cart.destroy', $item->id),'method' => 'delete')) !!}
-                             <button type="submit" class="remove fontsize_24" style="background: transparent; border: none;" title="Remove this item">
-                                 <i class="rt-icon2-trash highlight"></i>
-                             </button>
-                             {!! Form::close() !!}
-                        </div>
-                    </div>
-                        @endforeach
-                    @else
-                        <div class="cart_item row">
-                            <div class="col-md-12" colspan="5">
-                                <p class="alert alert-warning text-center">
-                                    Shopping Basket is empty.
-                                </p>
+                        @if(count($cart->getItems())>0)
+                        @foreach($cart->getItems() as $item)
+                        <div class="row cart-sectn" style="margin: 0 0 10px;">
+                            <div class="col-md-3 col-xs-6">
+
+                                <div class="row title-row">
+                                    <div class="col-xs-4">
+                                        <a href="{{ route('product.show',['slug'=>$item->id]) }}">
+                                            <img class="media-object cart-product-image" src="{{  $item->image }}" alt="{{ $item->name }}" style="width: 100%;">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <h5 class="text-heading">
+                                            <a href="{{ route('product.show',['slug'=>$item->id]) }}">{{ $item->name }}</a>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1 col-xs-6">
+                                 <span class="amount">{{ $item->color  }}</span>
+                            </div>
+                            <div class="col-md-2 col-xs-6 text-center">
+                                 @if($item->p_size)
+                                    <span class="amount">{{ $item->p_size  }}</span>
+                                @else
+                                    <span class="amount">{{ $item->p_dimension  }}</span>
+                                @endif
+                            </div>
+                            <div class="col-md-2 col-xs-6 text-center">
+                                 <div class="quantity">
+                                     <input type="button" value="-" class="minus">
+                                     <input type="number" step="1" min="0" data-id="{{ $item->id }}" data-price="{{ $item->price }}"  name="product_quantity" value="{{ $item->qty }}" title="Qty" class="form-control input-product-quantity">
+                                     <input type="button" value="+" class="plus">
+                                 </div>
+                            </div>
+                            <div class="col-md-1 col-xs-6 text-center">
+                                 <span class="currencies">€</span>
+                                 <span class="amount">{{ $item->price }}</span>
+                            </div>
+                            <div class="col-md-2 col-xs-6 text-center">
+                                  <span class="currencies">€</span>
+                                 <span class="amount">{{ $item->price *  $item->qty  }}</span>
+                            </div>
+                            <div class="col-md-1 text-center">
+                                 {!! Form::open(array('route' => array('cart.destroy', $item->id),'method' => 'delete')) !!}
+                                 <button type="submit" class="remove fontsize_24" style="background: transparent; border: none;" title="Remove this item">
+                                     <i class="rt-icon2-trash highlight"></i>
+                                 </button>
+                                 {!! Form::close() !!}
                             </div>
                         </div>
-                    @endif
+                            @endforeach
+                        @else
+                            <div class="cart_item row">
+                                <div class="col-md-12" colspan="5">
+                                    <p class="alert alert-warning text-center">
+                                        Shopping Basket is empty.
+                                    </p>
+                                </div>
+                            </div>
+                        @endif
+                        
+                    </div>
+
+
+
+                    <!-- mobile view start -->
+
+
+                    <div class="hidden-md hidden-lg hidden-sm">
+                        <div class="row" style="margin: 0;">
+                            <div class="col-xs-4">
+                                <div class="row cart-sectn" style="margin: 0 0 10px;">
+                                    <div class="col-xs-12">
+                                        <h5 class="product-info">Product</h5>
+                                    </div>
+                                    <div class="col-xs-12">
+                                         <h5 class="product-info">Color</h5>
+                                     </div>
+                                     <div class="col-xs-12">
+                                         <h5 class="product-info">Size</h5>
+                                     </div>
+                                     <div class="col-xs-12">
+                                         <h5 class="product-info">Quantity</h5>
+                                     </div>
+                                     <div class="col-xs-12">
+                                         <h5 class="product-info">Price</h5>
+                                     </div>
+                                     <div class="col-xs-12">
+                                         <h5 class="product-info">Sub-total</h5>
+                                     </div>
+                                     <div class="col-xs-12">
+                                        <h5 class="product-info">Action</h5>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                            <div class="col-xs-8">
+                                @if(count($cart->getItems())>0)
+                                @foreach($cart->getItems() as $item)
+                                <div class="row cart-sectn" style="margin: 0 0 10px;">
+                                    <div class="col-xs-12">
+
+                                        <div class="row title-row">
+                                            <div class="col-xs-4">
+                                                <a href="{{ route('product.show',['slug'=>$item->id]) }}">
+                                                    <img class="media-object cart-product-image" src="{{  $item->image }}" alt="{{ $item->name }}" style="width: 100%;">
+                                                </a>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <h5 class="text-heading">
+                                                    <a href="{{ route('product.show',['slug'=>$item->id]) }}">{{ $item->name }}</a>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                         <span class="amount">{{ $item->color  }}</span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                         @if($item->p_size)
+                                            <span class="amount">{{ $item->p_size  }}</span>
+                                        @else
+                                            <span class="amount">{{ $item->p_dimension  }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-xs-12">
+                                         <div class="quantity">
+                                             <input type="button" value="-" class="minus">
+                                             <input type="number" step="1" min="0" data-id="{{ $item->id }}" data-price="{{ $item->price }}"  name="product_quantity" value="{{ $item->qty }}" title="Qty" class="form-control input-product-quantity">
+                                             <input type="button" value="+" class="plus">
+                                         </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                         <span class="currencies">€</span>
+                                         <span class="amount">{{ $item->price }}</span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                          <span class="currencies">€</span>
+                                         <span class="amount">{{ $item->price *  $item->qty  }}</span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                         {!! Form::open(array('route' => array('cart.destroy', $item->id),'method' => 'delete')) !!}
+                                         <button type="submit" class="remove fontsize_24" style="background: transparent; border: none;" title="Remove this item">
+                                             <i class="rt-icon2-trash highlight"></i>
+                                         </button>
+                                         {!! Form::close() !!}
+                                    </div>
+                                </div>
+                                    @endforeach
+                                @else
+                                    <div class="cart_item row">
+                                        <div class="col-md-12" colspan="5">
+                                            <p class="alert alert-warning text-center">
+                                                Shopping Basket is empty.
+                                            </p>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                        
+                    </div>
+
+
                     <!-- <div class="table-responsive">
                         <table class="table cart-table">
                             <thead>
@@ -258,6 +364,7 @@
                 <!-- eof aside sidebar -->
                 
             </div>
+
         </div>
     </div>
 @stop
