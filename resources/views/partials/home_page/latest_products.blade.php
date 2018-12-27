@@ -223,6 +223,14 @@
                                                             <a href="{{ action('BlogController@showPost',$product->id) }}">
                                                                {{$product->meta_title}}<br>
                                                             </a>
+                                                            <a href="{{ action('BlogController@showPost',$product->id) }}"><span class="text-left" style=" font-size: 13px; display: inline-block; overflow: hidden; ;">  {!!$product->publish_at !!} |Admin</span>
+                                                             <div class="blog-des">
+                                                                {!!$product->post  !!}
+                                                            </div>
+                                                            <div class="pager">
+                                                                <a href="{{ action('BlogController@showPost',$product->id) }}" class="next btn-more" style="color: white !important;">Read More</a>
+                                                            </div>
+                                                          </a>
                                                         </h5>
                                                             
                                                             
