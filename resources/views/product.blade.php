@@ -144,10 +144,14 @@
                                  
                                      <div style="display: -webkit-box;">
                                     <span>Dimension:</span>
-                                    @foreach($product_dimension as $key=>$dimension)
-                                    <input id="checkdem{{$dimension->id}}" onclick="dimensionselect({{$dimension->id}},{{$dimension->p_price}})" type="radio" name="p_dimension" value="{{$dimension->p_dimension}}" class="css-checkbox onlyone">
+                                   @foreach($product_dimension as $key=>$dimension)
+                                    
+                                    @if($dimension->dim_offer)
+                                    <input id="checkdem{{$dimension->id}}" onclick="dimensionselect({{$dimension->id}},{{$dimension->dimoffer_price}})" type="radio" name="p_dimension" value="{{$dimension->p_dimension}}" class="css-checkbox onlyone">
+                                      @else
+                                       <input id="checkdem{{$dimension->id}}" onclick="dimensionselect({{$dimension->id}},{{$dimension->p_price}})" type="radio" name="p_dimension" value="{{$dimension->p_dimension}}" class="css-checkbox onlyone">
+                                       @endif
                                        <label for="checkdem{{$dimension->id}}" class="css-label">{{strtoupper( $dimension->p_dimension)}}</label>
-                                       
                                         @if(($key+1)< $product_size->count())
                                                    	&nbsp;&nbsp;
                                         @endif
@@ -299,6 +303,7 @@
        //alert(price);
        $('#show_price').html('€'+price);
        var data= $('#checkdem'+id).val();
+      // alert(price);
            $('#sel_dim').val(data);
            $('#sel_price').val(price);
 

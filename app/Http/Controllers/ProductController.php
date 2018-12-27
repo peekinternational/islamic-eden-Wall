@@ -40,7 +40,7 @@ class ProductController extends Controller
          foreach($products as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
                 }
-
+             dd($products);
          return view('products',compact('products'));
 
     }
@@ -326,6 +326,10 @@ class ProductController extends Controller
     public function page_products($slug){
         $nav =  SubNavs::whereSlug($slug)->firstOrFail();
         $products = $nav->products()->orderBy('id','desc')->paginate(9);
+        foreach($products as &$rec){
+                  $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
+                }
+           // dd($products);
         return view('products',compact('products'));
     }
 }
