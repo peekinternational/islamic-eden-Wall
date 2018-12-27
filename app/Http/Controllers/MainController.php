@@ -20,7 +20,7 @@ class MainController extends Controller
                   $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
 
                 }
-               $latest_products2 = Products::inRandomOrder()->limit(10)->get();
+               $latest_products2 = Products::where('offer','!=',"")->latest(10)->get();
                  foreach($latest_products2 as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
 

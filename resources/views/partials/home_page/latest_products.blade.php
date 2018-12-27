@@ -78,7 +78,9 @@
            
                 <div class="row product-row">
                     @foreach($products as $key=>$pro)
-                     @if($key < 6)
+
+                     @if($key < 5)
+
                     @if($pro->offer == "")
                         <div class="col-md-2-5" style="width: 20%;">
                             <figure class="banner-01__img">
