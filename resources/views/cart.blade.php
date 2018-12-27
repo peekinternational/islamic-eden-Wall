@@ -204,7 +204,7 @@
                                     <div class="col-xs-12"  style="padding-top: 10px;">
                                          <div class="quantity">
                                              <input type="button" value="-" class="minus">
-                                             <input type="number" step="1" min="0" data-id="{{ $item->id }}" data-price="{{ $item->price }}"  name="product_quantity" value="{{ $item->qty }}" title="Qty" class="form-control input-product-quantity">
+                                             <input type="number" step="1" min="0" data-id="{{ $item->id }}" data-price="{{ $item->price }}"  name="product_quantity" value="{{ $item->qty }}" title="Qty" class="form-control input-product-quantitys">
                                              <input type="button" value="+" class="plus">
                                          </div>
                                     </div>
@@ -239,7 +239,7 @@
                                 @endif
                                  <div class="cart-buttons">
                         <a class="button-t1" href="{{ route('products') }}">Countinue Shopping</a>
-                        <input type="submit" class="button-t1 btn-update-cart" name="update_cart" value="Update Cart">
+                        <input type="submit" class="button-t1 btn-update-carts" name="update_cart" value="Update Cart">
                         <a class="button-t1" href="{{ route('cart.checkout') }}">Proceed to Checkout</a>
                     </div>
                     <div class="cart-collaterals">
@@ -418,6 +418,41 @@
                     var products = {};
                     var index = 0;
                     $('.input-product-quantity').each(function () {
+                        products[index] = {
+                            id: $(this).attr('data-id'),
+                            p_price: $(this).attr('data-price'),
+                            quantity:$(this).val()
+                        };
+                        index++;
+                    });
+                    $.ajax({
+                        url:'{{ url('cart/update/all') }}',
+                        type:'post',
+                        dataType:'json',
+                        data:{
+                            _token: "{{ csrf_token() }}",
+                            products : products
+                        },
+                        success: function (result) {
+                            console.log(result.notify);
+                            if(result.notify!=null){
+                                $.notify(result.notify, result.type);
+                                setTimeout(function () {
+                                    location.reload();
+                                },1000);
+                            }
+                        },
+                        error: function(error){
+                            console.log(error);
+                        }
+                    });
+                });
+            });
+
+             $('.btn-update-carts').click(function () {
+                    var products = {};
+                    var index = 0;
+                    $('.input-product-quantitys').each(function () {
                         products[index] = {
                             id: $(this).attr('data-id'),
                             p_price: $(this).attr('data-price'),
