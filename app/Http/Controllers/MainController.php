@@ -25,7 +25,7 @@ class MainController extends Controller
                   $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
 
                 }
-                //dd($product_offer);
+                //dd($latest_products);
                 // $product_dimension  = DB::table('product_dimension')->where('product_id','=',$latest_products->id)->get();
             
                 $gallery = Gallery::all();

@@ -77,60 +77,56 @@
             @foreach($latest_products->chunk(5) as $key=>$products)
            
                 <div class="row product-row">
-                    @foreach($products as $key=>$product)
+                    @foreach($products as $key=>$pro)
                      @if($key < 6)
-                    @if($product->offer == "" && $product->dimension[0]->dim_offer == "" )
+                    @if($pro->offer == "")
                         <div class="col-md-2-5" style="width: 20%;">
                             <figure class="banner-01__img">
-                                <a class="banner-01__img-wrapp" href="{{ url('product/'.$product->slug) }}">
-                                  <!-- {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
-                                  <div class="add_cart" >
-                                    <button class="btn block" type="submit"> ADD TO CART</button>
-                                    </div>
-                                   {!! Form::close() !!}  -->
+                                <a class="banner-01__img-wrapp" href="{{ url('product/'.$pro->slug) }}">
+                              
                                   
-                                    @if($product->images->count()>0)
-                                        <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
+                                    @if($pro->images->count()>0)
+                                        <img style="position: relative;"  src="{{ asset('assets/images/products/'.$pro->images->first()->image) }}" alt="{{ $pro->name }}">
                                         
                                        
                                     @else
-                                        <img  src="{{ asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
+                                        <img  src="{{ asset('assets/images/no-image.png') }}" alt="{{ $pro->name }}">
                                     @endif
                                 </a>
                             </figure>
                             <div class="banner-01__content">
                                 <h5 class="card-dscrpt">
-                                    <a href="{{ url('product/'.$product->slug) }}">
-                                        {{ $product->name }} <br>
-                                    <span>{{ $product->category['name'] }}</span></a>
+                                    <a href="{{ url('product/'.$pro->slug) }}">
+                                        {{ $pro->name }} <br>
+                                    <span>{{ $pro->category['name'] }}</span></a>
                                 </h5>
-                                @if($product->dimension)
+                                @if($pro->dimension)
                                 
-                                @if($product->dimension[0]->dim_offer)
+                                @if($pro->dimension[0]->dim_offer)
                                 
-                                 <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->dimension[0]->dim_offer }} % off</p>
-                                      <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->dimension[0]->p_price }}</small> </strike>
-                                      <span> €{{ $product->dimension[0]->dimoffer_price }}</span></p>
+                                 
+                                      <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $pro->dimension[0]->p_price }}</small> </strike>
+                                      <span> €{{ $pro->dimension[0]->dimoffer_price }}</span></p>
                                       
                                  @else
                                  
-                                <p class="text-center"> €{{ $product->dimension[0]->p_price }} </p>
+                                <p class="text-center"> €{{ $pro->dimension[0]->p_price }} </p>
                                  @endif
                                 
 
                                @else
-                                @if($product->offer)
-                                <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
-                                      <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
-                                      <span> €{{ $product->saleprice }}</span></p>
+                                @if($pro->offer)
+                                <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $pro->offer }} % off</p>
+                                      <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $pro->price }}</small> </strike>
+                                      <span> €{{ $pro->saleprice }}</span></p>
                                         @else
-                                      <p class="text-center"> €{{ $product->price }} </p>
+                                      <p class="text-center"> €{{ $pro->price }} </p>
                                       @endif
                                     @endif
 
                             </div>
                         </div>
-                        @endif
+                         @endif
                          @endif
                     @endforeach
                 </div>
@@ -144,7 +140,7 @@
                           <div class="row product-row">
                               @foreach($products as $key =>$product)
                               @if($key < 5)
-                              @if($product->offer != "" || $product->dimension[0]->dim_offer != "")
+                              @if($product->offer != "")
                                   <div class="col-md-2-5" style="width: 20%;">
                                       <figure class="banner-01__img">
                                           <a class="banner-01__img-wrapp" href="{{ url('product/'.$product->slug) }}">
