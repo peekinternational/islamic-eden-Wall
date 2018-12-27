@@ -191,7 +191,6 @@
                                                 <p class="text-center"> €{{ $product->price }} </p>
                                                 @endif
                                                 @endif
-
                                               
                                       </div>
                                   </div>
