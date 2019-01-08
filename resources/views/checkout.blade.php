@@ -127,7 +127,7 @@
                         <input type="hidden" name="quantity_{{ $i }}" value="{{ $item->qty }}">
                         <input type="hidden" name="item_name_{{ $i  }}" value="{{ $item->name }}">
                         <input type="hidden" name="item_number_{{ $i  }}" value="PR-{{ $item->id }}">
-                        <input type="hidden" name="amount_{{ $i  }}" value="{{ $item->price }}">
+                        <input type="hidden" name="amount{{ $i  }}" value="{{ $item->price }}">
                         <!--<input type="hidden" name="shipping_1" value="0.01">
                         <input type="hidden" name="tax_1" value="0.02">-->
                         @endforeach
