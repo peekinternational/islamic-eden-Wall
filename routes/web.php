@@ -26,7 +26,9 @@ Route::get('category/{slug}','CategoryController@show')->name('category.show');
 Route::get('shop/{slug}','ProductController@page_products')->name('shop.products');
 //Route::resource('users', 'UserController');
 //Route::resource('payments', 'PaymentsController');
+
 Route::post('pay','PaymentsController@pay');
+Route::post('pay2','PaymentsController@pay2');
 Route::post('gift/pay','PaymentsController@payGift');
 Route::get('thanks','PaymentsController@thanks');
 Route::any('search','ProductController@search')->name('search');
