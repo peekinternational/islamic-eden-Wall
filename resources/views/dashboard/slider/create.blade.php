@@ -71,6 +71,11 @@
     </section>
 @stop
 @section('footer')
+
+    <script src="{{ asset('assets/plugins/ckinplace/ck/ckeditor.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/plugins/ckinplace/ck/adapters/jquery.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/plugins/ckinplace/ck-in-place.js') }}" type="text/javascript"></script>
+
     <script>
 
         $(function () {

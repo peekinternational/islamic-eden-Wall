@@ -13,7 +13,7 @@
 <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
     <label for="description" class="col-sm-3 control-label">Description <span>*</span></label>
     <div class="col-sm-9">
-        {!! Form::textarea('description',$value= null, $attributes = ['class'=>'form-control','placeholder'=>'Description','required'=>true])  !!}
+        {!! Form::textarea('description',$value= null, $attributes = ['class'=>'form-control ckeditor','placeholder'=>'Description','required'=>true])  !!}
         @if ($errors->has('description'))
             <span class="help-block">
                 <strong>{{ $errors->first('description') }}</strong>

@@ -92,6 +92,7 @@ class PaymentsController extends Controller
 		return 'false';
 	}
 	public function pay(Request $request){
+        
 		if(isset($_GET['_token'])){
            $request->merge(['_token'=>$_GET['_token']]);
 			$orderCount =  Orders::where('_token','=',$request->input('_token'))->count();
@@ -107,13 +108,13 @@ class PaymentsController extends Controller
 								$product = Products::find($product_id);
 								if($product->id){
 									OrderProducts::create([
-									                                            'order_id' => $order->id,
-									                                            'product_id' => $product->id,
-									                                            'price' => $product->price,
-									                                            'quantity' => $request->input('quantity'.$i),
-									                                            'tax' => $request->input('tax'.$i),
-									                                        ]);
-								}
+                                                        'order_id' => $order->id,
+                                                        'product_id' => $product->id,
+                                                        'price' => $product->price,
+                                                        'quantity' => $request->input('quantity'.$i),
+                                                        'tax' => $request->input('tax'.$i),
+                                                    ]);
+        }
 								
 							}
 						}

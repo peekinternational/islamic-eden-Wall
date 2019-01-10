@@ -40,7 +40,7 @@ class ProductController extends Controller
          foreach($products as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
                 }
-             dd($products);
+            // dd($products);
          return view('products',compact('products'));
 
     }
