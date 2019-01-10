@@ -41,7 +41,25 @@
 
 <script src="{{ asset('assets/js/script.js') }}"></script>
 <script>
-
+function paypalcheckout() {
+        alert('hello');
+        
+        var formVal = $('form.shop-checkout').serialize();
+		console.log(formVal);
+        var actionUrl = "{{ url('/pay2')}}";
+        $.ajax({
+          type: "POST",
+          url: actionUrl,
+          data: formVal,
+          success: function(data){
+           
+          },
+          error: function() {
+           
+          }
+        });
+        //return false;
+      }
  //preloader
  $(window).load(function() {
      $("#loading").fadeOut(500);
@@ -51,6 +69,7 @@
 <script src="{{ asset('assets/plugins/notify.js') }}"></script>
 @if(Session::has('__response') && isset(Session::get('__response')['notify']))
     <script>
+ 
         $(document).ready(function () {
             $.notify('{!! Session::get('__response')['notify'] !!}', "{{Session::get('__response')['type']}}");
         });
