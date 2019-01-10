@@ -74,7 +74,7 @@
                     <li><a href="{{ action('ProductController@getIndex') }}"><i class="fa fa-circle-o"></i> View product</a></li>
                 </ul>
             </li>
-            <li class="treeview">
+          {{--  <li class="treeview">
                 <a href="{{ action('GalleryController@index') }}">
                     <i class="fa fa-picture-o"></i>
                     <span>Gallery</span>
@@ -85,7 +85,7 @@
                     <i class="fa fa-upload"></i>
                     <span>Upload</span>
                 </a>
-            </li>
+            </li>--}}   
             <li class="treeview">
                 <a href="{{ url('/dashboard/newsletter') }}">
                     <i class="fa fa-envelope"></i>
@@ -126,7 +126,7 @@
                 </ul>
             </li>
             <li class="header">THEME & PAGES</li>
-            <li><a href="{{ action('SliderController@index') }}"><i class="fa fa-picture-o"></i> <span>Send Newsletter</span> </a></li>
+            <li><a href="{{ action('SliderController@index') }}"><i class="fa fa-picture-o"></i> <span>Slider</span> </a></li>
             <li><a href="{{ action('PagesController@map_page') }}"><i class="fa fa-map-marker"></i> <span>Map</span> </a></li>
             <li class="treeview">
                 <a href="#">
@@ -158,12 +158,12 @@
                     <span>Site Navigation</span>
                  </a>
             </li>
-            <li class="treeview">
+            {{-- <li class="treeview">
                 <a href="{{ action('SettingsController@theme') }}">
                     <i class="fa fa-adjust"></i>
                     <span>Theme</span>
                 </a>
-            </li>
+            </li>--}}   
             <li class="treeview">
                 <a href="{{ action('SettingsController@showSettings') }}">
                     <i class="fa fa-wrench" ></i>

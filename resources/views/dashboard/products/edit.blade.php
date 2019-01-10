@@ -64,6 +64,158 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group {{ $errors->has('color') ? ' has-error' : '' }}">
+                            <label for="price" class="col-sm-3 control-label">Product Color <span>*</span></label>
+                            <div class="col-sm-9">
+                              <select multiple="multiple" name="color[]" class="form-control select2" id="color_select">
+                              <option disabled>Select Color</option>
+                                <option value="white">White</option>
+                                <option value="black">black</option>
+                                <option value="green">Green</option>
+                                <option value="grey">gray</option>
+                                <option value="pink">pink</option>
+                                <option value="violet">Violet</option>
+                                <option value="brown">Brown</option>
+                                <option value="blue">Blue</option>
+                                <option value="maroon">Maroon</option>
+                                <option value="olive">olive</option>
+                            </select>
+                               
+                                @if ($errors->has('color'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('color') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group {{ $errors->has('color') ? ' has-error' : '' }}">
+                        <label for="price" class="col-sm-3 control-label">Size/Dimension <span>*</span></label>
+                        <div class="col-sm-9">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="checkbox">
+                                <label>
+                                <input type="radio" name="size" value="size" class="checkboxsize">
+                                  Product Size </label>
+                                </div>
+                                </div>
+                               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="checkbox">
+                                <label>
+                                    <input type="radio" name="size"  value="dim" class="checkboxsize">
+                                    Product Dimension
+                                </label>
+                             </div>
+                           </div>
+                         </div>
+                        </div>
+                           <div class="form-group {{ $errors->has('price') ? ' has-error' : '' }}" id="main_price">
+                            <label for="price" class="col-sm-3 control-label">Price <span>*</span></label>
+                            <div class="col-sm-9">
+                            <input type="number" name="price" id="orgprice" class="form-control" placeholder="Price" >
+                               
+                                @if ($errors->has('price'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('price') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group {{ $errors->has('price') ? ' has-error' : '' }}" id="dim_offer" style="display:none">
+                            <label for="price" class="col-sm-3 control-label">Discount Offer <span></span></label>
+                            <div class="col-sm-9">
+                           
+                           <select name="dim_offer" id="demoffers" class="form-control" >
+                               <option value="">Select Offer</option>
+                                <?php 
+                                        for($i=1; $i<=100; $i++){
+                                            $i=$i+4;
+                                            echo "<option value='$i'>$i % offer</option>";
+                                        }
+                                ?>
+                           </select>
+                           
+                               
+                                @if ($errors->has('dim_offer'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('dim_offer') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group {{ $errors->has('price') ? ' has-error' : '' }}" id="main_sale">
+                            <label for="price" class="col-sm-3 control-label">Discount Offer <span></span></label>
+                            <div class="col-sm-9">
+                           
+                           <select name="offer" id="offers" class="form-control" >
+                               <option value="">Select Offer</option>
+                                <?php 
+                                        for($i=1; $i<=100; $i++){
+                                            $i=$i+4;
+                                            echo "<option value='$i'>$i % offer</option>";
+                                        }
+                                ?>
+                           </select>
+                           
+                               
+                                @if ($errors->has('offer'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('offer') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div id="salepricemain" class="form-group {{ $errors->has('description') ? ' has-error' : '' }}" style="display:none">
+                            <label for="description" class="col-sm-3 control-label">Sale Price</label>
+                            <div class="col-sm-9">
+                                <input type="number" name="saleprice" id="saleprice" class="form-control" placeholder="Price">
+                                @if ($errors->has('saleprice'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('saleprice') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                         <div class="form-group {{ $errors->has('p_size') ? ' has-error' : '' }}" style="display:none" id="showdim">
+                            <label for="price" class="col-sm-3 control-label">Product Dimension  <span>*</span></label>
+                            <div class="col-sm-9 optionBox">
+
+                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;">
+                               
+                               <input type="text" id="i" class="form-control" name="p_dimension[]" placeholder="Enter Dimension">
+                                
+                            </div>
+                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;">
+                               
+                               <input type="text"  id="inpu" class="form-control" name="p_price[]" placeholder="Enter Price">
+                                
+                            </div>
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 block" style="padding-top: 5px;">
+                            <span class="add" style=""><i class="fa fa-plus"></i></span>
+                        </div>
+
+                        </div>
+                        </div>
+                         <div class="form-group {{ $errors->has('p_size') ? ' has-error' : '' }}" style="display:none" id="showsize">
+                            <label for="" class="col-sm-3 control-label">Product Size <span>*</span></label>
+                            <div class="col-sm-9">
+                              <select multiple="multiple" name="p_size[]" class="form-control select2" id="size_select" style="width:100%">
+                              <option disabled>Select size</option>
+                                <option value="s">S</option>
+                                <option value="m">M</option>
+                                <option value="l">L</option>
+                                <option value="xl">XL</option>
+                                <option value="xxl">XXL</option>
+                                <option value="xxxl">XXXL</option>
+                            </select>
+                               
+                                @if ($errors->has('p_size'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('p_size') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-group {{ $errors->has('categories') ? ' has-error' : '' }}">
                             <label for="category_id" class="col-sm-3 control-label">Product Category</label>
                             <div class="col-sm-9">
@@ -160,7 +312,7 @@
                         </div>
                 </div>
               </div>
-            <!-- /.box-body -->
+             /.box-body
             <div class="box-footer clearfix">
                 <div class="row">
                     <div class="col-sm-11">
@@ -173,7 +325,7 @@
                 </div>
             </div>
             {!! Form::close() !!}
-                    <!-- /.box-footer-->
+                    /.box-footer
         </div>
         <!-- /.box -->
     </section>
@@ -223,3 +375,4 @@
         });
     </script>
 @stop
+ 

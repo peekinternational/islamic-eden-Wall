@@ -60,6 +60,17 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
+                            <label for="description" class="col-sm-3 control-label">Addtional Information</label>
+                            <div class="col-sm-9">
+                                {!! Form::textarea('Addtional_Information',$value= null, $attributes = ['class'=>'form-control','placeholder'=>'Addtional_Information'])  !!}
+                                @if ($errors->has('Addtional_Information'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('Addtional_Information') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                       
                         <div class="form-group {{ $errors->has('color') ? ' has-error' : '' }}">
                             <label for="price" class="col-sm-3 control-label">Product Color <span>*</span></label>
@@ -260,7 +271,17 @@
                                 <hr>
                             </div>
                         </div>
-
+                       <div id="delivery_days" class="form-group {{ $errors->has('delivery_days') ? ' has-error' : '' }}">
+                            <label for="delivery_days" class="col-sm-3 control-label">Delivery Days</label>
+                            <div class="col-sm-9">
+                                <input type="number" name="delivery_days" id="delivery" class="form-control" placeholder="Delivery Days">
+                                @if ($errors->has('delivery_days'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('delivery_days') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-group {{ $errors->has('meta_title') ? ' has-error' : '' }}">
                             <label for="meta_title" class="col-sm-3 control-label">Meta Title</label>
                             <div class="col-sm-9">

@@ -8,10 +8,17 @@
         <div class="container">
             <div class="row product-page-responsive">
                 @include('partials/sidebar')
+                 <ul class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="{{ url('products')}}">{{$products[0]->category->name }}</a></li>
+                        <li>{{ $product->name }}</li>
+                  </ul>
+
                 <div class="col-sm-8">
-                    <div class="shop-single">
+                   <div class="shop-single">
                         <figure class="shop-single__img">
                             @if($product->images->count()>0)
+                            
                                 <div class="format-gallery">
                                     <div class="entry-thumbnail">
                                         <div id="carousel-generic" class="carousel slide">
@@ -43,21 +50,13 @@
                                         {{ $product->name }}
                                     </h3>
                                 </li>
-                                <li>
-                                </li>
+                                
                                 @if($product->tags->count()>0)
                                     <li>
                                         <a class="shop-item__meta-tag" href="{{ action('CategoryController@show',str_slug($product->category->name)) }}">{{ $product->category->name }}</a>
                                     </li>
                                 @endif
-                                
-                               {{-- <li>
-                                    <div class="star-rating" title="Rated 4.00 out of 5">
-												<span style="width:80%">
-													<strong class="rating">4.00</strong> out of 5
-												</span>
-                                    </div>
-                                </li>--}}
+                             
                             </ul>
                            <span class="price">
                                 <span>
@@ -96,11 +95,10 @@
                                @endif
                                 </span>
                             </span>
-                                <p class="shop-item__desc">
-                                {{ $product->description }}
-                            </p>
+                               
+                         
                             @if($product->tags->count()>0)
-                                <p class="shop-tags">
+                                <p class="shop-tags" style="border: none;margin: 0;">
                                     <span>Tags:</span>
                                     @foreach($product->tags as $key=>$tag)
                                         <a href="#">{{ $tag->name }}</a>
@@ -110,9 +108,10 @@
                                     @endforeach
                                 </p>
                             @endif
+                               <p>Delivery Days:  {{ $product->delivery_days }} <small>days</small> </p>
                          @if($product_color->count()>0)
                                 
-                                    <div class="shop-tags" style="display: -webkit-box;">
+                                    <div class="shop-tags" style="display: -webkit-box;border: none;margin: 0;">
                                     <span>Color:</span>
                                     @foreach($product_color as $key=>$color)
                                     <input id="checkboxid{{$color->id}}" onclick="colorselect({{$color->id}})" name="color" type="checkbox" value="{{$color->color}}" class="css-checkbox onlyone">
@@ -160,6 +159,7 @@
                                 
                             @endif
                            
+                               
                             <div class="quantity-btn">
                                 {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
 
@@ -185,7 +185,7 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active">
-                                    <a href="#descript" aria-controls="home" role="tab" data-toggle="tab">DEScription</a>
+                                    <a href="#descript" aria-controls="home" role="tab" data-toggle="tab">Description</a>
                                 </li>
                                 <li role="presentation">
                                     <a href="#Additional-info" aria-controls="tab" role="tab" data-toggle="tab">Additional Information</a>
@@ -195,7 +195,7 @@
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="descript">{{ $product->description }}</div>
-                                <div role="tabpanel" class="tab-pane" id="Additional-info">Additional</div>
+                                <div role="tabpanel" class="tab-pane" id="Additional-info">{{ $product->Addtional_Information}}</div>
                             </div>
                         </div>
                        

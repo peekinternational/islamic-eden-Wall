@@ -4,37 +4,26 @@
     @include('partials/breadcrumb')
 @stop
 @section('content')
+
     <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_120 section_padding_bottom_85">
         <div class="container responsive">
             <div class="row">
                  @include('partials/sidebar')
+                 <ul class="breadcrumb" style="">
+                      <li><a href="#">Home</a></li>
+                      <li><a href="{{ url('products')}}" >{{$products[0]->category->name }}</a></li>
+                 </ul>
                 <div class="col-sm-8 col-md-9 col-lg-9" style="margin-left: 10px;">
                     @if($products->count()>0)
-                    <div class="shop-sorting hidden-xs">
-                        <form class="form-inline">
-                            <div class="form-group">
-                                <select class="form-control orderby" name="limit" id="limit">
-                                    <option value="10" selected="">10 items/pages</option>
-                                    <option value="20" >20 items/pages</option>
-                                    <option value="30" >30 items/pages</option>
-                                    <option value="50" >50 items/pages</option>
-                                </select>
-                                <select class="form-control orderby" name="orderby" id="orderby_2">
-                                    <option value="menu_order" selected="">Name: A to Z</option>
-                                    <option value="menu_order">Name: Z to A</option>
-                                    <option value="date">New First</option>
-                                    <option value="date">Old First</option>
-                                    <option value="price">Price: Low To High</option>
-                                    <option value="price-desc">Pric: High To Low</option>
-                                </select>
-                            </div>
-                            <div class="form-group toggle-wrapper">
-                                <a href="#" id="toggle_shop_view" class=""></a>
-                            </div>
-                        </form>
+
+                 <div class="shop-sorting hidden-xs">
+                     <div class="form-group toggle-wrapper">
+                     <a href="#" id="toggle_shop_view" class=""></a>
                     </div>
-                    <ul id="products" class="products list-unstyled grid-view">
+                </div>
+                  <ul id="products" class="products list-unstyled grid-view">
                     @foreach($products as $product)
+
 
                         <li class="shop-item product type-product item-list">
 
@@ -70,6 +59,7 @@
                                                          <strong class="rating">4.00</strong> out of 5
                                                      </span>
                                          </div>--}}
+                                       
                                      <p class="shop-item__price">
                                      
                                 @if($product->dimension)

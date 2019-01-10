@@ -604,6 +604,26 @@ input[type=radio].css-checkbox:checked + label.css-label {
 {
   width: 100%;
   height: 270px;
-  border: 1px solid lightgray;
+  /*border: 1px solid lightgray;*/
 
 } 
+
+/* Style the list */
+.breadcrumb{
+	background-color: white !important;
+	float: right !important;
+	 width: 40%;
+}
+.breadcrumb>li:before{
+	background: transparent !important;
+}
+.breadcrumb>li a{
+	color: black;
+}
+.breadcrumb>li+li:before{
+	background: transparent !important;
+	margin-top: 0 !important;
+	font-size: 23px;
+	color: black;
+	background-color: white !important;
+}
