@@ -43,7 +43,7 @@
                         <a href="{{ $url }}" class="subnavbtn">{{ $nav->title }} </a>
                         
                             <div class="row">
-                                <div class="subnav-content">
+                                <div class="subnav-content sub-align">
                                 @foreach($nav->sub_navs as $sub_nav)
                                 
                                 <div class="col-md-2 col-lg-2">

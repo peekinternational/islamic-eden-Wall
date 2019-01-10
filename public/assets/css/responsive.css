@@ -594,3 +594,16 @@ input[type=radio].css-checkbox:checked + label.css-label {
     font-size: 32px;
     line-height: 32px;
   }
+ .sub-align{
+ 	color: white;
+    width: 78% !important;
+    left: 11% !important;
+    
+}
+.image-list
+{
+  width: 100%;
+  height: 270px;
+  border: 1px solid lightgray;
+
+} 

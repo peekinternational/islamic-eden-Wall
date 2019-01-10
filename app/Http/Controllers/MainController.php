@@ -18,6 +18,7 @@ class MainController extends Controller
                 $latest_products = Products::latest(10)->get();
                  foreach($latest_products as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
+                  // dd($rec->dimension);
 
                 }
                $latest_products2 = Products::where('offer','!=',"")->latest(10)->get();
