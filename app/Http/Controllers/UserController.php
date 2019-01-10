@@ -16,8 +16,6 @@ class UserController extends Controller
                  'description'  => 'Manage your users.',
                  'page'         => ''
         );
-
-
         public function index(){
                 $title = "All users";
                 $this->breadcrumb['page'] = 'List';

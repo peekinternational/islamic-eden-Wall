@@ -158,14 +158,13 @@
                                 <ul class="">
                                   <li><a href="{{ url('shop/online-shop') }}">ART</a></li>
                                   <li><a href="#">DECORE</a></li>
-                                  <li><a href="#">FAQS</a></li>
-                                </ul>
+                                 </ul>
                             </div>
                             <div class="col-md-6">
                                 <ul class="">
                                   <li><a href="#">HOME GOODS</a></li>
-                                  <li><a href="#">CONTACT</a></li>
-                                  <li><a href="#">BLOGS</a></li>
+                                  <li><a href="{{url('about/page')}}">CONTACT</a></li>
+                                  <li><a href="{{url('blog')}}">BLOGS</a></li>
                                 </ul>
                             </div>
                         </div>  
@@ -173,8 +172,6 @@
                     <div class="col-md-2 tags-section hidden-xs">
                      
                         <h4 style="color: white;"> Tags</h4>
-                        <span class="label label-shirt">Shirt</span>
-                            <span class="label label-wordpress">Wordpress</span>
                             <span class="label label-art">Art</span>
                             <span class="label label-men">Men</span>
                             <span class="label label-women">Women</span>

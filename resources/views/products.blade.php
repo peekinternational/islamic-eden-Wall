@@ -48,7 +48,10 @@
                                                     $image = 'products/'.$first_image->image;
                                                 }
                                         ?>
-                                        <img src="{{  asset('assets/images/'.$image) }}" alt="{{ $product->name }}">
+                                    <div class="image-list">
+                                        <img src="{{  asset('assets/images/'.$image) }}" alt="{{ $product->name }}" style="width: 100%; height: 100%;
+                                             ">
+                                    </div>
                                     </a>
                                 </figure>
                                 <div class="shop-item__content" style="padding: 0">
