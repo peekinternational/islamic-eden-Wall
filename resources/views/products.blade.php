@@ -4,6 +4,7 @@
     @include('partials/breadcrumb')
 @stop
 @section('content')
+
     <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_120 section_padding_bottom_85">
         <div class="container responsive">
             <div class="row">
@@ -70,6 +71,7 @@
                                                          <strong class="rating">4.00</strong> out of 5
                                                      </span>
                                          </div>--}}
+                                       
                                      <p class="shop-item__price">
                                      
                                 @if($product->dimension)

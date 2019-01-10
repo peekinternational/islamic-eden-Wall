@@ -43,21 +43,13 @@
                                         {{ $product->name }}
                                     </h3>
                                 </li>
-                                <li>
-                                </li>
+                                
                                 @if($product->tags->count()>0)
                                     <li>
                                         <a class="shop-item__meta-tag" href="{{ action('CategoryController@show',str_slug($product->category->name)) }}">{{ $product->category->name }}</a>
                                     </li>
                                 @endif
-                                
-                               {{-- <li>
-                                    <div class="star-rating" title="Rated 4.00 out of 5">
-												<span style="width:80%">
-													<strong class="rating">4.00</strong> out of 5
-												</span>
-                                    </div>
-                                </li>--}}
+                             
                             </ul>
                            <span class="price">
                                 <span>
@@ -96,11 +88,10 @@
                                @endif
                                 </span>
                             </span>
-                                <p class="shop-item__desc">
-                                {{ $product->description }}
-                            </p>
+                               
+                         
                             @if($product->tags->count()>0)
-                                <p class="shop-tags">
+                                <p class="shop-tags" style="border: none;margin: 0;">
                                     <span>Tags:</span>
                                     @foreach($product->tags as $key=>$tag)
                                         <a href="#">{{ $tag->name }}</a>
@@ -110,9 +101,10 @@
                                     @endforeach
                                 </p>
                             @endif
+                               <p>Delivery Days:  {{ $product->delivery_days }} <small>days</small> </p>
                          @if($product_color->count()>0)
                                 
-                                    <div class="shop-tags" style="display: -webkit-box;">
+                                    <div class="shop-tags" style="display: -webkit-box;border: none;margin: 0;">
                                     <span>Color:</span>
                                     @foreach($product_color as $key=>$color)
                                     <input id="checkboxid{{$color->id}}" onclick="colorselect({{$color->id}})" name="color" type="checkbox" value="{{$color->color}}" class="css-checkbox onlyone">
@@ -160,6 +152,7 @@
                                 
                             @endif
                            
+                               
                             <div class="quantity-btn">
                                 {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
 
