@@ -8,13 +8,16 @@ use Edenmill\Products;
 use Illuminate\Http\Request;
 
 use Edenmill\Http\Requests;
-use LukePOLO\LaraCart\Facades\LaraCart;
+
 use Edenmill\Orders;
 use Illuminate\Support\Facades\Mail;
 use Edenmill\Mail\AdminOrderCompleted;
 use Edenmill\Mail\UserOrderCompleted;
 use Edenmill\User;
 use Edenmill\GiftOrders;
+use LukePOLO\LaraCart\LaraCart;
+
+use DB;
 class PaymentsController extends Controller
 {
 	
@@ -91,34 +94,76 @@ class PaymentsController extends Controller
 		
 		return 'false';
 	}
-	public function pay(Request $request){
-        
-		if(isset($_GET['_token'])){
-           $request->merge(['_token'=>$_GET['_token']]);
-			$orderCount =  Orders::where('_token','=',$request->input('_token'))->count();
+	public function pay2(Request $request,LaraCart $cart){
+		
+		//dd($request->all());
+		
+		$input['user_id']=$request->input('custom');
+	    $input['_token']=$request->input('_token');
+		$input['payer_id']='none';
+		$input['payment_date']='none';
+		$input['payment_status']='Pending';
+		$input['payer_status']='unverfied';
+		$input['business']=$request->input('email');
+		$input['ipn_track_id']='none';
+		$input['num_cart_items']=$request->input('num_cart_items');
+		$input['address_name']=$request->input('first_name');
+		$input['address_city']=$request->input('address1');
+		$input['address_street']=$request->input('address2');
+		$input['city']=$request->input('city');
+		$input['address_zip']=$request->input('zip');
+		$input['payer_email']=$request->input('email');
+		$input['address_country_code']=$request->input('country');
+		$input['mobilenumber']=$request->input('night_phone_a');
+		if($request->input('_token') != null){
+           
+			$orderCount =  Orders::where('user_id','=',$request->input('custom'))->count();
 			if(!$orderCount>0){
                 $_request = $request->all();
-				$order =  Orders::create($_request);
-				if(isset($order->id) && $request->has('num_cart_items')){
-					for ($i=1;$i<=$request->input('num_cart_items');$i++){
-						if($request->has('item_number'.$i)){
-							$product_idtxt = explode('-',$request->input('item_number'.$i));
-							if(is_array($product_idtxt) && (isset($product_idtxt[0]) && strtoupper($product_idtxt[0])==='PR') && (isset($product_idtxt[1]) && $product_idtxt[1]>0)){
-								$product_id = $product_idtxt[1];
-								$product = Products::find($product_id);
-								if($product->id){
+				$order =  DB::table('orders')->insertGetId($input);
+				$size='';
+				if(isset($order)){
+					foreach ($cart->getItems() as $key=> $item){
+						if($item->p_size){
+							$size=$item->p_size;
+						}else{
+							$size=$item->p_dimension;
+						}
+							
+								if($item->id){
 									OrderProducts::create([
-                                                        'order_id' => $order->id,
-                                                        'product_id' => $product->id,
-                                                        'price' => $product->price,
-                                                        'quantity' => $request->input('quantity'.$i),
-                                                        'tax' => $request->input('tax'.$i),
-                                                    ]);
-        }
+															'order_id' => $order,
+															'product_id' => $item->id,
+															'price' => $item->price,
+															'quantity' => $item->qty,
+															'p_size' => $size,
+															'color' => $item->color,
+															'tax' => 'tax',
 								
-							}
+								]);
+							
 						}
 					}
+                   
+					return 'true';
+				}
+			}
+		}
+		return 'false';
+	}
+	public function pay(Request $request){
+		
+			$_request= $request->all();
+		
+			$inputs['payer_id']=$request->input('payer_id');
+			$inputs['payment_date']=$request->input('payment_date');
+			$inputs['payment_status']=$request->input('payment_status');
+			$inputs['payer_status']=$request->input('payer_status');
+			$inputs['business']=$request->input('business');
+			$inputs['ipn_track_id']=$request->input('ipn_track_id');
+			$inputs['num_cart_items']=$request->input('num_cart_items');
+			$orderCount =  DB::table('orders')->where('user_id','=',$request->input('custom'))->update($inputs);
+			if($orderCount){
                     $email = $request->input('payer_email');
 					Mail::to($email)->send(new UserOrderCompleted($_request));
 					$users = User::all();
@@ -128,19 +173,18 @@ class PaymentsController extends Controller
 						}
 					}
 					return 'true';
-				}
+				
 			}
-		}
+		
 		return 'false';
 	}
 	
-	public function thanks(){
+		public function thanks(){
 		if(isset($_GET['clear_cart']) && $_GET['clear_cart']=='true'){
-			LaraCart::destroyCart();
+			 
 		}
 		return view('thanks');
 	}
-	
 	
 	
 	/**
