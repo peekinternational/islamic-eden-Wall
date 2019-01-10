@@ -24,7 +24,7 @@
                         <th>Country</th>
                         <th>IPN Track id</th>
                         <th>Payment Status</th>
-                        <th>Payer Status</th>
+                        <th>Delivery Status</th>
                         <th>Payment Date</th>
                     </tr>
                     @foreach($orders as $order)
@@ -88,11 +88,17 @@
 							 <td>{{ $order->city }}</td>
                             <td>{{ $order->address_country_code }}</td>
                             <td>{{ $order->ipn_track_id }}</td>
+							@if($order->payment_status == 'Paid')
                             <td>
                                 <label class="label label-success">Paid</label>
                             </td>
+							@else
+								 <td>
+                                <label class="label label-warning">Unpaid</label>
+                            </td>
+							@endif
                             <td>
-                                <label class="label label-info">{{$order->payer_status }}</label>
+                                <label class="label label-info">{{$order->delivery_status }}</label>
                             </td>
                             <td>{{ $order->payment_date }}</td>
                         </tr>
