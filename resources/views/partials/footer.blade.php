@@ -119,36 +119,52 @@
                             tempor incididunt ut labore et dolore magna aliqua. 
                         </p>
                         <ul class="list-inline ">
+                           @if(isset($site['facebook']['value']) && (!isset($site['hide_facebook']['value']) || $site['hide_facebook']['value']!='1'))
                           <li>
-                              <a href="">
+                              <a href="{{ $site['facebook']['value'] }}">
                                   <i class="fa fa-facebook-f"></i>
                               </a>
                           </li>
+                          @endif
+                        @if(isset($site['twitter']['value']) && (!isset($site['hide_twitter']['value']) || $site['hide_twitter']['value']!='1'))
                           <li>
-                              <a href="">
+                              <a href="{{ $site['twitter']['value'] }}">
                                   <i class="fa fa-twitter"></i>
                               </a>
                           </li>
+                              @endif
+                        @if(isset($site['google_plus']['value']) && (!isset($site['hide_google_plus']['value']) || $site['hide_google_plus']['value']!='1'))
                           <li>
-                              <a href="">
+                              <a href="{{ $site['google_plus']['value'] }}">
                                   <i class="fa fa-google-plus"></i>
                               </a>
                           </li>
+                          @endif
+                        @if(isset($site['instagram']['value']) && (!isset($site['hide_instagram']['value']) || $site['hide_instagram']['value']!='1'))
                           <li>
-                              <a href="">
+                              <a href="{{ $site['instagram']['value'] }}">
                                   <i class="fa fa-instagram"></i>
                               </a>
                           </li>
+                          @endif
+                        @if(isset($site['youtube']['value']) && (!isset($site['hide_youtube']['value']) || $site['hide_youtube']['value']!='1'))
+                            <li>
                           <li>
-                              <a href="">
+                              <a href="{{ $site['youtube']['value'] }}">
                                   <i class="fa fa-youtube"></i>
                               </a>
                           </li>
-                          <li>
-                              <a href="">
-                                  <i class="fa fa-pinterest-p"></i>
-                              </a>
-                          </li>
+                       @endif
+                        @if(isset($site['skype']['value']) && (!isset($site['hide_skype']['value']) || $site['hide_skype']['value']!='1'))
+                            <li>
+                                <a href="skype:{{$site['skype']['value']}}">
+                                    <i class="fa fa-skype"></i>
+                                </a>
+                            </li>
+                          @endif
+                        @if(isset($site['tripadvisor']['value']) && (!isset($site['hide_tripadvisor']['value']) || $site['hide_tripadvisor']['value']!='1'))
+                            
+                        @endif
                         </ul>
                     </div>
                     <div class="col-md-3 second-col hidden-xs">
@@ -156,13 +172,14 @@
                         <div class="row">
                             <div class="col-md-6" style="">
                                 <ul class="">
-                                  <li><a href="{{ url('shop/online-shop') }}">ART</a></li>
-                                  <li><a href="#">DECORE</a></li>
+                                  <li><a href="{{ $url }}">ART</a></li>
+                                  <li><a href="{{url('category/home-goods')}}">HOME GOODS</a></li>
                                  </ul>
                             </div>
                             <div class="col-md-6">
                                 <ul class="">
-                                  <li><a href="#">HOME GOODS</a></li>
+                                  
+
                                   <li><a href="{{url('about/page')}}">CONTACT</a></li>
                                   <li><a href="{{url('blog')}}">BLOGS</a></li>
                                 </ul>
@@ -232,12 +249,13 @@
                
                 <div class="col-md-4 hidden-xs">
                    
-                    <p class="text-center" style="    padding: 10px 0px; font-size: 14px; margin-right: 12px; margin-bottom: 0px;"> Powered by:<a href="" class="text-primary"> Peek International</a></p>
+                    <p class="text-center" style="    padding: 10px 0px; font-size: 14px; margin-right: 12px; margin-bottom: 0px;"> Powered by:<a href=" http://peekinternational.com/" class="text-primary"> Peek International</a></p>
                     
                 </div>
                 
                 </div>
             </div>
         </div>
+
     </div>
 </footer>

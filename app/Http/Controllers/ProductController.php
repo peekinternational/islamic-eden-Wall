@@ -36,11 +36,12 @@ class ProductController extends Controller
         $cat = $produt->category;
         return $category;*/
         $products = Products::orderBy('id','desc')->paginate(10);
+         // dd($products);
 
          foreach($products as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
                 }
-            // dd($products);
+             // dd($products);
          return view('products',compact('products'));
 
     }
@@ -80,7 +81,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     { 
-    // dd($request->file('photos'));
+    ($request->all());
         
         
         if(!$request->has('slug')){
@@ -219,8 +220,10 @@ class ProductController extends Controller
         $this->breadcrumb['page']  = 'Edit Products';
         $breadcrumb = $this->breadcrumb;
         $product = Products::findOrFail($id);
+        // dd($product);
         $tags = Tags::pluck('name','id');
         $categories = Category::pluck('name','id');
+
         return view('dashboard.products.edit',compact('product','breadcrumb','tags','categories'));
     }
 
@@ -237,6 +240,7 @@ class ProductController extends Controller
             $request->merge(['slug'=>str_slug($request->input('name'))]);
         }
         $product = Products::findOrFail($id);
+        dd($product);
         //return $request->all();
         $this->validate($request,[
                 'name' => 'required',
@@ -247,6 +251,53 @@ class ProductController extends Controller
         ],[],[
                 'name' => 'title'
         ]);
+       $size=$request->input('p_size');
+       $p_color=$request->input('color');
+       $p_dimension=$request->input('p_dimension');
+       $p_price=$request->input('p_price');
+       //dd($p_price[0]);
+       $dim_offer=$request->input('dim_offer');
+       foreach($p_color as $colors )
+              {
+                  $input['color']=$colors;
+                  $input['product_id']=$product->id;
+                  DB::table('product_color')->insert($input);
+              }
+
+              if($size){
+              foreach($size as $pro_size )
+              {
+                  $inputs['p_size']=$pro_size;
+                  $inputs['product_id']=$product->id;
+                  DB::table('product_size')->insert($inputs);
+              }
+             }
+              if($dim_offer){
+                      
+                   foreach($p_price as $key=>$price){
+                                $original_price = $price;
+                                $discountprice=$original_price/100*$dim_offer;
+                                $saledec =$original_price-$discountprice;
+                                $sale =round($saledec);
+                                $inputsss['p_price']=$price;
+                                $inputsss['dimoffer_price']=$sale;
+                                $inputsss['dim_offer']=$dim_offer;
+                                $inputsss['p_dimension']=$p_dimension[$key];
+                                $inputsss['product_id']=$product->id;
+                                DB::table('product_dimension')->insert($inputsss);
+                            }
+                        }elseif($p_price[0] !=''){   
+                                foreach($p_price as $key=>$price){
+                                $inputss['p_price']=$price;
+                                $inputss['p_dimension']=$p_dimension[$key];
+                                $inputss['product_id']=$product->id;
+                                DB::table('product_dimension')->insert($inputss);
+                        }
+                    }
+       
+
+
+
         $product->fill($request->all());
         $product->save();
         session()->flash('__response', ['notify'=>'Product "'.$product->name.'" updated successfully.','type'=>'success']);
@@ -329,7 +380,6 @@ class ProductController extends Controller
         foreach($products as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
                 }
-           // dd($products);
-        return view('products',compact('products'));
+         return view('products',compact('products'));
     }
 }

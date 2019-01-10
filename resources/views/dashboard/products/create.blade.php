@@ -60,6 +60,17 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
+                            <label for="description" class="col-sm-3 control-label">Addtional Information</label>
+                            <div class="col-sm-9">
+                                {!! Form::textarea('Addtional_Information',$value= null, $attributes = ['class'=>'form-control','placeholder'=>'Addtional_Information'])  !!}
+                                @if ($errors->has('Addtional_Information'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('Addtional_Information') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                       
                         <div class="form-group {{ $errors->has('color') ? ' has-error' : '' }}">
                             <label for="price" class="col-sm-3 control-label">Product Color <span>*</span></label>

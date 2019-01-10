@@ -170,6 +170,7 @@ class DashboardController extends Controller
         if(isset($_POST['edit_product_btn'])){
 
             $query = \DB::table('products')
+
                 ->where('id', $id)
                 ->update([
                     'name'=>$_POST['name'],
@@ -180,7 +181,7 @@ class DashboardController extends Controller
                     'meta_keywords'=>$_POST['meta_keyword'],
                     'meta_description'=>$_POST['meta_description']
                 ]);
-            //dd(\DB::getQueryLog());exit;
+            // dd(\DB::getQueryLog());exit;
             return redirect()->action('DashboardController@products');
         }
         $product_info = \DB::table('products')->where('id', $id)->first();

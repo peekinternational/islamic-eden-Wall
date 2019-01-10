@@ -8,10 +8,17 @@
         <div class="container">
             <div class="row product-page-responsive">
                 @include('partials/sidebar')
+                 <ul class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="{{ url('products')}}">{{$products[0]->category->name }}</a></li>
+                        <li>{{ $product->name }}</li>
+                  </ul>
+
                 <div class="col-sm-8">
-                    <div class="shop-single">
+                   <div class="shop-single">
                         <figure class="shop-single__img">
                             @if($product->images->count()>0)
+                            
                                 <div class="format-gallery">
                                     <div class="entry-thumbnail">
                                         <div id="carousel-generic" class="carousel slide">
@@ -185,7 +192,7 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active">
-                                    <a href="#descript" aria-controls="home" role="tab" data-toggle="tab">DEScription</a>
+                                    <a href="#descript" aria-controls="home" role="tab" data-toggle="tab">Description</a>
                                 </li>
                                 <li role="presentation">
                                     <a href="#Additional-info" aria-controls="tab" role="tab" data-toggle="tab">Additional Information</a>
@@ -195,7 +202,7 @@
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="descript">{{ $product->description }}</div>
-                                <div role="tabpanel" class="tab-pane" id="Additional-info">Additional</div>
+                                <div role="tabpanel" class="tab-pane" id="Additional-info">{{ $product->Addtional_Information}}</div>
                             </div>
                         </div>
                        
