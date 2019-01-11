@@ -33,6 +33,16 @@ class OrderController extends Controller
     {
         //
     }
+	
+	 public function updatestatus(Request $request, $id)
+    {
+       // dd($request->all());
+		$return=DB::table('orders')->where('id','=',$id)->update($request->all());
+		if($return== 1){
+			$data= DB::table('orders')->where('id','=',$id)->get();
+		return $data;
+		}
+    }
 
     /**
      * Store a newly created resource in storage.

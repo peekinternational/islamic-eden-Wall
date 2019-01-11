@@ -97,6 +97,8 @@ class PaymentsController extends Controller
 	public function pay2(Request $request,LaraCart $cart){
 		
 		//dd($request->all());
+		$Date = date("Y-m-d");
+        $delivery_days = date('Y-m-d', strtotime($Date. ' + 20 days'));
 		
 		$input['user_id']=$request->input('custom');
 	    $input['_token']=$request->input('_token');
@@ -112,6 +114,7 @@ class PaymentsController extends Controller
 		$input['address_street']=$request->input('address2');
 		$input['city']=$request->input('city');
 		$input['delivery_status']='received';
+		$input['delivery_days']=$delivery_days;
 		$input['address_zip']=$request->input('zip');
 		$input['payer_email']=$request->input('email');
 		$input['address_country_code']=$request->input('country');

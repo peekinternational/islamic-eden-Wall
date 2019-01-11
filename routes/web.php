@@ -59,6 +59,7 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     Route::post('upload', 'SettingsController@upload');
     Route::resource('users', 'UserController');
     Route::resource('orders', 'OrderController');
+	Route::get('changestatus/{id}', 'OrderController@updatestatus');
     Route::get('blog/published', 'BlogController@published');
     Route::get('blog/un-published', 'BlogController@unPublished');
     Route::resource('blog', 'BlogController');
