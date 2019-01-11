@@ -138,7 +138,7 @@
 							 @else
 								 <span data-toggle="tooltip" title="{{$order->delivery_status}}!" id="color{{ $order->id }}" style="" class="form-group green"></span>
 							 @endif
-						       <select class="received status{{ $order->id }}" style="" id="status" onchange="changestatus('{{ $order->id }}')">
+						       <select class="received status{{ $order->id }}" style=""  onchange="changestatus('{{ $order->id }}')">
 							   <option value="">{{ucfirst($order->delivery_status)}}</option>
 							   <option value="process">Process</option>
 							   <option value="shipped">Shipped</option>
@@ -153,7 +153,7 @@
 							 @else
 								 <span data-toggle="tooltip" title="{{$order->delivery_status}}!" id="color{{ $order->id }}" style="" class="form-group green"></span>
 							 @endif
-							<span data-toggle="tooltip" title="{{$order->delivery_status}}!" style="" id="color{{ $order->id }}" class="green"></span><select class="process status{{ $order->id }}" style="" id="status" onchange="changestatus('{{ $order->id }}')">
+							<select class="process status{{ $order->id }}" style=""  onchange="changestatus('{{ $order->id }}')">
 							  <option value="">{{ucfirst($order->delivery_status)}}</option>
 							 <option value="received">Received</option>
 							 <option value="shipped">Shipped</option>
@@ -162,7 +162,7 @@
 							
                                 @elseif($order->delivery_status =='shipped')
 							<span data-toggle="tooltip" title="{{$order->delivery_status}}!" style="display:none" id="color{{ $order->id }}" class="green"></span>
-							<select class="shipped status{{ $order->id }}" style="" id="status" onchange="changestatus('{{ $order->id }}')">
+							<select class="shipped status{{ $order->id }}" style=""  onchange="changestatus('{{ $order->id }}')">
 							  <option value="">{{ucfirst($order->delivery_status)}}</option>
 							  <option value="received">Received</option>
 							  <option value="process">Process</option>
@@ -171,7 +171,7 @@
 							
                                 @elseif($order->delivery_status =='deliver')
 								  <span data-toggle="tooltip" title="{{$order->delivery_status}}!" style="display:none" id="color{{ $order->id }}" class="green"></span>
-								  <select class="deliver status{{ $order->id }}" style="" id="status" onchange="changestatus('{{ $order->id }}')">
+								  <select class="deliver status{{ $order->id }}" style=""  onchange="changestatus('{{ $order->id }}')">
 								  <option value="">{{ucfirst($order->delivery_status)}}</option>
 								  <option value="received">Received</option>
 								  <option value="process">Process</option>
