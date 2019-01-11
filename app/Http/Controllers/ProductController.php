@@ -81,7 +81,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     { 
-    ($request->all());
+    
         
         
         if(!$request->has('slug')){
@@ -251,50 +251,6 @@ class ProductController extends Controller
         ],[],[
                 'name' => 'title'
         ]);
-       $size=$request->input('p_size');
-       $p_color=$request->input('color');
-       $p_dimension=$request->input('p_dimension');
-       $p_price=$request->input('p_price');
-       //dd($p_price[0]);
-       $dim_offer=$request->input('dim_offer');
-       foreach($p_color as $colors )
-              {
-                  $input['color']=$colors;
-                  $input['product_id']=$product->id;
-                  DB::table('product_color')->insert($input);
-              }
-
-              if($size){
-              foreach($size as $pro_size )
-              {
-                  $inputs['p_size']=$pro_size;
-                  $inputs['product_id']=$product->id;
-                  DB::table('product_size')->insert($inputs);
-              }
-             }
-              if($dim_offer){
-                      
-                   foreach($p_price as $key=>$price){
-                                $original_price = $price;
-                                $discountprice=$original_price/100*$dim_offer;
-                                $saledec =$original_price-$discountprice;
-                                $sale =round($saledec);
-                                $inputsss['p_price']=$price;
-                                $inputsss['dimoffer_price']=$sale;
-                                $inputsss['dim_offer']=$dim_offer;
-                                $inputsss['p_dimension']=$p_dimension[$key];
-                                $inputsss['product_id']=$product->id;
-                                DB::table('product_dimension')->insert($inputsss);
-                            }
-                        }elseif($p_price[0] !=''){   
-                                foreach($p_price as $key=>$price){
-                                $inputss['p_price']=$price;
-                                $inputss['p_dimension']=$p_dimension[$key];
-                                $inputss['product_id']=$product->id;
-                                DB::table('product_dimension')->insert($inputss);
-                        }
-                    }
-       
 
 
 

@@ -11,7 +11,7 @@
                  @include('partials/sidebar')
                  <ul class="breadcrumb" style="">
                       <li><a href="#">Home</a></li>
-                      <li><a href="{{ url('products')}}" >{{$products[0]->category->name }}</a></li>
+                      <li><a href="">{{$products[0]->category->name }}</a></li>
                  </ul>
                 <div class="col-sm-8 col-md-9 col-lg-9" style="margin-left: 10px;">
                     @if($products->count()>0)

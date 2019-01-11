@@ -66,6 +66,10 @@
 		display: block;
 		width: 100%;
 	}
+	
+	.respnsve-row{
+		margin-left: 10px;
+	}
 	.title-featured span{
 		font-weight: 0px !important;
 		font-size: 14px !important;
