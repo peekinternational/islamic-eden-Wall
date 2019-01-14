@@ -27,18 +27,29 @@
 
                         <?php $i =0;
                         $user_id=rand();
+						$size='';
 						?>
 						<input type="hidden" name="custom" value="{{ $user_id}}">
                         @foreach($cart->getItems() as $item)
-                        <?php $i++; ?>
+                        <?php $i++; 
+						if($item->p_size){
+							$size=$item->p_size;
+						}else{
+							$size=$item->p_dimension;
+						}
+						?>
                         <input type="hidden" name="quantity_{{ $i }}" value="{{ $item->qty }}">
                         <input type="hidden" name="item_name_{{ $i  }}" value="{{ $item->name }}">
-                        <input type="hidden" name="item_number_{{ $i  }}" value="PR-{{ $item->id }}">
+                        <input type="hidden" name="p_id{{ $i  }}" value="{{ $item->id }}">
                         <input type="hidden" name="amount_{{ $i  }}" value="{{ $item->price }}">
+						<input type="hidden" name="p_size{{ $i  }}" value="{{ $size }}">
+						<input type="hidden" name="color_{{ $i  }}" value="{{ $item->color }}">
+						
 						 
                         <!--<input type="hidden" name="shipping_1" value="0.01">
                         <input type="hidden" name="tax_1" value="0.02">-->
                         @endforeach
+						<input type="hidden" name="total" value="{{ $i }}">
                         <!-- End First Item -->
 
 

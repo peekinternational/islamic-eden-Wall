@@ -15,7 +15,7 @@ use Edenmill\Mail\AdminOrderCompleted;
 use Edenmill\Mail\UserOrderCompleted;
 use Edenmill\User;
 use Edenmill\GiftOrders;
-use LukePOLO\LaraCart\LaraCart;
+use LukePOLO\LaraCart\Facades\LaraCart;
 
 use DB;
 class PaymentsController extends Controller
@@ -97,6 +97,8 @@ class PaymentsController extends Controller
 	public function pay2(Request $request,LaraCart $cart){
 		
 		//dd($request->all());
+		$Date = date("Y-m-d");
+        $delivery_days = date('Y-m-d', strtotime($Date. ' + 20 days'));
 		
 		$input['user_id']=$request->input('custom');
 	    $input['_token']=$request->input('_token');
@@ -111,38 +113,37 @@ class PaymentsController extends Controller
 		$input['address_city']=$request->input('address1');
 		$input['address_street']=$request->input('address2');
 		$input['city']=$request->input('city');
+		$input['delivery_status']='received';
+		$input['delivery_days']=$delivery_days;
 		$input['address_zip']=$request->input('zip');
 		$input['payer_email']=$request->input('email');
 		$input['address_country_code']=$request->input('country');
 		$input['mobilenumber']=$request->input('night_phone_a');
 		if($request->input('_token') != null){
-           
+         
 			$orderCount =  Orders::where('user_id','=',$request->input('custom'))->count();
 			if(!$orderCount>0){
                 $_request = $request->all();
 				$order =  DB::table('orders')->insertGetId($input);
-				$size='';
 				if(isset($order)){
-					foreach ($cart->getItems() as $key=> $item){
-						if($item->p_size){
-							$size=$item->p_size;
-						}else{
-							$size=$item->p_dimension;
-						}
-							
-								if($item->id){
-									OrderProducts::create([
+					for ($i=1;$i<=$request->input('total');$i++){
+						
+							$product = Products::find($request->input('p_id'.$i));
+								if($product->id){
+									$dd=OrderProducts::create([
 															'order_id' => $order,
-															'product_id' => $item->id,
-															'price' => $item->price,
-															'quantity' => $item->qty,
-															'p_size' => $size,
-															'color' => $item->color,
+															'product_id' => $product->id,
+															'price' => $request->input('amount_'.$i),
+															'quantity' => $request->input('quantity_'.$i),
+															'p_size' => $request->input('p_size'.$i),
+															'color' => $request->input('color_'.$i),
 															'tax' => 'tax',
 								
 								]);
 							
+							
 						}
+						
 					}
                    
 					return 'true';
@@ -157,7 +158,7 @@ class PaymentsController extends Controller
 		
 			$inputs['payer_id']=$request->input('payer_id');
 			$inputs['payment_date']=$request->input('payment_date');
-			$inputs['payment_status']=$request->input('payment_status');
+			$inputs['payment_status']='Paid';
 			$inputs['payer_status']=$request->input('payer_status');
 			$inputs['business']=$request->input('business');
 			$inputs['ipn_track_id']=$request->input('ipn_track_id');
@@ -181,7 +182,7 @@ class PaymentsController extends Controller
 	
 		public function thanks(){
 		if(isset($_GET['clear_cart']) && $_GET['clear_cart']=='true'){
-			 
+			 LaraCart::destroyCart();
 		}
 		return view('thanks');
 	}

@@ -1,4 +1,29 @@
 @extends('dashboard.layouts.default')
+@section('css')
+<style>
+.received{
+	background-color: green;color: white;display: block;height: 31px;border-radius: 4px;
+}
+.process{
+	background-color: green;color: white;display: block;height: 31px;border-radius: 4px;
+}
+.shipped{
+	background-color: orange;color: white;display: block;height: 31px;border-radius: 4px;
+}
+.deliver{
+	background-color: pink;color: white;display: block;height: 31px;border-radius: 4px;
+}
+.green{
+	height: 18px;width: 18px; background-color: green;border-radius: 50%;display: inline-block;margin-left: 19px;
+}
+.red{
+	height: 18px;width: 18px; background-color: red;border-radius: 50%;display: inline-block;margin-left: 19px;
+}
+.yellow{
+	height: 18px;width: 18px; background-color: yellow;border-radius: 50%;display: inline-block;margin-left: 19px;
+}
+</style>
+@stop
 @section('content')
     <section class="content">
         <div class="box">
@@ -24,11 +49,17 @@
                         <th>Country</th>
                         <th>IPN Track id</th>
                         <th>Payment Status</th>
-                        <th>Payer Status</th>
+                        <th>Delivery Status</th>
                         <th>Payment Date</th>
                     </tr>
                     @foreach($orders as $order)
                     <?php 
+					$Date = date("Y-m-d");
+					$date1=date_create($Date);
+                    $date2=date_create($order->delivery_days);
+					$diff=date_diff($date1,$date2, false);
+					
+					
                         //$products =  $order->products($order->id)->get();
                         $order_products = $order->order_products()->select('order_products.*','products.name',DB::raw('((order_products.quantity * order_products.price) + IFNULL(order_products.tax, 0)) as total'),DB::raw('((order_products.quantity * order_products.price) + IFNULL(order_products.tax, 0)) as total'))->join('products', 'products.id', '=', 'order_products.product_id')->get();
                      ?>
@@ -88,12 +119,68 @@
 							 <td>{{ $order->city }}</td>
                             <td>{{ $order->address_country_code }}</td>
                             <td>{{ $order->ipn_track_id }}</td>
+							@if($order->payment_status == 'Paid')
                             <td>
                                 <label class="label label-success">Paid</label>
                             </td>
-                            <td>
-                                <label class="label label-info">{{$order->payer_status }}</label>
+							@else
+								 <td>
+                                <label class="label label-warning">Unpaid</label>
                             </td>
+							@endif
+                            <td>
+							
+							@if($order->delivery_status =='received')
+							@if($diff->format("%R%a days") >= +0  && $diff->format("%R%a days") < +6)
+							 <span data-toggle="tooltip" title="{{$order->delivery_status}}!" id="colors{{ $order->id }}" style="" class="form-group yellow"></span>
+						     @elseif($diff->format("%R%a days") < +0)
+							 <span data-toggle="tooltip" title="{{$order->delivery_status}}!" id="colorss{{ $order->id }}" style="" class="form-group red"></span>
+							 @else
+								 <span data-toggle="tooltip" title="{{$order->delivery_status}}!" id="color{{ $order->id }}" style="" class="form-group green"></span>
+							 @endif
+						       <select class="received status{{ $order->id }}" style=""  onchange="changestatus('{{ $order->id }}')">
+							   <option value="">{{ucfirst($order->delivery_status)}}</option>
+							   <option value="process">Process</option>
+							   <option value="shipped">Shipped</option>
+							   <option value="deliver">Deliver</option>
+							   </select>
+							
+							@elseif($order->delivery_status =='process')
+							@if($diff->format("%R%a days") >= +0  && $diff->format("%R%a days") < +6)
+							 <span data-toggle="tooltip" title="{{$order->delivery_status}}!" id="colors{{ $order->id }}" style="" class="form-group yellow"></span>
+						     @elseif($diff->format("%R%a days") < +0)
+							 <span data-toggle="tooltip" title="{{$order->delivery_status}}!" id="colorss{{ $order->id }}" style="" class="form-group red"></span>
+							 @else
+								 <span data-toggle="tooltip" title="{{$order->delivery_status}}!" id="color{{ $order->id }}" style="" class="form-group green"></span>
+							 @endif
+							<select class="process status{{ $order->id }}" style=""  onchange="changestatus('{{ $order->id }}')">
+							  <option value="">{{ucfirst($order->delivery_status)}}</option>
+							 <option value="received">Received</option>
+							 <option value="shipped">Shipped</option>
+							  <option value="deliver">Deliver</option>
+							</select>
+							
+                                @elseif($order->delivery_status =='shipped')
+							<span data-toggle="tooltip" title="{{$order->delivery_status}}!" style="display:none" id="color{{ $order->id }}" class="green"></span>
+							<select class="shipped status{{ $order->id }}" style=""  onchange="changestatus('{{ $order->id }}')">
+							  <option value="">{{ucfirst($order->delivery_status)}}</option>
+							  <option value="received">Received</option>
+							  <option value="process">Process</option>
+							  <option value="deliver">Deliver</option>
+							</select>
+							
+                                @elseif($order->delivery_status =='deliver')
+								  <span data-toggle="tooltip" title="{{$order->delivery_status}}!" style="display:none" id="color{{ $order->id }}" class="green"></span>
+								  <select class="deliver status{{ $order->id }}" style=""  onchange="changestatus('{{ $order->id }}')">
+								  <option value="">{{ucfirst($order->delivery_status)}}</option>
+								  <option value="received">Received</option>
+								  <option value="process">Process</option>
+								  <option value="shipped">Shipped</option>
+								  </select>
+							
+                               @endif 
+                            </td>
+							
                             <td>{{ $order->payment_date }}</td>
                         </tr>
                     @endforeach
@@ -116,10 +203,113 @@
             <!-- /.box-footer-->
         </div>
         <!-- /.box -->
+		<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
     </section>
 @stop
 @section('footer')
     <script>
-      
-    </script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip(); 
+});
+function changestatus(id){
+	var val=$('.status'+id).val();
+	 
+        var actionUrl = "{{ url('dashboard/changestatus')}}/"+id+'?delivery_status='+val;
+        $.ajax({
+          type: "get",
+          url: actionUrl,
+          success: function(data){
+			  var start = new Date(data[0].delivery_days);
+              var end  = new Date();
+			  days = (start - end) / (1000 * 60 * 60 * 24);
+              var getday = Math.round(days);
+			 if(data[0].delivery_status == 'received'){
+				 if(getday >= 0 && getday < 6){
+				 $("#color"+id).hide();
+				 $("#colors"+id).show();
+				 $("#colorss"+id).hide();
+				 }
+				 else if(getday < 0){
+				 $("#color"+id).hide();
+				 $("#colors"+id).hide();
+				 $("#colorss"+id).show();
+				 }
+				 else{
+					 $("#color"+id).show();
+				 }
+				 
+				 $("#color"+id).addClass("green");
+				 $(".status"+id).addClass("received");
+				 $(".status"+id).removeClass("process");
+				  $(".status"+id).removeClass("shipped");
+				   $(".status"+id).removeClass("deliver");
+				 
+			 }
+			 else if(data[0].delivery_status == 'process'){
+				  if(getday >= 0 && getday < 6){
+				 $("#color"+id).hide();
+				 $("#colors"+id).show();
+				 $("#colorss"+id).hide();
+				 }
+				 else if(getday < 0){
+				 $("#color"+id).hide();
+				 $("#colors"+id).hide();
+				 $("#colorss"+id).show();
+				 }
+				 else{
+					 $("#color"+id).show();
+				 }
+				 $("#color"+id).addClass("green");
+				 $(".status"+id).addClass("process");
+				 $(".status"+id).removeClass("received");
+				 $(".status"+id).removeClass("shipped");
+				 $(".status"+id).removeClass("deliver");
+			 }
+			  else if(data[0].delivery_status == 'shipped'){
+				  $("#color"+id).hide();
+				 $("#colors"+id).hide();
+				 $("#colorss"+id).hide();
+				 $(".status"+id).addClass("shipped");
+				 $(".status"+id).removeClass("process");
+				 $(".status"+id).removeClass("received");
+				 $(".status"+id).removeClass("deliver");
+			 }
+			  else if(data[0].delivery_status == 'deliver'){
+				 $("#color"+id).hide();
+				 $("#colors"+id).hide();
+				 $("#colorss"+id).hide();
+				 $(".status"+id).addClass("deliver");
+				 $(".status"+id).removeClass("process");
+				 $(".status"+id).removeClass("shipped");
+				 $(".status"+id).removeClass("received");
+			 }
+			 
+           
+          },
+          error: function() {
+            
+          }
+        });
+	
+}
+</script>
 @stop
