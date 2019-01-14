@@ -135,7 +135,7 @@
                
             @endforeach
             <!-- End featured Products -->
-            <!-- starting best Sellers -->
+            <!-- sales items -->
            <h3  class="title-featured text-center" style="    margin-bottom: 38px;     margin-top: 38px;"> <i class="fa fa-chevron-left"></i> <span>Sales Items</span> <i class="fa fa-chevron-right"></i></h3>
                       
                       @foreach($latest_products2->chunk(5) as $products)
@@ -143,7 +143,7 @@
                               @foreach($products as $key =>$product)
                               @if($key < 5)
                               @if($product->offer != "")
-                                  <div class="col-md-2-5" style="width: 20%;">
+                                  <div class="col-md-2-5 tagsss" style="width: 20%;">
                                       <figure class="banner-01__img">
                                           <a class="banner-01__img-wrapp" href="{{ url('product/'.$product->slug) }}">
                                            <!--  {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
@@ -154,6 +154,8 @@
                                             
                                               @if($product->images->count()>0)
                                                   <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
+                                                   <label class="tag sales-tag">Sale
+                                                   </label>
                                                 
                                               @else
                                                   <img  src="{{ asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">

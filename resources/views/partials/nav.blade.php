@@ -247,7 +247,7 @@
                              
                            
                             <li class="">
-                                <a href="{{ url('/contact') }}" class="sf-with-ul">Contact </a>
+                                <a href="{{ url('/contact-us') }}" class="sf-with-ul">Contact </a>
                             </li>--}}
                     </nav>
                     <!-- eof main nav -->

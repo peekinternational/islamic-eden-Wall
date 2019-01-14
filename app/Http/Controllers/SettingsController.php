@@ -3,6 +3,7 @@
 namespace Edenmill\Http\Controllers;
 
 use Edenmill\Settings;
+use DB;
 use Illuminate\Http\Request;
 
 use Edenmill\Http\Requests;
@@ -403,5 +404,19 @@ else{
 	session()->flash('__response', ['notify'=>ucfirst($type).' could not be uploaded.','type'=>'error']);
 }
 return back();
+}
+public function contact_us(){
+$address =DB::table('settings')->where('type','=','address')->first();
+$phone_num =DB::table('settings')->where('type','=','phone')->first();
+$email =DB::table('settings')->where('type','=','email')->first();
+$map_lats =DB::table('settings')->where('type','=','lat')->first();
+$map_lngs =DB::table('settings')->where('type','=','lng')->first();
+$working_hours =DB::table('settings')->where('type','=','working_hours')->first();
+
+
+
+
+
+	return view('contact-us',compact('address','phone_num','email','map_lats','map_lngs','working_hours'));
 }
 }

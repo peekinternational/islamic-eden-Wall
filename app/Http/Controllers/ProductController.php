@@ -55,7 +55,7 @@ class ProductController extends Controller
     {
         $this->breadcrumb['page']  = 'Products List';
         $breadcrumb = $this->breadcrumb;
-        $products = Products::orderBy('id','desc')->paginate(10);
+        $products = Products::orderBy('id','desc')->paginate(12);
         return view('dashboard.products.index',compact('products','breadcrumb'));
     }
 
@@ -236,11 +236,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request->all());
         if(!$request->has('slug')){
             $request->merge(['slug'=>str_slug($request->input('name'))]);
         }
         $product = Products::findOrFail($id);
-        dd($product);
+        // dd($product);
         //return $request->all();
         $this->validate($request,[
                 'name' => 'required',

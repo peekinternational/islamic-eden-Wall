@@ -66,7 +66,7 @@
 		display: block;
 		width: 100%;
 	}
-	
+
 	.respnsve-row{
 		margin-left: 10px;
 	}
@@ -631,3 +631,11 @@ input[type=radio].css-checkbox:checked + label.css-label {
 	color: black;
 	background-color: white !important;
 }
+.col-md-2-5 .sales-tag{
+	position: absolute;
+    left: 74%;
+    top: 0px;
+    background: red !important;
+    color: white;
+    border-radius: 15px;
+    padding: 0px 13px;

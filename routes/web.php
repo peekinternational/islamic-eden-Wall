@@ -40,6 +40,11 @@ Route::get('{slug}/page','PagesController@show_page');
 route::get( '/contact', function(){
     return view('contact');
 });
+// contact-us
+route::get( '/contact-us', 'SettingsController@contact_us');
+// end contact us
+
+
 Route::post('login', ['as' => 'login', 'uses' => 'Auth\LoginController@login']);
 Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
 Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
