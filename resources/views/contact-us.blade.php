@@ -7,10 +7,10 @@
 
 
 <div class="container">
-	<div class="row" style="padding-top:80px">
+	<div class="row responsive-cont" style="padding-top:80px">
 		  <div class="col-md-12">
 			  <div class="panel">
-					<div class="panel-heading">
+					<div class="panel-heading contact-panel">
 						<h3 style="padding-top:10px"><i class="fa fa-map-marker" aria-hidden="true"></i> Location</h3>
 					</div>
 					<div class="panel-body">
@@ -20,10 +20,10 @@
 		    </div>
 	    </div>
 <hr>
-<div class="row" style="padding-top:25px">
-			<div class="col-sm-4 col-lg-4">
+<div class="row responsive-cont" style="padding-top:25px">
+			<div class="col-sm-4 col-lg-4 col-padding">
 				<div class="panel">
-					<div class="panel-heading">
+					<div class="panel-heading contact-panel">
 						<h3><i class="fa fa-thumb-tack" aria-hidden="true"></i>Information
 					</div>
 					<div class="panel-body">
@@ -39,16 +39,16 @@
 				</div>
 			
 			</div>
-       <div class="col-12 col-lg-8">
+       <div class="col-12 col-lg-8 col-padding">
 	  			<div class="panel">
-						<div class="panel-heading">
+						<div class="panel-heading contact-panel">
 							<h3 class="">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 
 							 contact us
 							</h3>
 						</div>
-					<div class="panel-body">
+					<div class="panel-body contct-body">
 						<form method="post" action="">
 
 						<div class="form-group">
