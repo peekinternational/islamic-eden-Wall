@@ -1519,6 +1519,19 @@ jQuery( function() {
 			});
 
 		};
+		$(document).ready(function() {
+		    $(window).scroll(function() {    
+		    var scroll = $(window).scrollTop();
+		    // console.log(scroll);
+		    if (scroll <=100) {
+		        $(".subnav-content").css("top", "17%");
+		    }else if(scroll >100) {
+		    	$(".subnav-content").css("top", "59px");
+		    }else {
+		        $(".subnav-content").css("top", "10px");
+		    }
+		});
+		});
 
 }( jQuery )); 
 //# sourceMappingURL=script.js.map

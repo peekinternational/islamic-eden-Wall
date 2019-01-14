@@ -9,18 +9,21 @@
         <div class="container responsive">
             <div class="row">
                  @include('partials/sidebar')
-                 <ul class="breadcrumb" style="">
-                      <li><a href="#">Home</a></li>
-                      <li><a href="">{{$products[0]->category->name }}</a></li>
-                 </ul>
+                 
                 <div class="col-sm-8 col-md-9 col-lg-9" style="margin-left: 10px;">
                     @if($products->count()>0)
 
                  <div class="shop-sorting hidden-xs">
-                     <div class="form-group toggle-wrapper">
-                     <a href="#" id="toggle_shop_view" class=""></a>
-                    </div>
+
+                     
+                        <ul class="breadcrumb" style="float: left !important;">
+                      <li><a href="{{ url('/') }}">Home</a></li>
+                      <li><a href="">{{$products[0]->category->name }}</a></li>
+                 </ul>
+                     <a href="#" id="toggle_shop_view" class="" style="float: right!important;"></a>
+                    
                 </div>
+
                   <ul id="products" class="products list-unstyled grid-view">
                     @foreach($products as $product)
 

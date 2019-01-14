@@ -1,5 +1,5 @@
 <header class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }}">
-    <div class="page_header header-01 mbl-view-header" style="height: 70px; background-color: white">
+    <div class="page_header header-01 mbl-view-header" style="height: 70px; background-color: white;">
         <div class="container">
             <div class="row respnsve" style="background-color: white; height: 20px;">
                 <div class=" col-md-2 col-sm-12 text-md-center hidden-xs hidden-sm">
@@ -11,7 +11,7 @@
                 <span class="toggle_menu">
                 <span></span>
                 </span>
-                    <div class="navbar hidden-xs hidden-sm">
+                    <div class="navbar hidden-xs hidden-sm" >
                         @foreach($navs as $key=>$nav)
                         @if(!$nav->hidden)
                             
@@ -43,7 +43,7 @@
                         <a href="{{ $url }}" class="subnavbtn">{{ $nav->title }} </a>
                         
                             <div class="row">
-                                <div class="subnav-content sub-align">
+                                <div class="subnav-content sub-align  affix-top">
                                 @foreach($nav->sub_navs as $sub_nav)
                                 
                                 <div class="col-md-2 col-lg-2">

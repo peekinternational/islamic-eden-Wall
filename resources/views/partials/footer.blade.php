@@ -189,12 +189,9 @@
                     <div class="col-md-2 tags-section hidden-xs">
                      
                         <h4 style="color: white;"> Tags</h4>
-                            <span class="label label-art">Art</span>
-                            <span class="label label-men">Men</span>
-                            <span class="label label-women">Women</span>
-                            <span class="label label-retail">Retail</span>
-                            <span class="label label-class">Class</span>
-                            <span class="label label-business">Business</span>
+                            <span class="label label-art">Wall</span>
+                            <span class="label label-men">furniture</span>
+                           
                     </div>
                     <div class="col-md-2">
                         <div class="last-column">
