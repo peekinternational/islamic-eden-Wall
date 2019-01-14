@@ -1,5 +1,4 @@
 
-
 <div class="top_header_bg hidden-xs">
     <div id="home" class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} page_toplogo">
         <div class="container">
