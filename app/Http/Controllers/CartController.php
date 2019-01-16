@@ -8,6 +8,7 @@ use Edenmill\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use LukePOLO\LaraCart\LaraCart;
 use Lykegenes\LaravelCountries\Facades\Countries as Countries;
+use DB;
 
 class CartController extends Controller
 {
@@ -218,6 +219,25 @@ class CartController extends Controller
                 $countries = Countries::getListForDropdown('cca2', false, 'eng');
                 return view('checkout',compact('countries','order_products'));
                
+        }
+
+        public function couponcode(Request $request , LaraCart $cart){
+               $code=$request->input('coupon_code');
+              $cd = DB::table('couponcode')->where('code','=',$code)->first();
+              $total=$cart->total($format = false, $withDiscount = true);
+              $discount=0;
+              if($cd->type == 'fixed'){
+                $discount=$cd->discount;
+              }elseif($cd->type == 'percent'){
+                    $avg=$cd->discount/100*$total;
+                    $discount=$total-$avg;
+              }
+               $request->session()->put('coupon',[
+                       'name'=>$cd->code,
+                       'discount' =>$discount,
+               ]);
+
+               return redirect()->route('cart.checkout')->with('success','Coupon apply successfully');
         }
 
         public function giftVoucherCheckout(Request $request){

@@ -11,6 +11,7 @@
     <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_100 section_padding_bottom_75 columns_padding_25">
         <div class="container">
             <div class="row respnsve-row">
+           
                 <form target="paypal" class="form-horizontal checkout shop-checkout" action="{{ isset($PaymentSettings['payment_mood']['value']) && $PaymentSettings['payment_mood']['value']=='live'?'https://www.paypal.com/cgi-bin/webscr':'https://www.sandbox.paypal.com/cgi-bin/webscr' }}" method="post">
                 <div class="col-sm-7 col-md-8 col-lg-8" style="width: 63%;">
 
@@ -320,7 +321,28 @@
                     </div>
                 </aside>
                 </form>
+                <div class="col-sm-offset-8 col-sm-4" style="margin-top: -192px;">
+                            <div class="coupon with_padding muted_background">
+                                <h3 class="topmargin_0">Discount Codes</h3>
+                                <p>Enter coupon code if you have one</p>
+                                
+                                <form action="{{url('couponcode')}}" method="POST" role="form">
+                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                   <div class="form-group">
+                                    <label class="sr-only" for="coupon_code">Coupon:</label>
+                                    <input type="text" name="coupon_code" class="form-control" id="coupon_code" value="" placeholder="Coupon code">
+                                </div>
+                                <button class="button-t1" type="submit">Apply Coupon</button>
+                                </form>
+                                
+                                
+                            </div>
+                        </div>
             </div>
+              
+                        
+                        
+                    
         </div>
     </div>
 @stop

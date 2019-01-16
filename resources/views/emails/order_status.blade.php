@@ -76,7 +76,6 @@ $style = [
                         </td>
                     </tr>
 
-
                     <!-- Email Body -->
                     <tr>
                         <td style="{{ $style['email-body'] }}" width="100%">
