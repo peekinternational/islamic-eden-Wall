@@ -15,6 +15,7 @@ Route::get('products/price','ProductController@price_filter');
 Route::get('shop/gift-vouchers','GiftVouchersController@showPage');
 Route::get('checkout/gift-vouchers','CartController@giftVoucherCheckout');
 Route::get('checkout','CartController@checkout')->name('cart.checkout');
+Route::post('couponcode','CartController@couponcode')->name('cart.coupon');
 //Route::get('file/{file}','FileController@getFile');
 Route::get('images/{image}','FileController@images')->name('images');
 Route::post('cart/update/all', 'CartController@update_all');
