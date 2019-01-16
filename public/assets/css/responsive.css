@@ -613,8 +613,8 @@ input[type=radio].css-checkbox:checked + label.css-label {
   }
  .sub-align{
  	color: white;
-    width: 78% !important;
-    left: 11% !important;
+    width: 64% !important;
+    left: 25% !important;
     
 }
 .image-list
@@ -700,4 +700,11 @@ input[type=radio].css-checkbox:checked + label.css-label {
 	border-radius: 0;
 	text-align: center;
 
+}
+.subnav-content{
+	box-shadow: 3px 2px 3px 2px lightgray;
+	border-top:  2px solid black !important;
+}
+.navbar a{
+	font-size: 13px !important;
 }
