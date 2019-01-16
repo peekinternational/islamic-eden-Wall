@@ -1524,7 +1524,7 @@ jQuery( function() {
 		    var scroll = $(window).scrollTop();
 		    // console.log(scroll);
 		    if (scroll <=100) {
-		        $(".subnav-content").css("top", "17%");
+		        $(".subnav-content").css("top", "14%");
 		    }else if(scroll >100) {
 		    	$(".subnav-content").css("top", "59px");
 		    }else {
