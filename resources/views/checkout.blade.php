@@ -11,7 +11,7 @@
     <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_100 section_padding_bottom_75 columns_padding_25">
         <div class="container">
             <div class="row respnsve-row">
-            {{$success}}
+           
                 <form target="paypal" class="form-horizontal checkout shop-checkout" action="{{ isset($PaymentSettings['payment_mood']['value']) && $PaymentSettings['payment_mood']['value']=='live'?'https://www.paypal.com/cgi-bin/webscr':'https://www.sandbox.paypal.com/cgi-bin/webscr' }}" method="post">
                 <div class="col-sm-7 col-md-8 col-lg-8" style="width: 63%;">
 
