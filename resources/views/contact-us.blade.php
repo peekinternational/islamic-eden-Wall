@@ -7,8 +7,11 @@
 
 
 <div class="container">
-	<div class="row responsive-cont" style="padding-top:80px">
+	<div class="row responsive-cont" style="padding-top:40px">
 		  <div class="col-md-12">
+             <h3  class="title-featured text-left" style="    margin-bottom: 20px;"> <span>CONTACT US</span>
+             </h3>
+             <hr>
 			  <div class="panel">
 					<div class="panel-heading contact-panel">
 						<h3 style="padding-top:10px"><i class="fa fa-map-marker" aria-hidden="true"></i> Location</h3>
