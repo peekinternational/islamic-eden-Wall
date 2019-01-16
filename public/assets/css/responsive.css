@@ -705,6 +705,6 @@ input[type=radio].css-checkbox:checked + label.css-label {
 	box-shadow: 3px 2px 3px 2px lightgray;
 	border-top:  2px solid black !important;
 }
-.navbar a{
+.sub-men a{
 	font-size: 13px !important;
 }
