@@ -1,5 +1,6 @@
 @extends('dashboard.layouts.default')
 @section('content')
+
     <section class="content">
         <div class="box">
             <div class="box-header with-border">
@@ -42,7 +43,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group {{ $errors->has('price') ? ' has-error' : '' }}">
+                        <!-- <div class="form-group {{ $errors->has('price') ? ' has-error' : '' }}">
                             <label for="price" class="col-sm-3 control-label">Price <span>*</span></label>
                             <div class="col-sm-9">
                                 {!! Form::number('price',$value= null, $attributes = ['class'=>'form-control','placeholder'=>'Price','required'=>true])  !!}
@@ -52,7 +53,7 @@
                                     </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
                             <label for="description" class="col-sm-3 control-label">Description</label>
                             <div class="col-sm-9">
@@ -80,16 +81,16 @@
                             <div class="col-sm-9">
                               <select multiple="multiple" name="color[]" class="form-control select2" id="color_select">
                               <option disabled>Select Color</option>
-                                <option value="white">White</option>
-                                <option value="black">black</option>
-                                <option value="green">Green</option>
-                                <option value="grey">gray</option>
-                                <option value="pink">pink</option>
-                                <option value="violet">Violet</option>
-                                <option value="brown">Brown</option>
-                                <option value="blue">Blue</option>
-                                <option value="maroon">Maroon</option>
-                                <option value="olive">olive</option>
+                                <option value="white" {{$product_color[0]->color == 'white' ? 'selected="selected"' : ''}}>White</option>
+                                <option value="black" {{$product_color[0]->color == 'black' ? 'selected="selected"' : ''}}>black</option>
+                                <option value="green" {{$product_color[0]->color == 'green' ? 'selected="selected"' : ''}} >Green</option>
+                                <option value="grey" {{$product_color[0]->color == 'grey' ? 'selected="selected"' : ''}}>gray</option>
+                                <option value="pink" {{$product_color[0]->color == 'pink' ? 'selected="selected"' : ''}}>pink</option>
+                                <option value="violet" {{$product_color[0]->color == 'violet' ? 'selected="selected"' : ''}}>Violet</option>
+                                <option value="brown" {{$product_color[0]->color == 'brown' ? 'selected="selected"' : ''}}>Brown</option>
+                                <option value="blue" {{$product_color[0]->color == 'blue' ? 'selected="selected"' : ''}}>Blue</option>
+                                <option value="maroon" {{$product_color[0]->color == 'maroon' ? 'selected="selected"' : ''}}>Maroon</option>
+                                <option value="olive" {{$product_color[0]->color == 'olive' ? 'selected="selected"' : ''}}>olive</option>
                             </select>
                                
                                 @if ($errors->has('color'))
@@ -106,14 +107,20 @@
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                 <div class="checkbox">
                                 <label>
-                                <input type="radio" name="size" value="size" class="checkboxsize">
+                                @if($product_size->count() > 0)
+                                <input type="radio" name="size" value="size" class="checkboxsize" checked="">
+                              
+                                @endif
                                   Product Size </label>
                                 </div>
                                 </div>
                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                 <div class="checkbox">
                                 <label>
-                                    <input type="radio" name="size"  value="dim" class="checkboxsize">
+                                    @if($product_dimension->count() > 0)
+                                    <input type="radio" name="size"  value="dim" class="checkboxsize" checked="">
+                                   
+                                     @endif
                                     Product Dimension
                                 </label>
                              </div>
@@ -123,6 +130,14 @@
                            <div class="form-group {{ $errors->has('price') ? ' has-error' : '' }}" id="main_price">
                             <label for="price" class="col-sm-3 control-label">Price <span>*</span></label>
                             <div class="col-sm-9">
+                                {!! Form::number('price',$value= null, $attributes = ['class'=>'form-control','placeholder'=>'Price','required'=>true])  !!}
+                                @if ($errors->has('price'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('price') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <!-- <div class="col-sm-9">
                             <input type="number" name="price" id="orgprice" class="form-control" placeholder="Price" >
                                
                                 @if ($errors->has('price'))
@@ -130,10 +145,11 @@
                                         <strong>{{ $errors->first('price') }}</strong>
                                     </span>
                                 @endif
-                            </div>
+                            </div> -->
                         </div>
                         <div class="form-group {{ $errors->has('price') ? ' has-error' : '' }}" id="dim_offer" style="display:none">
                             <label for="price" class="col-sm-3 control-label">Discount Offer <span></span></label>
+
                             <div class="col-sm-9">
                            
                            <select name="dim_offer" id="demoffers" class="form-control" >
@@ -190,17 +206,20 @@
                          <div class="form-group {{ $errors->has('p_size') ? ' has-error' : '' }}" style="display:none" id="showdim">
                             <label for="price" class="col-sm-3 control-label">Product Dimension  <span>*</span></label>
                             <div class="col-sm-9 optionBox">
-
+                        @if($product_dimension->count() > 0)
+                        @foreach($product_dimension as $dim)
                             <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;">
                                
-                               <input type="text" id="i" class="form-control" name="p_dimension[]" placeholder="Enter Dimension">
+                               <input type="text" id="i" class="form-control" name="p_dimension[]" placeholder="Enter Dimension" value="{{$dim->p_dimension}}">
                                 
                             </div>
                             <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;">
                                
-                               <input type="text"  id="inpu" class="form-control" name="p_price[]" placeholder="Enter Price">
+                               <input type="text"  id="inpu" class="form-control" name="p_price[]" placeholder="Enter Price" value="{{$dim->p_price}}">
                                 
                             </div>
+                            @endforeach
+                            @endif
                             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 block" style="padding-top: 5px;">
                             <span class="add" style=""><i class="fa fa-plus"></i></span>
                         </div>
@@ -212,12 +231,12 @@
                             <div class="col-sm-9">
                               <select multiple="multiple" name="p_size[]" class="form-control select2" id="size_select" style="width:100%">
                               <option disabled>Select size</option>
-                                <option value="s">S</option>
-                                <option value="m">M</option>
-                                <option value="l">L</option>
-                                <option value="xl">XL</option>
-                                <option value="xxl">XXL</option>
-                                <option value="xxxl">XXXL</option>
+                                <option value="s" {{$product_size[0]->p_size == 's' ? 'selected="selected"' : ''}}>S</option>
+                                <option value="m" {{$product_size->p_size == 'm' ? 'selected="selected"' : ''}}>M</option>
+                                <option value="l" {{$product_size->p_size == 'l' ? 'selected="selected"' : ''}}>L</option>
+                                <option value="xl" {{$product_size->p_size == 'xl' ? 'selected="selected"' : ''}}>XL</option>
+                                <option value="xxl" {{$product_size->p_size == 'xxl' ? 'selected="selected"' : ''}}>XXL</option>
+                                <option value="xxxl" {{$product_size->p_size == 'xxxl' ? 'selected="selected"' : ''}}>XXXL</option>
                             </select>
                                
                                 @if ($errors->has('p_size'))
@@ -343,7 +362,57 @@
 @stop
 @section('footer')
 <script src="{{ asset('assets/tinymce/tinymce.min.js') }}"></script>
+ <script>
+    $( document ).ready(function() {
+    
+        if($('.checkboxsize').val() == 'size'){
+            $('#showsize').show();
+            $('#showdim').hide();
+            $('#main_price').show();
+             $('#main_sale').show();
+             $('#dim_offer').hide();
+            }else{
+               
+           $('#showdim').show();
+           $('#showsize').hide();
+           $('#main_price').hide();
+           $('#main_sale').hide();
+            $('#dim_offer').show();
+        }
+    
+});
+    var maxAppend = 0;
+$('.checkboxsize').change(function(){
+    if($(this).is(":checked")){
+        if($(this).val() == 'size'){
+            $('#showsize').show();
+            $('#showdim').hide();
+            $('#main_price').show();
+             $('#main_sale').show();
+             $('#dim_offer').hide();
+            }else{
+           
+           $('#showdim').show();
+           $('#showsize').hide();
+           $('#main_price').hide();
+           $('#main_sale').hide();
+            $('#dim_offer').show();
+        }
+    }
+});
 
+        $('.add').click(function() {
+            if (maxAppend >= 5) return;
+            $('.block:last').before('<div class="block"> <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;"><input type="text"  class="form-control" name="p_dimension[]" placeholder="Enter Dimension"/></div><div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;"><input type="text" class="form-control" name="p_price[]" placeholder="Enter Price" /></div><span class="col-xs-2 col-sm-2 col-md-2 col-lg-2 remove" style="padding-top: 5px;"><i class="fa fa-minus"></i></span></div>');
+            maxAppend++;
+        });
+        $('.optionBox').on('click','.remove',function() {
+            $(this).parent().remove();
+        });
+  $('#color_select select').multipleSelect();
+    
+        $('#size_select select').multipleSelect();
+    </script>
     <script>
          tinymce.init({
     selector: '.tex-editor',
@@ -400,6 +469,75 @@
             }catch (e){
                 console.error(e);
             }
+
+        });
+
+           $(function () {
+            //Initialize Select2 Elements
+            try {
+                $("#color_select").select2({
+                    placeholder:"Select Colors"
+                });
+            }catch (e){
+                console.error(e);
+            }
+            try {
+                //iCheck for checkbox and radio inputs
+                $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+                    checkboxClass: 'icheckbox_minimal-blue',
+                    radioClass: 'iradio_minimal-blue'
+                });
+                //Red color scheme for iCheck
+                $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+                    checkboxClass: 'icheckbox_minimal-red',
+                    radioClass: 'iradio_minimal-red'
+                });
+            }catch (e){
+                console.error(e);
+            }
+
+        });
+
+           $(function () {
+            //Initialize Select2 Elements
+            try {
+                $("#size_select").select2({
+                    placeholder:"Select Size"
+                });
+            }catch (e){
+                console.error(e);
+            }
+            try {
+                //iCheck for checkbox and radio inputs
+                $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+                    checkboxClass: 'icheckbox_minimal-blue',
+                    radioClass: 'iradio_minimal-blue'
+                });
+                //Red color scheme for iCheck
+                $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+                    checkboxClass: 'icheckbox_minimal-red',
+                    radioClass: 'iradio_minimal-red'
+                });
+            }catch (e){
+                console.error(e);
+            }
+
+        });
+        $('#offers').change(function(){
+           var val= $(this).val();
+           if(val != ''){
+                var original_price = $('#orgprice').val();
+                var discountprice=original_price/100*val;
+                var saledec =original_price-discountprice;
+                var sale =Math.round(saledec)
+               // alert(sale);
+                $('#salepricemain').show();
+                $('#saleprice').val(sale);
+           }
+           else{
+               $('#salepricemain').hide();
+           }
+           
 
         });
     </script>
