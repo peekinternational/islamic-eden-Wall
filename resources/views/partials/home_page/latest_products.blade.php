@@ -52,7 +52,7 @@
             </div>
             <div class="overlay">
                 <a href="{{url('category/table-decor')}}" class="btn btn-lg btn-block"><span>TABLE DECOR</span></a>
-            </div>a
+            </div>
         </div>
         <div class="col-md-3 col-sm-3">
             <div class="gridview-pic2">
