@@ -1,0 +1,20 @@
+.shop-itemm{
+	padding: 0;
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+    width: 23.64%;
+    margin-right: 12px;
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+.editi_res{
+	display: block;
+}
+.description-dash{
+  width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+}

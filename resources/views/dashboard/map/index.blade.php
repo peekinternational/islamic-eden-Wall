@@ -1,4 +1,4 @@
-<!-- @extends('dashboard.layouts.default')
+ @extends('dashboard.layouts.default')
 @section('content')
     <section class="content">
         <div class="box">
@@ -312,14 +312,14 @@
                     }]
             }];
         <?php
-            $map_lat //= "40.714224";
-            $map_lng //= "-73.961452";
+            $map_lat = "40.714224";
+            $map_lng = "-73.961452";
 
-            // if(isset($map['lat']['value']) && !empty($map['lat']['value'])){
-            //     $map_lat = $map['lat']['value'];
-            // }
-            // if(isset($map['lng']['value']) && !empty($map['lng']['value'])){
-            //     $map_lng = $map['lng']['value'];
+            if(isset($map['lat']['value']) && !empty($map['lat']['value'])){
+             $map_lat = $map['lat']['value'];
+            }
+             if(isset($map['lng']['value']) && !empty($map['lng']['value'])){
+                $map_lng = $map['lng']['value'];
             }
         ?>
         jQuery.getJSON('http://maps.googleapis.com/maps/api/geocode/json?latlng={{ $map_lat }},{{ $map_lng }}', function (data)
@@ -365,6 +365,6 @@
             //type your map title and description here
             attachSecretMessage(marker, '<h3>Map title</h3><p>Map HTML description</p>');
         
-//     </script>
-// @stop
- -->
+   </script>
+ @stop
+ 

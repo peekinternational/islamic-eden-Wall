@@ -68,7 +68,7 @@ $style = [
             <td style="{{ $style['email-wrapper'] }}" align="center">
                 <table width="100%" cellpadding="0" cellspacing="0">
                     <!-- Logo -->
-                    <tr>
+                      <tr>
                         <td style="{{ $style['email-masthead'] }}">
                             <a style="{{ $fontFamily }} {{ $style['email-masthead_name'] }}" href="{{ url('/') }}" target="_blank">
                                 {{ config('app.name') }}
@@ -84,40 +84,40 @@ $style = [
                                     <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">
                                         <!-- Greeting -->
                                         <h1 style="{{ $style['header-1'] }}">
-                                         {{ config('app.name') }} Order completed successfully.
+                                         {{ config('app.name') }} Order {{ucfirst($status)}} Now.
                                         </h1>
 
                                         <p style="{{ $style['paragraph'] }}">
                                             Dear {{ $order->address_name }},
                                         </p>
                                         <p style="{{ $style['paragraph'] }}">
-                                             Your order compleated successfully. Following is the details of your order.
+                                             Your order {{ucfirst($status)}} Now. Following is the details of your order.
                                         </p>
                                         <div>
                                          <table border="1" width="100%">
                                                 <tr>
-                                                    <th width="30%">Name</td>
-                                                    @if(isset($pro['price']))
-                                                        <th>Price</th>
-                                                    @endif
+                                                    <th width="30%">Name</th>
+                                                    <th width="30%">Price</th>
+                                                    <th width="20%">Quantity</th>
                                                     
-                                                    <th width="20%">Quantity</td>
-                                                    <th width="20%">Tax</td>
-                                                    <th width="30%">SubTotal</td>
+                                                    <th width="30%">Total</th>
                                                 </tr>
-                                                @for($i=1;$i<=$order['num_cart_items'];$i++)
+                                                @for($i=1;$i<=$order->num_cart_items;$i++)
                                                 
                                                 <tr>
-                                                    <td>{{ $pro->name }}</td>
-                                                    @if(isset($pro->price))
-                                                        <th>{{ (float)$pro->price }}</th>
+                                                    <td>{{ $product[$i-1]->name }}</td>
+                                                    @if(isset($product[$i-1]->price))
+                                                        <td>{{ (float)$product[$i-1]->price }}</td>
                                                     @endif
                                                    
-                                                    <td>{{ $pro->quantity }}</td>
+                                                    <td>{{ $product[$i-1]->quantity }}</td>
                                                     
                                                 </tr>
                                                 @endfor
-                                              
+                                               <tr>
+                                                    <th colspan="3">Total</th>
+                                                     <td>&euro; {{ $total }}</td>
+                                                </tr>
                                             </table>
                                         </div>
                                         
@@ -133,8 +133,9 @@ $style = [
                 </table>
             </td>
         </tr>
-
+      </table>
         <!-- Footer -->
+		<table>
         <tr>
             <td>
                 <table style="{{ $style['email-footer'] }}" align="center" width="570" cellpadding="0" cellspacing="0">
@@ -151,8 +152,6 @@ $style = [
             </td>
         </tr>
     </table>
-    </td>
-    </tr>
-    </table>
+   
 </body>
 </html>

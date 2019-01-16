@@ -10,9 +10,10 @@
 @section('content')
     <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_100 section_padding_bottom_75 columns_padding_25">
         <div class="container">
-            <div class="row">
+            <div class="row respnsve-row">
+            {{$success}}
                 <form target="paypal" class="form-horizontal checkout shop-checkout" action="{{ isset($PaymentSettings['payment_mood']['value']) && $PaymentSettings['payment_mood']['value']=='live'?'https://www.paypal.com/cgi-bin/webscr':'https://www.sandbox.paypal.com/cgi-bin/webscr' }}" method="post">
-                <div class="col-sm-7 col-md-8 col-lg-8">
+                <div class="col-sm-7 col-md-8 col-lg-8" style="width: 63%;">
 
                     {{--<input type="hidden" name="country" value="Us" />--}}
                     {{--<input type="hidden" name="first_name" value="shah" />
@@ -27,18 +28,29 @@
 
                         <?php $i =0;
                         $user_id=rand();
+						$size='';
 						?>
 						<input type="hidden" name="custom" value="{{ $user_id}}">
                         @foreach($cart->getItems() as $item)
-                        <?php $i++; ?>
+                        <?php $i++; 
+						if($item->p_size){
+							$size=$item->p_size;
+						}else{
+							$size=$item->p_dimension;
+						}
+						?>
                         <input type="hidden" name="quantity_{{ $i }}" value="{{ $item->qty }}">
                         <input type="hidden" name="item_name_{{ $i  }}" value="{{ $item->name }}">
-                        <input type="hidden" name="item_number_{{ $i  }}" value="PR-{{ $item->id }}">
+                        <input type="hidden" name="p_id{{ $i  }}" value="{{ $item->id }}">
                         <input type="hidden" name="amount_{{ $i  }}" value="{{ $item->price }}">
+						<input type="hidden" name="p_size{{ $i  }}" value="{{ $size }}">
+						<input type="hidden" name="color_{{ $i  }}" value="{{ $item->color }}">
+						
 						 
                         <!--<input type="hidden" name="shipping_1" value="0.01">
                         <input type="hidden" name="tax_1" value="0.02">-->
                         @endforeach
+						<input type="hidden" name="total" value="{{ $i }}">
                         <!-- End First Item -->
 
 
@@ -214,7 +226,7 @@
                           </div>
                 </div>
 
-                <aside class="col-sm-5 col-md-4 col-lg-4">
+                <aside class="col-sm-5 col-md-4 col-lg-4" style="margin-left: 30px;">
                     <h3 class="widget-title" id="order_review_heading">Your order</h3>
                     <div id="order_review" class="shop-checkout-review-order">
                         <table class="table shop_table shop-checkout-review-order-table">
@@ -309,7 +321,28 @@
                     </div>
                 </aside>
                 </form>
+                <div class="col-sm-offset-8 col-sm-4" style="margin-top: -192px;">
+                            <div class="coupon with_padding muted_background">
+                                <h3 class="topmargin_0">Discount Codes</h3>
+                                <p>Enter coupon code if you have one</p>
+                                
+                                <form action="{{url('couponcode')}}" method="POST" role="form">
+                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                   <div class="form-group">
+                                    <label class="sr-only" for="coupon_code">Coupon:</label>
+                                    <input type="text" name="coupon_code" class="form-control" id="coupon_code" value="" placeholder="Coupon code">
+                                </div>
+                                <button class="button-t1" type="submit">Apply Coupon</button>
+                                </form>
+                                
+                                
+                            </div>
+                        </div>
             </div>
+              
+                        
+                        
+                    
         </div>
     </div>
 @stop

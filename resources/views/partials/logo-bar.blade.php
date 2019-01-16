@@ -1,5 +1,4 @@
 
-
 <div class="top_header_bg hidden-xs">
     <div id="home" class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} page_toplogo">
         <div class="container">
@@ -81,7 +80,7 @@
                                 My Cart (0):$0
                             @endif
                            </span>
-                           <button class="btn checkout-btn">Checkout</button>
+                           <a href="{{asset('/checkout')}}" class="btn checkout-btn">Checkout</a>
 
                     </a>
                     @if($cart_items > 0)

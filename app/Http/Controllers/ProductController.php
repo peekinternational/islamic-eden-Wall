@@ -36,11 +36,12 @@ class ProductController extends Controller
         $cat = $produt->category;
         return $category;*/
         $products = Products::orderBy('id','desc')->paginate(10);
+         // dd($products);
 
          foreach($products as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
                 }
-            // dd($products);
+             // dd($products);
          return view('products',compact('products'));
 
     }
@@ -54,7 +55,7 @@ class ProductController extends Controller
     {
         $this->breadcrumb['page']  = 'Products List';
         $breadcrumb = $this->breadcrumb;
-        $products = Products::orderBy('id','desc')->paginate(10);
+        $products = Products::orderBy('id','desc')->paginate(12);
         return view('dashboard.products.index',compact('products','breadcrumb'));
     }
 
@@ -80,7 +81,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     { 
-    // dd($request->file('photos'));
+    
         
         
         if(!$request->has('slug')){
@@ -219,8 +220,10 @@ class ProductController extends Controller
         $this->breadcrumb['page']  = 'Edit Products';
         $breadcrumb = $this->breadcrumb;
         $product = Products::findOrFail($id);
+        // dd($product);
         $tags = Tags::pluck('name','id');
         $categories = Category::pluck('name','id');
+
         return view('dashboard.products.edit',compact('product','breadcrumb','tags','categories'));
     }
 
@@ -233,10 +236,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request->all());
         if(!$request->has('slug')){
             $request->merge(['slug'=>str_slug($request->input('name'))]);
         }
         $product = Products::findOrFail($id);
+        // dd($product);
         //return $request->all();
         $this->validate($request,[
                 'name' => 'required',
@@ -247,6 +252,9 @@ class ProductController extends Controller
         ],[],[
                 'name' => 'title'
         ]);
+
+
+
         $product->fill($request->all());
         $product->save();
         session()->flash('__response', ['notify'=>'Product "'.$product->name.'" updated successfully.','type'=>'success']);
@@ -329,7 +337,6 @@ class ProductController extends Controller
         foreach($products as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
                 }
-           // dd($products);
-        return view('products',compact('products'));
+         return view('products',compact('products'));
     }
 }

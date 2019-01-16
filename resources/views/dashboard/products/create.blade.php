@@ -52,10 +52,21 @@
                         <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
                             <label for="description" class="col-sm-3 control-label">Description</label>
                             <div class="col-sm-9">
-                                {!! Form::textarea('description',$value= null, $attributes = ['class'=>'form-control','placeholder'=>'Description'])  !!}
+                                {!! Form::textarea('description',$value= null, $attributes = ['class'=>'form-control tex-editor','placeholder'=>'Description'])  !!}
                                 @if ($errors->has('description'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
+                            <label for="description" class="col-sm-3 control-label">Addtional Information</label>
+                            <div class="col-sm-9">
+                                {!! Form::textarea('Addtional_Information',$value= null, $attributes = ['class'=>'form-control tex-editor','placeholder'=>'Addtional_Information'])  !!}
+                                @if ($errors->has('Addtional_Information'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('Addtional_Information') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -296,7 +307,7 @@
                         <div class="form-group {{ $errors->has('meta_description') ? ' has-error' : '' }}">
                             <label for="meta_description" class="col-sm-3 control-label">Meta Description</label>
                             <div class="col-sm-9">
-                                {!! Form::textarea('meta_description',$value= null, $attributes = ['class'=>'form-control','placeholder'=>'Meta Description'])  !!}
+                                {!! Form::textarea('meta_description',$value= null, $attributes = ['class'=>'form-control tex-editor','placeholder'=>'Meta Description'])  !!}
                                 @if ($errors->has('meta_description'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('meta_keywords') }}</strong>
@@ -338,7 +349,27 @@
 @stop
 @section('footer')
 <script src="{{ asset('assets/backend/dist/js/jquery.imageuploader.js') }}"></script>
+<script src="{{ asset('assets/tinymce/tinymce.min.js') }}"></script>
+
 <script>
+    // editor
+    tinymce.init({
+    selector: '.tex-editor',
+    setup: function (editor) {
+        editor.on('change', function () {
+            editor.save();
+        });
+    },
+    height: 200,
+    menubar: false,
+    plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table contextmenu paste code'
+    ],
+    toolbar: 'styleselect | bold italic | alignleft aligncenter alignright alignjustify bullist numlist outdent indent | link'
+});
+    // end editor
 (function(){
             var options = {};
             $('.js-uploader__box').uploader(options);

@@ -49,7 +49,7 @@
 <div class="form-group {{ $errors->has('meta_description') ? ' has-error' : '' }}">
     <label for="meta_description" class="col-sm-2 control-label">Meta Description</label>
     <div class="col-sm-10">
-        {!! Form::textarea('meta_description',$value=null, $attributes = ['class'=>'form-control','id'=>'meta_description','placeholder'=>'Meta Description'])  !!}
+        {!! Form::textarea('meta_description',$value=null, $attributes = ['class'=>'form-control ckeditor','id'=>'meta_description','placeholder'=>'Meta Description'])  !!}
         @if ($errors->has('meta_description'))
             <span class="help-block">
                 <strong>{{ $errors->first('meta_description') }}</strong>

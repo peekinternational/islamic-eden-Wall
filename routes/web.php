@@ -15,6 +15,7 @@ Route::get('products/price','ProductController@price_filter');
 Route::get('shop/gift-vouchers','GiftVouchersController@showPage');
 Route::get('checkout/gift-vouchers','CartController@giftVoucherCheckout');
 Route::get('checkout','CartController@checkout')->name('cart.checkout');
+Route::post('couponcode','CartController@couponcode')->name('cart.coupon');
 //Route::get('file/{file}','FileController@getFile');
 Route::get('images/{image}','FileController@images')->name('images');
 Route::post('cart/update/all', 'CartController@update_all');
@@ -40,6 +41,11 @@ Route::get('{slug}/page','PagesController@show_page');
 route::get( '/contact', function(){
     return view('contact');
 });
+// contact-us
+route::get( '/contact-us', 'SettingsController@contact_us');
+// end contact us
+
+
 Route::post('login', ['as' => 'login', 'uses' => 'Auth\LoginController@login']);
 Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
 Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
@@ -59,6 +65,7 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     Route::post('upload', 'SettingsController@upload');
     Route::resource('users', 'UserController');
     Route::resource('orders', 'OrderController');
+	Route::get('changestatus/{id}', 'OrderController@updatestatus');
     Route::get('blog/published', 'BlogController@published');
     Route::get('blog/un-published', 'BlogController@unPublished');
     Route::resource('blog', 'BlogController');

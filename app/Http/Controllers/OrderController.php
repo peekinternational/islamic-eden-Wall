@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Edenmill\Http\Requests;
 use DB;
+use Mail;
 class OrderController extends Controller
 {
     /**
@@ -32,6 +33,28 @@ class OrderController extends Controller
     public function create()
     {
         //
+    }
+	
+	 public function updatestatus(Request $request, $id)
+    {
+       // dd($request->all());
+		$return=DB::table('orders')->where('id','=',$id)->update($request->all());
+		if($return== 1){
+			$data= DB::table('orders')->where('id','=',$id)->get();
+			 $pro= DB::table('order_products')->join('products', 'order_products.product_id', '=', 'products.id')->select('order_products.*', 'products.name')->where('order_products.order_id','=',$id)->get();
+			  $sum= DB::table('order_products')->join('products', 'order_products.product_id', '=', 'products.id')->select('order_products.*', 'products.name')->where('order_products.order_id','=',$id)->sum('order_products.price');
+			// dd($pro);
+			$email['email'] = $data[0]->payer_email;
+            $toemail =$email['email'];
+			 Mail::send('emails.order_status',['order' =>$data[0],'product' =>$pro,'total'=>$sum,'status'=>$data[0]->delivery_status],
+                        function ($message) use ($toemail)
+                        {
+                            $message->subject('Islamic Wall - Order Status');
+                            $message->from('nabeelirbab@gmail.com', 'Islamic Wall');
+                            $message->to($toemail);
+                         });
+		return $data;
+		}
     }
 
     /**
