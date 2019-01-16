@@ -220,11 +220,27 @@ class ProductController extends Controller
         $this->breadcrumb['page']  = 'Edit Products';
         $breadcrumb = $this->breadcrumb;
         $product = Products::findOrFail($id);
-        // dd($product);
+        $product_dimension = DB::table('product_dimension')->where('product_id','=',$product->id)->get();
+        $product_color = DB::table('product_color')->where('product_id','=',$product->id)->get();
+        $product_size = DB::table('product_size')->where('product_id','=',$product->id)->get();
+        
+//dd($product_size);
+        // join query
+
+        // $product=DB::table('products')->
+        //      join('product_dimension','products.id','=','product_dimension.product_id')->
+        //      join('product_color','product_color.product_id','=','products.id')->
+        //      join('product_size','product_size.product_id','=','products.id')->
+        //      where('products.id','=',$id)->first();
+        //      DD($product);
+
         $tags = Tags::pluck('name','id');
         $categories = Category::pluck('name','id');
 
-        return view('dashboard.products.edit',compact('product','breadcrumb','tags','categories'));
+
+             
+
+        return view('dashboard.products.edit',compact('product','breadcrumb','tags','categories','product_dimension','product_color','product_size'));
     }
 
     /**
@@ -236,7 +252,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
+       // dd($request->all());
         if(!$request->has('slug')){
             $request->merge(['slug'=>str_slug($request->input('name'))]);
         }
@@ -253,7 +269,13 @@ class ProductController extends Controller
                 'name' => 'title'
         ]);
 
-
+       $size=$request->input('p_size');
+       $p_color=$request->input('color');
+       $p_dimension=$request->input('p_dimension');
+       $p_price=$request->input('p_price');
+       //dd($p_price[0]);
+       $dim_offer=$request->input('dim_offer');
+       
 
         $product->fill($request->all());
         $product->save();
@@ -277,6 +299,44 @@ class ProductController extends Controller
                 }
             }
         }
+
+        foreach($p_color as $colors )
+              {
+                  $input['color']=$colors;
+                  $input['product_id']=$product->id;
+                  DB::table('product_color')->where('product_id','=',$product->id)->update($input);
+              }
+
+              if($size){
+              foreach($size as $pro_size )
+              {
+                  $inputs['p_size']=$pro_size;
+                  $inputs['product_id']=$product->id;
+                  DB::table('product_size')->where('product_id','=',$product->id)->update($inputs);
+              }
+             }
+              if($dim_offer){
+                      
+                   foreach($p_price as $key=>$price){
+                                $original_price = $price;
+                                $discountprice=$original_price/100*$dim_offer;
+                                $saledec =$original_price-$discountprice;
+                                $sale =round($saledec);
+                                $inputsss['p_price']=$price;
+                                $inputsss['dimoffer_price']=$sale;
+                                $inputsss['dim_offer']=$dim_offer;
+                                $inputsss['p_dimension']=$p_dimension[$key];
+                                $inputsss['product_id']=$product->id;
+                                DB::table('product_dimension')->where('product_id','=',$product->id)->update($inputsss);
+                            }
+                        }elseif($p_price[0] !=''){   
+                                foreach($p_price as $key=>$price){
+                                $inputss['p_price']=$price;
+                                $inputss['p_dimension']=$p_dimension[$key];
+                                $inputss['product_id']=$product->id;
+                                DB::table('product_dimension')->where('product_id','=',$product->id)->update($inputss);
+                        }
+                  }
 
         return back();
     }

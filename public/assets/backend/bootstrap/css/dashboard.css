@@ -18,3 +18,16 @@
   white-space: nowrap;
   display: inline-block;
 }
+@media  only screen and (max-width: 767px){
+	.shop-itemm{
+	padding: 0;
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    margin-right: 12px;
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+}
+

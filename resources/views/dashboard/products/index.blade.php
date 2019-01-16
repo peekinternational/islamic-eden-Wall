@@ -6,6 +6,7 @@
         <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_120 section_padding_bottom_85">
         <div class="container responsive">
             <div class=" row box-header with-border">
+              <div class="col-sm-8 col-md-9 col-lg-9" style="margin-left: 10px;">
                 <h3 class="box-title">Products</h3>
                 <div class="box-tools pull-right">
                     <a href="{{ action('ProductController@create') }}" type="button" class="btn btn-box-tool"  data-toggle="tooltip" title="New Product">
@@ -117,7 +118,8 @@
                             </td>
                         </tr> -->
                     @endforeach
-                     </ul>
+                    
+                    <!--  </ul>
                     @if($products->isEmpty())
                         <tr>
                             <td colspan="7">
@@ -126,7 +128,8 @@
                                 </p>
                             </td>
                         </tr>
-                    @endif
+                    @endif -->
+                </div>
              </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
