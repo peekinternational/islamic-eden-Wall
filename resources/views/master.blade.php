@@ -42,8 +42,18 @@
 <script src="{{ asset('assets/js/script.js') }}"></script>
 <script>
 function paypalcheckout() {
-        alert('hello');
         
+        if($('#first_name').val() == ''){
+			alert('Requried all fields');
+			return 0;
+		}else if($('#last_name').val() == ''){
+			alert('Requried all fields');
+			return 0;
+		}
+		else if($('#address').val() == ''){
+			alert('Requried all fields');
+			return 0;
+		}
         var formVal = $('form.shop-checkout').serialize();
 		console.log(formVal);
         var actionUrl = "{{ url('/pay2')}}";

@@ -18,6 +18,7 @@ use Edenmill\GiftOrders;
 use LukePOLO\LaraCart\Facades\LaraCart;
 
 use DB;
+use Session;
 class PaymentsController extends Controller
 {
 	
@@ -133,7 +134,7 @@ class PaymentsController extends Controller
 									$dd=OrderProducts::create([
 															'order_id' => $order,
 															'product_id' => $product->id,
-															'price' => $request->input('amount_'.$i),
+															'price' => $request->input('price_'.$i),
 															'quantity' => $request->input('quantity_'.$i),
 															'p_size' => $request->input('p_size'.$i),
 															'color' => $request->input('color_'.$i),
@@ -180,9 +181,11 @@ class PaymentsController extends Controller
 		return 'false';
 	}
 	
-		public function thanks(){
+		public function thanks(Request $request){
 		if(isset($_GET['clear_cart']) && $_GET['clear_cart']=='true'){
 			 LaraCart::destroyCart();
+			 
+			 $request->session()->forget('coupon');
 		}
 		return view('thanks');
 	}

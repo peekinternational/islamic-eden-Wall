@@ -73,15 +73,15 @@
             </div> -->
             <!-- featured Products sections -->
           <h3  class="title-featured text-center" style="    margin-bottom: 38px;     margin-top: 38px;"> <i class="fa fa-chevron-left"></i> <span>Featured Product</span> <i class="fa fa-chevron-right"></i></h3>
-            
-            @foreach($latest_products->chunk(5) as $key=>$products)
            
+            @foreach($latest_products->chunk(5) as $key=>$products)
+			
                 <div class="row product-row">
                     @foreach($products as $key=>$pro)
 
                      @if($key < 5)
 
-                    @if($pro->offer == "")
+                    @if($pro->dimension && $pro->dimension[0]->dim_offer == "")
                         <div class="col-md-2-5" style="width: 20%;">
                             <figure class="banner-01__img">
                                 <a class="banner-01__img-wrapp" href="{{ url('product/'.$pro->slug) }}">

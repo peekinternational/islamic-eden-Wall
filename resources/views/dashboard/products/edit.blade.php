@@ -232,11 +232,11 @@
                               <select multiple="multiple" name="p_size[]" class="form-control select2" id="size_select" style="width:100%">
                               <option disabled>Select size</option>
                                 <option value="s" {{$product_size[0]->p_size == 's' ? 'selected="selected"' : ''}}>S</option>
-                                <option value="m" {{$product_size->p_size == 'm' ? 'selected="selected"' : ''}}>M</option>
-                                <option value="l" {{$product_size->p_size == 'l' ? 'selected="selected"' : ''}}>L</option>
-                                <option value="xl" {{$product_size->p_size == 'xl' ? 'selected="selected"' : ''}}>XL</option>
-                                <option value="xxl" {{$product_size->p_size == 'xxl' ? 'selected="selected"' : ''}}>XXL</option>
-                                <option value="xxxl" {{$product_size->p_size == 'xxxl' ? 'selected="selected"' : ''}}>XXXL</option>
+                                <option value="m" {{$product_size[0]->p_size == 'm' ? 'selected="selected"' : ''}}>M</option>
+                                <option value="l" {{$product_size[0]->p_size == 'l' ? 'selected="selected"' : ''}}>L</option>
+                                <option value="xl" {{$product_size[0]->p_size == 'xl' ? 'selected="selected"' : ''}}>XL</option>
+                                <option value="xxl" {{$product_size[0]->p_size == 'xxl' ? 'selected="selected"' : ''}}>XXL</option>
+                                <option value="xxxl" {{$product_size[0]->p_size == 'xxxl' ? 'selected="selected"' : ''}}>XXXL</option>
                             </select>
                                
                                 @if ($errors->has('p_size'))
