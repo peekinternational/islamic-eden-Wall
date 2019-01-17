@@ -41,6 +41,12 @@
             
                     <div class="subnav">
                         <a href="{{ $url }}" class="subnavbtn">{{ $nav->title }} </a>
+                        @if($nav->title=='HOME')
+                        @elseif($nav->title=='AbOUT')
+                        @elseif($nav->title=='contact')
+                         @elseif($nav->title=='BLOG')
+                        @else
+
                         
                             <div class="row sub-menu">
                                 <div class="subnav-content sub-align  affix-top">
@@ -94,6 +100,7 @@
                         @endforeach
                             </div>
                             </div>
+                            @endif
                         </div>
                         @endif
                         @endforeach

@@ -7,8 +7,8 @@
             </li>
             @if($ProductCategories->count()>0)
                 @foreach($ProductCategories as $category)
-                    <li>
-                        <a href="{{ url('category/'.str_slug($category->name)) }}">{{ $category->name }}</a>
+                    <li class="active">
+                        <a href="{{ url('category/'.str_slug($category->name)) }}  " id="{{$category->id}}" class="acticecate">{{ $category->name }}</a>
                     </li>
                 @endforeach
             @endif
@@ -74,3 +74,6 @@
         </ul>
     </div> -->
 </aside>
+<script>
+
+</script>
