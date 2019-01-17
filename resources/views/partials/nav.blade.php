@@ -52,11 +52,11 @@
                                 <div class="subnav-content sub-align  affix-top">
                                 @foreach($nav->sub_navs as $sub_nav)
                                 
-                                <div class="col-md-2 col-lg-2">
+                                <div class="col-md-2 col-lg-2 sub-men">
                             @if($nav->slug == 'shop')
-                            <a href="{{ url('shop/'.$sub_nav->slug) }}" ><b>{{ $sub_nav->title }}</b></a>
+                            <a class="sub-men" href="{{ url('shop/'.$sub_nav->slug) }}" ><b>{{ $sub_nav->title }}</b></a>
                             
-                            <div class="">
+                            <div class="sub-men">
                                 @foreach($sub_nav->more_subnav as $msub_nav)
                                 
                                 <div class="col-md-12 col-lg-12">
