@@ -44,6 +44,7 @@
                         @if($nav->title=='HOME')
                         @elseif($nav->title=='About')
                         @elseif($nav->title=='contact')
+                        @elseif($nav->title=='home goods')
                          @elseif($nav->title=='BLOG')
                         @else
 
@@ -59,7 +60,7 @@
                             <div class="sub-men">
                                 @foreach($sub_nav->more_subnav as $msub_nav)
                                 
-                                <div class="col-md-12 col-lg-12">
+                                <div class="col-md-7 col-lg-7">
                                     
                                     <a href="{{ url('shop/'.$sub_nav->slug) }}" style="color: #989898;">{{ $msub_nav->title }}</a>
                                                         
