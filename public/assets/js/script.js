@@ -1535,5 +1535,13 @@ jQuery( function() {
 		$(document).ready(function() {
 		    $(this).scrollTop(0);
 		});
+	$("a[name='category']").on('click', function(){ 
+    //tried this by given answer which not worked 
+    var category_id = $(this).attr("id"); 
+    ('.categories li').removeClass('active'); 
+    $(this).addClass('active'); 
+    //ended code 
+   
+});
 }( jQuery )); 
 //# sourceMappingURL=script.js.map

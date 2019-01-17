@@ -41,6 +41,15 @@
 
 <script src="{{ asset('assets/js/script.js') }}"></script>
 <script>
+    $('a.acticecate').on('click', function(){ 
+    //tried this by given answer which not worked 
+    var category_id = $(this).attr("id"); 
+    //alert(category_id) ;
+    $('.acticecate').parent().removeClass('active'); 
+     $(this).parent().addClass('active'); 
+    //ended code 
+   
+});
 function paypalcheckout() {
         
         if($('#first_name').val() == ''){
