@@ -42,7 +42,7 @@
                     <div class="subnav">
                         <a href="{{ $url }}" class="subnavbtn">{{ $nav->title }} </a>
                         @if($nav->title=='HOME')
-                        @elseif($nav->title=='AbOUT')
+                        @elseif($nav->title=='about')
                         @elseif($nav->title=='contact')
                          @elseif($nav->title=='BLOG')
                         @else
