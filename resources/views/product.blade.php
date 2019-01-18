@@ -142,7 +142,7 @@
                              @if($product_dimension->count()>0)
                                  
                                      <div style="display: -webkit-box;">
-                                    <span>Dimension:</span>
+                                    <span>size:</span>
                                    @foreach($product_dimension as $key=>$dimension)
                                     
                                     @if($dimension->dim_offer)
@@ -276,7 +276,7 @@ $(document).ready(function() {
          
      return true;
       }else{
-          $('#selcol').html('<span style="color:red">Please Select Color</span>');
+          $('#selcol').html('<span style="color:red">Please Select Color/Size</span>');
           e.preventDefault();
           return false;
       }
