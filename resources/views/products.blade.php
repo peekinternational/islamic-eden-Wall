@@ -30,7 +30,7 @@
 
                         <li class="shop-item product type-product item-list">
 
-                            <div class="side-item">
+                            <div class="side-item box">
                                 <figure class="item-media shop-item__img">
                                     <a href="{{ url('product/'.$product->slug) }}">
                                         <?php
@@ -48,7 +48,7 @@
                                 </figure>
                                 <div class="shop-item__content" style="padding: 0">
                                     <h3 class="shop-item__title">
-                                        <a href="{{ url('/product/'.$product->slug) }}">{{ $product->name }}</a>
+                                        <a class="wrapping-txt" href="{{ url('/product/'.$product->slug) }}">{{ $product->name }}</a>
                                     </h3>
                                     <!-- <div class="shop-item__meta-list">
                                         

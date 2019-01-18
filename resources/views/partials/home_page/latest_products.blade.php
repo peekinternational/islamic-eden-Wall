@@ -82,7 +82,7 @@
                      @if($key < 5)
 
                     @if($pro->offer == "")
-                        <div class="col-md-2-5" style="width: 20%;">
+                        <div class="col-md-2-5 box" style="width: 20%;">
                             <figure class="banner-01__img">
                                 <a class="banner-01__img-wrapp" href="{{ url('product/'.$pro->slug) }}">
                               
@@ -143,7 +143,7 @@
                               @foreach($products as $key =>$product)
                               @if($key < 5)
                               @if($product->offer != "")
-                                  <div class="col-md-2-5 tagsss" style="width: 20%;">
+                                  <div class="col-md-2-5 tagsss box" style="width: 20%;">
                                       <figure class="banner-01__img">
                                           <a class="banner-01__img-wrapp" href="{{ url('product/'.$product->slug) }}">
                                            <!--  {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
@@ -205,7 +205,7 @@
                                     @foreach($posts->chunk(5) as $products)
                                         <div class="row product-row">
                                             @foreach($products as $product)
-                                                <div class="col-md-2-5" style="width: 20%;">
+                                                <div class="col-md-2-5 box" style="width: 20%;">
                                                     <figure class="banner-01__img">
                                                         <a class="banner-01__img-wrapp" href="{{ action('BlogController@showPost',$product->id) }}">
                                                           <!-- {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
