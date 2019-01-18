@@ -53,7 +53,7 @@
 							 <td>{{ $order->discount }}</td>
                             <td>{{ $order->expiry_date }}</td>
                             <td><span class="btn-edit">
-                                    <a href="{{ action('ProductController@edit',$product->id) }}" class="btn btn-xs btn-warning" data-toggle="tooltip"  data-original-title="Edit"><i class="fa fa-edit"></i> </a>
+                                    <a href="{{ url('dashboard/editcoupon/'.$order->id) }}" class="btn btn-xs btn-warning" data-toggle="tooltip"  data-original-title="Edit"><i class="fa fa-edit"></i> </a>
                                     {!! Form::open(['action'=>['SettingsController@destroy',$order->id],'method'=>'delete','style'=>'display:inline;']) !!}
                                    <input type="hidden" class="delete_permanent" name="delete_permanent" value="0">
                                     <button type="submit" class="btn btn-xs btn-danger btn-delete-user" data-toggle="tooltip"  data-original-title="Delete"><i class="fa fa-trash-o"></i></button>

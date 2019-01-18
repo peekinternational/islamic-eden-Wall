@@ -10,6 +10,7 @@
                         <i class="fa fa-minus"></i></button>
                 </div>
             </div>
+            <input type="hidden" name="id" value="{{$coupon->id}}">
             <div class="box-body">
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-2">
@@ -29,9 +30,9 @@
                             <label for="email" class="col-sm-3 control-label">Discount Type</label>
                             <div class="col-sm-9">
                                <select name="type" class="form-control">
-                               <option selected>Select Discount Type</option>
-                                 <option value="fixed">Fixed</option>
-                                 <option value="percent">Percent</option>
+                               
+                                 <option value="fixed" {{($coupon->type =='fixed') ? 'selected' : ""}}>Fixed</option>
+                                 <option value="percent" {{($coupon->type =='percent') ? 'selected' : ""}}>Percent</option>
                                </select>
                             </div>
                         </div>
