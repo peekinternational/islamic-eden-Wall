@@ -420,7 +420,7 @@ public function coupon(Request $request){
     {
         $product = DB::table('couponcode')->where('id',$id)->delete();
        
-        session()->flash('__response', ['notify'=>'Product "'.$name.'" deleted successfully.','type'=>'success']);
+        session()->flash('__response', ['notify'=>'Coupon  deleted successfully.','type'=>'success']);
         return back();
     }
 public function contact_us(){
