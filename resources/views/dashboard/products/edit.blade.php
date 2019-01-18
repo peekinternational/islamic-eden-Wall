@@ -226,8 +226,10 @@
 
                         </div>
                         </div>
+						@if($product_size->count() > 0)
                          <div class="form-group {{ $errors->has('p_size') ? ' has-error' : '' }}" style="display:none" id="showsize">
                             <label for="" class="col-sm-3 control-label">Product Size <span>*</span></label>
+							
                             <div class="col-sm-9">
                               <select multiple="multiple" name="p_size[]" class="form-control select2" id="size_select" style="width:100%">
                               <option disabled>Select size</option>
@@ -246,6 +248,7 @@
                                 @endif
                             </div>
                         </div>
+						@endif
                         <div class="form-group {{ $errors->has('categories') ? ' has-error' : '' }}">
                             <label for="category_id" class="col-sm-3 control-label">Product Category</label>
                             <div class="col-sm-9">

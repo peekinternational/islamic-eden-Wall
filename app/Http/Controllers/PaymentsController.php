@@ -120,6 +120,8 @@ class PaymentsController extends Controller
 		$input['payer_email']=$request->input('email');
 		$input['address_country_code']=$request->input('country');
 		$input['mobilenumber']=$request->input('night_phone_a');
+		$request->session()->put('buy_email',$request->input('email'));
+		
 		if($request->input('_token') != null){
          
 			$orderCount =  Orders::where('user_id','=',$request->input('custom'))->count();
@@ -166,7 +168,7 @@ class PaymentsController extends Controller
 			$inputs['num_cart_items']=$request->input('num_cart_items');
 			$orderCount =  DB::table('orders')->where('user_id','=',$request->input('custom'))->update($inputs);
 			if($orderCount){
-                    $email = $request->input('payer_email');
+                    $email = $request->session()->get('buy_email');
 					Mail::to($email)->send(new UserOrderCompleted($_request));
 					$users = User::all();
 					foreach($users as $user){
@@ -186,6 +188,7 @@ class PaymentsController extends Controller
 			 LaraCart::destroyCart();
 			 
 			 $request->session()->forget('coupon');
+			 $request->session()->forget('buy_email');
 		}
 		return view('thanks');
 	}

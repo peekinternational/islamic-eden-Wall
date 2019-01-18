@@ -40,6 +40,7 @@
 <!-- Main libs -->
 
 <script src="{{ asset('assets/js/script.js') }}"></script>
+
 <script>
     $('a.acticecate').on('click', function(){ 
     //tried this by given answer which not worked 
@@ -50,6 +51,26 @@
     //ended code 
    
 });
+	
+   function initMap() {
+   	var lats=$('#lat').val();
+   	var lngs= $('#lng').val();
+	
+   	var myLatLng = new google.maps.LatLng(lats, lngs);
+
+   	var map = new google.maps.Map(document.getElementById('googleMap'), {
+   	zoom: 20,
+   	center: myLatLng
+   	});
+
+   	var marker = new google.maps.Marker({
+   	position: myLatLng,
+   	map: map,
+   	title: 'Hello World!'
+   	});
+   }
+	
+	  
 function paypalcheckout() {
         
         if($('#first_name').val() == ''){
@@ -84,6 +105,7 @@ function paypalcheckout() {
      $("#loading").fadeOut(500);
  });
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1RaWWrKsEf2xeBjiZ5hk1gannqeFxMmw&callback=initMap"></script>
 <!-- Notify -->
 <script src="{{ asset('assets/plugins/notify.js') }}"></script>
 @if(Session::has('__response') && isset(Session::get('__response')['notify']))

@@ -81,7 +81,7 @@
 
                      @if($key < 5)
 
-                    @if($pro->dimension && $pro->dimension[0]->dim_offer == "")
+                    @if($pro->offer == "")
                         <div class="col-md-2-5" style="width: 20%;">
                             <figure class="banner-01__img">
                                 <a class="banner-01__img-wrapp" href="{{ url('product/'.$pro->slug) }}">
@@ -103,27 +103,15 @@
                                     <span>{{ $pro->category['name'] }}</span></a>
                                 </h5>
                                 @if($pro->dimension)
-                                
-                                @if($pro->dimension[0]->dim_offer)
-                                
-                                 
-                                      <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $pro->dimension[0]->p_price }}</small> </strike>
-                                      <span> €{{ $pro->dimension[0]->dimoffer_price }}</span></p>
-                                      
-                                 @else
-                                 
+                               
                                 <p class="text-center"> €{{ $pro->dimension[0]->p_price }} </p>
-                                 @endif
+                                 
                                 
 
                                @else
-                                @if($pro->offer)
-                                <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $pro->offer }} % off</p>
-                                      <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $pro->price }}</small> </strike>
-                                      <span> €{{ $pro->saleprice }}</span></p>
-                                        @else
+                               
                                       <p class="text-center"> €{{ $pro->price }} </p>
-                                      @endif
+                                      
                                     @endif
 
                             </div>
@@ -142,7 +130,7 @@
                           <div class="row product-row">
                               @foreach($products as $key =>$product)
                               @if($key < 5)
-                              @if($product->offer != "")
+                              @if($product->offer != "" || $product->dimension && $product->dimension[0]->dim_offer != "")
                                   <div class="col-md-2-5 tagsss" style="width: 20%;">
                                       <figure class="banner-01__img">
                                           <a class="banner-01__img-wrapp" href="{{ url('product/'.$product->slug) }}">
