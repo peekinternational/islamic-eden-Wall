@@ -75,7 +75,7 @@
                         <div class="form-group {{ $errors->has('color') ? ' has-error' : '' }}">
                             <label for="price" class="col-sm-3 control-label">Product Color <span>*</span></label>
                             <div class="col-sm-9">
-                              <select multiple="multiple" name="color[]" class="form-control select2" id="color_select">
+                              <select multiple="multiple" name="color[]" class="form-control select2" id="color_select" required>
                               <option disabled>Select Color</option>
                                 <option value="white">White</option>
                                 <option value="black">black</option>

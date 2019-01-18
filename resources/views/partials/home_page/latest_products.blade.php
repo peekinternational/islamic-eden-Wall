@@ -73,9 +73,9 @@
             </div> -->
             <!-- featured Products sections -->
           <h3  class="title-featured text-center" style="    margin-bottom: 38px;     margin-top: 38px;"> <i class="fa fa-chevron-left"></i> <span>Featured Product</span> <i class="fa fa-chevron-right"></i></h3>
-            
-            @foreach($latest_products->chunk(5) as $key=>$products)
            
+            @foreach($latest_products->chunk(5) as $key=>$products)
+			
                 <div class="row product-row">
                     @foreach($products as $key=>$pro)
 
@@ -103,27 +103,15 @@
                                     <span>{{ $pro->category['name'] }}</span></a>
                                 </h5>
                                 @if($pro->dimension)
-                                
-                                @if($pro->dimension[0]->dim_offer)
-                                
-                                 
-                                      <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $pro->dimension[0]->p_price }}</small> </strike>
-                                      <span> €{{ $pro->dimension[0]->dimoffer_price }}</span></p>
-                                      
-                                 @else
-                                 
+                               
                                 <p class="text-center"> €{{ $pro->dimension[0]->p_price }} </p>
-                                 @endif
+                                 
                                 
 
                                @else
-                                @if($pro->offer)
-                                <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $pro->offer }} % off</p>
-                                      <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $pro->price }}</small> </strike>
-                                      <span> €{{ $pro->saleprice }}</span></p>
-                                        @else
+                               
                                       <p class="text-center"> €{{ $pro->price }} </p>
-                                      @endif
+                                      
                                     @endif
 
                             </div>
@@ -142,8 +130,10 @@
                           <div class="row product-row">
                               @foreach($products as $key =>$product)
                               @if($key < 5)
-                              @if($product->offer != "")
-                                  <div class="col-md-2-5 tagsss box" style="width: 20%;">
+
+                              @if($product->offer != "" || $product->dimension && $product->dimension[0]->dim_offer != "")
+                                  <div class="col-md-2-5 tagsss" style="width: 20%;">
+
                                       <figure class="banner-01__img">
                                           <a class="banner-01__img-wrapp" href="{{ url('product/'.$product->slug) }}">
                                            <!--  {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}

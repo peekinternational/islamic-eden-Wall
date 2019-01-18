@@ -223,6 +223,7 @@ class ProductController extends Controller
         $product_dimension = DB::table('product_dimension')->where('product_id','=',$product->id)->get();
         $product_color = DB::table('product_color')->where('product_id','=',$product->id)->get();
         $product_size = DB::table('product_size')->where('product_id','=',$product->id)->get();
+
         
 //dd($product_size);
         // join query

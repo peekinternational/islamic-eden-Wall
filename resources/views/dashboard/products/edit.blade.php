@@ -226,17 +226,19 @@
 
                         </div>
                         </div>
+						@if($product_size->count() > 0)
                          <div class="form-group {{ $errors->has('p_size') ? ' has-error' : '' }}" style="display:none" id="showsize">
                             <label for="" class="col-sm-3 control-label">Product Size <span>*</span></label>
+							
                             <div class="col-sm-9">
                               <select multiple="multiple" name="p_size[]" class="form-control select2" id="size_select" style="width:100%">
                               <option disabled>Select size</option>
                                 <option value="s" {{$product_size[0]->p_size == 's' ? 'selected="selected"' : ''}}>S</option>
-                                <option value="m" {{$product_size->p_size == 'm' ? 'selected="selected"' : ''}}>M</option>
-                                <option value="l" {{$product_size->p_size == 'l' ? 'selected="selected"' : ''}}>L</option>
-                                <option value="xl" {{$product_size->p_size == 'xl' ? 'selected="selected"' : ''}}>XL</option>
-                                <option value="xxl" {{$product_size->p_size == 'xxl' ? 'selected="selected"' : ''}}>XXL</option>
-                                <option value="xxxl" {{$product_size->p_size == 'xxxl' ? 'selected="selected"' : ''}}>XXXL</option>
+                                <option value="m" {{$product_size[0]->p_size == 'm' ? 'selected="selected"' : ''}}>M</option>
+                                <option value="l" {{$product_size[0]->p_size == 'l' ? 'selected="selected"' : ''}}>L</option>
+                                <option value="xl" {{$product_size[0]->p_size == 'xl' ? 'selected="selected"' : ''}}>XL</option>
+                                <option value="xxl" {{$product_size[0]->p_size == 'xxl' ? 'selected="selected"' : ''}}>XXL</option>
+                                <option value="xxxl" {{$product_size[0]->p_size == 'xxxl' ? 'selected="selected"' : ''}}>XXXL</option>
                             </select>
                                
                                 @if ($errors->has('p_size'))
@@ -246,6 +248,7 @@
                                 @endif
                             </div>
                         </div>
+						@endif
                         <div class="form-group {{ $errors->has('categories') ? ' has-error' : '' }}">
                             <label for="category_id" class="col-sm-3 control-label">Product Category</label>
                             <div class="col-sm-9">
