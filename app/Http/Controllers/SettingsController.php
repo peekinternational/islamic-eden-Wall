@@ -406,14 +406,28 @@ else{
 return back();
 }
 public function couponcode(Request $request){
-	
-    DB::table('couponcode')->insert($request->all());
+	if($request->input(id)){
+
+		DB::table('couponcode')->where('id','=',$request->input(id))->update($request->all());
+		session()->flash('__response', ['notify'=>'Coupon  update successfully.','type'=>'success']);
+	}
+	else{
+		DB::table('couponcode')->insert($request->all());
+		session()->flash('__response', ['notify'=>'Coupon add successfully.','type'=>'success']);
+	}
+    
 	return redirect()->action('SettingsController@coupon');
 }
 public function coupon(Request $request){
 	
   $coupon= DB::table('couponcode')->paginate(10);
 	return view('dashboard.showcode',compact('coupon'));
+}
+
+public function editcoupon(Request $request,$id){
+	
+  $coupon= DB::table('couponcode')->where('id','=',$id)->first();
+	return view('dashboard.editcoupon',compact('coupon'));
 }
 
  public function destroy($id)

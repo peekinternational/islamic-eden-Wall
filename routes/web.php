@@ -67,6 +67,7 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     Route::post('couponcode', 'SettingsController@couponcode');
     Route::get('coupon', 'SettingsController@coupon');
     Route::delete('deletecoupon/{id}', 'SettingsController@destroy');
+    Route::get('editcoupon/{id}', 'SettingsController@editcoupon');
     Route::post('upload', 'SettingsController@upload');
     Route::resource('users', 'UserController');
     Route::resource('orders', 'OrderController');
