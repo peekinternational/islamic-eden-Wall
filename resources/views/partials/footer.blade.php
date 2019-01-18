@@ -189,9 +189,11 @@
                     <div class="col-md-2 tags-section hidden-xs">
                      
                         <h4 style="color: white;"> Tags</h4>
-                            <span class="label label-art">Wall</span>
-                            <span class="label label-men">furniture</span>
-                           
+                          <a href="{{url('shop/wall-art')}}" class="label label-art">Wall</a>
+                          <a href="{{url('category/furniture')}}" class="label label-men">furniture</a>
+                          <a href="{{url('category/furniture')}}" class="label label-men">Decore</a>
+                          <a href="{{url('category/furniture')}}" class="label label-men">Baby Room</a>
+                          <a href="{{url('category/furniture')}}" class="label label-men">Painting</a>
                     </div>
                     <div class="col-md-2">
                         <div class="last-column">

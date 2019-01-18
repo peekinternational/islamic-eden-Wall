@@ -41,19 +41,26 @@
             
                     <div class="subnav">
                         <a href="{{ $url }}" class="subnavbtn">{{ $nav->title }} </a>
+                        @if($nav->title=='HOME')
+                        @elseif($nav->title=='About')
+                        @elseif($nav->title=='contact')
+                        @elseif($nav->title=='home goods')
+                         @elseif($nav->title=='BLOG')
+                        @else
+
                         
-                            <div class="row sub-men">
+                            <div class="row sub-menu">
                                 <div class="subnav-content sub-align  affix-top">
                                 @foreach($nav->sub_navs as $sub_nav)
                                 
-                                <div class="col-md-2 col-lg-2">
+                                <div class="col-md-2 col-lg-2 sub-men">
                             @if($nav->slug == 'shop')
-                            <a href="{{ url('shop/'.$sub_nav->slug) }}" ><b>{{ $sub_nav->title }}</b></a>
+                            <a class="sub-men" href="{{ url('shop/'.$sub_nav->slug) }}" ><b>{{ $sub_nav->title }}</b></a>
                             
                             <div class="sub-men">
                                 @foreach($sub_nav->more_subnav as $msub_nav)
                                 
-                                <div class="col-md-12 col-lg-12">
+                                <div class="col-md-7 col-lg-7">
                                     
                                     <a href="{{ url('shop/'.$sub_nav->slug) }}" style="color: #989898;">{{ $msub_nav->title }}</a>
                                                         
@@ -94,6 +101,7 @@
                         @endforeach
                             </div>
                             </div>
+                            @endif
                         </div>
                         @endif
                         @endforeach

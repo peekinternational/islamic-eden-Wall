@@ -42,7 +42,7 @@
                                     <a href="{{ action('ProductController@edit',$product->id) }}" class="btn btn-xs btn-warning" data-toggle="tooltip"  data-original-title="Edit"><i class="fa fa-edit"></i> </a>
                                     {!! Form::open(['action'=>['ProductController@destroy',$product->id],'method'=>'delete','style'=>'display:inline;']) !!}
                                    <input type="hidden" class="delete_permanent" name="delete_permanent" value="0">
-                                    <button type="button" class="btn btn-xs btn-danger btn-delete-user" data-toggle="tooltip"  data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
+                                    <button type="submit" class="btn btn-xs btn-danger btn-delete-user" data-toggle="tooltip"  data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
                                     {!! Form::close() !!}
                             </span>
                                          </div>
@@ -66,15 +66,17 @@
                                  <p class="shop-item__price">
                                  
                             @if($product->dimension)
-                            @if($product->dimension[0]->dim_offer)
+                            @if(!$product->dimension[0]->dim_offer)
                            
-                             <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->dimension[0]->p_price }}</small></strike></span> -
-                             <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $product->dimension[0]->dimoffer_price  }}</span><br>
-                            @else
-                              <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $product->dimension[0]->p_price }}</span><br>
-                             @endif
-                             @else
-                             
+									  <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $product->dimension[0]->p_price }}</span><br>
+									
+									@else
+									 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->dimension[0]->p_price }}</small></strike></span> -
+									 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $product->dimension[0]->dimoffer_price  }}</span><br>	
+									
+									 @endif
+									 @else
+									 
                                     @if($product->offer)
                                     <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->price }}</small></strike></span>
                                     <span class="amount" style="color: gray !important; font-size: 26px;">&euro;{{ $product->saleprice }}</span>

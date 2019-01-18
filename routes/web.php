@@ -75,6 +75,7 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     Route::resource('category', 'CategoryController');
     Route::resource('subscribers', 'SubscriberController');
     Route::post('gallery/update-categories', 'GalleryController@updateCategories');
+   
     Route::resource('gallery', 'GalleryController');
     Route::get('products','ProductController@getIndex')->name('dashboard.products');
     Route::resource('product', 'ProductController');

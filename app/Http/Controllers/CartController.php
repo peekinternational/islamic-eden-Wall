@@ -224,20 +224,43 @@ class CartController extends Controller
         public function couponcode(Request $request , LaraCart $cart){
                $code=$request->input('coupon_code');
               $cd = DB::table('couponcode')->where('code','=',$code)->first();
+			  
               $total=$cart->total($format = false, $withDiscount = true);
               $discount=0;
-              if($cd->type == 'fixed'){
-                $discount=$cd->discount;
-              }elseif($cd->type == 'percent'){
-                    $avg=$cd->discount/100*$total;
-                    $discount=$total-$avg;
+			  if($cd){
+			  if($cd->type == 'fixed'){
+				   $discount=$cd->discount;
+                $coupon = new \LukePOLO\LaraCart\Coupons\Fixed($cd->code, $cd->discount, [
+							'description' => 'apply code'
+				]);
+
+				$cart->addCoupon($coupon);
               }
+			  else if($cd->type == 'percent'){
+				   $discount=$cd->discount/100*$total;
+                   
+				  
+				  $netdiscount=$cd->discount/100;
+                 $coupon = new \LukePOLO\LaraCart\Coupons\Percentage($cd->code, $netdiscount, [
+					'name'        => $cd->discount,
+					'description' => $cd->discount.''.$cd->code,
+				]);
+
+				$cart->addCoupon($coupon);
+              }
+			  
+             
                $request->session()->put('coupon',[
                        'name'=>$cd->code,
                        'discount' =>$discount,
                ]);
-
-               return redirect()->route('cart.checkout')->with('success','Coupon apply successfully');
+               $request->session()->flash('alert-success', 'Coupon apply successfully');
+               return redirect()->route('cart.checkout');
+			  }
+			  else{
+				  $request->session()->flash('alert-danger', 'Coupon Code Not Match!');
+				    return redirect()->route('cart.checkout');
+			  }
         }
 
         public function giftVoucherCheckout(Request $request){

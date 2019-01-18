@@ -108,13 +108,13 @@
                                     @endforeach
                                 </p>
                             @endif
-                               <p>Delivery Days:  {{ $product->delivery_days }} <small>days</small> </p>
+                              
                          @if($product_color->count()>0)
                                 
                                     <div class="shop-tags" style="display: -webkit-box;border: none;margin: 0;">
                                     <span>Color:</span>
                                     @foreach($product_color as $key=>$color)
-                                    <input id="checkboxid{{$color->id}}" onclick="colorselect({{$color->id}})" name="color" type="checkbox" value="{{$color->color}}" class="css-checkbox onlyone">
+                                    <input id="checkboxid{{$color->id}}" onclick="colorselect({{$color->id}})" name="color" type="checkbox" value="{{$color->color}}" class="css-checkbox onlyone color">
                                      <label for="checkboxid{{$color->id}}" class="css-label">{{ucfirst($color->color)}}</label>
                                         @if(($key+1)< $product_color->count())
                                                 	&nbsp;&nbsp;
@@ -172,7 +172,7 @@
                                                 <input type="hidden" name="p_dimension" id="sel_dim">
                                                 <input type="hidden" name="p_price" id="sel_price">
                                         </span>
-                                        <button class="button-t1" type="submit">Add to cart</button>
+                                        <button class="button-t1" type="submit" id="addcart">Add to cart</button>
                                        
                                 {!! Form::close() !!}
                             </div>
@@ -265,7 +265,19 @@
    
 @stop
 @section('scripts')
+<script>
+$(document).ready(function() {
+     $(':input[type="submit"]').prop('disabled', true);
 
+ });
+  
+  $('.color').click(function() {
+		 
+        if($(this).val() != '') {
+           $(':input[type="submit"]').prop('disabled', false);
+        }
+     });
+ </script>
     <script>
         $('#thumbs img').click(function(){
           var imgsrc=$(this).attr('src');

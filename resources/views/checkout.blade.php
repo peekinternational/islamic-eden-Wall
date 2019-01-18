@@ -11,7 +11,14 @@
     <div class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_top_100 section_padding_bottom_75 columns_padding_25">
         <div class="container">
             <div class="row respnsve-row">
-           
+           <div class="flash-message">
+			@foreach (['danger', 'warning', 'success', 'info'] as $msg)
+			  @if(Session::has('alert-' . $msg))
+
+			  <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+			  @endif
+			@endforeach
+		  </div> <!-- end .flash-message -->
                 <form target="paypal" class="form-horizontal checkout shop-checkout" action="{{ isset($PaymentSettings['payment_mood']['value']) && $PaymentSettings['payment_mood']['value']=='live'?'https://www.paypal.com/cgi-bin/webscr':'https://www.sandbox.paypal.com/cgi-bin/webscr' }}" method="post">
                 <div class="col-sm-7 col-md-8 col-lg-8" style="width: 63%;">
 
@@ -52,7 +59,7 @@
                         @endforeach
 						<input type="hidden" name="total" value="{{ $i }}">
                         <!-- End First Item -->
-                       <input type="hidden" name="amount" value="{{ $cart->total($format = false,$withDiscount = true) }}">
+                        <input type="hidden" name="amount_1" value="{{ $cart->total($format = false,$withDiscount = true) }}">
 
                         <!-- Begin Second Item -->
                     <!--    <input type="hidden" name="quantity_2" value="1">
@@ -78,7 +85,7 @@
                         <input type="hidden" name="email" value="shahkhalid.me@gmail.com">
                         <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_cart_SM.gif" border="0" name="upload" alt="Make payments with PayPal - it's fast, free and secure!" width="87" height="23">--}}
                  {{--   </form>--}}
-                    <h2 class="shop-checkout__title">Shipping Address</h2>
+                    <h3 class="shop-checkout__title">Shipping Address</h3>
                        <div class="form-group">
                             <label for="country" class="col-sm-3 control-label">
                                 <span class="grey">Country </span>
@@ -141,7 +148,7 @@
                                   <span class="required">*</span>
                               </label>
                               <div class="col-sm-9">
-                                  {!! Form::text('address1',$value= null, $attributes = ['class'=>'form-control','required'=>'required','placeholder'=>'Address'])  !!}
+                                  {!! Form::text('address1',$value= null, $attributes = ['class'=>'form-control','required'=>'required','id'=>'address','placeholder'=>'Address'])  !!}
                                   @if ($errors->has('address1'))
                                       <span class="help-block">
                                           <strong>{{ $errors->first('address1') }}</strong>
@@ -224,9 +231,8 @@
                                   <textarea name="noteToSeller" class="form-control" id="order_comments" placeholder="Notes about your order, e.g. special notes for delivery." rows="5"></textarea>
                               </div>
                           </div>
-                </div>
-
-                <aside class="col-sm-5 col-md-4 col-lg-4" style="margin-left: 30px;">
+                      </div>
+                  <aside class="col-sm-5 col-md-4 col-lg-4" style="margin-left: 30px;">
                     <h3 class="widget-title" id="order_review_heading">Your order</h3>
                     <div id="order_review" class="shop-checkout-review-order">
                         <table class="table shop_table shop-checkout-review-order-table">
@@ -262,12 +268,20 @@
                                     <span class="grey">Free Shipping</span>
                                 </td>
                             </tr>
+							@if(session()->has('coupon'))
+							<tr class="shipping">
+                                <td>Discount:</td>
+                                <td>
+                                    <span class="grey">- &euro; {{session()->get('coupon')['discount']}}</span>
+                                </td>
+                            </tr>
+							@endif
                             <tr class="order-total">
                                 <td>Total:</td>
                                 <td>
-												<span class="amount grey">
-													<strong>&euro; {{ $cart->total($format = false,$withDiscount = true) }}</strong>
-												</span>
+								<span class="amount grey">
+									<strong>&euro; {{ $cart->total($format = false,$withDiscount = true) }}</strong>
+								</span>
                                 </td>
                             </tr>
                             </tfoot>
@@ -321,35 +335,34 @@
                     </div>
                 </aside>
                 </form>
-                <div class="col-sm-offset-8 col-sm-4" style="margin-top: -192px;">
+                <div class="col-sm-offset-8 col-sm-4" style="margin-top: -142px;">
                             <div class="coupon with_padding muted_background">
-                                <h3 class="topmargin_0">Discount Codes</h3>
+                                <h5 class="topmargin_0">Discount Codes</h5>
                                 <p>Enter coupon code if you have one</p>
                                 
                                 <form action="{{url('couponcode')}}" method="POST" role="form">
                               <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                   <div class="form-group">
-                                    <label class="sr-only" for="coupon_code">Coupon:</label>
-                                    <input type="text" name="coupon_code" class="form-control" id="coupon_code" value="" placeholder="Coupon code">
-                                </div>
-                                <button class="button-t1" type="submit">Apply Coupon</button>
-                                </form>
+                                  
+                                <div class="input-group">
+								  
+								  <input type="text" name="coupon_code" class="form-control" placeholder="Coupon code">
+								  <span class="input-group-btn">
+									<button class="button-t1" type="submit" style="padding: 0px 11px !important;height: 34px; !important">Apply Coupon</button>
+								  </span>
+								</div>
+								</form>
                                 
                                 
                             </div>
                         </div>
-            </div>
-              
-                        
-                        
-                    
-        </div>
-    </div>
-@stop
-@section('script')
+                     </div>
+					</div>
+				</div>
+			@stop
+			@section('script')
 
-<script>
+			<script>
 
-</script>
+			</script>
 
-@stop
+			@stop

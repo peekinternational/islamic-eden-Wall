@@ -73,9 +73,19 @@
                        href="{{ route('cart.index') }}" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
                         <span class="shopping-cart__info" style="font-size: 13px !important;">
-                           
+						<?php 
+						  $i =0;
+						?>
+                        @foreach($cart->getItems() as $item)
+                       
+                        <?php $total=$item->qty+$i;
+                             $i++;
+						?>
+						@endforeach
+						
+                       
                             @if($cart_items>0)
-                                {{ $cart_items }} Items  &euro;{{ $cart->subTotal($format = false, $withDiscount = true) }}
+                                {{ $total }} Items  &euro;{{ $cart->subTotal($format = false, $withDiscount = true) }}
                             @else
                                 My Cart (0):$0
                             @endif
