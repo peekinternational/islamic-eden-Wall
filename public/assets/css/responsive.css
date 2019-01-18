@@ -702,9 +702,9 @@ input[type=radio].css-checkbox:checked + label.css-label {
 
 }
 .subnav-content{
-	box-shadow: 3px 2px 3px 2px lightgray;
-	border-top:  2px solid black !important;
-}
+	box-shadow: 1px 1px 15px 0px rgba(33,33,33,.2); 
+	/*border-top:  2px solid black !important;
+}*/
 .sub-men a{
 	font-size: 13px !important;
 }
