@@ -41,6 +41,7 @@ Route::get('{slug}/page','PagesController@show_page');
 route::get( '/contact', function(){
     return view('contact');
 });
+
 // contact-us
 route::get( '/contact-us', 'SettingsController@contact_us');
 // end contact us
@@ -58,10 +59,14 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     Route::get('/upload', function ()    {
         return view('dashboard.upload');
     });
-    
+    route::get( '/addcoupon', function(){
+    return view('dashboard.coupon');
+});
     Route::get('newsletter', 'NewsLetterController@index');
     Route::post('newsletter', 'NewsLetterController@send');
-    
+    Route::post('couponcode', 'SettingsController@couponcode');
+    Route::get('coupon', 'SettingsController@coupon');
+    Route::delete('deletecoupon/{id}', 'SettingsController@destroy');
     Route::post('upload', 'SettingsController@upload');
     Route::resource('users', 'UserController');
     Route::resource('orders', 'OrderController');
