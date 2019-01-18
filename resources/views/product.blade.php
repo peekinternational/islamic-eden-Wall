@@ -171,6 +171,7 @@
                            
                                
                             <div class="quantity-btn">
+                           <p id="selcol"> </p>
                                 {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
 
                                         <span class="quantity form-group">
@@ -296,14 +297,24 @@ $('.stop').on('click',function(){
 <script>
 
 $(document).ready(function() {
-     $(':input[type="submit"]').prop('disabled', true);
+   
 
- });
-  
+ });sel_color
+  $("form").submit(function(e){
+      if($('#sel_color').val()){
+         
+     return true;
+      }else{
+          $('#selcol').html('<span style="color:red">Please Select Color</span>');
+          e.preventDefault();
+          return false;
+      }
+        
+    });
   $('.color').click(function() {
 		 
         if($(this).val() != '') {
-           $(':input[type="submit"]').prop('disabled', false);
+           $('#selcol').hide();
         }
      });
  </script>
