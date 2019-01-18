@@ -90,6 +90,7 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     Route::get('navigation/{id}/edit-sub-nav','NavigationController@edit_subNav');
     Route::patch('navigation/{id}/update-sub-nav','NavigationController@update_subNav');
     Route::delete('navigation/{id}/delete-sub-nav','NavigationController@destroy_subNav');
+    Route::delete('navigation/{id}/delete-more-nav','NavigationController@destroy_moreNav');
     Route::get('map','PagesController@map_page');
     Route::post('map','SettingsController@update_map');
     Route::get('theme','SettingsController@theme');
