@@ -115,7 +115,10 @@ class ProductController extends Controller
             }
             if($request->hasFile('photos')) {
                 $photos = $request->file('photos');
-                 foreach ($photos as $photo) {
+                
+                 foreach (array_slice($photos, 0, 6)as $photo) {
+                    
+                    
                     /* $extension = $photo->extension();
                     $filename = md5(str_shuffle(time())) . md5(time()) . '.' . $extension;
                     $path = public_path('assets/images/products/' . $filename);
