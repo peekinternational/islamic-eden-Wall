@@ -15,18 +15,20 @@ class MainController extends Controller
 {
         public function home_page(Request $request){
                  $slides = Slider::orderBy('order_by','asc')->get();
-                $latest_products = Products::latest(10)->get();
-                 foreach($latest_products as &$rec){
-                  $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
-                  // dd($rec->dimension);
 
-                }
-               $latest_products2 = Products::where('offer','!=',"")->latest(10)->get();
-                 foreach($latest_products2 as &$rec){
-                  $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
+             
+             $latest_products = Products::join('product_dimension','product_dimension.product_id','=','products.id')
+                ->join('product_images','product_images.product_id','=','products.id')
+               ->where('product_dimension.dim_offer','!=','null')
+                ->where('products.offer','=','')->groupBy('product_dimension.product_id')->get()->toArray();
 
-                }
-                //dd($latest_products);
+               $latest_products2 = Products::join('product_dimension','product_dimension.product_id','=','products.id')
+                ->join('product_images','product_images.product_id','=','products.id')
+                ->whereNull('product_dimension.dim_offer')
+                ->where('products.offer','=','')->groupBy('product_dimension.product_id')->get()->toArray();
+
+                
+               //dd($latest_products2);
                 // $product_dimension  = DB::table('product_dimension')->where('product_id','=',$latest_products->id)->get();
             
                 $gallery = Gallery::all();
