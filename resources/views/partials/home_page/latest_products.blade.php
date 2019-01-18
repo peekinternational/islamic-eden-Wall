@@ -77,7 +77,7 @@
             @foreach(array_chunk($latest_products2, 5) as $key=>$products)
 			
                 <div class="row product-row">
-                    @foreach($products as $key=>$pro)
+                    @foreach($products as $pro)
 
                         <div class="col-md-2-5 box" style="width: 20%;">
                             <figure class="banner-01__img">
@@ -85,11 +85,11 @@
                               
                                   
                                     @if($pro['image'])
-                                        <img style="position: relative;"  src="{{ asset('assets/images/products/'.$pro['image']) }}" alt="{{ $pro->name }}">
+                                        <img style="position: relative;"  src="{{ asset('assets/images/products/'.$pro['image']) }}" alt="{{ $pro['name'] }}">
                                         
                                        
                                     @else
-                                        <img  src="{{ asset('assets/images/no-image.png') }}" alt="{{ $pro->name }}">
+                                        <img  src="{{ asset('assets/images/no-image.png') }}" alt="{{ $pro['name'] }}">
                                     @endif
                                 </a>
                             </figure>
@@ -97,7 +97,7 @@
                                 <h5 class="card-dscrpt">
                                     <a href="{{ url('product/'.$pro['slug']) }}">
                                         {{ $pro['name'] }} <br>
-                                    <span>{{ $pro->category['name'] }}</span></a>
+                                    <span></span></a>
                                 </h5>
                                 
                                 <p class="text-center"> €{{ $pro['p_price'] }} </p>
@@ -122,19 +122,15 @@
 
                                       <figure class="banner-01__img">
                                           <a class="banner-01__img-wrapp" href="{{ url('product/'.$product['slug']) }}">
-                                           <!--  {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
-                                            <div class="add_cart" >
-                                              <button class="btn block" type="submit"> ADD TO CART</button>
-                                              </div>
-                                             {!! Form::close() !!} -->
+                                          
                                             
                                               @if($product['image'])
-                                                  <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product['image']) }}" alt="{{ $product->name }}">
+                                                  <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product['image']) }}" alt="{{ $pro['name'] }}">
                                                    <label class="tag sales-tag">Sale
                                                    </label>
                                                 
                                               @else
-                                                  <img  src="{{ asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
+                                                  <img  src="{{ asset('assets/images/no-image.png') }}" alt="{{ $pro['name']}}">
                                               @endif
                                           </a>
                                       </figure>
@@ -142,7 +138,7 @@
                                           <h5 class="card-dscrpt">
                                               <a href="{{ url('product/'.$product['slug']) }}">
                                                   {{ $product['name'] }} <br>
-                                              <span>{{ $product->category['name'] }}</span></a>
+                                              <span></span></a>
                                           </h5>
                                           
                                             @if($product['dim_offer'])

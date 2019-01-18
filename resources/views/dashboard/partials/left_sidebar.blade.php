@@ -36,7 +36,7 @@
                 </a>
                
             </li>
-            <li>
+          {{--   <li>
                 <a href="{{ action('GiftVouchersController@index') }}"> 
                     <i class="fa fa-gift"></i> <span>Gift Vouchers</span>
                      @if($GiftOrderCount > 0)
@@ -44,7 +44,7 @@
                     @endif
                 </a>
                 
-            </li>
+            </li>--}}  
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-rss"></i>
@@ -167,7 +167,7 @@
                 <li class="treeview">
                 <a href="#">
                     <i class="fa fa-adjust"></i>
-                    <span>Coupon Code</span>
+                    <span>Promo Code</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">

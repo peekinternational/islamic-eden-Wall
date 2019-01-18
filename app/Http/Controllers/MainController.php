@@ -20,12 +20,12 @@ class MainController extends Controller
              $latest_products = Products::join('product_dimension','product_dimension.product_id','=','products.id')
                 ->join('product_images','product_images.product_id','=','products.id')
                ->where('product_dimension.dim_offer','!=','null')
-                ->where('products.offer','=','')->groupBy('product_dimension.product_id')->get()->toArray();
+                ->where('products.offer','=','')->groupBy('product_dimension.product_id')->limit(5)->get()->toArray();
 
                $latest_products2 = Products::join('product_dimension','product_dimension.product_id','=','products.id')
                 ->join('product_images','product_images.product_id','=','products.id')
                 ->whereNull('product_dimension.dim_offer')
-                ->where('products.offer','=','')->groupBy('product_dimension.product_id')->get()->toArray();
+                ->where('products.offer','=','')->groupBy('product_dimension.product_id')->limit(5)->get()->toArray();
 
                 
                //dd($latest_products2);

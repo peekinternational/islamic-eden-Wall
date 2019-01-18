@@ -305,7 +305,7 @@ $(document).ready(function() {
          
      return true;
       }else{
-          $('#selcol').html('<span style="color:red">Please Select Color</span>');
+          $('#selcol').html('<span style="color:red">Please Select Color and Dimension</span>');
           e.preventDefault();
           return false;
       }
