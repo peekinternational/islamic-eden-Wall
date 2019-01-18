@@ -223,7 +223,7 @@ class CartController extends Controller
 
         public function couponcode(Request $request , LaraCart $cart){
                $code=$request->input('coupon_code');
-              $cd = DB::table('couponcode')->where('code','=',$code)->first();
+              $cd = DB::table('couponcode')->where('code','=',$code)->where('expiry_date','<=',date("Y-m-d"))->first();
 			  
               $total=$cart->total($format = false, $withDiscount = true);
               $discount=0;

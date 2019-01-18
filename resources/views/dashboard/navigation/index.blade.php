@@ -71,7 +71,7 @@
                                                         <a href="#"> <i class="fa fa-link"></i> {{ $moresub_nav->title }}</a>
                                                         <span class="action" style="margin-left: 20px">
                                                             <a href="{{ action('NavigationController@edit_subNav',['id'=>$moresub_nav->id]) }}"><i class="fa fa-edit"></i></a> &nbsp;
-                                                            {!! Form::open(['action'=>['NavigationController@destroy_subNav',$moresub_nav->id],'method'=>'delete','style'=>'display:inline']) !!}
+                                                            {!! Form::open(['action'=>['NavigationController@destroy_moreNav',$moresub_nav->id],'method'=>'delete','style'=>'display:inline']) !!}
                                                                 <a href="#" class="btn-delete-sub-menu"><i class="fa fa-trash-o"></i></a>
                                                             {!! Form::close() !!}
                                                         </span>

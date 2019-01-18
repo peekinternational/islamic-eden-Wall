@@ -339,4 +339,14 @@ class NavigationController extends Controller
         }
         return back();
     }
+    public function destroy_moreNav($id)
+    {
+        $sub_nav = MoreSubNav::findOrFail($id);
+        if($sub_nav->delete()){
+            session()->flash('__response', ['notify' => 'Sub navigation deleted successfully.', 'type' => 'success']);
+        }else{
+            session()->flash('__response', ['notify' => 'Sub navigation could not be deleted.', 'type' => 'error']);
+        }
+        return back();
+    }
 }

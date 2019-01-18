@@ -405,18 +405,45 @@ else{
 }
 return back();
 }
-public function contact_us(){
-$address =DB::table('settings')->where('type','=','address')->first();
-$phone_num =DB::table('settings')->where('type','=','phone')->first();
-$email =DB::table('settings')->where('type','=','email')->first();
-$map_lats =DB::table('settings')->where('type','=','lat')->first();
-$map_lngs =DB::table('settings')->where('type','=','lng')->first();
-$working_hours =DB::table('settings')->where('type','=','working_hours')->first();
+public function couponcode(Request $request){
+	if($request->input(id)){
 
-
-
-
-
-	return view('contact-us',compact('address','phone_num','email','map_lats','map_lngs','working_hours'));
+		DB::table('couponcode')->where('id','=',$request->input(id))->update($request->all());
+		session()->flash('__response', ['notify'=>'Coupon  update successfully.','type'=>'success']);
+	}
+	else{
+		DB::table('couponcode')->insert($request->all());
+		session()->flash('__response', ['notify'=>'Coupon add successfully.','type'=>'success']);
+	}
+    
+	return redirect()->action('SettingsController@coupon');
 }
+public function coupon(Request $request){
+	
+  $coupon= DB::table('couponcode')->paginate(10);
+	return view('dashboard.showcode',compact('coupon'));
+}
+
+public function editcoupon(Request $request,$id){
+	
+  $coupon= DB::table('couponcode')->where('id','=',$id)->first();
+	return view('dashboard.editcoupon',compact('coupon'));
+}
+
+ public function destroy($id)
+    {
+        $product = DB::table('couponcode')->where('id',$id)->delete();
+       
+        session()->flash('__response', ['notify'=>'Product "'.$name.'" deleted successfully.','type'=>'success']);
+        return back();
+    }
+public function contact_us(){
+	$address =DB::table('settings')->where('type','=','address')->first();
+	$phone_num =DB::table('settings')->where('type','=','phone')->first();
+	$email =DB::table('settings')->where('type','=','email')->first();
+	$map_lats =DB::table('settings')->where('type','=','lat')->first();
+	$map_lngs =DB::table('settings')->where('type','=','lng')->first();
+	$working_hours =DB::table('settings')->where('type','=','working_hours')->first();
+	return view('contact-us',compact('address','phone_num','email','map_lats','map_lngs','working_hours'));
+  }
 }

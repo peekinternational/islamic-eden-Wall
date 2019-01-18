@@ -35,7 +35,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <!--<div class="col-md-3 col-sm-6 col-xs-12">
                 <a href="{{ action('GalleryController@index') }}">
                     <div class="info-box">
                         <span class="info-box-icon bg-blue"><i class="fa fa-picture-o"></i></span>
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div>-->
 
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <a href="{{ action('CategoryController@index') }}">
@@ -111,7 +111,7 @@
                 </a>
             </div>
 
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <!--<div class="col-md-3 col-sm-6 col-xs-12">
                 <a href="{{ action('SettingsController@theme') }}">
                     <div class="info-box">
                         <span class="info-box-icon bg-olive"><i class="fa fa-adjust"></i></span>
@@ -120,7 +120,7 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div>-->
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <a href="{{ action('SettingsController@showSettings') }}">
                     <div class="info-box">
@@ -131,7 +131,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <!--<div class="col-md-3 col-sm-6 col-xs-12">
                 <a href="{{ url('/user/'.Auth::user()->id) }}">
                     <div class="info-box">
                         <span class="info-box-icon bg-yellow"><i class="fa fa-user"></i></span>
@@ -140,8 +140,17 @@
                         </div>
                     </div>
                 </a>
+            </div>-->
+             <div class="col-md-3 col-sm-6 col-xs-12">
+                <a href="{{ action('SettingsController@theme') }}">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-olive"><i class="fa fa-adjust"></i></span>
+                        <div class="info-box-content">
+                            <h2>Coupon Code</h2>
+                        </div>
+                    </div>
+                </a>
             </div>
-
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <a href="{{ url('/logout') }}">
                     <div class="info-box">

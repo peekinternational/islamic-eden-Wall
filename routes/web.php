@@ -41,6 +41,7 @@ Route::get('{slug}/page','PagesController@show_page');
 route::get( '/contact', function(){
     return view('contact');
 });
+
 // contact-us
 route::get( '/contact-us', 'SettingsController@contact_us');
 // end contact us
@@ -58,10 +59,15 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     Route::get('/upload', function ()    {
         return view('dashboard.upload');
     });
-    
+    route::get( '/addcoupon', function(){
+    return view('dashboard.coupon');
+});
     Route::get('newsletter', 'NewsLetterController@index');
     Route::post('newsletter', 'NewsLetterController@send');
-    
+    Route::post('couponcode', 'SettingsController@couponcode');
+    Route::get('coupon', 'SettingsController@coupon');
+    Route::delete('deletecoupon/{id}', 'SettingsController@destroy');
+    Route::get('editcoupon/{id}', 'SettingsController@editcoupon');
     Route::post('upload', 'SettingsController@upload');
     Route::resource('users', 'UserController');
     Route::resource('orders', 'OrderController');
@@ -84,6 +90,7 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     Route::get('navigation/{id}/edit-sub-nav','NavigationController@edit_subNav');
     Route::patch('navigation/{id}/update-sub-nav','NavigationController@update_subNav');
     Route::delete('navigation/{id}/delete-sub-nav','NavigationController@destroy_subNav');
+    Route::delete('navigation/{id}/delete-more-nav','NavigationController@destroy_moreNav');
     Route::get('map','PagesController@map_page');
     Route::post('map','SettingsController@update_map');
     Route::get('theme','SettingsController@theme');
