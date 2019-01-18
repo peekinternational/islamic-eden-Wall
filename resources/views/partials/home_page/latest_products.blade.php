@@ -1,4 +1,4 @@
-@if($latest_products->count()>0)
+
     <div id="shop" class="{{ isset($theme['theme']['value'])?$theme['theme']['value']:'ls' }} section_padding_bottom_85 banners__position">
         <div class="container responsive" style="padding-left: 0; padding-right: 0;">
             
@@ -74,21 +74,18 @@
             <!-- featured Products sections -->
           <h3  class="title-featured text-center" style="    margin-bottom: 38px;     margin-top: 38px;"> <i class="fa fa-chevron-left"></i> <span>Featured Product</span> <i class="fa fa-chevron-right"></i></h3>
            
-            @foreach($latest_products->chunk(5) as $key=>$products)
+            @foreach(array_chunk($latest_products2, 5) as $key=>$products)
 			
                 <div class="row product-row">
                     @foreach($products as $key=>$pro)
 
-                     @if($key < 5)
-
-                    @if($pro->offer == "")
                         <div class="col-md-2-5 box" style="width: 20%;">
                             <figure class="banner-01__img">
-                                <a class="banner-01__img-wrapp" href="{{ url('product/'.$pro->slug) }}">
+                                <a class="banner-01__img-wrapp" href="{{ url('product/'.$pro['slug']) }}">
                               
                                   
-                                    @if($pro->images->count()>0)
-                                        <img style="position: relative;"  src="{{ asset('assets/images/products/'.$pro->images->first()->image) }}" alt="{{ $pro->name }}">
+                                    @if($pro['image'])
+                                        <img style="position: relative;"  src="{{ asset('assets/images/products/'.$pro['image']) }}" alt="{{ $pro->name }}">
                                         
                                        
                                     @else
@@ -98,26 +95,17 @@
                             </figure>
                             <div class="banner-01__content">
                                 <h5 class="card-dscrpt">
-                                    <a href="{{ url('product/'.$pro->slug) }}">
-                                        {{ $pro->name }} <br>
+                                    <a href="{{ url('product/'.$pro['slug']) }}">
+                                        {{ $pro['name'] }} <br>
                                     <span>{{ $pro->category['name'] }}</span></a>
                                 </h5>
-                                @if($pro->dimension)
-                               
-                                <p class="text-center"> €{{ $pro->dimension[0]->p_price }} </p>
-                                 
                                 
-
-                               @else
-                               
-                                      <p class="text-center"> €{{ $pro->price }} </p>
-                                      
-                                    @endif
+                                <p class="text-center"> €{{ $pro['p_price'] }} </p>
+                                 
 
                             </div>
                         </div>
-                         @endif
-                         @endif
+                       
                     @endforeach
                 </div>
                
@@ -126,24 +114,22 @@
             <!-- sales items -->
            <h3  class="title-featured text-center" style="    margin-bottom: 38px;     margin-top: 38px;"> <i class="fa fa-chevron-left"></i> <span>Sales Items</span> <i class="fa fa-chevron-right"></i></h3>
                       
-                      @foreach($latest_products2->chunk(5) as $products)
+                      @foreach(array_chunk($latest_products, 5) as $products)
                           <div class="row product-row">
                               @foreach($products as $key =>$product)
-                              @if($key < 5)
-
-                              @if($product->offer != "" || $product->dimension && $product->dimension[0]->dim_offer != "")
+                             
                                   <div class="col-md-2-5 tagsss box" style="width: 20%;">
 
                                       <figure class="banner-01__img">
-                                          <a class="banner-01__img-wrapp" href="{{ url('product/'.$product->slug) }}">
+                                          <a class="banner-01__img-wrapp" href="{{ url('product/'.$product['slug']) }}">
                                            <!--  {!! Form::open(['route'=>['cart.update',$product->id],'method'=>'put','class'=>'single-shop-item__gty']) !!}
                                             <div class="add_cart" >
                                               <button class="btn block" type="submit"> ADD TO CART</button>
                                               </div>
                                              {!! Form::close() !!} -->
                                             
-                                              @if($product->images->count()>0)
-                                                  <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product->images->first()->image) }}" alt="{{ $product->name }}">
+                                              @if($product['image'])
+                                                  <img style="position: relative;"  src="{{ asset('assets/images/products/'.$product['image']) }}" alt="{{ $product->name }}">
                                                    <label class="tag sales-tag">Sale
                                                    </label>
                                                 
@@ -154,38 +140,26 @@
                                       </figure>
                                       <div class="banner-01__content">
                                           <h5 class="card-dscrpt">
-                                              <a href="{{ url('product/'.$product->slug) }}">
-                                                  {{ $product->name }} <br>
+                                              <a href="{{ url('product/'.$product['slug']) }}">
+                                                  {{ $product['name'] }} <br>
                                               <span>{{ $product->category['name'] }}</span></a>
                                           </h5>
-                                           @if($product->dimension)
-                                
-                                            @if($product->dimension[0]->dim_offer)
+                                          
+                                            @if($product['dim_offer'])
                                         
-                                            <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->dimension[0]->dim_offer }} % off</p>
-                                            <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->dimension[0]->p_price }}</small> </strike>
-                                            <span> €{{ $product->dimension[0]->dimoffer_price }}</span></p>
+                                            <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product['dim_offer'] }} % off</p>
+                                            <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product['p_price'] }}</small> </strike>
+                                            <span> €{{ $product['dimoffer_price'] }}</span></p>
                                             
                                          @else
                                         
-                                            <p class="text-center"> €{{ $product->dimension[0]->p_price }} </p>
+                                            <p class="text-center"> €{{ $product['p_price'] }} </p>
                                         @endif
-                                
-
-                                      @else
-                                          @if($product->offer)
-                                          <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
-                                                <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
-                                                <span> €{{ $product->saleprice }}</span></p>
-                                                  @else
-                                                <p class="text-center"> €{{ $product->price }} </p>
-                                                @endif
-                                                @endif
+                          
                                               
                                       </div>
                                   </div>
-                                  @endif
-                                  @endif
+                                  
                               @endforeach
                           </div>
                       @endforeach
@@ -235,4 +209,4 @@
                                     @endforeach
                         <!-- ending our logs -->
         </div>
-@endif
+
