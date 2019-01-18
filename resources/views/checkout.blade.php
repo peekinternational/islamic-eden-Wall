@@ -42,7 +42,7 @@
                         <input type="hidden" name="quantity_{{ $i }}" value="{{ $item->qty }}">
                         <input type="hidden" name="item_name_{{ $i  }}" value="{{ $item->name }}">
                         <input type="hidden" name="p_id{{ $i  }}" value="{{ $item->id }}">
-                        <input type="hidden" name="amount_{{ $i  }}" value="{{ $item->price }}">
+                        <input type="hidden" name="price_{{ $i  }}" value="{{ $item->price }}">
 						<input type="hidden" name="p_size{{ $i  }}" value="{{ $size }}">
 						<input type="hidden" name="color_{{ $i  }}" value="{{ $item->color }}">
 						
@@ -52,7 +52,7 @@
                         @endforeach
 						<input type="hidden" name="total" value="{{ $i }}">
                         <!-- End First Item -->
-
+                       <input type="hidden" name="amount" value="{{ $cart->total($format = false,$withDiscount = true) }}">
 
                         <!-- Begin Second Item -->
                     <!--    <input type="hidden" name="quantity_2" value="1">
