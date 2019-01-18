@@ -132,7 +132,7 @@
                               @if($key < 5)
 
                               @if($product->offer != "" || $product->dimension && $product->dimension[0]->dim_offer != "")
-                                  <div class="col-md-2-5 tagsss" style="width: 20%;">
+                                  <div class="col-md-2-5 tagsss box" style="width: 20%;">
 
                                       <figure class="banner-01__img">
                                           <a class="banner-01__img-wrapp" href="{{ url('product/'.$product->slug) }}">
