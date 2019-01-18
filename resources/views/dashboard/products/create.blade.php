@@ -27,7 +27,7 @@
                         </p>
                         @include('dashboard.partials.formErrorMessage')
                         <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-sm-3 control-label">Title <span>*</span></label>
+                            <!-- <label for="name" class="col-sm-3 control-label">Title <span>*</span></label> -->
                             <div class="col-sm-9">
                                 {!! Form::text('name',$value= null, $attributes = ['class'=>'form-control','placeholder'=>'Product Title','required'=>true,'autofocus'=>true])  !!}
                                 @if ($errors->has('name'))

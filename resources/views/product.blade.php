@@ -37,11 +37,21 @@
                             @else
                                 <img src="{{  asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
                             @endif
-                            <div style="margin-top:11px;" id="thumbs">
-                            @foreach($product->images as $key => $image)
-                           <img src="{{ asset('assets/images/products/'.$image->image) }}" alt="{{ $product->name }}" style="width:19%;margin-right: 8px;">
-                            @endforeach
+                            <!-- <div style="margin-top:11px;" id="thumbs"> -->
+                           
+                           <!-- <img src="{{ asset('assets/images/products/'.$image->image) }}" alt="{{ $product->name }}" style="width:19%;margin-right: 8px;"> -->
+                           <div id="itemSlider" class="wow fadeInUp">
+                              <div class="col-md-12">
+                                <div class="owl-carousel productss-carousel product-img-carosl">
+                                   @foreach($product->images as $key => $image)
+                                  
+                                    <img src="{{ asset('assets/images/products/'.$image->image) }}">
+                                  @endforeach
+
+                                </div>
+                              </div>
                             </div>
+                            <!-- </div> -->
                         </figure>
                         <div class="shop-single__content">
                             <ul class="shop-item__meta-list">
@@ -267,6 +277,25 @@
 @stop
 @section('scripts')
 <script>
+
+    var owl = $('.productss-carousel');
+    owl.owlCarousel({
+      items:4,
+      loop:true,
+      margin:4,
+      autoplay:true,
+      autoplayTimeout:1000,
+      autoplayHoverPause:true
+    });
+$('.play').on('click',function(){
+    owl.trigger('play.owl.autoplay',[1000])
+})
+$('.stop').on('click',function(){
+    owl.trigger('stop.owl.autoplay')
+})
+</script>
+<script>
+
 $(document).ready(function() {
    
 
