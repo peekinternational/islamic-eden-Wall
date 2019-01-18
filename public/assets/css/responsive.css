@@ -730,3 +730,38 @@ input[type=radio].css-checkbox:checked + label.css-label {
   white-space: nowrap;
   display: inline-block;
 }
+.productss-carousel{
+  height: 79px;
+}
+#itemSlider .productss-carousel{
+  height: 95px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+#itemSlider .owl-stage-outer{
+  width: 100%;
+}
+#itemSlider .productss-carousel .owl-dots{
+	position: absolute;
+    top: 78%;
+    left: 41%;
+}
+#itemSlider .productss-carousel .owl-nav .owl-prev{
+  position: absolute;
+  top: 40%;
+  font-size: 56px;
+  color: skyblue;
+}
+#itemSlider .productss-carousel .owl-nav .owl-next{
+  position: absolute;
+  right: 0px;
+  top: 40%;
+  font-size: 56px;
+  color: skyblue;
+}
+#itemSlider .owl-stage .owl-item{
+  margin-right: 10px;
+}
+.productss-carousel .owl-dots.disabled, .owl-carousel .owl-nav.disabled{
+  display: block;
+}
