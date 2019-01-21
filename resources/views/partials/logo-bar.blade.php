@@ -124,9 +124,11 @@
                                                     <h4>
                                                         <a href="blog-right.html">{{ $item->options['name'] }}</a>
                                                     </h4>
+                                                    <br>
                                                       <span class="quantity">{{ $item->options['qty'] }} ×
                                                        <span class="amount">&euro; {{ $item->options['price'] }}</span>
                                                       </span>
+                                                      <br>
                                                       <span class="">{{ $item->options['color'] }}  
                                                           @if($item->options['p_size'])
                                                            <span class="" style="color: black;">({{ strtoupper($item->options['p_size'] )}})</span>
