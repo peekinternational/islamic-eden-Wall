@@ -39,7 +39,7 @@
                             @endif
                             <div style="margin-top:11px; margin-bottom: 11px; text-align: center; " id="thumbs">
                             @foreach($product->images as $key => $image)
-                           <img src="{{ asset('assets/images/products/'.$image->image) }}" alt="{{ $product->name }}" style="width:15%;margin-right: 2px; height: 80px; border: 1px solid blue">
+                           <img src="{{ asset('assets/images/products/'.$image->image) }}" alt="{{ $product->name }}" style="width:50px; margin-right: 2px; height: 50px; border: 1px solid blue">
                             @endforeach
                             </div>
                         </figure>
