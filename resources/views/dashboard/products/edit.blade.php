@@ -130,7 +130,7 @@
                            <div class="form-group {{ $errors->has('price') ? ' has-error' : '' }}" id="main_price">
                             <label for="price" class="col-sm-3 control-label">Price <span>*</span></label>
                             <div class="col-sm-9">
-                                {!! Form::number('price',$value= null, $attributes = ['class'=>'form-control','placeholder'=>'Price','required'=>true])  !!}
+                                {!! Form::number('price',$value= null, $attributes = ['class'=>'form-control','placeholder'=>'Price'])  !!}
                                 @if ($errors->has('price'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('price') }}</strong>
@@ -357,8 +357,8 @@
                     </div>
                 </div>
             </div>
-            {!! Form::close() !!}
-                    /.box-footer
+            <!-- {!! Form::close() !!}
+                    /.box-footer -->
         </div>
         <!-- /.box -->
     </section>
