@@ -85,7 +85,7 @@
 						
                        
                             @if($cart_items>0)
-                                {{ $total }} Items  &euro;{{ $cart->subTotal($format = false, $withDiscount = true) }}
+                                {{ $total }} CART  &euro;{{ $cart->subTotal($format = false, $withDiscount = true) }}
                             @else
                                 My Cart (0):$0
                             @endif
