@@ -37,7 +37,7 @@
                                     <img src="{{  asset('assets/images/'.$image) }}" alt="{{ $product->name }}" style="width: 100%; height: 100%; position: relative;
                                          ">
                                          <div style="position: absolute; top: 57%; left:38%;">
-                                                 <a href="{{ action('ProductController@show',$product->name) }}" class="btn btn-xs btn-info" data-toggle="tooltip"  data-original-title="View Product"><i class="fa fa-search"></i> </a>
+                                                 <a href="{{ url('product/'.$product->slug) }}" class="btn btn-xs btn-info" data-toggle="tooltip"  data-original-title="View Product"><i class="fa fa-search"></i> </a>
                             <span class="btn-edit">
                                     <a href="{{ action('ProductController@edit',$product->id) }}" class="btn btn-xs btn-warning" data-toggle="tooltip"  data-original-title="Edit"><i class="fa fa-edit"></i> </a>
                                     {!! Form::open(['action'=>['ProductController@destroy',$product->id],'method'=>'delete','style'=>'display:inline;']) !!}
