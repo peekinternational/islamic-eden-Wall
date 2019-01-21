@@ -19,13 +19,13 @@
                         <figure class="shop-single__img">
                             @if($product->images->count()>0)
                             
-                                <div class="format-gallery">
+                                <div class="format-gallery"  style="border: 1px solid lightgrey" >
                                     <div class="entry-thumbnail">
                                         <div id="carousel-generic" class="carousel slide">
                                             <div class="carousel-inner"  id="description">
                                                 @foreach($product->images as $key => $image)
 
-                                                <div class="item {{ $key==0?'active':'' }}  product-detail-img tile"  data-scale="2.4"  data-image="{{ asset('assets/images/products/'.$image->image)}}">
+                                                <div style="text-align: center;" class="item {{ $key==0?'active':'' }}  product-detail-img tile"  data-scale="2.4"  data-image="{{ asset('assets/images/products/'.$image->image)}}">
                                                     <img
                                                     src="{{ asset('assets/images/products/'.$image->image) }}" alt="{{ $product->name }}" id="largeImage ">
                                                 </div>
@@ -37,9 +37,9 @@
                             @else
                                 <img src="{{  asset('assets/images/no-image.png') }}" alt="{{ $product->name }}">
                             @endif
-                            <div style="margin-top:11px; margin-bottom: 11px; text-align: center;" id="thumbs">
+                            <div style="margin-top:11px; margin-bottom: 11px; text-align: center; " id="thumbs">
                             @foreach($product->images as $key => $image)
-                           <img src="{{ asset('assets/images/products/'.$image->image) }}" alt="{{ $product->name }}" style="width:15%;margin-right: 2px;">
+                           <img src="{{ asset('assets/images/products/'.$image->image) }}" alt="{{ $product->name }}" style="width:15%;margin-right: 2px; height: 80px; border: 1px solid blue">
                             @endforeach
                             </div>
                         </figure>
