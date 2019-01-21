@@ -406,9 +406,9 @@ else{
 return back();
 }
 public function couponcode(Request $request){
-	if($request->input(id)){
+	if($request->input('id')){
 
-		DB::table('couponcode')->where('id','=',$request->input(id))->update($request->all());
+		DB::table('couponcode')->where('id','=',$request->input('id'))->update($request->all());
 		session()->flash('__response', ['notify'=>'Coupon  update successfully.','type'=>'success']);
 	}
 	else{

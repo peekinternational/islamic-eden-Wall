@@ -142,7 +142,7 @@
                              @if($product_dimension->count()>0)
                                  
                                      <div style="display: -webkit-box;">
-                                    <span>size:</span>
+                                    <span>Size:</span>
                                    @foreach($product_dimension as $key=>$dimension)
                                     
                                     @if($dimension->dim_offer)

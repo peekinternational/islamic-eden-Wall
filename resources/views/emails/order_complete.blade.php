@@ -60,7 +60,9 @@ $style = [
 ];
 ?>
 
-<?php $fontFamily = 'font-family: Arial, \'Helvetica Neue\', Helvetica, sans-serif;'; ?>
+<?php $fontFamily = 'font-family: Arial, \'Helvetica Neue\', Helvetica, sans-serif;';
+
+ ?>
 
     <body style="{{ $style['body'] }}">
     <table width="100%" cellpadding="0" cellspacing="0">
@@ -87,47 +89,7 @@ $style = [
                                          {{ config('app.name') }} Order completed successfully.
                                         </h1>
 
-                                        <p style="{{ $style['paragraph'] }}">
-                                            Dear {{ $order['address_name'] }},
-                                        </p>
-                                        <p style="{{ $style['paragraph'] }}">
-                                             Your order compleated successfully. Following is the details of your order.
-                                        </p>
-                                        <div>
-                                            <table border="1" width="100%">
-                                                <tr>
-                                                    <th width="30%">Name</td>
-                                                    @if(isset($order['price']))
-                                                        <th>Price</th>
-                                                    @endif
-                                                    @if(isset($order['type']))
-                                                        <th>Type</th>
-                                                    @endif
-                                                    <th width="20%">Quantity</td>
-                                                    <th width="20%">Tax</td>
-                                                    <th width="30%">SubTotal</td>
-                                                </tr>
-                                                @for($i=1;$i<=$order['num_cart_items'];$i++)
-                                                
-                                                <tr>
-                                                    <td>{{ $order['item_name'.$i] }}</td>
-                                                    @if(isset($order['price']))
-                                                        <th>{{ (float)$order['price'] }}</th>
-                                                    @endif
-                                                    @if(isset($order['type']))
-                                                        <th>{{ ucfirst(str_replace('_','-',$order['type'])) }}</th>
-                                                    @endif
-                                                    <td>{{ $order['quantity'.$i] }}</td>
-                                                    <td>&euro; {{ (float)$order['tax'.$i] }}</td>
-                                                    <td>&euro; {{ $order['mc_gross_'.$i]  }}</td>
-                                                </tr>
-                                                @endfor
-                                                <tr>
-                                                    <th colspan="3">Total</th>
-                                                     <td>&euro; {{ $order['num_cart_items']==1?$order['mc_gross_1']:$order['mc_gross'] }}</td>
-                                                </tr>
-                                            </table>
-                                        </div>
+                                      
                                         
                                         <br />
                                         <p style="{{ $style['paragraph'] }}">
