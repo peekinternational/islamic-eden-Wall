@@ -195,8 +195,8 @@
                         
                             <!-- Tab panes -->
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="descript">{{ $product->description }}</div>
-                                <div role="tabpanel" class="tab-pane" id="Additional-info">{{ $product->Addtional_Information}}</div>
+                                <div role="tabpanel" class="tab-pane active" id="descript">{ !! $product->description !!}</div>
+                                <div role="tabpanel" class="tab-pane" id="Additional-info">{!! $product->Addtional_Information !!}</div>
                             </div>
                         </div>
                        
