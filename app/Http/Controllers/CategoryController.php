@@ -35,7 +35,7 @@ class CategoryController extends Controller
                         }
                 }
 
-        $products = Products::orderBy('id','desc')->where('category_id','=',$id)->get();
+        $products = Products::orderBy('id','desc')->where('category_id','=',$id)->paginate(9);
          foreach($products as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
 				    $product_color = DB::table('product_color')->where('product_id','=',$rec->id)->get();

@@ -273,7 +273,7 @@ $(document).ready(function() {
    
 
  });sel_color
-  $("form").submit(function(e){
+  $("form.single-shop-item__gty").submit(function(e){
       if($('#sel_color').val()){
          
      return true;

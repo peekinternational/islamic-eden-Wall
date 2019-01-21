@@ -165,13 +165,14 @@ class PaymentsController extends Controller
 			$inputs['payment_date']=$request->input('payment_date');
 			$inputs['payment_status']='Paid';
 			$inputs['payer_status']=$request->input('payer_status');
+			$inputs['payer_email']=$request->input('payer_email');
 			$inputs['business']=$request->input('business');
 			$inputs['ipn_track_id']=$request->input('ipn_track_id');
 			$inputs['num_cart_items']=$request->input('num_cart_items');
 			$orderCount =  DB::table('orders')->where('user_id','=',$request->input('custom'))->update($inputs);
 			if($orderCount){
-			        	$email['email'] = 'toseef3@gmail.com';
-                        $toemail =$email['email'];
+			        	//$email['email'] = 'toseef3@gmail.com';
+                        $toemail =$inputs['payer_email'];
 			            Mail::send('emails.order_complete',['order' =>$_request],
                         function ($message) use ($toemail)
                         {
