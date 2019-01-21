@@ -35,13 +35,13 @@ class CategoryController extends Controller
                         }
                 }
 
-        $products = Products::orderBy('id','desc')->where('category_id','=',$id)->limit(5)->get();
+        $products = Products::orderBy('id','desc')->where('category_id','=',$id)->paginate(9);
          foreach($products as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
                 }
-        $product_color = DB::table('product_color')->where('product_id','=',$product->id)->get();
-        $product_size = DB::table('product_size')->where('product_id','=',$product->id)->get();
-         $product_dimension  = DB::table('product_dimension')->where('product_id','=',$product->id)->get();$products = Products::where('category_id','=',$id)->paginate(9);
+        $product_color = DB::table('product_color')->where('product_id','=',$products->id)->get();
+        $product_size = DB::table('product_size')->where('product_id','=',$products->id)->get();
+         $product_dimension  = DB::table('product_dimension')->where('product_id','=',$products->id)->get();
 
                return view('products',compact('category','products','quantity','product_size','product_color','products','product_dimension'));
        }
