@@ -341,7 +341,20 @@
                         </div>
                         <div class="form-group {{ $errors->has('photos') ? ' has-error' : '' }}">
                             <div class="col-sm-9 col-sm-offset-3 preview-images">
+                             
                             </div>
+                            <div class="col-sm-9 col-sm-offset-3">
+                            @foreach($images as $image)
+                            <div class="col-sm-3 img_del">
+                            
+                             
+                            <i class="fa fa-times-circle closeimg" data-id="{{$image['id']}}" ></i>
+                           
+                            <img src="{{  asset('assets/images/products/'.$image['image']) }}" alt="{{ $product->name }}" style="width: 100%; height: 100%; position: relative;
+                                         ">
+                                         </div>
+                                         @endforeach
+                                         </div>
                         </div>
                 </div>
               </div>
@@ -366,6 +379,25 @@
 @section('footer')
 <script src="{{ asset('assets/tinymce/tinymce.min.js') }}"></script>
  <script>
+ $(document).on('click','.closesimg',function(e){
+$(e.target).closest('.imgs_del').remove();
+ });
+$(document).on('click','.closeimg',function(e){
+  var img_id=  $(e.target).data('id');
+  //alert(img_id);
+   
+      var actionUrl = "{{ url('dashboard/deleteimg')}}/"+img_id;
+    $.ajax({
+          type: "get",
+          url: actionUrl,
+          success: function(data){
+             $(e.target).closest('.img_del').remove();
+
+            console.log(data);
+          }
+
+    });
+})
     $( document ).ready(function() {
     
         if($('.checkboxsize').val() == 'size'){
@@ -438,7 +470,7 @@ $('.checkboxsize').change(function(){
                 for (var i=0;i<input.files.length;i++){
                     var reader = new FileReader();
                     reader.onload = function (e) {
-                        $('.preview-images').append('<img width="200" src="'+ e.target.result +'" id="image_upload_preview" class="img-responsive img-thumbnail">')
+                        $('.preview-images').append('<div class="col-sm-3 imgs_del"><i class="fa fa-times-circle closesimg" data-id="" ></i><img width="200" src="'+ e.target.result +'" id="image_upload_preview" class="img-responsive img-thumbnail"></div>')
                     };
                     reader.readAsDataURL(input.files[i]);
                 }
