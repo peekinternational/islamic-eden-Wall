@@ -180,7 +180,7 @@
                                 <ul class="">
                                   
 
-                                  <li><a href="{{url('about/page')}}">CONTACT</a></li>
+                                  <li><a href="{{url('/contact-us')}}">CONTACT</a></li>
                                   <li><a href="{{url('blog')}}">BLOGS</a></li>
                                 </ul>
                             </div>
