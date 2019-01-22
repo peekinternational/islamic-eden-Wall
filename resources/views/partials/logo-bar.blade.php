@@ -85,7 +85,9 @@
 						
                        
                             @if($cart_items>0)
+
                                 {{ $total }} CART  &euro;{{ $cart->subTotal($format = false, $withDiscount = true) }}
+
                             @else
                                 My Cart (0):$0
                             @endif
@@ -110,12 +112,10 @@
                                 <div class="widget widget_shopping_cart">
                                     <div class="widget_shopping_cart_content">
                                         <ul class="cart_list product_list_widget media-list darklinks">
-                                             <?php 
-                                                   print_r($cart->subTotal($format = false, $withDiscount = true));
-                                                ?>
+                                             
                                             @foreach($cart->getItems() as $item)
                                              <li class="media">
-                                                <div class="media-left media-middle">
+                                                <div class="media-left media-middle" style="vertical-align:top;">
                                                     <a href="{{ route('product.show',['slug'=>$item->slug]) }}">
                                                         <img src="{{  asset($item->options['image']) }}" alt="{{ $item->name }}">
                                                     </a>
@@ -124,16 +124,16 @@
                                                     <h4>
                                                         <a href="blog-right.html">{{ $item->options['name'] }}</a>
                                                     </h4>
-                                                      <span class="quantity">{{ $item->options['qty'] }} ×
+                                                      <p class="quantity" style="margin-bottom:0px;">{{ $item->options['qty'] }} ×
                                                        <span class="amount">&euro; {{ $item->options['price'] }}</span>
-                                                      </span>
-                                                      <span class="">{{ $item->options['color'] }}  
+                                                      </p>
+                                                      <p class="">{{ $item->options['color'] }}  
                                                           @if($item->options['p_size'])
                                                            <span class="" style="color: black;">({{ strtoupper($item->options['p_size'] )}})</span>
                                                         @else
                                                            <span class="" style="color: black;">({{ strtoupper($item->options['p_dimension'] )}})</span>
                                                        @endif
-                                                      </span>
+                                                      </p>
                                                 </div>
                                                 <div class="media-body media-middle">
                                                     {!! Form::open(array('route' => array('cart.destroy', $item->options['id']),'method' => 'delete')) !!}

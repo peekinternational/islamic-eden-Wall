@@ -31,7 +31,7 @@
                         <input type="hidden" name="upload" value="1">
                         <input type="hidden" name="business" value="{{ (isset($PaymentSettings['payment_mood']['value']) && !empty($PaymentSettings['payment_mood']['value']) && isset($PaymentSettings[$PaymentSettings['payment_mood']['value']]['value'])?$PaymentSettings[$PaymentSettings['payment_mood']['value']]['value']:'peek.saad-facilitator@gmail.com') }}">
                         <input type="hidden" name="METHOD" value="SetExpressCheckout">
-                        <input type="hidden" name="notify_url" value="{{ url('/pay') }}">
+                        <input type="hidden" name="notify_url" value="{{ url('/pay') }}?_token={{ md5(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ').time()) }}">
 
                         <?php $i =0;
                         $user_id=rand();

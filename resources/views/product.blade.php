@@ -142,7 +142,7 @@
                              @if($product_dimension->count()>0)
                                  
                                      <div style="display: -webkit-box;">
-                                    <span>size:</span>
+                                    <span>Size:</span>
                                    @foreach($product_dimension as $key=>$dimension)
                                     
                                     @if($dimension->dim_offer)
@@ -273,12 +273,14 @@ $(document).ready(function() {
    
 
  });sel_color
-  $("form").submit(function(e){
+  $("form.single-shop-item__gty").submit(function(e){
       if($('#sel_color').val()){
          
      return true;
       }else{
+
           $('#selcol').html('<span style="color:red">Please Select Color/Size</span>');
+
           e.preventDefault();
           return false;
       }

@@ -406,9 +406,9 @@ else{
 return back();
 }
 public function couponcode(Request $request){
-	if($request->input(id)){
+	if($request->input('id')){
 
-		DB::table('couponcode')->where('id','=',$request->input(id))->update($request->all());
+		DB::table('couponcode')->where('id','=',$request->input('id'))->update($request->all());
 		session()->flash('__response', ['notify'=>'Coupon  update successfully.','type'=>'success']);
 	}
 	else{
@@ -434,7 +434,7 @@ public function editcoupon(Request $request,$id){
     {
         $product = DB::table('couponcode')->where('id',$id)->delete();
        
-        session()->flash('__response', ['notify'=>'Product "'.$name.'" deleted successfully.','type'=>'success']);
+        session()->flash('__response', ['notify'=>'Coupon  deleted successfully.','type'=>'success']);
         return back();
     }
 public function contact_us(){

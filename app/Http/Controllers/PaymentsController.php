@@ -120,7 +120,9 @@ class PaymentsController extends Controller
 		$input['payer_email']=$request->input('email');
 		$input['address_country_code']=$request->input('country');
 		$input['mobilenumber']=$request->input('night_phone_a');
-		$request->session()->put('buy_email',$request->input('email'));
+		$email=$request->input('email');
+		$request->session()->put('buy_email',$email);
+		//$request->session()->put('key', 'value');
 		
 		if($request->input('_token') != null){
          
@@ -156,26 +158,30 @@ class PaymentsController extends Controller
 		return 'false';
 	}
 	public function pay(Request $request){
-		
+		//dd($request->session()->get('buy_email'));
 			$_request= $request->all();
 		
 			$inputs['payer_id']=$request->input('payer_id');
 			$inputs['payment_date']=$request->input('payment_date');
 			$inputs['payment_status']='Paid';
 			$inputs['payer_status']=$request->input('payer_status');
+			$inputs['payer_email']=$request->input('payer_email');
 			$inputs['business']=$request->input('business');
 			$inputs['ipn_track_id']=$request->input('ipn_track_id');
 			$inputs['num_cart_items']=$request->input('num_cart_items');
 			$orderCount =  DB::table('orders')->where('user_id','=',$request->input('custom'))->update($inputs);
 			if($orderCount){
-                    $email = $request->session()->get('buy_email');
-					Mail::to($email)->send(new UserOrderCompleted($_request));
-					$users = User::all();
-					foreach($users as $user){
-						if($user->hasRole('admin')){
-							Mail::to($user->email)->send(new AdminOrderCompleted($_request));
-						}
-					}
+			        	//$email['email'] = 'toseef3@gmail.com';
+                        $toemail =$inputs['payer_email'];
+			            Mail::send('emails.order_complete',['order' =>$inputs],
+                        function ($message) use ($toemail)
+                        {
+                            $message->subject('Islamic Wall - Order Received');
+                            $message->from('nabeelirbab@gmail.com', 'Islamic Wall Design');
+                            $message->to($toemail);
+                         });
+                    //$email = $request->session()->get('buy_email');
+					
 					return 'true';
 				
 			}

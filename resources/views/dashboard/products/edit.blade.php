@@ -345,7 +345,7 @@
                         </div>
                 </div>
               </div>
-             /.box-body
+            
             <div class="box-footer clearfix">
                 <div class="row">
                     <div class="col-sm-11">
@@ -357,10 +357,10 @@
                     </div>
                 </div>
             </div>
-            <!-- {!! Form::close() !!}
-                    /.box-footer -->
+            
+                   
         </div>
-        <!-- /.box -->
+       
     </section>
 @stop
 @section('footer')

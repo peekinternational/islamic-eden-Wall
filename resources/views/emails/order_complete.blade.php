@@ -83,50 +83,17 @@ $style = [
                                 <tr>
                                     <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">
                                         <!-- Greeting -->
-                                        <h1 style="{{ $style['header-1'] }}">
-                                         {{ config('app.name') }} Order completed successfully.
-                                        </h1>
+                                        
 
                                         <p style="{{ $style['paragraph'] }}">
-                                            Dear {{ $order['address_name'] }},
+                                            Dear customer,
                                         </p>
+										<h1>Thank You!</h1>
                                         <p style="{{ $style['paragraph'] }}">
-                                             Your order compleated successfully. Following is the details of your order.
+												We inform you that we have receivd your order.
                                         </p>
                                         <div>
-                                            <table border="1" width="100%">
-                                                <tr>
-                                                    <th width="30%">Name</td>
-                                                    @if(isset($order['price']))
-                                                        <th>Price</th>
-                                                    @endif
-                                                    @if(isset($order['type']))
-                                                        <th>Type</th>
-                                                    @endif
-                                                    <th width="20%">Quantity</td>
-                                                    <th width="20%">Tax</td>
-                                                    <th width="30%">SubTotal</td>
-                                                </tr>
-                                                @for($i=1;$i<=$order['num_cart_items'];$i++)
-                                                
-                                                <tr>
-                                                    <td>{{ $order['item_name'.$i] }}</td>
-                                                    @if(isset($order['price']))
-                                                        <th>{{ (float)$order['price'] }}</th>
-                                                    @endif
-                                                    @if(isset($order['type']))
-                                                        <th>{{ ucfirst(str_replace('_','-',$order['type'])) }}</th>
-                                                    @endif
-                                                    <td>{{ $order['quantity'.$i] }}</td>
-                                                    <td>&euro; {{ (float)$order['tax'.$i] }}</td>
-                                                    <td>&euro; {{ $order['mc_gross_'.$i]  }}</td>
-                                                </tr>
-                                                @endfor
-                                                <tr>
-                                                    <th colspan="3">Total</th>
-                                                     <td>&euro; {{ $order['num_cart_items']==1?$order['mc_gross_1']:$order['mc_gross'] }}</td>
-                                                </tr>
-                                            </table>
+                                           
                                         </div>
                                         
                                         <br />
