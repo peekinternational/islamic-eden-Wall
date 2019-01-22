@@ -83,22 +83,17 @@ $style = [
                                 <tr>
                                     <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">
                                         <!-- Greeting -->
-                                        <h1 style="{{ $style['header-1'] }}">
-                                         {{ config('app.name') }} Order completed successfully.
-                                        </h1>
+                                        
 
                                         <p style="{{ $style['paragraph'] }}">
                                             Dear customer,
                                         </p>
+										<h1>Thank You!</h1>
                                         <p style="{{ $style['paragraph'] }}">
-                                             Your order compleated successfully.
+												We inform you that we have receivd your order.
                                         </p>
                                         <div>
-                                            <?php  
-												foreach($order as $or){
-													echo json_encode($or);
-												}
-												?>
+                                           
                                         </div>
                                         
                                         <br />
