@@ -173,11 +173,11 @@ class PaymentsController extends Controller
 			if($orderCount){
 			        	//$email['email'] = 'toseef3@gmail.com';
                         $toemail =$inputs['payer_email'];
-			            Mail::send('emails.order_complete',['order' =>$_request],
+			            Mail::send('emails.order_complete',['order' =>$inputs],
                         function ($message) use ($toemail)
                         {
-                            $message->subject('Islamic Wall - Order Status');
-                            $message->from('nabeelirbab@gmail.com', 'Islamic Wall');
+                            $message->subject('Islamic Wall - Order Received');
+                            $message->from('nabeelirbab@gmail.com', 'Islamic Wall Design');
                             $message->to($toemail);
                          });
                     //$email = $request->session()->get('buy_email');

@@ -60,9 +60,7 @@ $style = [
 ];
 ?>
 
-<?php $fontFamily = 'font-family: Arial, \'Helvetica Neue\', Helvetica, sans-serif;';
-
- ?>
+<?php $fontFamily = 'font-family: Arial, \'Helvetica Neue\', Helvetica, sans-serif;'; ?>
 
     <body style="{{ $style['body'] }}">
     <table width="100%" cellpadding="0" cellspacing="0">
@@ -89,7 +87,19 @@ $style = [
                                          {{ config('app.name') }} Order completed successfully.
                                         </h1>
 
-                                      
+                                        <p style="{{ $style['paragraph'] }}">
+                                            Dear customer,
+                                        </p>
+                                        <p style="{{ $style['paragraph'] }}">
+                                             Your order compleated successfully.
+                                        </p>
+                                        <div>
+                                            <?php  
+												foreach($order as $or){
+													echo json_encode($or);
+												}
+												?>
+                                        </div>
                                         
                                         <br />
                                         <p style="{{ $style['paragraph'] }}">
