@@ -74,14 +74,14 @@
 function paypalcheckout() {
         
         if($('#first_name').val() == ''){
-			alert('Requried all fields');
+			alert('Please fill in the mandatory fields*');
 			return 0;
 		}else if($('#last_name').val() == ''){
-			alert('Requried all fields');
+			alert('Please fill in the mandatory fields*');
 			return 0;
 		}
 		else if($('#address').val() == ''){
-			alert('Requried all fields');
+			alert('Please fill in the mandatory fields*');
 			return 0;
 		}
         var formVal = $('form.shop-checkout').serialize();
