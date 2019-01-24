@@ -45,13 +45,13 @@
 
                                 <div class="row title-row">
                                     <div class="col-xs-4">
-                                        <a href="{{ route('product.show',['slug'=>$item->id]) }}">
+                                        <a href="{{  asset($item->options['image']) }}">
                                             <img class="media-object cart-product-image" src="{{  $item->image }}" alt="{{ $item->name }}" style="width: 100%;">
                                         </a>
                                     </div>
                                     <div class="col-xs-8">
                                         <h5 class="text-heading">
-                                            <a href="{{ route('product.show',['slug'=>$item->id]) }}">{{ $item->name }}</a>
+                                            <a href="{{  asset($item->options['image']) }}">{{ $item->name }}</a>
                                         </h5>
                                     </div>
                                 </div>
