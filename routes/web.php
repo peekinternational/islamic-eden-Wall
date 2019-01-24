@@ -71,6 +71,8 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     Route::post('upload', 'SettingsController@upload');
     Route::resource('users', 'UserController');
     Route::resource('orders', 'OrderController');
+    Route::get('recycle-orders', 'RecycleController@index');
+     Route::delete('deleteorder/{id}', 'RecycleController@destroy');
 	Route::get('changestatus/{id}', 'OrderController@updatestatus');
     Route::get('blog/published', 'BlogController@published');
     Route::get('blog/un-published', 'BlogController@unPublished');
