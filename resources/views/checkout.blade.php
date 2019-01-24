@@ -85,7 +85,7 @@
                         <input type="hidden" name="email" value="shahkhalid.me@gmail.com">
                         <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_cart_SM.gif" border="0" name="upload" alt="Make payments with PayPal - it's fast, free and secure!" width="87" height="23">--}}
                  {{--   </form>--}}
-                    <h3 class="shop-checkout__title">Shipping Address</h3>
+                    <h3 class="shop-checkout__title">Billing Address</h3>
                        <div class="form-group">
                             <label for="country" class="col-sm-3 control-label">
                                 <span class="grey">Country </span>
@@ -215,11 +215,11 @@
                                       </label>
                                   </div>
                                   @endif--}}
-                                  <div class="checkbox">
+                                  <!-- <div class="checkbox">
                                       <label>
-                                          <input type="checkbox" name="REQCONFIRMSHIPPING" checked value="1"> Shop to Billing Address?
+                                          <input type="checkbox" name="REQCONFIRMSHIPPING" checked value="1"> Ship to Billing Address?
                                       </label>
-                                  </div>
+                                  </div> -->
                               </div>
                           </div>
                           <div class="form-group">
