@@ -11,7 +11,7 @@
 	background-color: orange;color: white;display: block;height: 31px;border-radius: 4px;
 }
 .deliver{
-	background-color: pink;color: white;display: block;height: 31px;border-radius: 4px;
+	background-color: red;color: white;display: block;height: 31px;border-radius: 4px;
 }
 .green{
 	height: 18px;width: 18px; background-color: green;border-radius: 50%;display: inline-block;margin-left: 19px;

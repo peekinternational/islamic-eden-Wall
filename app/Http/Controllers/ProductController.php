@@ -249,6 +249,7 @@ class ProductController extends Controller
 
         $tags = Tags::pluck('name','id');
         $categories = Category::pluck('name','id');
+        
 
 
              
