@@ -116,13 +116,13 @@
                                             @foreach($cart->getItems() as $item)
                                              <li class="media">
                                                 <div class="media-left media-middle" style="vertical-align:top;">
-                                                    <a href="{{ route('product.show',['slug'=>$item->slug]) }}">
+                                                    <a href="{{ url('product/'.$item->slug)}}">
                                                         <img src="{{  asset($item->options['image']) }}" alt="{{ $item->name }}">
                                                     </a>
                                                 </div>
                                                 <div class="media-body media-middle">
                                                     <h4>
-                                                        <a href="blog-right.html">{{ $item->options['name'] }}</a>
+                                                        <a href="{{ url('product/'.$item->slug)}}">{{ $item->options['name'] }}</a>
                                                     </h4>
                                                       <p class="quantity" style="margin-bottom:0px;">{{ $item->options['qty'] }} ×
                                                        <span class="amount">&euro; {{ $item->options['price'] }}</span>

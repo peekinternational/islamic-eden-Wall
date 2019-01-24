@@ -11,7 +11,7 @@
                  <form action="{{ action('ProductController@getIndex')}}" method="post" >
                 {!! csrf_field() !!}
                     <div class="col-md-4" style="padding: 0px 0px;">
-                      <select id = "" class="form-control" name="catid">
+                      <select class="form-control" name="catid">
                        <option value = "">select Category</option>
                        @foreach($category as $cat)
                        <option value ="{{$cat->id}}">{{$cat->name}}</option>
