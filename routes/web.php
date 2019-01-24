@@ -71,6 +71,7 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     Route::post('upload', 'SettingsController@upload');
     Route::resource('users', 'UserController');
     Route::resource('orders', 'OrderController');
+    Route::get('recycl-remove/{id}', 'OrderController@destroy_payer');
     Route::get('recycle-orders', 'RecycleController@index');
      Route::delete('deleteorder/{id}', 'RecycleController@destroy');
 	Route::get('changestatus/{id}', 'OrderController@updatestatus');
@@ -85,7 +86,7 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     Route::post('gallery/update-categories', 'GalleryController@updateCategories');
    
     Route::resource('gallery', 'GalleryController');
-    Route::get('products','ProductController@getIndex')->name('dashboard.products');
+    Route::match(['get', 'post'],'products','ProductController@getIndex')->name('dashboard.products');
     Route::get('/deleteimg/{id}','ProductController@deleteimg');
     Route::resource('product', 'ProductController');
     Route::resource('slider', 'SliderController');
