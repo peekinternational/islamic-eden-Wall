@@ -111,7 +111,7 @@ class ProductController extends Controller
        $p_color=$request->input('color');
        $p_dimension=$request->input('p_dimension');
        $p_price=$request->input('p_price');
-       //dd($p_price[0]);
+   // dd($p_price);
        $dim_offer=$request->input('dim_offer');
        
 
@@ -236,8 +236,8 @@ class ProductController extends Controller
         $product_color = DB::table('product_color')->where('product_id','=',$product->id)->get();
         $product_size = DB::table('product_size')->where('product_id','=',$product->id)->get();
 
-        
-//dd($product_size);
+       $images=$product->images->toArray();
+       //dd($images[0]['image']);
         // join query
 
         // $product=DB::table('products')->
@@ -254,7 +254,7 @@ class ProductController extends Controller
 
              
 
-        return view('dashboard.products.edit',compact('product','breadcrumb','tags','categories','product_dimension','product_color','product_size'));
+        return view('dashboard.products.edit',compact('images','product','breadcrumb','tags','categories','product_dimension','product_color','product_size'));
     }
 
     /**
@@ -275,7 +275,7 @@ class ProductController extends Controller
         //return $request->all();
         $this->validate($request,[
                 'name' => 'required',
-                'price' => 'required',
+                //'price' => 'required',
                 'category_id'=>'required',
                 'navs' => 'required',
                 'slug' => 'unique:products,slug,'.$product->slug.',slug'
@@ -329,8 +329,9 @@ class ProductController extends Controller
                   DB::table('product_size')->where('product_id','=',$product->id)->update($inputs);
               }
              }
+             DB::table('product_dimension')->where('product_id','=',$product->id)->delete();
               if($dim_offer){
-                      
+                       DB::table('product_dimension')->where('product_id','=',$product->id)->delete();
                    foreach($p_price as $key=>$price){
                                 $original_price = $price;
                                 $discountprice=$original_price/100*$dim_offer;
@@ -341,14 +342,17 @@ class ProductController extends Controller
                                 $inputsss['dim_offer']=$dim_offer;
                                 $inputsss['p_dimension']=$p_dimension[$key];
                                 $inputsss['product_id']=$product->id;
-                                DB::table('product_dimension')->where('product_id','=',$product->id)->update($inputsss);
+                               // dd($inputsss);
+                               
+                                DB::table('product_dimension')->insert($inputsss);
                             }
                         }elseif($p_price[0] !=''){   
                                 foreach($p_price as $key=>$price){
                                 $inputss['p_price']=$price;
                                 $inputss['p_dimension']=$p_dimension[$key];
                                 $inputss['product_id']=$product->id;
-                                DB::table('product_dimension')->where('product_id','=',$product->id)->update($inputss);
+                                //  DB::table('product_dimension')->where('product_id','=',$product->id)->delete();
+                                DB::table('product_dimension')->insert($inputss);
                         }
                   }
 
@@ -376,6 +380,10 @@ class ProductController extends Controller
         return back();
     }
 
+function deleteimg($id){
+    //dd($id);
+    DB::table('product_images')->where('id','=',$id)->delete();
+}
     /**
      * Search a product
      *

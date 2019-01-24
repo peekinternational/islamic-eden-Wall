@@ -84,6 +84,7 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
    
     Route::resource('gallery', 'GalleryController');
     Route::get('products','ProductController@getIndex')->name('dashboard.products');
+    Route::get('/deleteimg/{id}','ProductController@deleteimg');
     Route::resource('product', 'ProductController');
     Route::resource('slider', 'SliderController');
     Route::resource('navigation','NavigationController');
