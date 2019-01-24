@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Edenmill\Http\Requests;
 use DB;
 use Mail;
-class OrderController extends Controller
+class RecycleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,11 +19,11 @@ class OrderController extends Controller
     {
        //DB::enableQueryLog();
         Orders::whereRead(0)->update(['read'=>1]);
-        $orders = Orders::where('status','=','Active')->orderBy('id','desc')->paginate(20);
-
+        $orders = Orders::where('status','=','Inactive')->orderBy('id','desc')->paginate(20);
+        
          // print_r(DB::getQueryLog());die();
         //return $order_products->sum('total');
-        return view('dashboard.orders',compact('orders'));
+        return view('dashboard.recycleorder',compact('orders'));
     }
 
     /**
@@ -111,10 +111,9 @@ class OrderController extends Controller
      */
      public function destroy($id)
     {
-        
-        $product = DB::table('orders')->where('id',$id)->Update(["status"=>"Inactive"]);
+        $product = DB::table('orders')->where('id',$id)->delete();
        
-        session()->flash('__response', ['notify'=>' Move to recycle order.','type'=>'success']);
+        session()->flash('__response', ['notify'=>' Delete order.','type'=>'success']);
         return back();
     }
 }

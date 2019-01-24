@@ -69,7 +69,7 @@
    	title: 'Hello World!'
    	});
    }
-	
+	   
 	  
 function paypalcheckout() {
         
@@ -114,6 +114,7 @@ function paypalcheckout() {
         $(document).ready(function () {
             $.notify('{!! Session::get('__response')['notify'] !!}', "{{Session::get('__response')['type']}}");
         });
+
     </script>
 @endif
 @yield('scripts')

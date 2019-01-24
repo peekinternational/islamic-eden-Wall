@@ -30,7 +30,7 @@ class CartController extends Controller
          */
         public function store(Request $request,LaraCart $cart)
         {
-            dd($request->all());
+            //dd($request->all());
                 if(!$request->has('id') && !((int)$request->input('id'))>0){
                         $request->session()->flash('__response', ['message'=>'Oops! Something went wrong.','type'=>'danger']);
                 }else{

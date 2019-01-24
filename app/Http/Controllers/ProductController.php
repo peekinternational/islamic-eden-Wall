@@ -30,11 +30,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-       /* $category = Category::first();
-        $category->products;
-        $produt = Products::first();
-        $cat = $produt->category;
-        return $category;*/
+        // $category = Category::first();
+        // $category->products;
+        // $produt = Products::first();
+        // $cat = $produt->category;
+        // return $category;
+        // dd($category);
         $products = Products::orderBy('id','desc')->paginate(10);
          // dd($products);
 
@@ -51,10 +52,24 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex()
+    public function getIndex(Request $request)
     {
         $this->breadcrumb['page']  = 'Products List';
         $breadcrumb = $this->breadcrumb;
+        if($request->isMethod('post')){
+            $id=$request->input('catid');
+            $products = Products::where('category_id','=',$id)->orderBy('id','desc')->paginate(9);
+         foreach($products as &$rec){
+                  $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
+                    $product_color = DB::table('product_color')->where('product_id','=',$rec->id)->get();
+        $product_size = DB::table('product_size')->where('product_id','=',$rec->id)->get();
+         $product_dimension  = DB::table('product_dimension')->where('product_id','=',$rec->id)->get();
+                }
+   
+            $category=DB::table('categories')->get();
+        
+        return view('dashboard.products.index',compact('products','breadcrumb','quantity','product_size','product_color','products','product_dimension','category'));
+        }
         $products = Products::orderBy('id','desc')->paginate(9);
          foreach($products as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
@@ -63,9 +78,9 @@ class ProductController extends Controller
          $product_dimension  = DB::table('product_dimension')->where('product_id','=',$rec->id)->get();
                 }
    
-
+            $category=DB::table('categories')->get();
         
-        return view('dashboard.products.index',compact('products','breadcrumb','quantity','product_size','product_color','products','product_dimension'));
+        return view('dashboard.products.index',compact('products','breadcrumb','quantity','product_size','product_color','products','product_dimension','category'));
     }
 
     /**

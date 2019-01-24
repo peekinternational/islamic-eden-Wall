@@ -185,9 +185,9 @@
 							
                             <td>{{ $order->payment_date }}</td>
                             <td><span class="btn-edit">
-                                    {!! Form::open(['action'=>['OrderController@destroy',$order->id],'method'=>'delete', 'class'=>'remove-order','style'=>'display:inline;']) !!}
+                                    {!! Form::open(['action'=>['RecycleController@destroy',$order->id],'method'=>'delete','style'=>'display:inline;']) !!}
                                    <input type="hidden" class="delete_permanent" name="delete_permanent" value="0">
-                                    <a href="javascript:void(0);" class="btn btn-xs btn-danger btn-delete-user removeRecord" data-toggle="tooltip" onclick="remove_record({{$order->id}})"  data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                                    <button type="submit" class="btn btn-xs btn-danger btn-delete-user" data-toggle="tooltip"  data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
                                     {!! Form::close() !!}
                             </span></td>
                         </tr>
@@ -235,22 +235,9 @@
 @stop
 @section('footer')
     <script>
-
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip(); 
 });
-  function remove_record(payer_id) {
-   // event.preventDefault();
-    if (confirm('Are you sure want to move in Archieve')) {
-            $('.remove-order').submit();
-    }
-   else
-   {
-      
-   }       
-   event.preventDefault();
-   
-}
 function changestatus(id){
 	var val=$('.status'+id).val();
 	 

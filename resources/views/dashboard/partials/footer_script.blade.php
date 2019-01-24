@@ -19,6 +19,21 @@
 <script src="{{ asset('assets/plugins/jquery-confirm/jquery-confirm.min.js') }}"></script>
 <!-- Notify -->
 <script src="{{ asset('assets/plugins/notify.js') }}"></script>
+<script type="text/javascript">
+	
+	  function remove_recordss(id) {
+   // event.preventDefault();
+    if (confirm('Are you sure want to delete this product')) {
+            $('#ids'+id).submit();
+    }
+   else
+   {
+      
+   }       
+   event.preventDefault();
+   
+}
+</script>
 @if(Session::has('__response') && isset(Session::get('__response')['notify']))
     <script>
         $(document).ready(function () {
