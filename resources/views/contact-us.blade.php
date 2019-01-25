@@ -54,21 +54,21 @@
 							</h3>
 						</div>
 					<div class="panel-body contct-body">
-						<form method="post" action="">
-
+						<form method="post" name="contac_form" action="{{ url('dashboard/conatctus')}}">
+								  {!! csrf_field() !!}
 						<div class="form-group">
-								<input type="text" class="form-control" id="" name="" placeholder="Name">
+								<input type="text" class="form-control" id="" name="name" placeholder="Name">
 								<span class="help-block" style="display: none;"> enter your name.</span>
 						  </div>
 						  <div class="form-group">
-								<input type="email" class="form-control" id="" name="" placeholder="Email Address">
+								<input type="email" class="form-control" id="" name="email" placeholder="Email Address">
 								<span class="help-block" style="display: none;"> enter a valid e-mail address.</span>
 						  </div>
 						  <div class="form-group">
-								<textarea rows="4" cols="100" class="form-control" id="" name="" placeholder="Message"></textarea>
+								<textarea rows="4" cols="100" class="form-control" id="" name="message" placeholder="Message"></textarea>
 								<span class="help-block" style="display: none;"> enter a message.</span>
 						  </div>
-						  <button type="submit" id="feedbackSubmit" class="btn btn-primary btn-lg" style="display: block; margin-top: 10px;">Send Feedback</button>
+						  <button type="submit" id="feedbackSubmit" name="feedbackSubmit" class="btn btn-primary btn-lg" style="display: block; margin-top: 10px;">Send Feedback</button>
 						</form>
 					<!-- END CONTACT FORM -->
 					</div>
