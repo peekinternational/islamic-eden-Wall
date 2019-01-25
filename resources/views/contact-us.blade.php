@@ -54,7 +54,7 @@
 							</h3>
 						</div>
 					<div class="panel-body contct-body">
-						<form method="post" name="contac_form" action="{{ url('dashboard/conatctus')}}">
+						<form method="post" name="contac_form" action="{{ url('conatctus')}}">
 								  {!! csrf_field() !!}
 						<div class="form-group">
 								<input type="text" class="form-control" id="" name="name" placeholder="Name">
