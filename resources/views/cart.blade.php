@@ -69,7 +69,7 @@
                             <div class="col-md-2 col-xs-6 text-center">
                                  <div class="quantity">
                                      <input type="button" value="-" class="minus">
-                                     <input class="text-center" type="number" step="1" min="0" data-id="{{ $item->id }}" data-price="{{ $item->price }}"  name="product_quantity" value="{{ $item->qty }}" title="Qty" class="form-control input-product-quantity">
+                                     <input style="text-align: center;" type="number" step="1" min="0" data-id="{{ $item->id }}" data-price="{{ $item->price }}"  name="product_quantity" value="{{ $item->qty }}" title="Qty" class="form-control input-product-quantity">
                                      <input type="button" value="+" class="plus">
                                  </div>
                             </div>
