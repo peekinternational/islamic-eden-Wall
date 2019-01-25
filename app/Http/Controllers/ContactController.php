@@ -30,9 +30,9 @@ class ContactController extends Controller
             'email' =>'required',
             'message' =>'required'
         ]);
-                         $inputs['payer_email']='rizwanahmadabbasi05@gmail.com';
+                         // $inputs['payer_email']='rizwanahmadabbasi05@gmail.com';
                          $inputs=$request->all();
-                         $toemail =$inputs['payer_email'];
+                         $toemail ='rizwanahmadabbasi05@gmail.com';
                         Mail::send('emails.contactus',['contact' =>$inputs],
                         function ($message) use ($toemail)
                         {
