@@ -108,5 +108,9 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     Route::get('settings','SettingsController@showSettings');
     Route::post('site-settings','SettingsController@updateSettings');
     Route::post('site-settings','SettingsController@updateSettings');
+    // contact us feed back
+     Route::post('conatctus','ContactController@contactus');
+     // End Contact feed back
+
 });
 

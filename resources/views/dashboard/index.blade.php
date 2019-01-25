@@ -142,11 +142,11 @@
                 </a>
             </div>-->
              <div class="col-md-3 col-sm-6 col-xs-12">
-                <a href="{{ action('SettingsController@theme') }}">
+                <a href="{{ action('SettingsController@coupon') }}">
                     <div class="info-box">
                         <span class="info-box-icon bg-olive"><i class="fa fa-adjust"></i></span>
                         <div class="info-box-content">
-                            <h2>Coupon Code</h2>
+                            <h2>Promo Code</h2>
                         </div>
                     </div>
                 </a>
