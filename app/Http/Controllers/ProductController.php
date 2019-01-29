@@ -80,7 +80,7 @@ class ProductController extends Controller
    
             $category=DB::table('categories')->get();
         
-        return view('dashboard.products.index',compact('products','breadcrumb','quantity','product_size','product_color','products','product_dimension','category'));
+        return view('dashboard.products.index',compact('products','breadcrumb','quantity','product_size','product_color','product_dimension','category'));
     }
 
     /**
@@ -410,7 +410,14 @@ function deleteimg($id){
         if($request->input('q')){
             $query = $request->q;
             $products = Products::where('name','like','%'.$query.'%')->orderBy('id','desc')->paginate(10);
-            return view('products',compact('products'));
+			  foreach($products as &$rec){
+                    $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
+				    $product_color = DB::table('product_color')->where('product_id','=',$rec->id)->get();
+                    $product_size = DB::table('product_size')->where('product_id','=',$rec->id)->get();
+                    $product_dimension  = DB::table('product_dimension')->where('product_id','=',$rec->id)->get();
+                }
+   
+            return view('products',compact('products','product_size','product_color','product_dimension'));
         }
         return redirect()->back();
     }
@@ -420,9 +427,15 @@ function deleteimg($id){
             $min = (int)$request->input('min');
             $max = (int)$request->input('max');
             $products = Products::whereBetween('price',[$min,$max])->orderBy('id','desc')->paginate(10);
-
+              foreach($products as &$rec){
+                    $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
+				    $product_color = DB::table('product_color')->where('product_id','=',$rec->id)->get();
+                    $product_size = DB::table('product_size')->where('product_id','=',$rec->id)->get();
+                    $product_dimension  = DB::table('product_dimension')->where('product_id','=',$rec->id)->get();
+                }
+   
             $products->appends(['min'=>$min,'max'=>$max]);
-            return view('products',compact('products'));
+            return view('products',compact('products','product_size','product_color','product_dimension'));
         }else{
             return redirect()->action('ProductController@index');
         }

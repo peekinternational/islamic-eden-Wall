@@ -272,9 +272,9 @@
 $(document).ready(function() {
    
 
- });sel_color
+ });
   $("form.single-shop-item__gty").submit(function(e){
-      if($('#sel_color').val()){
+  if($('#sel_color').val() != '' && $('#sel_dim').val() != '' || $('#sel_size').val() != ''){
          
      return true;
       }else{
@@ -288,7 +288,7 @@ $(document).ready(function() {
     });
   $('.color').click(function() {
 		 
-        if($(this).val() != '') {
+        if($(this).val() != '' && $('#sel_dim').val() != '' || $('#sel_size').val() != '') {
            $('#selcol').hide();
         }
      });

@@ -40,7 +40,7 @@ class ContactController extends Controller
                             $message->from('nabeelirbab@gmail.com', 'Islamic Wall Design');
                             $message->to($toemail);
                          });
-                        return true;
+                         return back();
 
     }
     public function create()
