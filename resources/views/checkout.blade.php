@@ -19,7 +19,7 @@
 			  @endif
 			@endforeach
 		  </div> <!-- end .flash-message -->
-                <form target="paypal" class="form-horizontal checkout shop-checkout" action="{{ isset($PaymentSettings['payment_mood']['value']) && $PaymentSettings['payment_mood']['value']=='live'?'https://www.paypal.com/cgi-bin/webscr':'https://www.sandbox.paypal.com/cgi-bin/webscr' }}" method="post">
+                <form target="_self" class="form-horizontal checkout shop-checkout" action="{{ isset($PaymentSettings['payment_mood']['value']) && $PaymentSettings['payment_mood']['value']=='live'?'https://www.paypal.com/cgi-bin/webscr':'https://www.sandbox.paypal.com/cgi-bin/webscr' }}" method="post">
                 <div class="col-sm-7 col-md-8 col-lg-8" style="width: 63%;">
 
                     {{--<input type="hidden" name="country" value="Us" />--}}
@@ -329,7 +329,7 @@
                                 </li>
                             </ul>
                             <div class="place-order">
-                                <input type="submit" class="button-t1" name="checkout_place_order" id="place_order" onclick="paypalcheckout();" value="Place order">
+                                <input type="submit" class="button-t1" target="_self" name="checkout_place_order" id="place_order" onclick="paypalcheckout();" value="Place order">
                             </div>
                         </div>
                     </div>

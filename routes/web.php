@@ -84,7 +84,7 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     Route::resource('category', 'CategoryController');
     Route::resource('subscribers', 'SubscriberController');
     Route::post('gallery/update-categories', 'GalleryController@updateCategories');
-   
+   Route::match(['get', 'post'],'copy/{id}','ProductController@copy')->name('dashboard.products');
     Route::resource('gallery', 'GalleryController');
     Route::match(['get', 'post'],'products','ProductController@getIndex')->name('dashboard.products');
     Route::get('/deleteimg/{id}','ProductController@deleteimg');
@@ -114,4 +114,5 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
   // contact us feed back
      Route::post('conatctus','ContactController@contactus');
      // End Contact feed back
+     
 

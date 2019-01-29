@@ -3,7 +3,6 @@
 namespace Edenmill\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Mail;
 
 class ContactController extends Controller
 {
@@ -22,6 +21,7 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function contactus(Request $request)
     {
 
@@ -43,6 +43,7 @@ class ContactController extends Controller
                          return back();
 
     }
+
     public function create()
     {
         //
