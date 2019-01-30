@@ -185,9 +185,9 @@
 							
                             <td>{{ $order->payment_date }}</td>
                             <td><span class="btn-edit">
-                                    {!! Form::open(['action'=>['RecycleController@destroy',$order->id],'method'=>'delete', 'class'=>'remove-order','style'=>'display:inline;']) !!}
+                                    {!! Form::open(['action'=>['RecycleController@destroy',$order->id],'method'=>'delete', 'class'=>$order->id,'style'=>'display:inline;']) !!}
                                    <input type="hidden" class="delete_permanent" name="delete_permanent" value="0">
-                                    <button type="submit" class="btn btn-xs btn-danger btn-delete-user" data-toggle="tooltip" onclick="remove_record({{$order->id}})" data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
+                                    <button type="submit" class="btn btn-xs btn-danger btn-delete-user" data-toggle="tooltip" onclick="remove_record('{{$order->id}}')" data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
                                     {!! Form::close() !!}
                             </span></td>
                         </tr>
@@ -242,7 +242,7 @@ $(document).ready(function(){
   function remove_record(payer_id) {
    // event.preventDefault();
     if (confirm('Are you want to permanently ')) {
-            $('.remove-order').submit();
+            $('.'+payer_id).submit();
     }
    else
    {

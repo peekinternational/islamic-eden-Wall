@@ -86,11 +86,14 @@ $style = [
                                         
 
                                         <p style="{{ $style['paragraph'] }}">
-                                            Dear customer,
+                                            Dear Admin,
                                         </p>
-										<h1>Thank You!</h1>
+										<h1>Please!</h1>
                                         <p style="{{ $style['paragraph'] }}">
-												We inform you that we have receivd your order.
+											
+											{{ $contact['message']}} 
+											
+												
                                         </p>
                                         <div>
                                            
@@ -98,7 +101,8 @@ $style = [
                                         
                                         <br />
                                         <p style="{{ $style['paragraph'] }}">
-                                            Regards, <br>{{ config('app.name') }}
+                                            Regards, <br>{{ $contact['name']}}<br> 
+														{{ $contact['email'] }} 
                                         </p>
                                     </td>
                                 </tr>

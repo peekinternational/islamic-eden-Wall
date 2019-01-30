@@ -3,6 +3,7 @@
 namespace Edenmill\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Mail;
 
 class ContactController extends Controller
 {
@@ -21,6 +22,30 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function contactus(Request $request)
+    {
+
+             $this->validate($request,[
+            'name' => 'required',
+            'email' =>'required',
+            'message' =>'required'
+        ]);
+                         // $inputs['payer_email']='rizwanahmadabbasi05@gmail.com';
+                         $inputs=$request->all();
+                         $toemail ='Islamicwalldesigns@outlook.com';
+                        Mail::send('emails.contactus',['contact' =>$inputs],
+                        function ($message) use ($toemail)
+                        {
+                            $message->subject('Islamic Wall - FeedBack');
+                            $message->from('nabeelirbab@gmail.com', 'Islamic Wall Design');
+                            $message->to($toemail);
+                         });
+						 session()->flash('__response', ['notify'=>' Thankyou for contacting us we will get back to you soon','type'=>'success']);
+                         return back();
+
+    }
+
     public function create()
     {
         //
