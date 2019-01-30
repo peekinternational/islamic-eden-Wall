@@ -425,6 +425,7 @@ class ProductController extends Controller
           {
               DB::table('product_tags')->insert(['product_id'=>$product->id,'tag_id'=>$tags->tag_id]);
           }
+          return back();
       
             
        
