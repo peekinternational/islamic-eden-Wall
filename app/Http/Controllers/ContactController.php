@@ -39,7 +39,7 @@ class ContactController extends Controller
                         Mail::send('emails.contactus',['contact' =>$inputs],
                         function ($message) use ($toemail)
                         {
-                            $message->subject('Islamic Wall - Order Received');
+                            $message->subject('Islamic Wall - feedback');
                             $message->from('nabeelirbab@gmail.com', 'Islamic Wall Design');
                             $message->to($toemail);
                          });
