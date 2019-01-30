@@ -35,16 +35,6 @@
                     </div>
                 </a>
             </div>
-            <!--<div class="col-md-3 col-sm-6 col-xs-12">
-                <a href="{{ action('GalleryController@index') }}">
-                    <div class="info-box">
-                        <span class="info-box-icon bg-blue"><i class="fa fa-picture-o"></i></span>
-                        <div class="info-box-content">
-                            <h2>Gallery </h2>
-                        </div>
-                    </div>
-                </a>
-            </div>-->
 
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <a href="{{ action('CategoryController@index') }}">

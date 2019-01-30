@@ -87,12 +87,7 @@
                     <span>Upload</span>
                 </a>
             </li>--}}   
-            <li class="treeview">
-                <a href="{{ url('/dashboard/newsletter') }}">
-                    <i class="fa fa-envelope"></i>
-                    <span>Send Newsletter</span>
-                </a>
-            </li>
+            
 
             <li class="treeview">
                 <a href="#">
@@ -104,6 +99,12 @@
                     <li><a href="{{ action('CategoryController@create') }}"><i class="fa fa-circle-o"></i> New Category</a></li>
                     <li><a href="{{ action('CategoryController@index') }}"><i class="fa fa-circle-o"></i> Show Categories</a></li>
                 </ul>
+            </li>
+            <li class="treeview">
+                <a href="{{ url('/dashboard/newsletter') }}">
+                    <i class="fa fa-envelope"></i>
+                    <span>Send Newsletter</span>
+                </a>
             </li>
             <li class="treeview">
                 <a href="#">
