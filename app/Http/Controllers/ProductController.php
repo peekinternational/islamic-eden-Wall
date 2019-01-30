@@ -36,12 +36,7 @@ class ProductController extends Controller
         // $cat = $produt->category;
         // return $category;
         // dd($category);
-        $products = Products::orderBy('id','desc')->paginate(10);
-          // dd($products);
-
-         foreach($products as &$rec){
-                  $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
-                }
+          $products = Products::join('product_dimension','product_dimension.product_id','=','products.id')->join('product_images','product_images.product_id','=','products.id')->orderBy('products.id','desc')->groupBy('products.id')->paginate(10);
              //dd($products);
          return view('products',compact('products'));
 
@@ -457,13 +452,8 @@ function deleteimg($id){
     {
         if($request->input('q')){
             $query = $request->q;
-            $products = Products::where('name','like','%'.$query.'%')->orderBy('id','desc')->paginate(10);
-			  foreach($products as &$rec){
-                    $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
-				    $product_color = DB::table('product_color')->where('product_id','=',$rec->id)->get();
-                    $product_size = DB::table('product_size')->where('product_id','=',$rec->id)->get();
-                    $product_dimension  = DB::table('product_dimension')->where('product_id','=',$rec->id)->get();
-                }
+            //$products = Products::where('name','like','%'.$query.'%')->orderBy('id','desc')->paginate(10);
+			  $products = Products::join('product_dimension','product_dimension.product_id','=','products.id')->join('product_images','product_images.product_id','=','products.id')->where('products.name','like','%'.$query.'%')->orderBy('products.id','desc')->groupBy('products.id')->paginate(10);
    
             return view('products',compact('products','product_size','product_color','product_dimension'));
         }
@@ -474,19 +464,15 @@ function deleteimg($id){
         if($request->has('max') && $request->has('min')){
             $min = (int)$request->input('min');
             $max = (int)$request->input('max');
-			
-            $products = Products::orderBy('id','desc')->paginate(10);
-			//dd($products);
-              foreach($products as &$rec){
-                    $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
-				    $product_color = DB::table('product_color')->where('product_id','=',$rec->id)->get();
-                    $product_size = DB::table('product_size')->where('product_id','=',$rec->id)->get();
-                    $product_dimension  = DB::table('product_dimension')->where('product_id', '=', $rec->id)->get();
-																					
-                }
-				
-   dd($products);
-            $products->appends(['min'=>$min,'max'=>$max]);
+            $products = Products::join('product_dimension','product_dimension.product_id','=','products.id')->join('product_images','product_images.product_id','=','products.id')->where('product_dimension.p_price','>',$min)->where('product_dimension.p_price','<',$max)->orderBy('products.id','desc')->groupBy('products.id')->paginate(10);
+             // foreach($products as &$rec){
+                   // $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->where('p_price','<','2000')->where('p_price','<','2000')->get()->toArray();
+				  //  $product_color = DB::table('product_color')->where('product_id','=',$rec->id)->get();
+                   // $product_size = DB::table('product_size')->where('product_id','=',$rec->id)->get();
+                   // $product_dimension  = DB::table('product_dimension')->where('product_id','=',$rec->id)->get();
+               // }
+   
+           $products->appends(['min'=>$min,'max'=>$max]);
             return view('products',compact('products','product_size','product_color','product_dimension'));
         }else{
             return redirect()->action('ProductController@index');

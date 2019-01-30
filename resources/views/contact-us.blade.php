@@ -33,12 +33,12 @@
 					</div>
 					<div class="panel-body">
 						<address>
-						<strong>{{$address->value}}</strong><br>
-						<strong>{{$email->value}}</strong><br>
-						<strong>{{$working_hours->value}}</strong><br>
+						<strong class="fa fa-map-marker">&nbsp;&nbsp;{{$address->value}}</strong><br>
+						<strong class="fa fa-envelope">&nbsp;{{$email->value}}</strong><br>
+						<strong class="fa fa-clock-o">&nbsp;{{$working_hours->value}}</strong><br>
 
 						
-						<i class="icon-phone-sign"></i> {{$phone_num->value}}
+						<i  class="fa fa-phone"></i>&nbsp; {{$phone_num->value}}
 						</address>
 					</div>
 				</div>
@@ -68,7 +68,7 @@
 								<textarea rows="4" cols="100" class="form-control" id="" name="message" placeholder="Message"></textarea>
 								<span class="help-block" style="display: none;"> enter a message.</span>
 						  </div>
-						  <button type="submit" id="feedbackSubmit" name="feedbackSubmit" class="btn btn-primary btn-lg" style="display: block; margin-top: 10px;">Send Feedback</button>
+						  <button type="submit" id="feedbackSubmit" name="feedbackSubmit" class="btn btn-primary btn-lg" style="display: block; margin-top: 10px;">Contact US</button>
 						</form>
 					<!-- END CONTACT FORM -->
 					</div>

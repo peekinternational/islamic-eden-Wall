@@ -33,14 +33,15 @@ class ContactController extends Controller
         ]);
                          // $inputs['payer_email']='rizwanahmadabbasi05@gmail.com';
                          $inputs=$request->all();
-                         $toemail ='rizwanahmadabbasi05@gmail.com';
+                         $toemail ='Islamicwalldesigns@outlook.com';
                         Mail::send('emails.contactus',['contact' =>$inputs],
                         function ($message) use ($toemail)
                         {
-                            $message->subject('Islamic Wall - Order Received');
+                            $message->subject('Islamic Wall - FeedBack');
                             $message->from('nabeelirbab@gmail.com', 'Islamic Wall Design');
                             $message->to($toemail);
                          });
+						 session()->flash('__response', ['notify'=>' Thankyou for contacting us we will get back to you soon','type'=>'success']);
                          return back();
 
     }
