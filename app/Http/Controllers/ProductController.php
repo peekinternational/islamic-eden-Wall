@@ -476,22 +476,17 @@ function deleteimg($id){
             $max = (int)$request->input('max');
 			
             $products = Products::orderBy('id','desc')->paginate(10);
-			
+			//dd($products);
               foreach($products as &$rec){
-                    $rec->dimension=DB::table('product_dimension')->where([
-																					['product_id', '=', $rec->id],
-																					['p_price', '>', $min],
-																					['p_price', '<', $max],])->get()->toArray();
+                    $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
 				    $product_color = DB::table('product_color')->where('product_id','=',$rec->id)->get();
                     $product_size = DB::table('product_size')->where('product_id','=',$rec->id)->get();
-                  //  $product_dimension  = DB::table('product_dimension')->where([
-																				//	['product_id', '=', $rec->id],
-																				//	['p_price', '>=', $min],
-																				//	['p_price', '<=', $max],])->get();
+                    $product_dimension  = DB::table('product_dimension')->where('product_id', '=', $rec->id)->get();
+																					
                 }
-   
-            //$products->appends(['min'=>$min,'max'=>$max]);
-			dd($products);
+				
+   dd($products);
+            $products->appends(['min'=>$min,'max'=>$max]);
             return view('products',compact('products','product_size','product_color','product_dimension'));
         }else{
             return redirect()->action('ProductController@index');
