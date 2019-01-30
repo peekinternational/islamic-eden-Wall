@@ -392,8 +392,6 @@ class ProductController extends Controller
      $input['saleprice']=$data->saleprice;
      $input['description']=$data->description;
      $input['Addtional_Information']=$data->Addtional_Information;
-     $input['color']=$data->color;
-     $input['p_size']=$data->p_size;
      $input['meta_title']=$data->meta_title;
      $input['meta_keywords']=$data->meta_keywords;
      $input['meta_description']=$data->meta_description;
@@ -425,6 +423,7 @@ class ProductController extends Controller
           {
               DB::table('product_tags')->insert(['product_id'=>$product->id,'tag_id'=>$tags->tag_id]);
           }
+		  return back();
       
             
        
@@ -475,15 +474,24 @@ function deleteimg($id){
         if($request->has('max') && $request->has('min')){
             $min = (int)$request->input('min');
             $max = (int)$request->input('max');
-            $products = Products::whereBetween('price',[$min,$max])->orderBy('id','desc')->paginate(10);
+			
+            $products = Products::orderBy('id','desc')->paginate(10);
+			
               foreach($products as &$rec){
-                    $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
+                    $rec->dimension=DB::table('product_dimension')->where([
+																					['product_id', '=', $rec->id],
+																					['p_price', '>', $min],
+																					['p_price', '<', $max],])->get()->toArray();
 				    $product_color = DB::table('product_color')->where('product_id','=',$rec->id)->get();
                     $product_size = DB::table('product_size')->where('product_id','=',$rec->id)->get();
-                    $product_dimension  = DB::table('product_dimension')->where('product_id','=',$rec->id)->get();
+                  //  $product_dimension  = DB::table('product_dimension')->where([
+																				//	['product_id', '=', $rec->id],
+																				//	['p_price', '>=', $min],
+																				//	['p_price', '<=', $max],])->get();
                 }
    
-            $products->appends(['min'=>$min,'max'=>$max]);
+            //$products->appends(['min'=>$min,'max'=>$max]);
+			dd($products);
             return view('products',compact('products','product_size','product_color','product_dimension'));
         }else{
             return redirect()->action('ProductController@index');

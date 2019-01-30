@@ -3,6 +3,7 @@
 namespace Edenmill\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Mail;
 
 class ContactController extends Controller
 {
