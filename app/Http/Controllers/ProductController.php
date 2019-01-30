@@ -37,12 +37,12 @@ class ProductController extends Controller
         // return $category;
         // dd($category);
         $products = Products::orderBy('id','desc')->paginate(10);
-         // dd($products);
+          // dd($products);
 
          foreach($products as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
                 }
-             // dd($products);
+             //dd($products);
          return view('products',compact('products'));
 
     }
@@ -215,7 +215,7 @@ class ProductController extends Controller
     public function show($slug,LaraCart $cart)
     {
         $product = Products::whereSlug($slug)->firstorFail();
-        //dd($product);
+        // dd($product);
 
         // return $product->images->first()->image;
         $product_id = (int)$product->id;
@@ -281,8 +281,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-       //dd($request->all());
-        if(!$request->has('slug')){
+               if(!$request->has('slug')){
             $request->merge(['slug'=>str_slug($request->input('name'))]);
         }
         $product = Products::findOrFail($id);
@@ -300,6 +299,7 @@ class ProductController extends Controller
 
        $size=$request->input('p_size');
        $p_color=$request->input('color');
+      
        $p_dimension=$request->input('p_dimension');
        $p_price=$request->input('p_price');
        //dd($p_price[0]);
@@ -329,12 +329,11 @@ class ProductController extends Controller
             }
         }
 
-        foreach($p_color as $colors )
-              {
-                  $input['color']=$colors;
-                  $input['product_id']=$product->id;
-                  DB::table('product_color')->where('product_id','=',$product->id)->update($input);
-              }
+        DB::table('product_color')->where('product_id','=',$product->id)->delete();
+        foreach($p_color as $color )
+            {
+                DB::table('product_color')->where('product_id','=',$product->id)->insert(['product_id'=>$product->id,'color'=>$color]);
+            }
 
               if($size){
               foreach($size as $pro_size )
@@ -380,6 +379,56 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+     public function copy(Request $request, $id)
+    {
+         
+      $data=DB::table('products')->where('id','=',$id)->first();
+    
+     $input['category_id']=$data->category_id;
+     $input['name']=$data->name;
+     $input['slug']=rand().$data->slug;
+     $input['price']=$data->price;
+     $input['offer']=$data->offer;
+     $input['saleprice']=$data->saleprice;
+     $input['description']=$data->description;
+     $input['Addtional_Information']=$data->Addtional_Information;
+     $input['color']=$data->color;
+     $input['p_size']=$data->p_size;
+     $input['meta_title']=$data->meta_title;
+     $input['meta_keywords']=$data->meta_keywords;
+     $input['meta_description']=$data->meta_description;
+
+      $product = Products::create($input);
+     
+      $photos=DB::table('product_images')->where('product_id','=',$id)->get();
+       
+       foreach ($photos as $photo) {
+                if ($photo) {
+                    $image = ProductImages::create(['product_id' => $product->id, 'image' => $photo->image]);
+                }
+            }
+     $dymentions = DB::table('product_dimension')->where('product_id','=',$id)->get();
+     
+     foreach ($dymentions as $dymention) {
+                if ($dymention) {
+                    DB::table('product_dimension')->insert(['product_id'=>$product->id,'p_dimension'=>$dymention->p_dimension,'p_price'=>$dymention->p_price,'dimoffer_price'=>$dymention->dimoffer_price,'dim_offer'=>$dymention->dim_offer]);
+                }
+            }
+    $p_color = DB::table('product_color')->where('product_id','=',$id)->get();
+
+    foreach($p_color as $color )
+        {
+            DB::table('product_color')->insert(['product_id'=>$product->id,'color'=>$color->color]);
+        }
+    $p_tags = DB::table('product_tags')->where('product_id','=',$id)->get();
+      foreach($p_tags as $tags )
+          {
+              DB::table('product_tags')->insert(['product_id'=>$product->id,'tag_id'=>$tags->tag_id]);
+          }
+      
+            
+       
+}
     public function destroy($id)
     {
         $product = Products::findOrFail($id);

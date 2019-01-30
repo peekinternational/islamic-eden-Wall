@@ -57,9 +57,11 @@
                                                  <a href="{{ url('product/'.$product->slug) }}" class="btn btn-xs btn-info" data-toggle="tooltip"  data-original-title="View Product"><i class="fa fa-search"></i> </a>
                             <span class="btn-edit">
                                     <a href="{{ action('ProductController@edit',$product->id) }}" class="btn btn-xs btn-warning" data-toggle="tooltip"  data-original-title="Edit"><i class="fa fa-edit"></i> </a>
+                                   <a href="{{ action('ProductController@copy',$product->id) }}" type="submit" class="btn btn-xs btn-danger btn-delete-user" data-toggle="tooltip"   data-original-title="copy"><i class="fa fa-copy"></i></a>
                                     {!! Form::open(['action'=>['ProductController@destroy',$product->id],'method'=>'delete', 'id'=>'ids'.$product->id,'style'=>'display:inline;']) !!}
                                    <input type="hidden" class="delete_permanent" name="delete_permanent" value="0">
                                     <a href="javascript:void(0);" type="submit" class="btn btn-xs btn-danger btn-delete-user" data-toggle="tooltip"  onclick="remove_recordss('{{$product->id}}')"  data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                                    
                                     {!! Form::close() !!}
                             </span>
                                          </div>

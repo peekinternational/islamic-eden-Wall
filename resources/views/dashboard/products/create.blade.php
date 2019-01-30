@@ -17,7 +17,7 @@
                 </div>
             </div>
             
-            {!! Form::open(['action'=>['ProductController@store'],'method'=>'post','class'=>'form-horizontal','files'=>true,'enctype'=>'multipart/form-data']) !!}
+            {!! Form::open(['action'=>['ProductController@store'],'method'=>'post','id'=>'form-sub','class'=>'form-horizontal','files'=>true,'enctype'=>'multipart/form-data']) !!}
             <div class="box-body">
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-2">
@@ -121,7 +121,7 @@
                            <div class="form-group {{ $errors->has('price') ? ' has-error' : '' }}" id="main_price">
                             <label for="price" class="col-sm-3 control-label">Price <span>*</span></label>
                             <div class="col-sm-9">
-                            <input type="number" name="price" id="orgprice" class="form-control" placeholder="Price" >
+                            <input type="number" name="price" id="orgprice" class="form-control" placeholder="Price">
                                
                                 @if ($errors->has('price'))
                                     <span class="help-block">
@@ -186,17 +186,17 @@
                             </div>
                         </div>
                          <div class="form-group {{ $errors->has('p_size') ? ' has-error' : '' }}" style="display:none" id="showdim">
-                            <label for="price" class="col-sm-3 control-label">Product Dimension  <span>*</span></label>
+                            <label for="price"  class="col-sm-3 control-label">Product Dimension  <span>*</span></label>
                             <div class="col-sm-9 optionBox">
 
                             <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;">
                                
-                               <input type="text" id="i" class="form-control" name="p_dimension[]" placeholder="Enter Dimension">
+                               <input type="text" id="i" class="form-control" name="p_dimension[]" placeholder="eg: 100x100">
                                 
                             </div>
                             <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;">
                                
-                               <input type="text"  id="inpu" class="form-control" name="p_price[]" placeholder="Enter Price">
+                               <input type="text"  id="inpu" class="form-control" name="p_price[]" placeholder="Enter Price"  required>
                                 
                             </div>
                             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 block" style="padding-top: 5px;">
@@ -335,7 +335,7 @@
                         <span class="pull-right">
                              <button type="reset" class="btn btn-default">Cancel</button>
                              &nbsp;
-                             <button type="submit" class="btn btn-info ">Save</button>
+                             <button id="save_button" type="submit" class="btn btn-info ">Save</button>
                         </span>
                     </div>
                 </div>
@@ -376,6 +376,11 @@
         }());
 </script>
 <script>
+
+
+
+
+
 var maxAppend = 0;
 $('.checkboxsize').change(function(){
 	if($(this).is(":checked")){
@@ -397,7 +402,7 @@ $('.checkboxsize').change(function(){
 });
         $('.add').click(function() {
             if (maxAppend >= 5) return;
-            $('.block:last').before('<div class="block"> <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;"><input type="text"  class="form-control" name="p_dimension[]" placeholder="Enter Dimension"/></div><div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;"><input type="text" class="form-control" name="p_price[]" placeholder="Enter Price" /></div><span class="col-xs-2 col-sm-2 col-md-2 col-lg-2 remove" style="padding-top: 5px;"><i class="fa fa-minus"></i></span></div>');
+            $('.block:last').before('<div class="block"> <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;"><input type="text"  class="form-control" name="p_dimension[]" placeholder="Enter Dimension" required/></div><div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;"><input type="text" class="form-control" name="p_price[]" placeholder="Enter Price" required/></div><span class="col-xs-2 col-sm-2 col-md-2 col-lg-2 remove" style="padding-top: 5px;"><i class="fa fa-minus"></i></span></div>');
             maxAppend++;
         });
         $('.optionBox').on('click','.remove',function() {
