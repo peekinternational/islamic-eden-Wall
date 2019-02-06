@@ -190,6 +190,12 @@
                                     <button type="submit" class="btn btn-xs btn-danger btn-delete-user" data-toggle="tooltip" onclick="remove_record('{{$order->id}}')" data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
                                     {!! Form::close() !!}
                             </span></td>
+                            <td><span class="btn-edit">
+                                    {!! Form::open(['action'=>['RecycleController@recycle',$order->id],'method'=>'delete','style'=>'display:inline;']) !!}
+                                   <input type="hidden" class="delete_permanent" name="delete_permanent" value="0">
+                                    <button type="submit"  data-toggle="tooltip"  data-original-title="back to view"><i class="fa fa-fas fa-arrow-left"></i></button>
+                                    {!! Form::close() !!}
+                            </span></td>
                         </tr>
                     @endforeach
                     @if($orders->isEmpty())

@@ -116,4 +116,16 @@ class RecycleController extends Controller
         session()->flash('__response', ['notify'=>' Delete order.','type'=>'success']);
         return back();
     }
+
+
+
+
+     public function recycle($id)
+    {
+        
+        $product = DB::table('orders')->where('id',$id)->Update(["status"=>"Inactive"]);
+       
+        session()->flash('__response', ['notify'=>' Move to recycle order.','type'=>'success']);
+        return back();
+    }
 }
