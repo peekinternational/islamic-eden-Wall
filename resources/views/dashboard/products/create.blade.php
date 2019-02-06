@@ -29,7 +29,7 @@
                         <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-sm-3 control-label">Title <span>*</span></label> 
                             <div class="col-sm-9">
-                                {!! Form::text('name',$value= null, $attributes = ['class'=>'form-control','placeholder'=>'Product Title','required'=>true,'autofocus'=>true])  !!}
+                                {!! Form::text('name',$value= null, $attributes = ['class'=>'form-control','placeholder'=>'Product Title','id'=>'name','autofocus'=>true])  !!}
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -75,8 +75,8 @@
                         <div class="form-group {{ $errors->has('color') ? ' has-error' : '' }}">
                             <label for="price" class="col-sm-3 control-label">Product Color <span>*</span></label>
                             <div class="col-sm-9">
-                              <select multiple="multiple" name="color[]" class="form-control select2" id="color_select" required>
-                              <option disabled>Select Color</option>
+                              <select multiple="multiple" name="color[]" class="form-control select2" id="color_select">
+                              <option value="">Select Color</option>
                                 <option value="white">White</option>
                                 <option value="black">black</option>
                                 <option value="green">Green</option>
@@ -111,7 +111,7 @@
                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                 <div class="checkbox">
                                 <label>
-                                    <input type="radio" name="size"  value="dim" class="checkboxsize">
+                                    <input type="radio" name="size"  value="dim" class="checkboxsize" id="dimcheck">
                                     Product Dimension
                                 </label>
                              </div>
@@ -196,7 +196,7 @@
                             </div>
                             <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;">
                                
-                               <input type="text"  id="inpu" class="form-control" name="p_price[]" placeholder="Enter Price"  required>
+                               <input type="text"  id="dimprice" class="form-control" name="p_price[]" placeholder="Enter Price"  required>
                                 
                             </div>
                             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 block" style="padding-top: 5px;">
@@ -335,7 +335,7 @@
                         <span class="pull-right">
                              <button type="reset" class="btn btn-default">Cancel</button>
                              &nbsp;
-                             <button id="save_button" type="submit" class="btn btn-info ">Save</button>
+                             <button id="save_button" type="button" class="btn btn-info ">Save</button>
                         </span>
                     </div>
                 </div>
@@ -352,6 +352,10 @@
 <script src="{{ asset('assets/tinymce/tinymce.min.js') }}"></script>
 
 <script>
+$( document ).ready(function() {
+	$('#dimcheck').attr('checked','checked');
+    $( ".checkboxsize" ).trigger( "change" );
+});
     // editor
     tinymce.init({
     selector: '.tex-editor',
@@ -383,6 +387,7 @@
 
 var maxAppend = 0;
 $('.checkboxsize').change(function(){
+	//alert('change');
 	if($(this).is(":checked")){
         if($(this).val() == 'size'){
             $('#showsize').show();
@@ -399,6 +404,7 @@ $('.checkboxsize').change(function(){
             $('#dim_offer').show();
         }
     }
+	
 });
         $('.add').click(function() {
             if (maxAppend >= 5) return;
@@ -525,5 +531,29 @@ $('.checkboxsize').change(function(){
            
 
         });
+		
+		$('#save_button').click(function(){
+			
+			var name = $('#name').val();
+			var color = $('#color_select').val();
+			var saleprice = $('#orgprice').val();
+			var dimprice = $('#dimprice').val();
+			console.log(color);
+			if(saleprice == '' && dimprice == '' ){
+				alert('please enter price');
+			
+			}
+			else if(name == ''){
+				alert('please enter product title');
+				
+			}
+			else if(color == null){
+				alert('please enter product color');
+				
+			}else{
+				$('#form-sub').submit();
+			}
+			
+		})
     </script>
 @stop
