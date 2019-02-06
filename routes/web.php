@@ -73,6 +73,8 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     Route::resource('orders', 'OrderController');
     Route::get('recycl-remove/{id}', 'OrderController@destroy_payer');
     Route::get('recycle-orders', 'RecycleController@index');
+    Route::get('recycleback', 'RecycleController@recycle');
+
      Route::delete('deleteorder/{id}', 'RecycleController@destroy');
 	Route::get('changestatus/{id}', 'OrderController@updatestatus');
     Route::get('blog/published', 'BlogController@published');
