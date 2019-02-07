@@ -19,7 +19,7 @@
         <div class=" text-cenetr form-group {{ $errors->has('name') ? ' has-error' : '' }}">
         	
         		<div class="row">
-        				<div class="col-sm-6 col-sm-offset-2">
+        				<div class="col-md-offset-2 col-md-10 ">
         		  <div class="col-md-6 ">
                     <form action="{{ action('TagsController@store')}}" method="POST" role="form">
                     	 {{ csrf_field() }}
@@ -33,7 +33,7 @@
                     
                     	
                     
-                    	<button type="submit" class="btn btn-primary">Submit</button>
+                    	<button type="submit" class="btn btn-primary">create</button>
                     </form>
                 </div>
                </div>
