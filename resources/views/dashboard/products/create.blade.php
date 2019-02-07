@@ -240,7 +240,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group {{ $errors->has('navs') ? ' has-error' : '' }}">
+                        <div class="form-group {{ $errors->has('navs') ? ' has-error' : '' }}" style="display:none" >
                             <label for="navs" class="col-sm-3 control-label">Product Pages <span>*</span></label>
                             <div class="col-sm-9">
                                 {!! Form::select('navs[]',$navs->where('slug','shop')->first()->sub_navs->pluck('title','id'),old('categories'),['class'=>'form-control select2','multiple','data-placeholder'=>'Pages where product will be visible']) !!}
@@ -271,17 +271,7 @@
                                 <hr>
                             </div>
                         </div>
-                       <div id="delivery_days" class="form-group {{ $errors->has('delivery_days') ? ' has-error' : '' }}">
-                            <label for="delivery_days" class="col-sm-3 control-label">Delivery Days</label>
-                            <div class="col-sm-9">
-                                <input type="number" name="delivery_days" id="delivery" class="form-control" placeholder="Delivery Days">
-                                @if ($errors->has('delivery_days'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('delivery_days') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                      
                         <div class="form-group {{ $errors->has('meta_title') ? ' has-error' : '' }}">
                             <label for="meta_title" class="col-sm-3 control-label">Meta Title</label>
                             <div class="col-sm-9">

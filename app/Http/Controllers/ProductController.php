@@ -109,7 +109,7 @@ class ProductController extends Controller
         $this->validate($request,[
             'name' => 'required',
             'category_id'=>'required',
-            'navs' => 'required',
+          //  'navs' => 'required',
             'slug' => 'unique:products'
         ],[],[
             'name' => 'title',
@@ -128,7 +128,7 @@ class ProductController extends Controller
         $product = Products::create($request->all());
         if($product->id){
 
-            $product->navs()->attach($request->input('navs'));
+           // $product->navs()->attach($request->input('navs'));
             if($request->has('tags')){
                 $product->tags()->attach($request->input('tags'));
             }
@@ -286,7 +286,7 @@ class ProductController extends Controller
                 'name' => 'required',
                 //'price' => 'required',
                 'category_id'=>'required',
-                'navs' => 'required',
+               // 'navs' => 'required',
                 'slug' => 'unique:products,slug,'.$product->slug.',slug'
         ],[],[
                 'name' => 'title'
@@ -304,7 +304,7 @@ class ProductController extends Controller
         $product->fill($request->all());
         $product->save();
         session()->flash('__response', ['notify'=>'Product "'.$product->name.'" updated successfully.','type'=>'success']);
-        $product->navs()->sync($request->input('navs'));
+       // $product->navs()->sync($request->input('navs'));
         $product->tags()->sync($request->input('tags'));
         if($request->hasFile('photos')) {
             $photos = $request->file('photos');

@@ -35,17 +35,10 @@ class CategoryController extends Controller
                         }
                 }
 
-        $products = Products::orderBy('id','desc')->where('category_id','=',$id)->paginate(9);
-         foreach($products as &$rec){
-                  $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
-				    $product_color = DB::table('product_color')->where('product_id','=',$rec->id)->get();
-        $product_size = DB::table('product_size')->where('product_id','=',$rec->id)->get();
-         $product_dimension  = DB::table('product_dimension')->where('product_id','=',$rec->id)->get();
-                }
-   
-
-               return view('products',compact('category','products','quantity','product_size','product_color','products','product_dimension'));
-       }
+       // $products = Products::orderBy('id','desc')->where('category_id','=',$id)->paginate(9);
+          $products = Products::join('product_dimension','product_dimension.product_id','=','products.id')->join('product_images','product_images.product_id','=','products.id')->where('products.category_id','=',$id)->orderBy('products.id','desc')->groupBy('products.id')->paginate(10);
+          return view('products',compact('products'));
+	   }
 
         public function edit($id){
                 $category = Category::findOrFail($id);

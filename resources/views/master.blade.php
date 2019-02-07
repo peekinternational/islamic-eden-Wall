@@ -70,7 +70,9 @@
    	});
    }
 	   
-	  
+	  $('#nabeelclick').click(function(){
+	$('#nabeel').submit();
+})
 function paypalcheckout() {
         
         if($('#first_name').val() == ''){
@@ -112,7 +114,9 @@ function paypalcheckout() {
     <script>
  
         $(document).ready(function () {
-            $.notify('{!! Session::get('__response')['notify'] !!}', "{{Session::get('__response')['type']}}");
+            $.notify('{!! Session::get('__response')['notify'] !!}', "{{Session::get('__response')['type']}}", {
+            style: 'happyblue',
+			autoHideDelay: 19000 } );
         });
 
     </script>
