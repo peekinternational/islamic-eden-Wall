@@ -38,8 +38,6 @@ class TagsController extends Controller
         $this->validate($request, [
                         'name' => 'required'
                                         ]);
-       
-
         $tag=DB::table('tags')->insert($request->all());
 
                  session()->flash('__response', ['notify'=>' tags Add Succesfully','type'=>'success']);
@@ -53,9 +51,13 @@ class TagsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+
+        $tags= DB::table('tags')->get();
+      // dd($tags);
+
+    return view('dashboard.tags.showtags',compact('tags'));
     }
 
     /**
@@ -64,9 +66,10 @@ class TagsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
-        //
+        $tags= DB::table('tags')->where('id','=',$id)->first();
+    return view('dashboard.tags.edittag',compact('tags'));
     }
 
     /**
@@ -76,9 +79,17 @@ class TagsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updatetag(Request $request)
     {
-        //
+//dd($request->all());
+        $id = $request->input('id');
+             // dd($id );
+
+        DB::table('tags')->where('id','=',$id)->update($request->all());
+        session()->flash('__response', ['notify'=>'Tag  update successfully.','type'=>'success']);
+    
+    
+    return redirect()->back();
     }
 
     /**
@@ -89,6 +100,9 @@ class TagsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tags = DB::table('tags')->where('id',$id)->delete();
+       
+        session()->flash('__response', ['notify'=>'Coupon  deleted successfully.','type'=>'success']);
+        return back();
     }
 }

@@ -68,13 +68,22 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
 
 
 
-    Route::post('tags', 'TagsController@store');
+   
     Route::get('newsletter', 'NewsLetterController@index');
     Route::post('newsletter', 'NewsLetterController@send');
     Route::post('couponcode', 'SettingsController@couponcode');
     Route::get('coupon', 'SettingsController@coupon');
     Route::delete('deletecoupon/{id}', 'SettingsController@destroy');
     Route::get('editcoupon/{id}', 'SettingsController@editcoupon');
+
+    // tags
+     Route::post('tags', 'TagsController@store');
+     Route::get('Showtags', 'TagsController@show');
+     Route::get('edittag/{id}', 'TagsController@edit');
+     Route::delete('deletetag/{id}', 'TagsController@destroy');
+     Route::post('update', 'TagsController@updatetag');
+
+    // end tags
     Route::post('upload', 'SettingsController@upload');
     Route::resource('users', 'UserController');
     Route::resource('orders', 'OrderController');
