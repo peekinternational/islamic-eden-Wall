@@ -62,6 +62,13 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     route::get( '/addcoupon', function(){
     return view('dashboard.coupon');
 });
+      route::get( '/tags', function(){
+    return view('dashboard.tags.create');
+});
+
+
+
+    Route::post('tags', 'TagsController@store');
     Route::get('newsletter', 'NewsLetterController@index');
     Route::post('newsletter', 'NewsLetterController@send');
     Route::post('couponcode', 'SettingsController@couponcode');
