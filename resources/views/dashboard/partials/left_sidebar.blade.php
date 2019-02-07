@@ -108,6 +108,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ url('dashboard/tags') }}"><i class="fa fa-circle-o"></i> New tags</a></li>
+                    <li><a href="{{url('dashboard/Showtags') }}"><i class="fa fa-circle-o"></i> Show tags</a></li>
                     
                 </ul>
             </li>

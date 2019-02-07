@@ -19,23 +19,21 @@
         <div class=" text-cenetr form-group {{ $errors->has('name') ? ' has-error' : '' }}">
         	
         		<div class="row">
-
         				<div class="col-sm-6 col-sm-offset-2">
-        		  <div class="col-md-6 " style="    padding: 10px 0px">
-
-                    <form action="{{ action('TagsController@store')}}" method="POST" role="form">
+        		  <div class="col-md-6 ">
+                    <form action="{{ url('dashboard/update')}}" method="post" role="form">
                     	 {{ csrf_field() }}
-                    	
+                    	<input type="hidden" name="id" value="{{$tags->id}}">
 
                     
                     	<div class="form-group text-cenetr">
                     		<label for="">tag name</label>
-                    		<input type="text" class="form-control" id="" name="name" placeholder="Enter TAgs">
+                    		<input type="text" class="form-control" id="" name="name" value="{{$tags->name}}" placeholder="Enter TAgs">
                     	</div>
                     
                     	
                     
-                    	<button type="submit" class="btn btn-primary">create</button>
+                    	<button type="submit" class="btn btn-primary">update</button>
                     </form>
                 </div>
                </div>
