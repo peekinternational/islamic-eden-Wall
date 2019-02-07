@@ -101,6 +101,17 @@
                 </ul>
             </li>
             <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-th-large"></i>
+                    <span>Product tags</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('dashboard/tags') }}"><i class="fa fa-circle-o"></i> New tags</a></li>
+                    
+                </ul>
+            </li>
+            <li class="treeview">
                 <a href="{{ url('/dashboard/newsletter') }}">
                     <i class="fa fa-envelope"></i>
                     <span>Send Newsletter</span>
