@@ -72,27 +72,18 @@
                             </div>
                         </div>
                       
-                        <div class="form-group {{ $errors->has('color') ? ' has-error' : '' }}">
-                            <label for="price" class="col-sm-3 control-label">Product Color <span>*</span></label>
+                        <div class="form-group {{ $errors->has('colors') ? ' has-error' : '' }}">
+                           <label for="colors" class="col-sm-3 control-label">colors</label>
                             <div class="col-sm-9">
-                              <select multiple="multiple" name="color[]" class="form-control select2" id="color_select" required>
-                              <option disabled>Select Color</option>
-                                <option value="white">White</option>
-                                <option value="black">black</option>
-                                <option value="green">Green</option>
-                                <option value="grey">gray</option>
-                                <option value="pink">pink</option>
-                                <option value="violet">Violet</option>
-                                <option value="brown">Brown</option>
-                                <option value="blue">Blue</option>
-                                <option value="maroon">Maroon</option>
-                                <option value="olive">olive</option>
-                            </select>
-                               
-                                @if ($errors->has('color'))
+                                <select name="colors[]"  id="colors" class="form-control select2" multiple>
+                                    @foreach($colors as $color)
+                                        <option  value="{{ $color->name }}">{{ $color->name }}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('colors'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('color') }}</strong>
-                                    </span>
+                            <strong>{{ $errors->first('colors') }}</strong>
+                        </span>
                                 @endif
                             </div>
                         </div>

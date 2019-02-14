@@ -8,7 +8,7 @@
 <section class="content">
 	<div class="box">
 		<div class="box-header with-border">
-            <h3 class="box-title">Add New TAgs</h3>
+            <h3 class="box-title">Add New color</h3>
             <div class="box-tools pull-right">
                     <a href="" type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Show Products">
                         <i class="fa fa-list"></i>
@@ -22,11 +22,11 @@
         	<div class="row">
         		<div class="col-sm-6 col-sm-offset-2">
         		    <div class="col-md-6 " style="    padding: 10px 0px">
-                       <form action="{{ action('TagsController@store')}}" method="POST" role="form">
+                       <form action="{{ action('ColorController@store')}}" method="post" role="form">
                     	 {{ csrf_field() }}
                     	<div class="form-group text-cenetr">
-                    		<label for="">tag name</label>
-                    		<input type="text" class="form-control" id="" name="name" placeholder="Enter TAgs">
+                    		<label for="">color name</label>
+                    		<input type="text" class="form-control" id="" name="name" placeholder="Enter color">
                     	</div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                        </form>

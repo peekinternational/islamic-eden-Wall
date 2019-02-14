@@ -65,6 +65,9 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
       route::get( '/tags', function(){
     return view('dashboard.tags.create');
 });
+            route::get( '/colors', function(){
+          return view('dashboard.colors.create');
+      });
 
 
 
@@ -84,6 +87,14 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
      Route::post('update', 'TagsController@updatetag');
 
     // end tags
+     // colors
+     Route::post('colors', 'ColorController@store');
+     Route::get('Showcolors', 'ColorController@show');
+     Route::get('editcolors/{id}', 'ColorController@edit');
+     Route::delete('deletecolors/{id}', 'ColorController@destroy');
+     Route::post('update', 'ColorController@updatecolor');
+
+    // end colors
     Route::post('upload', 'SettingsController@upload');
     Route::resource('users', 'UserController');
     Route::resource('orders', 'OrderController');

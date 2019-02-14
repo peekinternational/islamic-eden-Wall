@@ -88,8 +88,10 @@ class ProductController extends Controller
         $this->breadcrumb['page']  = 'New Products';
         $breadcrumb = $this->breadcrumb;
         $tags = Tags::pluck('name','id');
+        $colors= DB::table('color')->get();
+        // dd($colors);
         $categories = Category::pluck('name','id');
-       return view('dashboard.products.create',compact('breadcrumb','tags','categories'));
+       return view('dashboard.products.create',compact('breadcrumb','tags','colors','categories'));
     }
 
     /**
@@ -259,12 +261,13 @@ class ProductController extends Controller
 
         $tags = Tags::pluck('name','id');
         $categories = Category::pluck('name','id');
+        $colors= DB::table('color')->get();
         
 
 
              
 
-        return view('dashboard.products.edit',compact('images','product','breadcrumb','tags','categories','product_dimension','product_color','product_size'));
+        return view('dashboard.products.edit',compact('images','product','breadcrumb','tags','categories','product_dimension','product_color','product_size','colors'));
     }
 
     /**

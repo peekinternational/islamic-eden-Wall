@@ -112,6 +112,18 @@
                     
                 </ul>
             </li>
+             <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-th-large"></i>
+                    <span>Product Colors</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('dashboard/colors') }}"><i class="fa fa-circle-o"></i> New colors</a></li>
+                    <li><a href="{{url('dashboard/Showcolors') }}"><i class="fa fa-circle-o"></i> Show color</a></li>
+                    
+                </ul>
+            </li>
             <li class="treeview">
                 <a href="{{ url('/dashboard/newsletter') }}">
                     <i class="fa fa-envelope"></i>

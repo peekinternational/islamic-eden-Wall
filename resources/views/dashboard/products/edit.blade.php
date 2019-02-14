@@ -76,30 +76,21 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group {{ $errors->has('color') ? ' has-error' : '' }}">
-                            <label for="price" class="col-sm-3 control-label">Product Color <span>*</span></label>
+                       <div class="form-group {{ $errors->has('colors') ? ' has-error' : '' }}">
+                           <label for="colors" class="col-sm-3 control-label">colors</label>
                             <div class="col-sm-9">
-                               
-                              <select multiple="multiple" name="color[]" class="form-control select2" id="color_select">
-                              <option disabled>Select Color</option>
-                                @foreach($product_color as $color)
-                                <option value="white" {{$color->color == 'white' ? 'selected="selected"' : ''}}>White</option>
-                                <option value="black" {{$color->color == 'black' ? 'selected="selected"' : ''}}>black</option>
-                                <option value="green" {{$color->color == 'green' ? 'selected="selected"' : ''}} >Green</option>
-                                <option value="grey" {{$color->color == 'grey' ? 'selected="selected"' : ''}}>gray</option>
-                                <option value="pink" {{$color->color == 'pink' ? 'selected="selected"' : ''}}>pink</option>
-                                <option value="violet" {{$color->color == 'violet' ? 'selected="selected"' : ''}}>Violet</option>
-                                <option value="brown" {{$color->color == 'brown' ? 'selected="selected"' : ''}}>Brown</option>
-                                <option value="blue" {{$color->color == 'blue' ? 'selected="selected"' : ''}}>Blue</option>
-                                <option value="maroon" {{$color->color == 'maroon' ? 'selected="selected"' : ''}}>Maroon</option>
-                                <option value="olive" {{$color->color == 'olive' ? 'selected="selected"' : ''}}>olive</option>
-                                @endforeach
-                            </select>
-                               
-                                @if ($errors->has('color'))
+                                <select name="colors[]"  id="colors" class="form-control select2" multiple>
+                                     @foreach($colors as $color)
+                                    @foreach($product_color as $colorss)
+                                   
+                                        <option  value="{{ $color->name }}" {{$color->color == ' $colorss->color ' ? 'selected="selected"' : ''}}>{{ $color->name }}</option>
+                                    @endforeach
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('colors'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('color') }}</strong>
-                                    </span>
+                            <strong>{{ $errors->first('colors') }}</strong>
+                        </span>
                                 @endif
                             </div>
                         </div>
