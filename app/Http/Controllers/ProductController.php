@@ -262,6 +262,7 @@ class ProductController extends Controller
         $tags = Tags::pluck('name','id');
         $categories = Category::pluck('name','id');
         $colors= DB::table('color')->get();
+        dd($colors);
         
 
 
