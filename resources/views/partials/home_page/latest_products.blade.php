@@ -9,7 +9,7 @@
             </div>
             <div class="overlay">
            
-               <a href="{{ url('shop/canvas-painting') }}" class="btn btn-lg btn-block"><span>CANVAS-And-PAinting</span></a>
+               <a href="{{ url('category/canvas-and-painting') }}" class="btn btn-lg btn-block"><span>CANVAS-And-PAinting</span></a>
                </div>
         </div>
         <div class="col-md-4 col-sm-4">

@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.default')
 @section('css')
-<style>
+<!--<style>
 .received{
 	background-color: green;color: white;display: block;height: 31px;border-radius: 4px;
 }
@@ -21,8 +21,8 @@
 }
 .yellow{
 	height: 18px;width: 18px; background-color: yellow;border-radius: 50%;display: inline-block;margin-left: 19px;
-}
-</style>
+} 
+</style>-->
 @stop
 @section('content')
     <section class="content">

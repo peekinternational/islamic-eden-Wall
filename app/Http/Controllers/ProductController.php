@@ -480,11 +480,18 @@ function deleteimg($id){
     }
 
     public function page_products($slug){
-        $nav =  SubNavs::whereSlug($slug)->firstOrFail();
-        $products = $nav->products()->orderBy('id','desc')->paginate(9);
-        foreach($products as &$rec){
-                  $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
+      //  $nav =  SubNavs::whereSlug($slug)->firstOrFail();
+		//dd($nav);
+		 $categories = Category::pluck('name','id');
+                $id = null;
+                foreach($categories as $cat_id=>$category){
+                        if(str_slug($category)===trim($slug)){
+                                $id = $cat_id;
+                                break;
+                        }
                 }
+		 $products = Products::join('product_dimension','product_dimension.product_id','=','products.id')->join('product_images','product_images.product_id','=','products.id')->where('products.category_id','=',$id)->orderBy('products.id','desc')->groupBy('products.id')->paginate(10);
+       
          return view('products',compact('products'));
     }
 }

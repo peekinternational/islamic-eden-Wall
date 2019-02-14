@@ -26,6 +26,7 @@ class CategoryController extends Controller
                return view('dashboard.category.index',compact('breadcrumb','categories'));
        }
        public function show($slug){
+		   //dd($slug);
                 $categories = Category::pluck('name','id');
                 $id = null;
                 foreach($categories as $cat_id=>$category){
