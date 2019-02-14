@@ -123,9 +123,9 @@ class RecycleController extends Controller
      public function recycle($id)
     {
         
-        $product = DB::table('orders')->where('id',$id)->Update(["status"=>"Inactive"]);
+        $product = DB::table('orders')->where('id',$id)->Update(["status"=>"active"]);
        
-        session()->flash('__response', ['notify'=>' Move to recycle order.','type'=>'success']);
+        session()->flash('__response', ['notify'=>' Restore to view order Back.','type'=>'success']);
         return back();
     }
 }

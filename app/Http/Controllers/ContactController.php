@@ -33,7 +33,7 @@ class ContactController extends Controller
         ]);
                          // $inputs['payer_email']='rizwanahmadabbasi05@gmail.com';
                          $inputs=$request->all();
-                         $toemail ='Islamicwalldesigns@outlook.com';
+                         $toemail ='rizwanahmadabbasi05@gmail.com';
                         Mail::send('emails.contactus',['contact' =>$inputs],
                         function ($message) use ($toemail)
                         {
@@ -41,7 +41,8 @@ class ContactController extends Controller
                             $message->from('nabeelirbab@gmail.com', 'Islamic Wall Design');
                             $message->to($toemail);
                          });
-						 session()->flash('__response', ['notify'=>' Thankyou for contacting us we will get back to you soon','type'=>'success']);
+						 
+						session()->flash('__response', ['notify'=>' Thankyou for contacting us we will get back to you soon','type'=>'success']);
                          return back();
 
     }
@@ -50,6 +51,7 @@ class ContactController extends Controller
     {
         //
     }
+
 
     /**
      * Store a newly created resource in storage.

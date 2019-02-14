@@ -202,6 +202,7 @@
                             <div class="col-sm-9 optionBox">
                         @if($product_dimension->count() > 0)
                         @foreach($product_dimension as $dim)
+				    	<div class="block"> 
                             <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;">
                                
                                <input type="text" id="i" class="form-control" name="p_dimension[]" placeholder="Enter Dimension" value="{{$dim->p_dimension}}">
@@ -212,6 +213,10 @@
                                <input type="text"  id="inpu" class="form-control" name="p_price[]" placeholder="Enter Price" value="{{$dim->p_price}}">
                                 
                             </div>
+								 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 block remove" style="padding-top: 5px;">
+								<span class="add" style=""><i class="fa fa-minus"></i></span>
+								</div>
+								</div>
                             @endforeach
                             @endif
                             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 block" style="padding-top: 5px;">
@@ -258,21 +263,7 @@
                                 @endif
                             </div>
                         </div>
-                           <div class="form-group {{ $errors->has('navs') ? ' has-error' : '' }}">
-                            <label for="navs" class="col-sm-3 control-label">Product Pages <span>*</span></label>
-                            <div class="col-sm-9">
-                                 <select name="navs[]" id="categories" data-placeholder="Pages where product will be visible" class="form-control select2" multiple>
-                                    @foreach($navs->where('slug','shop')->first()->sub_navs as $nav)
-                                        <option {{ $product->navs->contains($nav)?'selected="selected"':'' }} value="{{ $nav->id }}">{{ $nav->title }}</option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('navs'))
-                                    <span class="help-block">
-                            <strong>{{ $errors->first('navs') }}</strong>
-                        </span>
-                                @endif
-                            </div>
-                        </div>
+                          
                         <div class="form-group {{ $errors->has('tags') ? ' has-error' : '' }}">
                             <label for="tags" class="col-sm-3 control-label">Tags</label>
                             <div class="col-sm-9">

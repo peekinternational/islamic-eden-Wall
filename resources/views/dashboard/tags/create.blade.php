@@ -19,18 +19,28 @@
             </div>
         </div>
         <div class=" text-cenetr form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-        	<div class="row">
-        		<div class="col-sm-6 col-sm-offset-2">
-        		    <div class="col-md-6 " style="    padding: 10px 0px">
-                       <form action="{{ action('TagsController@store')}}" method="POST" role="form">
+
+        	
+        		<div class="row">
+
+        				<div class="col-sm-6 col-sm-offset-2">
+        		  <div class="col-md-6 " style="    padding: 10px 0px">
+
+                    <form action="{{ action('TagsController@store')}}" method="POST" role="form">
+
                     	 {{ csrf_field() }}
                     	<div class="form-group text-cenetr">
                     		<label for="">tag name</label>
                     		<input type="text" class="form-control" id="" name="name" placeholder="Enter TAgs">
                     	</div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                       </form>
-                    </div>
+
+                    
+                    	
+                    
+                    	<button type="submit" class="btn btn-primary">create</button>
+                    </form>
+                </div>
+
                </div>
         	</div>
         </div>

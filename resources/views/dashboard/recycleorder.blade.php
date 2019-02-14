@@ -184,18 +184,19 @@
                             </td>
 							
                             <td>{{ $order->payment_date }}</td>
-                            <td><span class="btn-edit">
+                            <td style="padding:8px 0px;"><span class="btn-edit">
                                     {!! Form::open(['action'=>['RecycleController@destroy',$order->id],'method'=>'delete', 'class'=>$order->id,'style'=>'display:inline;']) !!}
                                    <input type="hidden" class="delete_permanent" name="delete_permanent" value="0">
                                     <button type="submit" class="btn btn-xs btn-danger btn-delete-user" data-toggle="tooltip" onclick="remove_record('{{$order->id}}')" data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
                                     {!! Form::close() !!}
-                            </span></td>
-                            <td><span class="btn-edit">
-                                    {!! Form::open(['action'=>['RecycleController@recycle',$order->id],'method'=>'delete','style'=>'display:inline;']) !!}
+									
+								{!! Form::open(['action'=>['RecycleController@recycle',$order->id],'method'=>'get','style'=>'display:inline;']) !!}
                                    <input type="hidden" class="delete_permanent" name="delete_permanent" value="0">
-                                    <button type="submit"  data-toggle="tooltip"  data-original-title="back to view"><i class="fa fa-fas fa-arrow-left"></i></button>
+                                    <button style="font-size:10px !important;" type="submit"  data-toggle="tooltip"  data-original-title="restore to view"><i class="fa fa-fas fa-arrow-left"></i></button>
                                     {!! Form::close() !!}
-                            </span></td>
+									</span>
+                            </td>
+                           
                         </tr>
                     @endforeach
                     @if($orders->isEmpty())
