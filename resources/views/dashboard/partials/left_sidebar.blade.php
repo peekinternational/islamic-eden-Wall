@@ -34,7 +34,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ action('OrderController@index') }}"><i class="fa fa-circle-o"></i>View Order</a></li>
-                    <li><a href="{{ action('RecycleController@index') }}"><i class="fa fa-circle-o"></i>Archieve</a></li>
+                    <li><a href="{{ action('RecycleController@index') }}"><i class="fa fa-circle-o"></i>Archive</a></li>
                 </ul>
             </li>
           {{--   <li>

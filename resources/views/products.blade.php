@@ -68,10 +68,10 @@
                                 @if($product->p_price)
                                 @if($product->dim_offer)
                                
-                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->p_price }}</small></strike></span> -
-                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $product->dimoffer_price  }}</span><br>
+                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£<strike><small>{{ $product->p_price }}</small></strike></span> -
+                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£{{ $product->dimoffer_price  }}</span><br>
                                 @else
-                                  <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $product->p_price }}</span><br>
+                                  <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£{{ $product->p_price }}</span><br>
                                  @endif
                                  @else
                                  
@@ -79,7 +79,7 @@
                                         <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->price }}</small></strike></span>
                                         <span class="amount" style="color: gray !important; font-size: 26px;">&euro;{{ $product->saleprice }}</span>
                                         @else
-                                            <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;{{ $product->price }}</span>
+                                            <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">£{{ $product->price }}</span>
                                         @endif
                                         @endif
                                          

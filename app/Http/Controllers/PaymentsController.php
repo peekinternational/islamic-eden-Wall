@@ -122,6 +122,10 @@ class PaymentsController extends Controller
 		$input['mobilenumber']=$request->input('night_phone_a');
 		$email=$request->input('email');
 		$request->session()->put('buy_email',$email);
+		$input['bill_country']=$request->input('bill_country');
+		$input['bill_address1']=$request->input('bill_address1');
+		$input['bill_city']=$request->input('bill_city');
+		$input['bill_billing_state']=$request->input('bill_billing_state');
 		//$request->session()->put('key', 'value');
 		
 		if($request->input('_token') != null){

@@ -10,7 +10,7 @@ class Orders extends Model
 {
         use Notifiable;
         protected $table = 'orders';
-        protected $fillable = ['payment_status','_token','payer_id','address_zip','address_street','address_name','address_country_code','address_city','payer_status','business','num_cart_items','payer_email','ipn_track_id','payment_date'];
+        protected $fillable = ['payment_status','_token','payer_id','address_zip','address_street','address_name','address_country_code','address_city','bill_country','bill_address1','bill_city','bill_billing_state','payer_status','business','num_cart_items','payer_email','ipn_track_id','payment_date'];
         public $timestamps = false;
 
         public function order_products(){

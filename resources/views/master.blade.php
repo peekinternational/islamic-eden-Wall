@@ -51,6 +51,21 @@
     //ended code 
    
 });
+	$("#bill_check").on('change', function(){
+		console.log($(this).val(this.checked ? "0" : "1"));
+  if($(this).val()){
+  }
+})
+$(document).ready(function(){
+    $('#bill_check').change(function(){
+        if(this.checked)
+           // alert('yes');
+		$('#bill_address').show();
+        else  
+         $('#bill_address').hide();			
+         // alert('no');
+    });
+});
 	
    function initMap() {
    	var lats=$('#lat').val();

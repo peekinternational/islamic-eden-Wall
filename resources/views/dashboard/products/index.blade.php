@@ -87,20 +87,20 @@
                             @if($product->dimension)
                             @if(!$product->dimension[0]->dim_offer)
                            
-									  <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $product->dimension[0]->p_price }}</span><br>
+									  <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£{{ $product->dimension[0]->p_price }}</span><br>
 									
 									@else
-									 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->dimension[0]->p_price }}</small></strike></span> -
-									 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $product->dimension[0]->dimoffer_price  }}</span><br>	
+									 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£<strike><small>{{ $product->dimension[0]->p_price }}</small></strike></span> -
+									 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£{{ $product->dimension[0]->dimoffer_price  }}</span><br>	
 									
 									 @endif
 									 @else
 									 
                                     @if($product->offer)
-                                    <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->price }}</small></strike></span>
-                                    <span class="amount" style="color: gray !important; font-size: 26px;">&euro;{{ $product->saleprice }}</span>
+                                    <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">£<strike><small>{{ $product->price }}</small></strike></span>
+                                    <span class="amount" style="color: gray !important; font-size: 26px;">£{{ $product->saleprice }}</span>
                                     @else
-                                        <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;{{ $product->price }}</span>
+                                        <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">£{{ $product->price }}</span>
                                     @endif
                                     @endif
                                      

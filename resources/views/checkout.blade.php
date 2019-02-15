@@ -144,7 +144,7 @@
                         </div>
                            <div class="form-group address-field validate-required  {{ $errors->has('address1') ? ' has-error' : '' }}" id="billing_address_fields">
                               <label for="address" class="col-sm-3 control-label">
-                                  <span class="grey">Address 1</span>
+                                  <span class="grey">Billing Address</span>
                                   <span class="required">*</span>
                               </label>
                               <div class="col-sm-9">
@@ -215,13 +215,67 @@
                                       </label>
                                   </div>
                                   @endif--}}
-                                  <!-- <div class="checkbox">
+                                   <div class="checkbox">
                                       <label>
-                                          <input type="checkbox" name="REQCONFIRMSHIPPING" checked value="1"> Ship to Billing Address?
+                                          <input type="checkbox" name="REQCONFIRMSHIPPING" id="bill_check" value="1"> Ship to Billing Address?
                                       </label>
-                                  </div> -->
+                                  </div>
                               </div>
                           </div>
+						  <div id="bill_address" style="display:none">
+						   <div class="form-group">
+                            <label for="country" class="col-sm-3 control-label">
+                                <span class="grey">Country </span>
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="hidden" name="return" value="{{ url('/thanks?clear_cart=true') }}">
+                                <input type="hidden" name="RETURNURL" value="{{ url('/thanks?clear_cart=true') }}">
+                                 <select class="form-control" name="bill_country" id="country">
+                                    @foreach($countries as $id=>$country)
+                                        <option {{ $id=="GB"?'selected="selected"':'' }} value="{{ $id }}">{{ $country }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                           
+                      
+                           <div class="form-group address-field validate-required  {{ $errors->has('address1') ? ' has-error' : '' }}" id="billing_address_fields">
+                              <label for="address" class="col-sm-3 control-label">
+                                  <span class="grey">Shipping Address</span>
+                                  <span class="required">*</span>
+                              </label>
+                              <div class="col-sm-9">
+                                  {!! Form::text('bill_address1',$value= null, $attributes = ['class'=>'form-control','required'=>'required','id'=>'address','placeholder'=>'Address'])  !!}
+                                  @if ($errors->has('address1'))
+                                      <span class="help-block">
+                                          <strong>{{ $errors->first('address1') }}</strong>
+                                      </span>
+                                  @endif
+                              </div>
+                          </div>
+                          
+                          <div class="form-group address-field validate-required" id="billing_city_field">
+                              <label for="city" class="col-sm-3 control-label">
+                                  <span class="grey">Town / City </span>
+                                  <span class="required">*</span>
+                              </label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control " name="bill_city" id="city" placeholder="Town / City" required>
+                              </div>
+                          </div>
+                         {{-- <div class="form-group address-field validate-state" id="billing_state_field">
+                              <label for="billing_state" class="col-sm-3 control-label">
+                                  <span class="grey">County</span>
+                              </label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control " value="" placeholder="State / County" name="bill_billing_state" id="billing_state">
+                              </div>
+                          </div>--}}
+                          
+						  {{csrf_field()}}
+                          
+						  </div>
                           <div class="form-group">
                               <label for="order_comments" class="col-sm-3 control-label">
                                   <span class="grey">Order Notes</span>
@@ -335,7 +389,7 @@
                     </div>
                 </aside>
                 </form>
-                <div class="col-sm-offset-8 col-sm-4" style="margin-top: -142px;">
+                <div class="col-sm-offset-8 col-sm-4" style="">
                             <div class="coupon with_padding muted_background">
                                 <h5 class="topmargin_0">Discount Codes</h5>
                                 <p>Enter coupon code if you have one</p>

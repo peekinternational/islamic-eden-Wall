@@ -97,17 +97,17 @@
                                                         {{ $_product->name }}
                                                         </th>
                                                         <td>{{ $_product->quantity }}</th>
-                                                        <td>&euro; {{ $_product->price }}</th>
+                                                        <td>£ {{ $_product->price }}</th>
 														<td>{{ $_product->p_size }}</th>
 														<td>{{ $_product->color }}</th>
-                                                        <td>&euro; {{ (float)$_product->tax }}</th>
-                                                        <td>&euro; {{ ($_product->quantity * $_product->price) + (float)$_product->tax }}</th>
+                                                        <td>£ {{ (float)$_product->tax }}</th>
+                                                        <td>£; {{ ($_product->quantity * $_product->price) + (float)$_product->tax }}</th>
                                                     </tr>
                                                     @endforeach
                                                      <tr >
 												   
                                                         <th colspan="6" style="border-top:2px solid black">Total</th>
-                                                        <th style="border-top:2px solid black">&euro; {{ $order_products->sum('total') }}</th>
+                                                        <th style="border-top:2px solid black">£ {{ $order_products->sum('total') }}</th>
                                                     </tr>
                                             </table>
                                         </div>
@@ -117,7 +117,7 @@
                             </td>
                             <td>&euro; {{ $order_products->sum('total') }}</td>
                             <td>{{ $order->payer_email }}</td>
-                            <td>{{ $order->address_city }}</td>
+                            <td>{{ $order->address_city }}, {{ $order->city }} , {{ $order->address_country_code }} </td>
 							 <td>{{ $order->city }}</td>
                             <td>{{ $order->address_country_code }}</td>
                             <td>{{ $order->ipn_track_id }}</td>

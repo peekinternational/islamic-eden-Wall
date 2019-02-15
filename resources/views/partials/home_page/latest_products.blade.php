@@ -100,7 +100,7 @@
                                     <span></span></a>
                                 </h5>
                                 
-                                <p class="text-center"> €{{ $pro['p_price'] }} </p>
+                                <p class="text-center"> £{{ $pro['p_price'] }} </p>
                                  
 
                             </div>
@@ -144,12 +144,12 @@
                                             @if($product['dim_offer'])
                                         
                                             <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product['dim_offer'] }} % off</p>
-                                            <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product['p_price'] }}</small> </strike>
-                                            <span> €{{ $product['dimoffer_price'] }}</span></p>
+                                            <p class="text-center"> <strike style="padding: 0px 8px;"><small>£{{ $product['p_price'] }}</small> </strike>
+                                            <span> £{{ $product['dimoffer_price'] }}</span></p>
                                             
                                          @else
                                         
-                                            <p class="text-center"> €{{ $product['p_price'] }} </p>
+                                            <p class="text-center"> £{{ $product['p_price'] }} </p>
                                         @endif
                           
                                               
