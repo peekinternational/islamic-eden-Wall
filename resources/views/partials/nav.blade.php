@@ -86,7 +86,7 @@
                                 
                                 <div class="col-md-12 col-lg-12">
                                     
-                                    <a href="{{ url('shop/'.$sub_nav->slug) }}" style="color: #989898;">{{ $msub_nav->title }}</a>
+                                    <a href="{{ $msub_nav->url }}" style="color: #989898;">{{ $msub_nav->title }}</a>
                                                         
                                 </div>
                                 @endforeach

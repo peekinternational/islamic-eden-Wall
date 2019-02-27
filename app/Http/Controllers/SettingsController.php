@@ -432,6 +432,7 @@ public function editcoupon(Request $request,$id){
 
  public function destroy($id)
     {
+		
         $product = DB::table('couponcode')->where('id',$id)->delete();
        
         session()->flash('__response', ['notify'=>'Coupon  deleted successfully.','type'=>'success']);

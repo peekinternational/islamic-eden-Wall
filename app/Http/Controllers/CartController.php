@@ -198,6 +198,7 @@ class CartController extends Controller
                                         $cart->updateItem($itemHashId,'qty', $quantity);
                                         
                                         $cart->updateItem($itemHashId,'price', (float)$final_price);
+										$cart->removeCoupons();
 
                                 }
                         }
