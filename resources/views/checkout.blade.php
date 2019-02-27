@@ -70,7 +70,7 @@
                             <input type="hidden" name="tax_2" value="0.02">-->
                         <!-- End Second Item -->
 
-                        <input type="hidden" name="currency_code" value="EUR">
+                        <input type="hidden" name="currency_code" value="GBP">
                         <!--<input type="hidden" name="tax_cart" value="5.13"> -->
                         {{--<input type="hidden" name="first_name" value="John">
                         <input type="hidden" name="last_name" value="Doe">
@@ -217,7 +217,7 @@
                                   @endif--}}
                                    <div class="checkbox">
                                       <label>
-                                          <input type="checkbox" name="REQCONFIRMSHIPPING" id="bill_check" value="1"> Ship to Billing Address?
+                                          <input type="checkbox" name="REQCONFIRMSHIPPING" id="bill_check" value="1"> Shipping address different to billing address?
                                       </label>
                                   </div>
                               </div>
@@ -246,7 +246,7 @@
                                   <span class="required">*</span>
                               </label>
                               <div class="col-sm-9">
-                                  {!! Form::text('bill_address1',$value= null, $attributes = ['class'=>'form-control','required'=>'required','id'=>'address','placeholder'=>'Address'])  !!}
+                                  {!! Form::text('bill_address1',$value= null, $attributes = ['class'=>'form-control','id'=>'address','placeholder'=>'Address'])  !!}
                                   @if ($errors->has('address1'))
                                       <span class="help-block">
                                           <strong>{{ $errors->first('address1') }}</strong>
@@ -261,7 +261,7 @@
                                   <span class="required">*</span>
                               </label>
                               <div class="col-sm-9">
-                                  <input type="text" class="form-control " name="bill_city" id="city" placeholder="Town / City" required>
+                                  <input type="text" class="form-control " name="bill_city" id="city" placeholder="Town / City" >
                               </div>
                           </div>
                          {{-- <div class="form-group address-field validate-state" id="billing_state_field">
@@ -304,7 +304,7 @@
                                     <span class="product-quantity">× {{ $item->qty }}</span>
                                 </td>
                                 <td class="product-total">
-                                    <span class="amount grey">&euro; {{ $item->price * $item->qty }}</span>
+                                    <span class="amount grey">£  {{ $item->price * $item->qty }}</span>
                                 </td>
                             </tr>
                             @endforeach
@@ -313,7 +313,7 @@
                             <tr class="cart-subtotal">
                                 <td>Subtotal:</td>
                                 <td>
-                                    <span class="amount grey">&euro; {{ $cart->subTotal($format = false, $withDiscount = true) }}</span>
+                                    <span class="amount grey">£  {{ $cart->subTotal($format = false, $withDiscount = true) }}</span>
                                 </td>
                             </tr>
                             <tr class="shipping">
@@ -326,7 +326,7 @@
 							<tr class="shipping">
                                 <td>Discount:</td>
                                 <td>
-                                    <span class="grey">- &euro; {{session()->get('coupon')['discount']}}</span>
+                                    <span class="grey">- £  {{session()->get('coupon')['discount']}}</span>
                                 </td>
                             </tr>
 							@endif
@@ -334,7 +334,7 @@
                                 <td>Total:</td>
                                 <td>
 								<span class="amount grey">
-									<strong>&euro; {{ $cart->total($format = false,$withDiscount = true) }}</strong>
+									<strong>£  {{ $cart->total($format = false,$withDiscount = true) }}</strong>
 								</span>
                                 </td>
                             </tr>

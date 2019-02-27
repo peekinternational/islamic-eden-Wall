@@ -44,7 +44,7 @@
                         <tr>
                             <td colspan="13">
                                 <p class="alert alert-warning text-center">
-                                    No orders found.
+                                    No tags found.
                                 </p>
                             </td>
                         </tr>

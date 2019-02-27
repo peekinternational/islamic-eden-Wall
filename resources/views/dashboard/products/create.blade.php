@@ -76,7 +76,7 @@
                            <label for="colors" class="col-sm-3 control-label">colors</label>
                             <div class="col-sm-9">
 
-                                <select name="colors[]"  id="colors" class="form-control select2" multiple>
+                                <select name="color[]"  id="color_select" class="form-control select2" multiple>
                                     @foreach($colors as $color)
                                         <option  value="{{ $color->name }}">{{ $color->name }}</option>
                                     @endforeach
@@ -248,7 +248,7 @@
                         <div class="form-group {{ $errors->has('tags') ? ' has-error' : '' }}">
                             <label for="tags" class="col-sm-3 control-label">Tags</label>
                             <div class="col-sm-9">
-                                <select name="tags[]"  id="tags" class="form-control select2" multiple>
+                                <select name="tags[]"  id="tags" class="form-control select2" multiple >
                                     @foreach($tags as $id=>$tag)
                                         <option  value="{{ $id }}">{{ $tag }}</option>
                                     @endforeach
@@ -429,6 +429,8 @@ $('.checkboxsize').change(function(){
             }catch (e){
                 console.error(e);
             }
+			
+			 
             try {
                 //iCheck for checkbox and radio inputs
                 $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
@@ -522,7 +524,8 @@ $('.checkboxsize').change(function(){
 			var color = $('#color_select').val();
 			var saleprice = $('#orgprice').val();
 			var dimprice = $('#dimprice').val();
-			console.log(color);
+			var tags = $('#tags').val();
+			console.log(tags);
 			if(saleprice == '' && dimprice == '' ){
 				alert('please enter price');
 			
@@ -532,7 +535,12 @@ $('.checkboxsize').change(function(){
 				
 			}
 			else if(color == null){
-				alert('please enter product color');
+				alert('please enter product colour');
+				
+			}
+			else if(tags == null){
+				alert('please enter product tags');
+				return false;
 				
 			}else{
 				$('#form-sub').submit();

@@ -8,7 +8,7 @@
 <section class="content">
 	<div class="box">
 		<div class="box-header with-border">
-                <h3 class="box-title">Add New TAgs</h3>
+                <h3 class="box-title">Update Tags</h3>
                 <div class="box-tools pull-right">
                     <a href="" type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Show Products">
                         <i class="fa fa-list"></i></a>
@@ -21,19 +21,19 @@
         		<div class="row">
         				<div class="col-sm-6 col-sm-offset-2">
         		  <div class="col-md-6 ">
-                    <form action="{{ url('dashboard/update')}}" method="post" role="form">
+                    <form action="{{ url('dashboard/tagupdate')}}" method="post" role="form">
                     	 {{ csrf_field() }}
                     	<input type="hidden" name="id" value="{{$tags->id}}">
 
                     
                     	<div class="form-group text-cenetr">
-                    		<label for="">tag name</label>
-                    		<input type="text" class="form-control" id="" name="name" value="{{$tags->name}}" placeholder="Enter TAgs">
+                    		<label for="">Tag name</label>
+                    		<input type="text" class="form-control" id="" name="name" value="{{$tags->name}}" placeholder="Enter Tag">
                     	</div>
                     
                     	
                     
-                    	<button type="submit" class="btn btn-primary">update</button>
+                    	<button type="submit" class="btn btn-primary">Update</button>
                     </form>
                 </div>
                </div>

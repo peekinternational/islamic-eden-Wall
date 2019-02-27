@@ -111,7 +111,7 @@ class ProductController extends Controller
         $this->validate($request,[
             'name' => 'required',
             'category_id'=>'required',
-          //  'navs' => 'required',
+            'photos.*' => 'required|mimes:jpg,jpeg,png,bmp|max:20000',
             'slug' => 'unique:products'
         ],[],[
             'name' => 'title',
@@ -133,7 +133,9 @@ class ProductController extends Controller
            // $product->navs()->attach($request->input('navs'));
             if($request->has('tags')){
                 $product->tags()->attach($request->input('tags'));
-            }
+            }else{
+				$product->tags()->attach('1');
+			}
             if($request->hasFile('photos')) {
                 $photos = $request->file('photos');
                 

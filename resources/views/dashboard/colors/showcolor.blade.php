@@ -3,7 +3,7 @@
     <section class="content">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">color</h3>
+                <h3 class="box-title">Colour</h3>
                 <div class="box-tools pull-right">
                   <a href="" type="button" class="btn btn-box-tool"  data-toggle="tooltip" title="New color">
                         <i class="fa fa-plus"></i>
@@ -18,7 +18,7 @@
                 <table class="table table-bordered">
                     <tbody><tr>
                     	<th>Sr.</th>
-                        <th>color name</th>
+                        <th>Colour name</th>
                         <th>Action</th>
                         
                     </tr>
@@ -44,7 +44,7 @@
                         <tr>
                             <td colspan="13">
                                 <p class="alert alert-warning text-center">
-                                    No color found.
+                                    No colour found.
                                 </p>
                             </td>
                         </tr>

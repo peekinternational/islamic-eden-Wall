@@ -29,7 +29,7 @@
 			<div class="col-sm-4 col-lg-4 col-padding">
 				<div class="panel">
 					<div class="panel-heading contact-panel">
-						<h3><i class="fa fa-thumb-tack" aria-hidden="true"></i>Information
+						<h3><i class="fa fa-thumb-tack" aria-hidden="true"></i> Information
 					</div>
 					<div class="panel-body">
 						<address>
@@ -68,7 +68,7 @@
 								<textarea rows="4" cols="100" class="form-control" id="" name="message" placeholder="Message"></textarea>
 								<span class="help-block" style="display: none;"> enter a message.</span>
 						  </div>
-						  <button type="submit" id="feedbackSubmit" name="feedbackSubmit" class="btn btn-primary btn-lg" style="display: block; margin-top: 10px;">Contact US</button>
+						  <button type="submit" id="feedbackSubmit" name="feedbackSubmit" class="btn btn-primary btn-lg" style="display: block; margin-top: 10px;">Contact Us</button>
 						</form>
 					<!-- END CONTACT FORM -->
 					</div>

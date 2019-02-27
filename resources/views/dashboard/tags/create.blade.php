@@ -8,7 +8,7 @@
 <section class="content">
 	<div class="box">
 		<div class="box-header with-border">
-            <h3 class="box-title">Add New TAgs</h3>
+            <h3 class="box-title">Add New Tag</h3>
             <div class="box-tools pull-right">
                     <a href="" type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Show Products">
                         <i class="fa fa-list"></i>
@@ -30,14 +30,14 @@
 
                     	 {{ csrf_field() }}
                     	<div class="form-group text-cenetr">
-                    		<label for="">tag name</label>
+                    		<label for="">Tag name</label>
                     		<input type="text" class="form-control" id="" name="name" placeholder="Enter TAgs">
                     	</div>
 
                     
                     	
                     
-                    	<button type="submit" class="btn btn-primary">create</button>
+                    	<button type="submit" class="btn btn-primary">Create</button>
                     </form>
                 </div>
 

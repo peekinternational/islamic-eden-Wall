@@ -84,7 +84,7 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
      Route::get('Showtags', 'TagsController@show');
      Route::get('edittag/{id}', 'TagsController@edit');
      Route::delete('deletetag/{id}', 'TagsController@destroy');
-     Route::post('update', 'TagsController@updatetag');
+     Route::post('tagupdate', 'TagsController@updatetag');
 
     // end tags
      // colors

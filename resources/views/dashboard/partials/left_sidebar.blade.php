@@ -115,12 +115,12 @@
              <li class="treeview">
                 <a href="#">
                     <i class="fa fa-th-large"></i>
-                    <span>Product Colors</span>
+                    <span>Product Colour</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ url('dashboard/colors') }}"><i class="fa fa-circle-o"></i> New colors</a></li>
-                    <li><a href="{{url('dashboard/Showcolors') }}"><i class="fa fa-circle-o"></i> Show color</a></li>
+                    <li><a href="{{ url('dashboard/colors') }}"><i class="fa fa-circle-o"></i> New colour</a></li>
+                    <li><a href="{{url('dashboard/Showcolors') }}"><i class="fa fa-circle-o"></i> Show colours</a></li>
                     
                 </ul>
             </li>

@@ -40,7 +40,7 @@ class TagsController extends Controller
                                         ]);
         $tag=DB::table('tags')->insert($request->all());
 
-                 session()->flash('__response', ['notify'=>' tags Add Succesfully','type'=>'success']);
+                 session()->flash('__response', ['notify'=>' Tags Add Succesfully','type'=>'success']);
 
                 return redirect('/dashboard/tags');
     }
@@ -102,7 +102,7 @@ class TagsController extends Controller
     {
         $tags = DB::table('tags')->where('id',$id)->delete();
        
-        session()->flash('__response', ['notify'=>'Coupon  deleted successfully.','type'=>'success']);
+        session()->flash('__response', ['notify'=>'Tag  deleted successfully.','type'=>'success']);
         return back();
     }
 }

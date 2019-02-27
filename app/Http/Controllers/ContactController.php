@@ -33,7 +33,7 @@ class ContactController extends Controller
         ]);
                          // $inputs['payer_email']='rizwanahmadabbasi05@gmail.com';
                          $inputs=$request->all();
-                         $toemail ='Islamicwalldesigns@outlook.com';
+                         $toemail ='islamicwalldesigns@outlook.com';
                         Mail::send('emails.contactus',['contact' =>$inputs],
                         function ($message) use ($toemail)
                         {

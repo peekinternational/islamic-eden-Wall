@@ -8,7 +8,7 @@
 <section class="content">
 	<div class="box">
 		<div class="box-header with-border">
-                <h3 class="box-title">Add New color</h3>
+                <h3 class="box-title">Update colour</h3>
                 <div class="box-tools pull-right">
                     <a href="" type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Show Products">
                         <i class="fa fa-list"></i></a>
@@ -27,8 +27,8 @@
 
                     
                     	<div class="form-group text-cenetr">
-                    		<label for="">Color name</label>
-                    		<input type="text" class="form-control" id="" name="name" value="{{$colors->name}}" placeholder="Enter color">
+                    		<label for="">Colour name</label>
+                    		<input type="text" class="form-control" id="" name="name" value="{{$colors->name}}" placeholder="Enter colour">
                     	</div>
                     
                     	

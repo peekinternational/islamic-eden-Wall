@@ -16,7 +16,7 @@
                     <p>
                         Thank you for buying. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate doloribus eligendi enim et eveniet expedita facilis illum iusto numquam, officia provident, quas repellat, sit. Consequatur, nemo vitae? Ea laborum, obcaecati?
                     </p>
-                    <a href="{{ url('/') }}" class="page-404__button inverse wide_button">Go Home</a>
+                    <a href="{{ url('/') }}" class="page-404__button inverse wide_button">Continue Shopping</a>
                 </div>
             </div>
         </div>

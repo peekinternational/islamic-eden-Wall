@@ -1,18 +1,7 @@
 @extends('dashboard.layouts.default')
 @section('css')
 <style>
-.received{
-	background-color: green;color: white;display: block;height: 31px;border-radius: 4px;
-}
-.process{
-	background-color: green;color: white;display: block;height: 31px;border-radius: 4px;
-}
-.shipped{
-	background-color: orange;color: white;display: block;height: 31px;border-radius: 4px;
-}
-.deliver{
-	background-color: red;color: white;display: block;height: 31px;border-radius: 4px;
-}
+
 .green{
 	height: 18px;width: 18px; background-color: green;border-radius: 50%;display: inline-block;margin-left: 19px;
 }
@@ -44,9 +33,8 @@
                         <th>Cart Items</th>
                         <th>Total Price</th>
                         <th>Email</th>
-                        <th>Address</th>
-                        <th>City</th>
-                        <th>Country</th>
+                        <th>Billing Address</th>
+                        <th>Shipping Address</th>
                         <th>IPN Track id</th>
                         <th>Payment Status</th>
                         <th>Delivery Status</th>
@@ -97,17 +85,17 @@
                                                         {{ $_product->name }}
                                                         </th>
                                                         <td>{{ $_product->quantity }}</th>
-                                                        <td>&euro; {{ $_product->price }}</th>
+                                                        <td>£  {{ $_product->price }}</th>
 														<td>{{ $_product->p_size }}</th>
 														<td>{{ $_product->color }}</th>
-                                                        <td>&euro; {{ (float)$_product->tax }}</th>
-                                                        <td>&euro; {{ ($_product->quantity * $_product->price) + (float)$_product->tax }}</th>
+                                                        <td>£  {{ (float)$_product->tax }}</th>
+                                                        <td>£  {{ ($_product->quantity * $_product->price) + (float)$_product->tax }}</th>
                                                     </tr>
                                                     @endforeach
                                                      <tr >
 												   
                                                         <th colspan="6" style="border-top:2px solid black">Total</th>
-                                                        <th style="border-top:2px solid black">&euro; {{ $order_products->sum('total') }}</th>
+                                                        <th style="border-top:2px solid black">£  {{ $order_products->sum('total') }}</th>
                                                     </tr>
                                             </table>
                                         </div>
@@ -115,11 +103,15 @@
                                 </div>
                             </div>
                             </td>
-                            <td>&euro; {{ $order_products->sum('total') }}</td>
+                            <td>£  {{ $order_products->sum('total') }}</td>
                             <td>{{ $order->payer_email }}</td>
-                            <td>{{ $order->address_city }}</td>
-							 <td>{{ $order->city }}</td>
-                            <td>{{ $order->address_country_code }}</td>
+                             <td>{{ $order->address_city }}, {{ $order->city }} , {{ $order->address_country_code }} </td>
+							 <td>@if($order->bill_address1)
+							 {{ $order->bill_address1 }}, {{ $order->bill_city }} , {{ $order->bill_country }}
+						      @else
+								  Same Address
+							  @endif
+							  </td>
                             <td>{{ $order->ipn_track_id }}</td>
 							@if($order->payment_status == 'Paid')
                             <td>

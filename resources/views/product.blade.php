@@ -328,7 +328,7 @@ $(document).ready(function() {
 
    function dimensionselect(id, price){
        //alert(price);
-       $('#show_price').html('€'+price);
+       $('#show_price').html('£'+price);
        var data= $('#checkdem'+id).val();
       // alert(price);
            $('#sel_dim').val(data);

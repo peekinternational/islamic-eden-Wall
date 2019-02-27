@@ -348,7 +348,7 @@
                 <div class="row">
                     <div class="col-sm-11">
                         <span class="pull-right">
-                             <button type="reset" class="btn btn-default">Cancel</button>
+                             <a href="{{url('/dashboard/products')}}" class="btn btn-default">Cancel</a>
                              &nbsp;
                              <button type="button" class="btn btn-info " id="edit_button">Update</button>
                         </span>
