@@ -12,7 +12,7 @@
                         <i class="fa fa-minus"></i></button>
                 </div>
             </div>
-            {!! Form::model($product,['action'=>['ProductController@update',$product->id],'method'=>'patch','class'=>'form-horizontal','files'=>true,'enctype'=>'multipart/form-data']) !!}
+            {!! Form::model($product,['action'=>['ProductController@update',$product->id],'method'=>'patch','id'=>'form-edit','class'=>'form-horizontal','files'=>true,'enctype'=>'multipart/form-data']) !!}
             <div class="box-body">
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-2">
@@ -76,27 +76,21 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group {{ $errors->has('color') ? ' has-error' : '' }}">
-                            <label for="price" class="col-sm-3 control-label">Product Color <span>*</span></label>
+                       <div class="form-group {{ $errors->has('colors') ? ' has-error' : '' }}">
+                           <label for="colors" class="col-sm-3 control-label">colors</label>
                             <div class="col-sm-9">
-                              <select multiple="multiple" name="color[]" class="form-control select2" id="color_select">
-                              <option disabled>Select Color</option>
-                                <option value="white" {{$product_color[0]->color == 'white' ? 'selected="selected"' : ''}}>White</option>
-                                <option value="black" {{$product_color[0]->color == 'black' ? 'selected="selected"' : ''}}>black</option>
-                                <option value="green" {{$product_color[0]->color == 'green' ? 'selected="selected"' : ''}} >Green</option>
-                                <option value="grey" {{$product_color[0]->color == 'grey' ? 'selected="selected"' : ''}}>gray</option>
-                                <option value="pink" {{$product_color[0]->color == 'pink' ? 'selected="selected"' : ''}}>pink</option>
-                                <option value="violet" {{$product_color[0]->color == 'violet' ? 'selected="selected"' : ''}}>Violet</option>
-                                <option value="brown" {{$product_color[0]->color == 'brown' ? 'selected="selected"' : ''}}>Brown</option>
-                                <option value="blue" {{$product_color[0]->color == 'blue' ? 'selected="selected"' : ''}}>Blue</option>
-                                <option value="maroon" {{$product_color[0]->color == 'maroon' ? 'selected="selected"' : ''}}>Maroon</option>
-                                <option value="olive" {{$product_color[0]->color == 'olive' ? 'selected="selected"' : ''}}>olive</option>
-                            </select>
-                               
+                                <select name="color[]"  id="color_select" class="form-control select2" multiple>
+                                   
+                                    @foreach($product_color as $colorss)
+                                     @foreach($colors as $key=> $color)
+                                        <option  value="{{ $color->name }}" {{ $colorss->color == $color->name ? 'selected="selected"' : ''}}>{{ $color->name }}</option>
+                                     @endforeach
+                                    @endforeach
+                                </select>
                                 @if ($errors->has('color'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('color') }}</strong>
-                                    </span>
+                            <strong>{{ $errors->first('color') }}</strong>
+                        </span>
                                 @endif
                             </div>
                         </div>
@@ -130,7 +124,7 @@
                            <div class="form-group {{ $errors->has('price') ? ' has-error' : '' }}" id="main_price">
                             <label for="price" class="col-sm-3 control-label">Price <span>*</span></label>
                             <div class="col-sm-9">
-                                {!! Form::number('price',$value= null, $attributes = ['class'=>'form-control','placeholder'=>'Price'])  !!}
+                                <input type="number" name="price" id="orgprices" class="form-control" placeholder="Price">
                                 @if ($errors->has('price'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('price') }}</strong>
@@ -208,6 +202,7 @@
                             <div class="col-sm-9 optionBox">
                         @if($product_dimension->count() > 0)
                         @foreach($product_dimension as $dim)
+				    	<div class="block"> 
                             <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;">
                                
                                <input type="text" id="i" class="form-control" name="p_dimension[]" placeholder="Enter Dimension" value="{{$dim->p_dimension}}">
@@ -215,9 +210,13 @@
                             </div>
                             <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;">
                                
-                               <input type="text"  id="inpu" class="form-control" name="p_price[]" placeholder="Enter Price" value="{{$dim->p_price}}">
+                               <input type="text"  id="dimprices" class="form-control" name="p_price[]" placeholder="Enter Price" value="{{$dim->p_price}}">
                                 
                             </div>
+								 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 block remove" style="padding-top: 5px;">
+								<span class="add" style=""><i class="fa fa-minus"></i></span>
+								</div>
+								</div>
                             @endforeach
                             @endif
                             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 block" style="padding-top: 5px;">
@@ -264,21 +263,7 @@
                                 @endif
                             </div>
                         </div>
-                           <div class="form-group {{ $errors->has('navs') ? ' has-error' : '' }}">
-                            <label for="navs" class="col-sm-3 control-label">Product Pages <span>*</span></label>
-                            <div class="col-sm-9">
-                                 <select name="navs[]" id="categories" data-placeholder="Pages where product will be visible" class="form-control select2" multiple>
-                                    @foreach($navs->where('slug','shop')->first()->sub_navs as $nav)
-                                        <option {{ $product->navs->contains($nav)?'selected="selected"':'' }} value="{{ $nav->id }}">{{ $nav->title }}</option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('navs'))
-                                    <span class="help-block">
-                            <strong>{{ $errors->first('navs') }}</strong>
-                        </span>
-                                @endif
-                            </div>
-                        </div>
+                          
                         <div class="form-group {{ $errors->has('tags') ? ' has-error' : '' }}">
                             <label for="tags" class="col-sm-3 control-label">Tags</label>
                             <div class="col-sm-9">
@@ -363,9 +348,9 @@
                 <div class="row">
                     <div class="col-sm-11">
                         <span class="pull-right">
-                             <button type="reset" class="btn btn-default">Cancel</button>
+                             <a href="{{url('/dashboard/products')}}" class="btn btn-default">Cancel</a>
                              &nbsp;
-                             <button type="submit" class="btn btn-info ">Update</button>
+                             <button type="button" class="btn btn-info " id="edit_button">Update</button>
                         </span>
                     </div>
                 </div>
@@ -438,7 +423,7 @@ $('.checkboxsize').change(function(){
 
         $('.add').click(function() {
             if (maxAppend >= 5) return;
-            $('.block:last').before('<div class="block"> <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;"><input type="text"  class="form-control" name="p_dimension[]" placeholder="Enter Dimension"/></div><div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;"><input type="text" class="form-control" name="p_price[]" placeholder="Enter Price" /></div><span class="col-xs-2 col-sm-2 col-md-2 col-lg-2 remove" style="padding-top: 5px;"><i class="fa fa-minus"></i></span></div>');
+            $('.block:last').before('<div class="block"> <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;"><input type="text"  class="form-control" id="dimprices" name="p_dimension[]" placeholder="Enter Dimension"/></div><div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" style="padding-top: 5px;"><input type="text" class="form-control" name="p_price[]" placeholder="Enter Price" /></div><span class="col-xs-2 col-sm-2 col-md-2 col-lg-2 remove" style="padding-top: 5px;"><i class="fa fa-minus"></i></span></div>');
             maxAppend++;
         });
         $('.optionBox').on('click','.remove',function() {
@@ -561,7 +546,7 @@ $('.checkboxsize').change(function(){
         $('#offers').change(function(){
            var val= $(this).val();
            if(val != ''){
-                var original_price = $('#orgprice').val();
+                var original_price = $('#orgprices').val();
                 var discountprice=original_price/100*val;
                 var saledec =original_price-discountprice;
                 var sale =Math.round(saledec)
@@ -575,6 +560,29 @@ $('.checkboxsize').change(function(){
            
 
         });
+			$('#edit_button').click(function(){
+			
+			var name = $('#name').val();
+			var color = $('#color_select').val();
+			var saleprice = $('#orgprices').val();
+			var dimprice = $('#dimprices').val();
+			console.log(color);
+			if(saleprice == '' && dimprice == '' ){
+				alert('please enter price');
+			
+			}
+			else if(name == ''){
+				alert('please enter product title');
+				
+			}
+			else if(color == null){
+				alert('please enter product color');
+				
+			}else{
+				$('#form-edit').submit();
+			}
+			
+		})
     </script>
 @stop
  

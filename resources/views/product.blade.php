@@ -71,8 +71,8 @@
                                   $offer_max = $product_dimension->max('dimoffer_price');
                                 
                                  ?>
-                                 <span class="amount" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $min }} - {{$max}}</small></strike></span><br>
-                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $offer_min }} - {{$offer_max}}</span>
+                                 <span class="amount" style="color: gray !important; font-size: 26px;">£<strike><small>{{ $min }} - {{$max}}</small></strike></span><br>
+                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£{{ $offer_min }} - {{$offer_max}}</span>
                                  <span>&nbsp;  {{$product_dimension[0]->dim_offer}} %</span>
                                  @else
                                 <?php 
@@ -80,16 +80,16 @@
                                   $max = $product_dimension->max('p_price');
                                
                                  ?>
-                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $min }} - {{$max}}</span><br>
+                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£{{ $min }} - {{$max}}</span><br>
                                  @endif
 
                                  @else
 
                                  @if($product->offer)
                                 <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->price }}</small></strike></span>
-                               <span class="amount" style="color: gray !important; font-size: 26px;">&euro;{{ $product->saleprice }}</span>
+                               <span class="amount" style="color: gray !important; font-size: 26px;">£{{ $product->saleprice }}</span>
                                  @else
-                                    <span class="amount" id="show_price" style="color: black !important; font-size: 26px;">&euro;{{ $product->price }}</span>
+                                    <span class="amount" id="show_price" style="color: black !important; font-size: 26px;">£{{ $product->price }}</span>
                                
                                @endif
                                @endif
@@ -233,12 +233,12 @@
                                             @if($product->dimension[0]->dim_offer)
                                         
                                             <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->dimension[0]->dim_offer }} % off</p>
-                                            <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->dimension[0]->p_price }}</small> </strike>
-                                            <span> €{{ $product->dimension[0]->dimoffer_price }}</span></p>
+                                            <p class="text-center"> <strike style="padding: 0px 8px;"><small>£{{ $product->dimension[0]->p_price }}</small> </strike>
+                                            <span> £{{ $product->dimension[0]->dimoffer_price }}</span></p>
                                             
                                          @else
                                         
-                                            <p class="text-center"> €{{ $product->dimension[0]->p_price }} </p>
+                                            <p class="text-center"> £{{ $product->dimension[0]->p_price }} </p>
                                         @endif
                                 
 
@@ -246,9 +246,9 @@
                                           @if($product->offer)
                                           <p class="text-center" style="margin-bottom: 0px; color: red;">{{ $product->offer }} % off</p>
                                                 <p class="text-center"> <strike style="padding: 0px 8px;"><small>€{{ $product->price }}</small> </strike>
-                                                <span> €{{ $product->saleprice }}</span></p>
+                                                <span> £{{ $product->saleprice }}</span></p>
                                                   @else
-                                                <p class="text-center"> €{{ $product->price }} </p>
+                                                <p class="text-center"> £{{ $product->price }} </p>
                                                 @endif
                                                 @endif
 
@@ -272,9 +272,9 @@
 $(document).ready(function() {
    
 
- });sel_color
+ });
   $("form.single-shop-item__gty").submit(function(e){
-      if($('#sel_color').val()){
+  if($('#sel_color').val() != '' && $('#sel_dim').val() != '' || $('#sel_size').val() != ''){
          
      return true;
       }else{
@@ -288,7 +288,7 @@ $(document).ready(function() {
     });
   $('.color').click(function() {
 		 
-        if($(this).val() != '') {
+        if($(this).val() != '' && $('#sel_dim').val() != '' || $('#sel_size').val() != '') {
            $('#selcol').hide();
         }
      });
@@ -328,7 +328,7 @@ $(document).ready(function() {
 
    function dimensionselect(id, price){
        //alert(price);
-       $('#show_price').html('€'+price);
+       $('#show_price').html('£'+price);
        var data= $('#checkdem'+id).val();
       // alert(price);
            $('#sel_dim').val(data);

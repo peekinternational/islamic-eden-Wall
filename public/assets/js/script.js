@@ -681,9 +681,9 @@ function documentReadyInit() {
 
 			min: 0,
 
-			max: 100000,
+			max: 10000,
 
-			values: [ 100, 5000 ],
+			values: [ 0, 5000 ],
 
 			slide: function( event, ui ) {
 

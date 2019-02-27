@@ -30,7 +30,7 @@ class CartController extends Controller
          */
         public function store(Request $request,LaraCart $cart)
         {
-            dd($request->all());
+            //dd($request->all());
                 if(!$request->has('id') && !((int)$request->input('id'))>0){
                         $request->session()->flash('__response', ['message'=>'Oops! Something went wrong.','type'=>'danger']);
                 }else{
@@ -57,6 +57,8 @@ class CartController extends Controller
                                         $taxable = false,
                                         $lineItem = false
                                 );
+								$cart->removeCoupons();
+								$request->session()->forget('coupon');
                               // dd($cart); 
                         }else if(is_array($find) && count($find)>0){
                               $item = $find[0];
@@ -88,6 +90,9 @@ class CartController extends Controller
                                $item = $find[0];
                                 $itemHashId =  $item->getHash();
                                 $cart->removeItem($itemHashId);
+								$cart->removeCoupons();
+								
+								$request->session()->forget('coupon');
                                 $request->session()->flash('__response', ['notify'=>'Product "'.$item->name.'" successfully removed from cart.','type'=>'success']);
                         }
                 }
@@ -143,11 +148,15 @@ class CartController extends Controller
                                 $taxable = true,
                                 $lineItem = false
                         );
+						$cart->removeCoupons();
+						$request->session()->forget('coupon');
                 }else if(is_array($find) && count($find)>0){
                         $item = $find[0];
                         $itemHashId =  $item->getHash();
                         $cart->updateItem($itemHashId,'qty', $quantity);
                         $cart->updateItem($itemHashId,'price', (float)$final_price);
+						$cart->removeCoupons();
+						$request->session()->forget('coupon');
                 }
                 $request->session()->flash('__response', ['notify'=>'Product "'.$product->name.'" successfully added to cart.','type'=>'success']);
                 return Redirect::back();
@@ -192,6 +201,8 @@ class CartController extends Controller
                                                 $taxable = false,
                                                 $lineItem = false
                                         );
+										$cart->removeCoupons();
+										$request->session()->forget('coupon');
                                 }else if(is_array($find) && count($find)>0){
                                         $item = $find[0];
                                         $itemHashId =  $item->getHash();

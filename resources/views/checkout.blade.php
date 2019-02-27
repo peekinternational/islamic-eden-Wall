@@ -19,7 +19,7 @@
 			  @endif
 			@endforeach
 		  </div> <!-- end .flash-message -->
-                <form target="paypal" class="form-horizontal checkout shop-checkout" action="{{ isset($PaymentSettings['payment_mood']['value']) && $PaymentSettings['payment_mood']['value']=='live'?'https://www.paypal.com/cgi-bin/webscr':'https://www.sandbox.paypal.com/cgi-bin/webscr' }}" method="post">
+                <form target="_self" class="form-horizontal checkout shop-checkout" action="{{ isset($PaymentSettings['payment_mood']['value']) && $PaymentSettings['payment_mood']['value']=='live'?'https://www.paypal.com/cgi-bin/webscr':'https://www.sandbox.paypal.com/cgi-bin/webscr' }}" method="post">
                 <div class="col-sm-7 col-md-8 col-lg-8" style="width: 63%;">
 
                     {{--<input type="hidden" name="country" value="Us" />--}}
@@ -70,7 +70,7 @@
                             <input type="hidden" name="tax_2" value="0.02">-->
                         <!-- End Second Item -->
 
-                        <input type="hidden" name="currency_code" value="EUR">
+                        <input type="hidden" name="currency_code" value="GBP">
                         <!--<input type="hidden" name="tax_cart" value="5.13"> -->
                         {{--<input type="hidden" name="first_name" value="John">
                         <input type="hidden" name="last_name" value="Doe">
@@ -85,7 +85,7 @@
                         <input type="hidden" name="email" value="shahkhalid.me@gmail.com">
                         <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_cart_SM.gif" border="0" name="upload" alt="Make payments with PayPal - it's fast, free and secure!" width="87" height="23">--}}
                  {{--   </form>--}}
-                    <h3 class="shop-checkout__title">Shipping Address</h3>
+                    <h3 class="shop-checkout__title">Billing Address</h3>
                        <div class="form-group">
                             <label for="country" class="col-sm-3 control-label">
                                 <span class="grey">Country </span>
@@ -144,7 +144,7 @@
                         </div>
                            <div class="form-group address-field validate-required  {{ $errors->has('address1') ? ' has-error' : '' }}" id="billing_address_fields">
                               <label for="address" class="col-sm-3 control-label">
-                                  <span class="grey">Address 1</span>
+                                  <span class="grey">Billing Address</span>
                                   <span class="required">*</span>
                               </label>
                               <div class="col-sm-9">
@@ -215,13 +215,67 @@
                                       </label>
                                   </div>
                                   @endif--}}
-                                  <div class="checkbox">
+                                   <div class="checkbox">
                                       <label>
-                                          <input type="checkbox" name="REQCONFIRMSHIPPING" checked value="1"> Shop to Billing Address?
+                                          <input type="checkbox" name="REQCONFIRMSHIPPING" id="bill_check" value="1"> Shipping address different to billing address?
                                       </label>
                                   </div>
                               </div>
                           </div>
+						  <div id="bill_address" style="display:none">
+						   <div class="form-group">
+                            <label for="country" class="col-sm-3 control-label">
+                                <span class="grey">Country </span>
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="hidden" name="return" value="{{ url('/thanks?clear_cart=true') }}">
+                                <input type="hidden" name="RETURNURL" value="{{ url('/thanks?clear_cart=true') }}">
+                                 <select class="form-control" name="bill_country" id="country">
+                                    @foreach($countries as $id=>$country)
+                                        <option {{ $id=="GB"?'selected="selected"':'' }} value="{{ $id }}">{{ $country }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                           
+                      
+                           <div class="form-group address-field validate-required  {{ $errors->has('address1') ? ' has-error' : '' }}" id="billing_address_fields">
+                              <label for="address" class="col-sm-3 control-label">
+                                  <span class="grey">Shipping Address</span>
+                                  <span class="required">*</span>
+                              </label>
+                              <div class="col-sm-9">
+                                  {!! Form::text('bill_address1',$value= null, $attributes = ['class'=>'form-control','id'=>'address','placeholder'=>'Address'])  !!}
+                                  @if ($errors->has('address1'))
+                                      <span class="help-block">
+                                          <strong>{{ $errors->first('address1') }}</strong>
+                                      </span>
+                                  @endif
+                              </div>
+                          </div>
+                          
+                          <div class="form-group address-field validate-required" id="billing_city_field">
+                              <label for="city" class="col-sm-3 control-label">
+                                  <span class="grey">Town / City </span>
+                                  <span class="required">*</span>
+                              </label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control " name="bill_city" id="city" placeholder="Town / City" >
+                              </div>
+                          </div>
+                         {{-- <div class="form-group address-field validate-state" id="billing_state_field">
+                              <label for="billing_state" class="col-sm-3 control-label">
+                                  <span class="grey">County</span>
+                              </label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control " value="" placeholder="State / County" name="bill_billing_state" id="billing_state">
+                              </div>
+                          </div>--}}
+                          
+						  {{csrf_field()}}
+                          
+						  </div>
                           <div class="form-group">
                               <label for="order_comments" class="col-sm-3 control-label">
                                   <span class="grey">Order Notes</span>
@@ -250,7 +304,7 @@
                                     <span class="product-quantity">× {{ $item->qty }}</span>
                                 </td>
                                 <td class="product-total">
-                                    <span class="amount grey">&euro; {{ $item->price * $item->qty }}</span>
+                                    <span class="amount grey">£  {{ $item->price * $item->qty }}</span>
                                 </td>
                             </tr>
                             @endforeach
@@ -259,7 +313,7 @@
                             <tr class="cart-subtotal">
                                 <td>Subtotal:</td>
                                 <td>
-                                    <span class="amount grey">&euro; {{ $cart->subTotal($format = false, $withDiscount = true) }}</span>
+                                    <span class="amount grey">£  {{ $cart->subTotal($format = false, $withDiscount = true) }}</span>
                                 </td>
                             </tr>
                             <tr class="shipping">
@@ -272,7 +326,7 @@
 							<tr class="shipping">
                                 <td>Discount:</td>
                                 <td>
-                                    <span class="grey">- &euro; {{session()->get('coupon')['discount']}}</span>
+                                    <span class="grey">- £  {{session()->get('coupon')['discount']}}</span>
                                 </td>
                             </tr>
 							@endif
@@ -280,7 +334,7 @@
                                 <td>Total:</td>
                                 <td>
 								<span class="amount grey">
-									<strong>&euro; {{ $cart->total($format = false,$withDiscount = true) }}</strong>
+									<strong>£  {{ $cart->total($format = false,$withDiscount = true) }}</strong>
 								</span>
                                 </td>
                             </tr>
@@ -329,13 +383,13 @@
                                 </li>
                             </ul>
                             <div class="place-order">
-                                <input type="submit" class="button-t1" name="checkout_place_order" id="place_order" onclick="paypalcheckout();" value="Place order">
+                                <input type="submit" class="button-t1" target="_self" name="checkout_place_order" id="place_order" onclick="paypalcheckout();" value="Place order">
                             </div>
                         </div>
                     </div>
                 </aside>
                 </form>
-                <div class="col-sm-offset-8 col-sm-4" style="margin-top: -142px;">
+                <div class="col-sm-offset-8 col-sm-4" style="">
                             <div class="coupon with_padding muted_background">
                                 <h5 class="topmargin_0">Discount Codes</h5>
                                 <p>Enter coupon code if you have one</p>

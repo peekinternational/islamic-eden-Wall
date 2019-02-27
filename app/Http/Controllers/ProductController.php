@@ -30,18 +30,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-       /* $category = Category::first();
-        $category->products;
-        $produt = Products::first();
-        $cat = $produt->category;
-        return $category;*/
-        $products = Products::orderBy('id','desc')->paginate(10);
-         // dd($products);
-
-         foreach($products as &$rec){
-                  $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
-                }
-             // dd($products);
+        // $category = Category::first();
+        // $category->products;
+        // $produt = Products::first();
+        // $cat = $produt->category;
+        // return $category;
+        // dd($category);
+          $products = Products::join('product_dimension','product_dimension.product_id','=','products.id')->join('product_images','product_images.product_id','=','products.id')->orderBy('products.id','desc')->groupBy('products.id')->paginate(10);
+             //dd($products);
          return view('products',compact('products'));
 
     }
@@ -51,10 +47,24 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex()
+    public function getIndex(Request $request)
     {
         $this->breadcrumb['page']  = 'Products List';
         $breadcrumb = $this->breadcrumb;
+        if($request->isMethod('post')){
+            $id=$request->input('catid');
+            $products = Products::where('category_id','=',$id)->orderBy('id','desc')->paginate(9);
+         foreach($products as &$rec){
+                  $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
+                    $product_color = DB::table('product_color')->where('product_id','=',$rec->id)->get();
+        $product_size = DB::table('product_size')->where('product_id','=',$rec->id)->get();
+         $product_dimension  = DB::table('product_dimension')->where('product_id','=',$rec->id)->get();
+                }
+   
+            $category=DB::table('categories')->get();
+        
+        return view('dashboard.products.index',compact('products','breadcrumb','quantity','product_size','product_color','products','product_dimension','category'));
+        }
         $products = Products::orderBy('id','desc')->paginate(9);
          foreach($products as &$rec){
                   $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
@@ -63,9 +73,9 @@ class ProductController extends Controller
          $product_dimension  = DB::table('product_dimension')->where('product_id','=',$rec->id)->get();
                 }
    
-
+            $category=DB::table('categories')->get();
         
-        return view('dashboard.products.index',compact('products','breadcrumb','quantity','product_size','product_color','products','product_dimension'));
+        return view('dashboard.products.index',compact('products','breadcrumb','quantity','product_size','product_color','product_dimension','category'));
     }
 
     /**
@@ -78,8 +88,10 @@ class ProductController extends Controller
         $this->breadcrumb['page']  = 'New Products';
         $breadcrumb = $this->breadcrumb;
         $tags = Tags::pluck('name','id');
+        $colors= DB::table('color')->get();
+        // dd($colors);
         $categories = Category::pluck('name','id');
-       return view('dashboard.products.create',compact('breadcrumb','tags','categories'));
+       return view('dashboard.products.create',compact('breadcrumb','tags','colors','categories'));
     }
 
     /**
@@ -99,7 +111,7 @@ class ProductController extends Controller
         $this->validate($request,[
             'name' => 'required',
             'category_id'=>'required',
-            'navs' => 'required',
+            'photos.*' => 'required|mimes:jpg,jpeg,png,bmp|max:20000',
             'slug' => 'unique:products'
         ],[],[
             'name' => 'title',
@@ -118,10 +130,12 @@ class ProductController extends Controller
         $product = Products::create($request->all());
         if($product->id){
 
-            $product->navs()->attach($request->input('navs'));
+           // $product->navs()->attach($request->input('navs'));
             if($request->has('tags')){
                 $product->tags()->attach($request->input('tags'));
-            }
+            }else{
+				$product->tags()->attach('1');
+			}
             if($request->hasFile('photos')) {
                 $photos = $request->file('photos');
                 
@@ -200,7 +214,7 @@ class ProductController extends Controller
     public function show($slug,LaraCart $cart)
     {
         $product = Products::whereSlug($slug)->firstorFail();
-        //dd($product);
+        // dd($product);
 
         // return $product->images->first()->image;
         $product_id = (int)$product->id;
@@ -249,11 +263,14 @@ class ProductController extends Controller
 
         $tags = Tags::pluck('name','id');
         $categories = Category::pluck('name','id');
+        $colors= DB::table('color')->get();
+      //  dd($colors);
+        
 
 
              
 
-        return view('dashboard.products.edit',compact('images','product','breadcrumb','tags','categories','product_dimension','product_color','product_size'));
+        return view('dashboard.products.edit',compact('images','product','breadcrumb','tags','categories','product_dimension','product_color','product_size','colors'));
     }
 
     /**
@@ -265,8 +282,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-       //dd($request->all());
-        if(!$request->has('slug')){
+               if(!$request->has('slug')){
             $request->merge(['slug'=>str_slug($request->input('name'))]);
         }
         $product = Products::findOrFail($id);
@@ -276,7 +292,7 @@ class ProductController extends Controller
                 'name' => 'required',
                 //'price' => 'required',
                 'category_id'=>'required',
-                'navs' => 'required',
+               // 'navs' => 'required',
                 'slug' => 'unique:products,slug,'.$product->slug.',slug'
         ],[],[
                 'name' => 'title'
@@ -284,6 +300,7 @@ class ProductController extends Controller
 
        $size=$request->input('p_size');
        $p_color=$request->input('color');
+      
        $p_dimension=$request->input('p_dimension');
        $p_price=$request->input('p_price');
        //dd($p_price[0]);
@@ -293,7 +310,7 @@ class ProductController extends Controller
         $product->fill($request->all());
         $product->save();
         session()->flash('__response', ['notify'=>'Product "'.$product->name.'" updated successfully.','type'=>'success']);
-        $product->navs()->sync($request->input('navs'));
+       // $product->navs()->sync($request->input('navs'));
         $product->tags()->sync($request->input('tags'));
         if($request->hasFile('photos')) {
             $photos = $request->file('photos');
@@ -313,12 +330,11 @@ class ProductController extends Controller
             }
         }
 
-        foreach($p_color as $colors )
-              {
-                  $input['color']=$colors;
-                  $input['product_id']=$product->id;
-                  DB::table('product_color')->where('product_id','=',$product->id)->update($input);
-              }
+        DB::table('product_color')->where('product_id','=',$product->id)->delete();
+        foreach($p_color as $color )
+            {
+                DB::table('product_color')->where('product_id','=',$product->id)->insert(['product_id'=>$product->id,'color'=>$color]);
+            }
 
               if($size){
               foreach($size as $pro_size )
@@ -364,6 +380,55 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+     public function copy(Request $request, $id)
+    {
+         
+      $data=DB::table('products')->where('id','=',$id)->first();
+    
+     $input['category_id']=$data->category_id;
+     $input['name']=$data->name;
+     $input['slug']=rand().$data->slug;
+     $input['price']=$data->price;
+     $input['offer']=$data->offer;
+     $input['saleprice']=$data->saleprice;
+     $input['description']=$data->description;
+     $input['Addtional_Information']=$data->Addtional_Information;
+     $input['meta_title']=$data->meta_title;
+     $input['meta_keywords']=$data->meta_keywords;
+     $input['meta_description']=$data->meta_description;
+
+      $product = Products::create($input);
+     
+      $photos=DB::table('product_images')->where('product_id','=',$id)->get();
+       
+       foreach ($photos as $photo) {
+                if ($photo) {
+                    $image = ProductImages::create(['product_id' => $product->id, 'image' => $photo->image]);
+                }
+            }
+     $dymentions = DB::table('product_dimension')->where('product_id','=',$id)->get();
+     
+     foreach ($dymentions as $dymention) {
+                if ($dymention) {
+                    DB::table('product_dimension')->insert(['product_id'=>$product->id,'p_dimension'=>$dymention->p_dimension,'p_price'=>$dymention->p_price,'dimoffer_price'=>$dymention->dimoffer_price,'dim_offer'=>$dymention->dim_offer]);
+                }
+            }
+    $p_color = DB::table('product_color')->where('product_id','=',$id)->get();
+
+    foreach($p_color as $color )
+        {
+            DB::table('product_color')->insert(['product_id'=>$product->id,'color'=>$color->color]);
+        }
+    $p_tags = DB::table('product_tags')->where('product_id','=',$id)->get();
+      foreach($p_tags as $tags )
+          {
+              DB::table('product_tags')->insert(['product_id'=>$product->id,'tag_id'=>$tags->tag_id]);
+          }
+		  return back();
+      
+            
+       
+}
     public function destroy($id)
     {
         $product = Products::findOrFail($id);
@@ -393,8 +458,10 @@ function deleteimg($id){
     {
         if($request->input('q')){
             $query = $request->q;
-            $products = Products::where('name','like','%'.$query.'%')->orderBy('id','desc')->paginate(10);
-            return view('products',compact('products'));
+            //$products = Products::where('name','like','%'.$query.'%')->orderBy('id','desc')->paginate(10);
+			  $products = Products::join('product_dimension','product_dimension.product_id','=','products.id')->join('product_images','product_images.product_id','=','products.id')->where('products.name','like','%'.$query.'%')->orderBy('products.id','desc')->groupBy('products.id')->paginate(10);
+   
+            return view('products',compact('products','product_size','product_color','product_dimension'));
         }
         return redirect()->back();
     }
@@ -403,21 +470,34 @@ function deleteimg($id){
         if($request->has('max') && $request->has('min')){
             $min = (int)$request->input('min');
             $max = (int)$request->input('max');
-            $products = Products::whereBetween('price',[$min,$max])->orderBy('id','desc')->paginate(10);
-
-            $products->appends(['min'=>$min,'max'=>$max]);
-            return view('products',compact('products'));
+            $products = Products::join('product_dimension','product_dimension.product_id','=','products.id')->join('product_images','product_images.product_id','=','products.id')->where('product_dimension.p_price','>',$min)->where('product_dimension.p_price','<',$max)->orderBy('products.id','desc')->groupBy('products.id')->paginate(10);
+             // foreach($products as &$rec){
+                   // $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->where('p_price','<','2000')->where('p_price','<','2000')->get()->toArray();
+				  //  $product_color = DB::table('product_color')->where('product_id','=',$rec->id)->get();
+                   // $product_size = DB::table('product_size')->where('product_id','=',$rec->id)->get();
+                   // $product_dimension  = DB::table('product_dimension')->where('product_id','=',$rec->id)->get();
+               // }
+   
+           $products->appends(['min'=>$min,'max'=>$max]);
+            return view('products',compact('products','product_size','product_color','product_dimension'));
         }else{
             return redirect()->action('ProductController@index');
         }
     }
 
     public function page_products($slug){
-        $nav =  SubNavs::whereSlug($slug)->firstOrFail();
-        $products = $nav->products()->orderBy('id','desc')->paginate(9);
-        foreach($products as &$rec){
-                  $rec->dimension=DB::table('product_dimension')->where('product_id','=',$rec->id)->get()->toArray();
+      //  $nav =  SubNavs::whereSlug($slug)->firstOrFail();
+		//dd($nav);
+		 $categories = Category::pluck('name','id');
+                $id = null;
+                foreach($categories as $cat_id=>$category){
+                        if(str_slug($category)===trim($slug)){
+                                $id = $cat_id;
+                                break;
+                        }
                 }
+		 $products = Products::join('product_dimension','product_dimension.product_id','=','products.id')->join('product_images','product_images.product_id','=','products.id')->where('products.category_id','=',$id)->orderBy('products.id','desc')->groupBy('products.id')->paginate(10);
+       
          return view('products',compact('products'));
     }
 }

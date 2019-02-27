@@ -30,6 +30,9 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Coupon Code</h3>
                 <div class="box-tools pull-right">
+                  <a href="{{ url('dashboard/addcoupon') }}" type="button" class="btn btn-box-tool"  data-toggle="tooltip" title="New coupon">
+                        <i class="fa fa-plus"></i>
+                    </a>
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                         <i class="fa fa-minus"></i>
                     </button>
@@ -43,6 +46,7 @@
                         <th>Discount Type</th>
                         <th>Discount Price</th>
                         <th>Expiry Date</th>
+						<th>Status </th>
                         <th>Action</th>
                     </tr>
                     @foreach($coupon as $order)
@@ -52,6 +56,16 @@
                             <td>{{ $order->type }}</td>
 							 <td>{{ $order->discount }}</td>
                             <td>{{ $order->expiry_date }}</td>
+							<td>
+							<?php if(date("Y-m-d") > $order->expiry_date ){
+								echo '<span class="label label-danger">Expire</span>';
+							}
+							else{
+								echo '<span class="label label-success">Active</span>';
+							}
+							
+							?>
+							</td>
                             <td><span class="btn-edit">
 
                                     <a href="{{ url('dashboard/editcoupon/'.$order->id) }}" class="btn btn-xs btn-warning" data-toggle="tooltip"  data-original-title="Edit"><i class="fa fa-edit"></i> </a>

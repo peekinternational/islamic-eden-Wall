@@ -1,18 +1,7 @@
 @extends('dashboard.layouts.default')
 @section('css')
 <style>
-.received{
-	background-color: green;color: white;display: block;height: 31px;border-radius: 4px;
-}
-.process{
-	background-color: green;color: white;display: block;height: 31px;border-radius: 4px;
-}
-.shipped{
-	background-color: orange;color: white;display: block;height: 31px;border-radius: 4px;
-}
-.deliver{
-	background-color: pink;color: white;display: block;height: 31px;border-radius: 4px;
-}
+
 .green{
 	height: 18px;width: 18px; background-color: green;border-radius: 50%;display: inline-block;margin-left: 19px;
 }
@@ -21,7 +10,7 @@
 }
 .yellow{
 	height: 18px;width: 18px; background-color: yellow;border-radius: 50%;display: inline-block;margin-left: 19px;
-}
+} 
 </style>
 @stop
 @section('content')
@@ -44,13 +33,14 @@
                         <th>Cart Items</th>
                         <th>Total Price</th>
                         <th>Email</th>
-                        <th>Address</th>
-                        <th>City</th>
-                        <th>Country</th>
+                        <th>Billing Address</th>
+                        <th>Shipping Address</th>
                         <th>IPN Track id</th>
                         <th>Payment Status</th>
                         <th>Delivery Status</th>
                         <th>Payment Date</th>
+                        <th>Action</th>
+
                     </tr>
                     @foreach($orders as $order)
                     <?php 
@@ -95,17 +85,17 @@
                                                         {{ $_product->name }}
                                                         </th>
                                                         <td>{{ $_product->quantity }}</th>
-                                                        <td>&euro; {{ $_product->price }}</th>
+                                                        <td>£  {{ $_product->price }}</th>
 														<td>{{ $_product->p_size }}</th>
 														<td>{{ $_product->color }}</th>
-                                                        <td>&euro; {{ (float)$_product->tax }}</th>
-                                                        <td>&euro; {{ ($_product->quantity * $_product->price) + (float)$_product->tax }}</th>
+                                                        <td>£  {{ (float)$_product->tax }}</th>
+                                                        <td>£  {{ ($_product->quantity * $_product->price) + (float)$_product->tax }}</th>
                                                     </tr>
                                                     @endforeach
                                                      <tr >
 												   
                                                         <th colspan="6" style="border-top:2px solid black">Total</th>
-                                                        <th style="border-top:2px solid black">&euro; {{ $order_products->sum('total') }}</th>
+                                                        <th style="border-top:2px solid black">£  {{ $order_products->sum('total') }}</th>
                                                     </tr>
                                             </table>
                                         </div>
@@ -113,11 +103,16 @@
                                 </div>
                             </div>
                             </td>
-                            <td>&euro; {{ $order_products->sum('total') }}</td>
+                            <td>£  {{ $order_products->sum('total') }}</td>
                             <td>{{ $order->payer_email }}</td>
-                            <td>{{ $order->address_city }}</td>
-							 <td>{{ $order->city }}</td>
-                            <td>{{ $order->address_country_code }}</td>
+                            <td>{{ $order->address_city }}, {{ $order->city }} , {{ $order->address_country_code }} </td>
+							 <td>@if($order->bill_address1)
+							 {{ $order->bill_address1 }}, {{ $order->bill_city }} , {{ $order->bill_country }}
+						      @else
+								  Same Address
+							  @endif
+							  </td>
+                            
                             <td>{{ $order->ipn_track_id }}</td>
 							@if($order->payment_status == 'Paid')
                             <td>
@@ -182,6 +177,12 @@
                             </td>
 							
                             <td>{{ $order->payment_date }}</td>
+                            <td><span class="btn-edit">
+                                    {!! Form::open(['action'=>['OrderController@destroy',$order->id],'method'=>'delete', 'class'=>$order->id,'style'=>'display:inline;']) !!}
+                                   <input type="hidden" class="delete_permanent" name="delete_permanent" value="0">
+                                    <a href="javascript:void(0);" class="btn btn-xs btn-danger btn-delete-user removeRecord" data-toggle="tooltip" onclick="remove_record('{{$order->id}}')"  data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                                    {!! Form::close() !!}
+                            </span></td>
                         </tr>
                     @endforeach
                     @if($orders->isEmpty())
@@ -227,9 +228,22 @@
 @stop
 @section('footer')
     <script>
+
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip(); 
 });
+  function remove_record(payer_id) {
+   // event.preventDefault();
+    if (confirm('Are you sure want to move in Archieve')) {
+            $('.'+payer_id).submit();
+    }
+   else
+   {
+      
+   }       
+   event.preventDefault();
+   
+}
 function changestatus(id){
 	var val=$('.status'+id).val();
 	 

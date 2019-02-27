@@ -34,10 +34,10 @@
                                 <figure class="item-media shop-item__img">
                                     <a href="{{ url('product/'.$product->slug) }}">
                                         <?php
-                                            $first_image = $product->images->first();
+                                            $first_image = $product->image;
                                             $image = 'no-image.png';
-                                                if(isset($first_image->image) && !empty($first_image)){
-                                                    $image = 'products/'.$first_image->image;
+                                                if(isset($first_image) && !empty($first_image)){
+                                                    $image = 'products/'.$first_image;
                                                 }
                                         ?>
                                     <div class="image-list">
@@ -65,13 +65,13 @@
                                        
                                      <p class="shop-item__price">
                                      
-                                @if($product->dimension)
-                                @if($product->dimension[0]->dim_offer)
+                                @if($product->p_price)
+                                @if($product->dim_offer)
                                
-                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->dimension[0]->p_price }}</small></strike></span> -
-                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $product->dimension[0]->dimoffer_price  }}</span><br>
+                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£<strike><small>{{ $product->p_price }}</small></strike></span> -
+                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£{{ $product->dimoffer_price  }}</span><br>
                                 @else
-                                  <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $product->dimension[0]->p_price }}</span><br>
+                                  <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£{{ $product->p_price }}</span><br>
                                  @endif
                                  @else
                                  
@@ -79,7 +79,7 @@
                                         <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->price }}</small></strike></span>
                                         <span class="amount" style="color: gray !important; font-size: 26px;">&euro;{{ $product->saleprice }}</span>
                                         @else
-                                            <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;{{ $product->price }}</span>
+                                            <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">£{{ $product->price }}</span>
                                         @endif
                                         @endif
                                          

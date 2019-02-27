@@ -7,8 +7,21 @@
         <div class="container responsive">
             <div class=" row box-header with-border">
               <div class="col-sm-8 col-md-9 col-lg-9" style="margin-left: 10px;">
-                <h3 class="box-title">Products</h3>
-                <div class="box-tools pull-right">
+                <div class="row" style="margin-bottom: 12px;">
+                 <form action="{{ action('ProductController@getIndex')}}" method="post" >
+                {!! csrf_field() !!}
+                    <div class="col-md-4" style="padding: 0px 0px;">
+                      <select class="form-control" name="catid">
+                       <option value = "">select Category</option>
+                       @foreach($category as $cat)
+                       <option value ="{{$cat->id}}">{{$cat->name}}</option>
+                       @endforeach
+                       </select>
+                    </div>
+                    <div class="col-md-4">
+                       <button style="padding: 7px 12px !important;" class="btn btn-xs">Search</button>
+                    </div>
+                    <div class="box-tools pull-right  col-offset-md-2 col-md-2">
                     <a href="{{ action('ProductController@create') }}" type="button" class="btn btn-box-tool"  data-toggle="tooltip" title="New Product">
                         <i class="fa fa-plus"></i>
                     </a>
@@ -16,6 +29,10 @@
                         <i class="fa fa-minus"></i>
                     </button>
                 </div>
+               
+                </form>   
+                </div>
+               
             </div>
             <div class="box-body">
                 @include('dashboard.partials.formErrorMessage')
@@ -40,9 +57,11 @@
                                                  <a href="{{ url('product/'.$product->slug) }}" class="btn btn-xs btn-info" data-toggle="tooltip"  data-original-title="View Product"><i class="fa fa-search"></i> </a>
                             <span class="btn-edit">
                                     <a href="{{ action('ProductController@edit',$product->id) }}" class="btn btn-xs btn-warning" data-toggle="tooltip"  data-original-title="Edit"><i class="fa fa-edit"></i> </a>
-                                    {!! Form::open(['action'=>['ProductController@destroy',$product->id],'method'=>'delete','style'=>'display:inline;']) !!}
+                                   <a href="{{ action('ProductController@copy',$product->id) }}" type="submit" class="btn btn-xs btn-danger btn-delete-user" data-toggle="tooltip"   data-original-title="copy"><i class="fa fa-copy"></i></a>
+                                    {!! Form::open(['action'=>['ProductController@destroy',$product->id],'method'=>'delete', 'id'=>'ids'.$product->id,'style'=>'display:inline;']) !!}
                                    <input type="hidden" class="delete_permanent" name="delete_permanent" value="0">
-                                    <button type="submit" class="btn btn-xs btn-danger btn-delete-user" data-toggle="tooltip"  data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
+                                    <a href="javascript:void(0);" type="submit" class="btn btn-xs btn-danger btn-delete-user" data-toggle="tooltip"  onclick="remove_recordss('{{$product->id}}')"  data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                                    
                                     {!! Form::close() !!}
                             </span>
                                          </div>
@@ -68,20 +87,20 @@
                             @if($product->dimension)
                             @if(!$product->dimension[0]->dim_offer)
                            
-									  <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $product->dimension[0]->p_price }}</span><br>
+									  <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£{{ $product->dimension[0]->p_price }}</span><br>
 									
 									@else
-									 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->dimension[0]->p_price }}</small></strike></span> -
-									 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">&euro;{{ $product->dimension[0]->dimoffer_price  }}</span><br>	
+									 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£<strike><small>{{ $product->dimension[0]->p_price }}</small></strike></span> -
+									 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£{{ $product->dimension[0]->dimoffer_price  }}</span><br>	
 									
 									 @endif
 									 @else
 									 
                                     @if($product->offer)
-                                    <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;<strike><small>{{ $product->price }}</small></strike></span>
-                                    <span class="amount" style="color: gray !important; font-size: 26px;">&euro;{{ $product->saleprice }}</span>
+                                    <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">£<strike><small>{{ $product->price }}</small></strike></span>
+                                    <span class="amount" style="color: gray !important; font-size: 26px;">£{{ $product->saleprice }}</span>
                                     @else
-                                        <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">&euro;{{ $product->price }}</span>
+                                        <span class="amount  pro-prce" style="color: gray !important; font-size: 26px;">£{{ $product->price }}</span>
                                     @endif
                                     @endif
                                      
@@ -168,6 +187,8 @@
                     });
                 } // End if
             });
+
+ 
             $(window).scroll(function() {
                 $(".slideanim").each(function(){
                     var pos = $(this).offset().top;
@@ -178,6 +199,7 @@
                 });
             });
         })
+
     </script>
     <script>
          var owl = $('.product-carousel ');

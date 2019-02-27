@@ -19,7 +19,8 @@ class OrderController extends Controller
     {
        //DB::enableQueryLog();
         Orders::whereRead(0)->update(['read'=>1]);
-        $orders = Orders::orderBy('id','desc')->paginate(20);
+        $orders = Orders::where('status','=','Active')->orderBy('id','desc')->paginate(20);
+
          // print_r(DB::getQueryLog());die();
         //return $order_products->sum('total');
         return view('dashboard.orders',compact('orders'));
@@ -108,8 +109,12 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+     public function destroy($id)
     {
-        //
+        
+        $product = DB::table('orders')->where('id',$id)->Update(["status"=>"Inactive"]);
+       
+        session()->flash('__response', ['notify'=>' Move to recycle order.','type'=>'success']);
+        return back();
     }
 }

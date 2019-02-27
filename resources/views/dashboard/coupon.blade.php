@@ -15,7 +15,7 @@
                     <div class="col-sm-6 col-sm-offset-2">
                         
                         <div class="form-group {{ $errors->has('address') ? ' has-error' : '' }}">
-                            <label for="address" class="col-sm-3 control-label">Coupon Code</label>
+                            <label for="address" class="col-sm-3 control-label">Promo Code</label>
                             <div class="col-sm-9">
                                 {!! Form::text('code',$value= (isset($site['code']['value'])?$site['code']['value']:''), $attributes = ['class'=>'form-control','address'=>'address','placeholder'=>'Enter Code'])  !!}
                                 @if ($errors->has('code'))

@@ -62,15 +62,47 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     route::get( '/addcoupon', function(){
     return view('dashboard.coupon');
 });
+      route::get( '/tags', function(){
+    return view('dashboard.tags.create');
+});
+            route::get( '/colors', function(){
+          return view('dashboard.colors.create');
+      });
+
+
+
+   
     Route::get('newsletter', 'NewsLetterController@index');
     Route::post('newsletter', 'NewsLetterController@send');
     Route::post('couponcode', 'SettingsController@couponcode');
     Route::get('coupon', 'SettingsController@coupon');
     Route::delete('deletecoupon/{id}', 'SettingsController@destroy');
     Route::get('editcoupon/{id}', 'SettingsController@editcoupon');
+
+    // tags
+     Route::post('tags', 'TagsController@store');
+     Route::get('Showtags', 'TagsController@show');
+     Route::get('edittag/{id}', 'TagsController@edit');
+     Route::delete('deletetag/{id}', 'TagsController@destroy');
+     Route::post('tagupdate', 'TagsController@updatetag');
+
+    // end tags
+     // colors
+     Route::post('colors', 'ColorController@store');
+     Route::get('Showcolors', 'ColorController@show');
+     Route::get('editcolors/{id}', 'ColorController@edit');
+     Route::delete('deletecolors/{id}', 'ColorController@destroy');
+     Route::post('update', 'ColorController@updatecolor');
+
+    // end colors
     Route::post('upload', 'SettingsController@upload');
     Route::resource('users', 'UserController');
     Route::resource('orders', 'OrderController');
+    Route::get('recycl-remove/{id}', 'OrderController@destroy_payer');
+    Route::get('recycle-orders', 'RecycleController@index');
+    Route::get('recycleback/{id}', 'RecycleController@recycle');
+
+     Route::delete('deleteorder/{id}', 'RecycleController@destroy');
 	Route::get('changestatus/{id}', 'OrderController@updatestatus');
     Route::get('blog/published', 'BlogController@published');
     Route::get('blog/un-published', 'BlogController@unPublished');
@@ -81,9 +113,9 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     Route::resource('category', 'CategoryController');
     Route::resource('subscribers', 'SubscriberController');
     Route::post('gallery/update-categories', 'GalleryController@updateCategories');
-   
+   Route::match(['get', 'post'],'copy/{id}','ProductController@copy')->name('dashboard.products');
     Route::resource('gallery', 'GalleryController');
-    Route::get('products','ProductController@getIndex')->name('dashboard.products');
+    Route::match(['get', 'post'],'products','ProductController@getIndex')->name('dashboard.products');
     Route::get('/deleteimg/{id}','ProductController@deleteimg');
     Route::resource('product', 'ProductController');
     Route::resource('slider', 'SliderController');
@@ -105,5 +137,11 @@ Route::group(['prefix' => 'dashboard','middleware' => ['dashboard_login','auth']
     Route::get('settings','SettingsController@showSettings');
     Route::post('site-settings','SettingsController@updateSettings');
     Route::post('site-settings','SettingsController@updateSettings');
+  
+
 });
+  // contact us feed back
+     Route::post('conatctus','ContactController@contactus');
+     // End Contact feed back
+     
 

@@ -26,15 +26,16 @@
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li><a href="{{ url('/dashboard') }}"> <i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-            <li class="treeview">
-                <a href="{{ action('OrderController@index') }}">
-                    <i class="fa fa-cart-plus"></i>
+           <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-th"></i>
                     <span>Orders</span>
-                    @if($OrderCount > 0)
-                     <small class="label pull-right bg-red">{{ $OrderCount }}</small>
-                    @endif 
+                    <i class="fa fa-angle-left pull-right"></i>
                 </a>
-               
+                <ul class="treeview-menu">
+                    <li><a href="{{ action('OrderController@index') }}"><i class="fa fa-circle-o"></i>View Order</a></li>
+                    <li><a href="{{ action('RecycleController@index') }}"><i class="fa fa-circle-o"></i>Archive</a></li>
+                </ul>
             </li>
           {{--   <li>
                 <a href="{{ action('GiftVouchersController@index') }}"> 
@@ -86,12 +87,7 @@
                     <span>Upload</span>
                 </a>
             </li>--}}   
-            <li class="treeview">
-                <a href="{{ url('/dashboard/newsletter') }}">
-                    <i class="fa fa-envelope"></i>
-                    <span>Send Newsletter</span>
-                </a>
-            </li>
+            
 
             <li class="treeview">
                 <a href="#">
@@ -103,6 +99,36 @@
                     <li><a href="{{ action('CategoryController@create') }}"><i class="fa fa-circle-o"></i> New Category</a></li>
                     <li><a href="{{ action('CategoryController@index') }}"><i class="fa fa-circle-o"></i> Show Categories</a></li>
                 </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-th-large"></i>
+                    <span>Product tags</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('dashboard/tags') }}"><i class="fa fa-circle-o"></i> New tags</a></li>
+                    <li><a href="{{url('dashboard/Showtags') }}"><i class="fa fa-circle-o"></i> Show tags</a></li>
+                    
+                </ul>
+            </li>
+             <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-th-large"></i>
+                    <span>Product Colour</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('dashboard/colors') }}"><i class="fa fa-circle-o"></i> New colour</a></li>
+                    <li><a href="{{url('dashboard/Showcolors') }}"><i class="fa fa-circle-o"></i> Show colours</a></li>
+                    
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="{{ url('/dashboard/newsletter') }}">
+                    <i class="fa fa-envelope"></i>
+                    <span>Send Newsletter</span>
+                </a>
             </li>
             <li class="treeview">
                 <a href="#">

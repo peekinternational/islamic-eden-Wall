@@ -51,6 +51,21 @@
     //ended code 
    
 });
+	$("#bill_check").on('change', function(){
+		console.log($(this).val(this.checked ? "0" : "1"));
+  if($(this).val()){
+  }
+})
+$(document).ready(function(){
+    $('#bill_check').change(function(){
+        if(this.checked)
+           // alert('yes');
+		$('#bill_address').show();
+        else  
+         $('#bill_address').hide();			
+         // alert('no');
+    });
+});
 	
    function initMap() {
    	var lats=$('#lat').val();
@@ -69,19 +84,21 @@
    	title: 'Hello World!'
    	});
    }
-	
-	  
+	   
+	  $('#nabeelclick').click(function(){
+	$('#nabeel').submit();
+})
 function paypalcheckout() {
         
         if($('#first_name').val() == ''){
-			alert('Requried all fields');
+			alert('Please fill in the mandatory fields*');
 			return 0;
 		}else if($('#last_name').val() == ''){
-			alert('Requried all fields');
+			alert('Please fill in the mandatory fields*');
 			return 0;
 		}
 		else if($('#address').val() == ''){
-			alert('Requried all fields');
+			alert('Please fill in the mandatory fields*');
 			return 0;
 		}
         var formVal = $('form.shop-checkout').serialize();
@@ -112,8 +129,11 @@ function paypalcheckout() {
     <script>
  
         $(document).ready(function () {
-            $.notify('{!! Session::get('__response')['notify'] !!}', "{{Session::get('__response')['type']}}");
+            $.notify('{!! Session::get('__response')['notify'] !!}', "{{Session::get('__response')['type']}}", {
+            style: 'happyblue',
+			autoHideDelay: 19000 } );
         });
+
     </script>
 @endif
 @yield('scripts')

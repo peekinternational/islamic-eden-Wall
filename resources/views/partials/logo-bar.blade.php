@@ -86,10 +86,10 @@
                        
                             @if($cart_items>0)
 
-                                {{ $total }} CART  &euro;{{ $cart->subTotal($format = false, $withDiscount = true) }}
+                                {{ $total }} CART  £{{ $cart->subTotal($format = false, $withDiscount = true) }}
 
                             @else
-                                My Cart (0):$0
+                                My Cart (0):0£
                             @endif
                            </span>
                            <a href="{{asset('/checkout')}}" class="btn checkout-btn">Checkout</a>
@@ -103,7 +103,7 @@
                                href="http://webdesign-finder.com/" data-toggle="dropdown" aria-haspopup="true"
                                aria-expanded="false">
                                 <span class="shopping-cart__info">3 Items</span>
-                                $ 25.99
+                                £ 25.99
                             </a>
                             <div class="shopping-cart__list dropdown-menu" aria-labelledby="cart">
                 --}}
@@ -116,16 +116,16 @@
                                             @foreach($cart->getItems() as $item)
                                              <li class="media">
                                                 <div class="media-left media-middle" style="vertical-align:top;">
-                                                    <a href="{{ route('product.show',['slug'=>$item->slug]) }}">
+                                                    <a href="{{ url('product/'.$item->slug)}}">
                                                         <img src="{{  asset($item->options['image']) }}" alt="{{ $item->name }}">
                                                     </a>
                                                 </div>
                                                 <div class="media-body media-middle">
                                                     <h4>
-                                                        <a href="blog-right.html">{{ $item->options['name'] }}</a>
+                                                        <a href="{{ url('product/'.$item->slug)}}">{{ $item->options['name'] }}</a>
                                                     </h4>
                                                       <p class="quantity" style="margin-bottom:0px;">{{ $item->options['qty'] }} ×
-                                                       <span class="amount">&euro; {{ $item->options['price'] }}</span>
+                                                       <span class="amount">£ {{ $item->options['price'] }}</span>
                                                       </p>
                                                       <p class="">{{ $item->options['color'] }}  
                                                           @if($item->options['p_size'])
@@ -152,7 +152,7 @@
                                         <p class="total">
                                             <span class="grey">Cart Subtotal:
 
-                                            <span class="amount">${{ $cart->subTotal($format = false, $withDiscount = true) }}</span>
+                                            <span class="amount">£{{ $cart->subTotal($format = false, $withDiscount = true) }}</span>
                                             </span>
                                         </p>
                                         <p class="buttons">

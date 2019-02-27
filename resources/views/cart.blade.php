@@ -45,13 +45,13 @@
 
                                 <div class="row title-row">
                                     <div class="col-xs-4">
-                                        <a href="{{ route('product.show',['slug'=>$item->id]) }}">
+                                        <a href="{{ url('product/'.$item->slug)}}">
                                             <img class="media-object cart-product-image" src="{{  $item->image }}" alt="{{ $item->name }}" style="width: 100%;">
                                         </a>
                                     </div>
                                     <div class="col-xs-8">
                                         <h5 class="text-heading">
-                                            <a href="{{ route('product.show',['slug'=>$item->id]) }}">{{ $item->name }}</a>
+                                            <a href="{{ url('product/'.$item->slug)}}">{{ $item->name }}</a>
                                         </h5>
                                     </div>
                                 </div>
@@ -69,16 +69,16 @@
                             <div class="col-md-2 col-xs-6 text-center">
                                  <div class="quantity">
                                      <input type="button" value="-" class="minus">
-                                     <input type="number" step="1" min="0" data-id="{{ $item->id }}" data-price="{{ $item->price }}"  name="product_quantity" value="{{ $item->qty }}" title="Qty" class="form-control input-product-quantity">
+                                     <input style="text-align: center;" type="number" step="1" min="0" data-id="{{ $item->id }}" data-price="{{ $item->price }}"  name="product_quantity" value="{{ $item->qty }}" title="Qty" class="form-control input-product-quantity">
                                      <input type="button" value="+" class="plus">
                                  </div>
                             </div>
                             <div class="col-md-1 col-xs-6 text-center">
-                                 <span class="currencies">€</span>
+                                 <span class="currencies">£</span>
                                  <span class="amount">{{ $item->price }}</span>
                             </div>
                             <div class="col-md-2 col-xs-6 text-center">
-                                  <span class="currencies">€</span>
+                                  <span class="currencies">£</span>
                                  <span class="amount">{{ $item->price *  $item->qty  }}</span>
                             </div>
                             <div class="col-md-1 text-center">
@@ -112,7 +112,7 @@
                                 <tr class="cart-subtotal">
                                     <td>Shopping Basket Subtotal</td>
                                     <td>
-                                        <span class="currencies">€</span>
+                                        <span class="currencies">£</span>
                                         <span class="amount">{{ $cart->subTotal($format = false, $withDiscount = true) }}</span>
                                     </td>
                                 </tr>
@@ -126,7 +126,7 @@
                                     <td class="grey">Order Total</td>
                                     <td>
                                         <strong class="grey">
-                                            <span class="currencies">€</span>
+                                            <span class="currencies">£</span>
                                             <span class="amount">{{ $cart->total($format = false,$withDiscount = true) }}</span>
                                         </strong>
                                     </td>
@@ -209,11 +209,11 @@
                                          </div>
                                     </div>
                                     <div class="col-xs-12" style="padding-top: 7px;">
-                                         <span class="currencies">€</span>
+                                         <span class="currencies">£</span>
                                          <span class="amount">{{ $item->price }}</span>
                                     </div>
                                     <div class="col-xs-12" style="padding-top: 15px;">
-                                          <span class="currencies">€</span>
+                                          <span class="currencies">£</span>
                                          <span class="amount">{{ $item->price *  $item->qty  }}</span>
                                     </div>
                                     <div class="col-xs-12" style="padding-top: 15px;">
@@ -250,7 +250,7 @@
                                 <tr class="cart-subtotal">
                                     <td>Shopping Basket Subtotal</td>
                                     <td>
-                                        <span class="currencies">€</span>
+                                        <span class="currencies">£</span>
                                         <span class="amount">{{ $cart->subTotal($format = false, $withDiscount = true) }}</span>
                                     </td>
                                 </tr>
@@ -264,7 +264,7 @@
                                     <td class="grey">Order Total</td>
                                     <td>
                                         <strong class="grey">
-                                            <span class="currencies">€</span>
+                                            <span class="currencies">£</span>
                                             <span class="amount">{{ $cart->total($format = false,$withDiscount = true) }}</span>
                                         </strong>
                                     </td>

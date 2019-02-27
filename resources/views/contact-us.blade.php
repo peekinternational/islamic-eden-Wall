@@ -29,16 +29,16 @@
 			<div class="col-sm-4 col-lg-4 col-padding">
 				<div class="panel">
 					<div class="panel-heading contact-panel">
-						<h3><i class="fa fa-thumb-tack" aria-hidden="true"></i>Information
+						<h3><i class="fa fa-thumb-tack" aria-hidden="true"></i> Information
 					</div>
 					<div class="panel-body">
 						<address>
-						<strong>{{$address->value}}</strong><br>
-						<strong>{{$email->value}}</strong><br>
-						<strong>{{$working_hours->value}}</strong><br>
+						<strong class="fa fa-map-marker">&nbsp;&nbsp;{{$address->value}}</strong><br>
+						<strong class="fa fa-envelope">&nbsp;{{$email->value}}</strong><br>
+						<strong class="fa fa-clock-o">&nbsp;{{$working_hours->value}}</strong><br>
 
 						
-						<i class="icon-phone-sign"></i> {{$phone_num->value}}
+						<i  class="fa fa-phone"></i>&nbsp; {{$phone_num->value}}
 						</address>
 					</div>
 				</div>
@@ -54,21 +54,21 @@
 							</h3>
 						</div>
 					<div class="panel-body contct-body">
-						<form method="post" action="">
-
+						<form class="remove-order" method="post" name="contac_form" action="{{ url('conatctus')}}">
+								  {!! csrf_field() !!}
 						<div class="form-group">
-								<input type="text" class="form-control" id="" name="" placeholder="Name">
+								<input type="text" class="form-control" id="" name="name" placeholder="Name">
 								<span class="help-block" style="display: none;"> enter your name.</span>
 						  </div>
 						  <div class="form-group">
-								<input type="email" class="form-control" id="" name="" placeholder="Email Address">
+								<input type="email" class="form-control" id="" name="email" placeholder="Email Address">
 								<span class="help-block" style="display: none;"> enter a valid e-mail address.</span>
 						  </div>
 						  <div class="form-group">
-								<textarea rows="4" cols="100" class="form-control" id="" name="" placeholder="Message"></textarea>
+								<textarea rows="4" cols="100" class="form-control" id="" name="message" placeholder="Message"></textarea>
 								<span class="help-block" style="display: none;"> enter a message.</span>
 						  </div>
-						  <button type="submit" id="feedbackSubmit" class="btn btn-primary btn-lg" style="display: block; margin-top: 10px;">Send Feedback</button>
+						  <button type="submit" id="feedbackSubmit" name="feedbackSubmit" class="btn btn-primary btn-lg" style="display: block; margin-top: 10px;">Contact Us</button>
 						</form>
 					<!-- END CONTACT FORM -->
 					</div>

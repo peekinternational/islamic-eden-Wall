@@ -14,7 +14,7 @@
                             <div class=" col-lg-offset-3 col-lg-6 text-{{ $slide->text_align }}">
                                 <h3 class="flexslider__title ">
                                     <span>{{ $slide->title }}</span>
-                                    {{ $slide->description }}
+                                    {!! $slide->description !!}
                                 </h3>
                                 @if(!empty($slide->link))
                                     <a href="{{ $slide->link }}" class="button-t1__parallax2">{{ $slide->link_text }}</a>
