@@ -57,8 +57,8 @@ class CartController extends Controller
                                         $taxable = false,
                                         $lineItem = false
                                 );
-								$cart->removeCoupons();
-								$request->session()->forget('coupon');
+                                $cart->removeCoupons();
+                                $request->session()->forget('coupon');
                               // dd($cart); 
                         }else if(is_array($find) && count($find)>0){
                               $item = $find[0];
@@ -90,9 +90,9 @@ class CartController extends Controller
                                $item = $find[0];
                                 $itemHashId =  $item->getHash();
                                 $cart->removeItem($itemHashId);
-								$cart->removeCoupons();
-								
-								$request->session()->forget('coupon');
+                                $cart->removeCoupons();
+                                
+                                $request->session()->forget('coupon');
                                 $request->session()->flash('__response', ['notify'=>'Product "'.$item->name.'" successfully removed from cart.','type'=>'success']);
                         }
                 }

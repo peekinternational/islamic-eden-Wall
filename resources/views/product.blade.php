@@ -63,6 +63,11 @@
                                  @if($product_dimension->count()>0)
 
                                  @if($product_dimension[0]->dim_offer)
+                                  @if($product_dimension->count() == 1)
+                                 <span class="amount" style="color: gray !important; font-size: 26px;">£<strike><small>{{ $product_dimension[0]->p_price }}</small></strike></span><br>
+                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£{{ $product_dimension[0]->dimoffer_price }}</span>
+                                 <span>&nbsp;  {{$product_dimension[0]->dim_offer}} %</span>
+                                  @else
                                   <?php 
                                   $min = $product_dimension->min('p_price');
                                   $max = $product_dimension->max('p_price');
@@ -74,13 +79,19 @@
                                  <span class="amount" style="color: gray !important; font-size: 26px;">£<strike><small>{{ $min }} - {{$max}}</small></strike></span><br>
                                  <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£{{ $offer_min }} - {{$offer_max}}</span>
                                  <span>&nbsp;  {{$product_dimension[0]->dim_offer}} %</span>
+                                @endif
                                  @else
+                                 @if($product_dimension->count() == 1)
+                                
+                                 <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£{{ $product_dimension[0]->p_price }}</span><br>
+                                @else
                                 <?php 
                                   $min = $product_dimension->min('p_price');
                                   $max = $product_dimension->max('p_price');
                                
                                  ?>
                                  <span class="amount" id="show_price" style="color: gray !important; font-size: 26px;">£{{ $min }} - {{$max}}</span><br>
+                                 @endif
                                  @endif
 
                                  @else
@@ -113,28 +124,29 @@
                                 
                                     <div class="shop-tags" style="display: -webkit-box;border: none;margin: 0;">
                                     <span>Color:</span>
+                                    
+                                    <select name="color" id="colorselect" class="form-control" required="required" >
+                                    <option value="" id="">Select Color</option>
                                     @foreach($product_color as $key=>$color)
-                                    <input id="checkboxid{{$color->id}}" onclick="colorselect({{$color->id}})" name="color" type="checkbox" value="{{$color->color}}" class="css-checkbox onlyone color">
-                                     <label for="checkboxid{{$color->id}}" class="css-label">{{ucfirst($color->color)}}</label>
-                                        @if(($key+1)< $product_color->count())
-                                                	&nbsp;&nbsp;
-                                       @endif
+                                     <option value="{{$color->color}}" id="">{{ucfirst($color->color)}}</option>
                                     @endforeach
+                                     </select>
                                     </div>
-                               
-                            @endif
-                            @if($product_size->count()>0)
-                                 
-                                     <div style="display: -webkit-box;">
-                                    <span>Size:</span>
-                                    @foreach($product_size as $key=>$size)
-                                    <input id="checkboxidd{{$size->id}}" onclick="sizeselect({{$size->id}})" type="radio" name="p_size" value="{{$size->p_size}}" class="css-checkbox onlyone">
-                                       <label for="checkboxidd{{$size->id}}" class="css-label">{{strtoupper( $size->p_size)}}</label>
-                                       
-                                        @if(($key+1)< $product_size->count())
-                                                   	&nbsp;&nbsp;
+                                        
                                         @endif
+                                        @if($product_size->count()>0)
+                                 
+                                      <div style="display: -webkit-box;">
+                                        <span>Size:</span>
+                                        
+                                        <select name="p_size" id="sizeselect" class="form-control" required="required">
+                                            <option value="">Select Size</option>
+                                        
+                                        
+                                        @foreach($product_size as $key=>$size)
+                                        <option value="{{$size->p_size}}">{{$size->p_size}}</option>
                                     @endforeach
+                                    </select>
                                     </div>
                                 
                             @endif
@@ -142,19 +154,25 @@
                              @if($product_dimension->count()>0)
                                  
                                      <div style="display: -webkit-box;">
-                                    <span>Size:</span>
-                                   @foreach($product_dimension as $key=>$dimension)
+                                    <span>Size: &nbsp;</span>
                                     
-                                    @if($dimension->dim_offer)
-                                    <input id="checkdem{{$dimension->id}}" onclick="dimensionselect({{$dimension->id}},{{$dimension->dimoffer_price}})" type="radio" name="p_dimension" value="{{$dimension->p_dimension}}" class="css-checkbox onlyone">
+                                    <select name="p_dimension" id="dimensionselect" class="form-control" required="required">
+                                    <option value="">Select Size</option>
+                                      @foreach($product_dimension as $key=>$dimension)
+                                    
+                                     @if($dimension->dim_offer)
+                                    
+                                        <option value="{{$dimension->p_dimension}},{{$dimension->dimoffer_price}}">{{$dimension->p_dimension}}</option>
+                                   
+<!--                                    
+                                    <input id="checkdem{{$dimension->id}}" onclick="dimensionselect({{$dimension->id}},{{$dimension->dimoffer_price}})" type="radio" name="p_dimension" value="{{$dimension->p_dimension}}" class="css-checkbox onlyone">-->
                                       @else
-                                       <input id="checkdem{{$dimension->id}}" onclick="dimensionselect({{$dimension->id}},{{$dimension->p_price}})" type="radio" name="p_dimension" value="{{$dimension->p_dimension}}" class="css-checkbox onlyone">
+                                      <option value="{{$dimension->p_dimension}},{{$dimension->p_price}}">{{$dimension->p_dimension}}</option>
+                                       <!--<input id="checkdem{{$dimension->id}}" onclick="dimensionselect({{$dimension->id}},{{$dimension->p_price}})" type="radio" name="p_dimension" value="{{$dimension->p_dimension}}" class="css-checkbox onlyone">-->
                                        @endif
-                                       <label for="checkdem{{$dimension->id}}" class="css-label">{{strtoupper( $dimension->p_dimension)}}</label>
-                                        @if(($key+1)< $product_size->count())
-                                                   	&nbsp;&nbsp;
-                                        @endif
-                                    @endforeach
+                                       
+                                     @endforeach
+                                     </select>
                                     </div>
                                 
                             @endif
@@ -326,27 +344,30 @@ $(document).ready(function() {
               .children('.photo').css({'background-image': 'url('+ $(this).attr('data-image') +')'});
           })
 
-   function dimensionselect(id, price){
-       //alert(price);
-       $('#show_price').html('£'+price);
-       var data= $('#checkdem'+id).val();
-      // alert(price);
-           $('#sel_dim').val(data);
-           $('#sel_price').val(price);
-
-   }
-        function colorselect(id)
-        {
-           var data= $('#checkboxid'+id).val();
-           $('#sel_color').val(data);
-        //   / alert(data);
-        }
-        function sizeselect(id)
-        {
-           var datas= $('#checkboxidd'+id).val();
+   $('#dimensionselect').change(function(){
+ //alert(price);
+     //  
+        var data= $(this).val();
+        var res = data.split (",");
+        var dataval =res[0];
+        var price =res[1];
+      
+            $('#show_price').html('£'+price);
+            $('#sel_dim').val(dataval);
+            $('#sel_price').val(price);
+   });
+      
+        $('#colorselect').change(function(){
+            var data= $(this).val();
+            $('#sel_color').val(data);
+           //alert(data);
+        });
+        
+        $('#sizeselect').change(function(){
+           var datas= $(this).val();
            $('#sel_size').val(datas);
-        //   / alert(data);
-        }
+        })
+        
 $("input:checkbox").on('click', function() {
   // in the handler, 'this' refers to the box clicked on
   var $box = $(this);
