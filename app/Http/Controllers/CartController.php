@@ -235,8 +235,10 @@ class CartController extends Controller
 
         public function couponcode(Request $request , LaraCart $cart){
                $code=$request->input('coupon_code');
+              
               $cd = DB::table('couponcode')->where('code','=',$code)->where('expiry_date','>=',date("Y-m-d"))->first();
-			  
+
+                	  
               $total=$cart->total($format = false, $withDiscount = true);
               $discount=0;
 			  if($cd){
@@ -247,6 +249,9 @@ class CartController extends Controller
 				]);
 
 				$cart->addCoupon($coupon);
+                     $total=$cart->total($format = false,$withDiscount = true);
+                     return $total;
+                     die;
               }
 			  else if($cd->type == 'percent'){
 				   $discount=$cd->discount/100*$total;
@@ -267,11 +272,11 @@ class CartController extends Controller
                        'discount' =>$discount,
                ]);
                $request->session()->flash('alert-success', 'Coupon apply successfully');
-               return redirect()->route('cart.checkout');
+               return array('status' => 1, 'discount'=>$discount);
 			  }
 			  else{
 				  $request->session()->flash('alert-danger', 'Coupon Code Not Match!');
-				    return redirect()->route('cart.checkout');
+				    return 0;
 			  }
         }
 

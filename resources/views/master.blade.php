@@ -40,7 +40,7 @@
 <!-- Main libs -->
 
 <script src="{{ asset('assets/js/script.js') }}"></script>
-
+@yield('scripts')
 <script>
     $('a.acticecate').on('click', function(){ 
     //tried this by given answer which not worked 
@@ -136,7 +136,7 @@ function paypalcheckout() {
 
     </script>
 @endif
-@yield('scripts')
+
 </body>
 
 </html>

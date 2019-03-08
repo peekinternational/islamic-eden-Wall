@@ -12,13 +12,11 @@
         <div class="container">
             <div class="row respnsve-row">
            <div class="flash-message">
-			@foreach (['danger', 'warning', 'success', 'info'] as $msg)
-			  @if(Session::has('alert-' . $msg))
-
-			  <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
-			  @endif
-			@endforeach
-		  </div> <!-- end .flash-message -->
+			
+			  <p class="alert alert-danger" style="display:none">Coupon Code Not Match!<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+               <p class="alert alert-success" style="display:none">Coupon apply successfully <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+			
+		     </div> <!-- end .flash-message -->
                 <form target="_self" class="form-horizontal checkout shop-checkout" action="{{ isset($PaymentSettings['payment_mood']['value']) && $PaymentSettings['payment_mood']['value']=='live'?'https://www.paypal.com/cgi-bin/webscr':'https://www.sandbox.paypal.com/cgi-bin/webscr' }}" method="post">
                 <div class="col-sm-7 col-md-8 col-lg-8" style="width: 63%;">
 
@@ -107,7 +105,10 @@
                                    <span class="required">*</span>
                                </label>
                                <div class="col-sm-9">
-                                   {!! Form::text('first_name',$value= null, $attributes = ['class'=>'form-control','required'=>'required','id'=>'first_name','placeholder'=>'First Name'])  !!}
+                               
+                               <input type="text" name="first_name" id="first_name" value="{{old('first_name')}}" class="form-control" value="" required="required" placeholder="First Name" title="" required>
+                               
+                                  
                                    @if ($errors->has('first_name'))
                                        <span class="help-block">
                                            <strong>{{ $errors->first('first_name') }}</strong>
@@ -322,14 +323,21 @@
                                     <span class="grey">Free Shipping</span>
                                 </td>
                             </tr>
-							@if(session()->has('coupon'))
+                            <span>
+                            <tr class="shipping">
+                                <td>Discount:</td>
+                                <td>
+                                    <span class="grey" id="discount_price">- £ 0</span>
+                                </td>
+                            </tr>
+							<!--@if(session()->has('coupon'))
 							<tr class="shipping">
                                 <td>Discount:</td>
                                 <td>
                                     <span class="grey">- £  {{session()->get('coupon')['discount']}}</span>
                                 </td>
                             </tr>
-							@endif
+							@endif-->
                             <tr class="order-total">
                                 <td>Total:</td>
                                 <td>
@@ -399,9 +407,9 @@
                                   
                                 <div class="input-group">
 								  
-								  <input type="text" name="coupon_code" class="form-control" placeholder="Coupon code">
+								  <input type="text" name="coupon_code" class="form-control" placeholder="Coupon code" id="coupondata">
 								  <span class="input-group-btn">
-									<button class="button-t1" type="submit" style="padding: 0px 11px !important;height: 34px; !important">Apply Coupon</button>
+									<button class="button-coupon" type="button" style="padding: 0px 11px !important;height: 34px; !important">Apply Coupon</button>
 								  </span>
 								</div>
 								</form>
@@ -413,9 +421,35 @@
 					</div>
 				</div>
 			@stop
-			@section('script')
+			@section('scripts')
 
 			<script>
+            $(document).ready(function(){
+            //alert('hello');
+            });
+
+            $('.button-coupon').click(function(){
+                var coupon=$('#coupondata').val();
+                
+               $.ajax({
+                type: "POST",
+                url: '/couponcode',
+                data: {coupon_code:coupon},
+                success: function(data){
+                   
+                    if(data.status == 1){
+                    $('.alert-success').show();
+                    $('.alert-danger').hide();
+                    $('#discount_price').html('- £ '+data.discount)
+                    }else{
+                    $('.alert-danger').show();
+                    $('.alert-success').hide();
+                    }
+                    console.log(data.status);
+                }
+
+          });
+            })
 
 			</script>
 
